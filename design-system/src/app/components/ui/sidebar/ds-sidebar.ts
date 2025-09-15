@@ -4,7 +4,15 @@ import { DsSidebarHeaderComponent } from './ds-sidebar-header';
 import { DsSidebarGroupComponent, SidebarItem } from './ds-sidebar-group';
 import { DsSidebarGroupContentItemComponent } from './ds-sidebar-group-content-item';
 
-export interface SidebarGroup { id: string; label: string; items: SidebarItem[]; expanded?: boolean; showLabel?: boolean; }
+export interface SidebarGroup { 
+  id: string; 
+  label: string; 
+  items: SidebarItem[]; 
+  expanded?: boolean; 
+  showLabel?: boolean; 
+}
+
+export type DsSidebarMode = 'default' | 'minimized' | 'drawer';
 
 @Component({
   selector: 'ds-sidebar',
@@ -13,11 +21,18 @@ export interface SidebarGroup { id: string; label: string; items: SidebarItem[];
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-sidebar.css'],
   template: `
-    <nav class="sidebar" role="navigation" [attr.aria-label]="ariaLabel()" [class]="hostClasses()">
+    <nav 
+      class="sidebar" 
+      role="navigation" 
+      [attr.aria-label]="ariaLabel()" 
+      [class]="hostClasses()"
+    >
       <div class="sidebar__container" [style.width]="effectiveWidth()">
+        <!-- Header (always shown) -->
         <ds-sidebar-header
-          [collapsed]="collapsedSig()"
-          [showGlobalAction]="showGlobalAction()"
+          [collapsed]="isCollapsed()"
+          [mode]="mode()"
+          [showGlobalAction]="showGlobalActionInCurrentMode()"
           [hostClass]="classes()?.header ?? ''"
           [globalActionLabel]="globalActionLabel()"
           [globalActionIcon]="globalActionIcon()"
@@ -26,60 +41,76 @@ export interface SidebarGroup { id: string; label: string; items: SidebarItem[];
           (globalActionClick)="globalActionClick.emit()"
         />
 
-        <div class="sidebar__content" role="list" (scroll)="onContentScroll($event)">
-          @for (group of groups(); track group.id) {
-            <ds-sidebar-group
-              [id]="group.id"
-              [label]="group.label"
-              [items]="group.items"
-              [expanded]="getGroupExpanded(group.id, group.expanded ?? true)"
-              [showLabel]="group.showLabel ?? true"
-              [collapsed]="collapsedSig()"
-              [activeItemId]="activeItemId() ?? ''"
-              (toggled)="onGroupToggled($event)"
-              (itemSelected)="itemSelected.emit($event)"
-            />
-          }
-        </div>
+        <!-- Content and Footer (hidden in minimized mode) -->
+        @if (mode() !== 'minimized') {
+          <div class="sidebar__content" role="list" (scroll)="onContentScroll($event)">
+            @for (group of groups(); track group.id) {
+              <ds-sidebar-group
+                [id]="group.id"
+                [label]="group.label"
+                [items]="group.items"
+                [expanded]="getGroupExpanded(group.id, group.expanded ?? true)"
+                [showLabel]="group.showLabel ?? true"
+                [collapsed]="isCollapsed()"
+                [activeItemId]="activeItemId() ?? ''"
+                (toggled)="onGroupToggled($event)"
+                (itemSelected)="itemSelected.emit($event)"
+              />
+            }
+          </div>
 
-        <footer class="sidebar__footer">
-          <ng-content select="[sidebar-footer]">
-            <ds-sidebar-group-content-item
-              id="settings"
-              icon="remixSettings3Line"
-              label="Settings"
-              [collapsed]="collapsedSig()"
-              [active]="false"
-              (selected)="onSettingsSelected()"
-            />
-          </ng-content>
-        </footer>
+          <footer class="sidebar__footer">
+            <ng-content select="[sidebar-footer]">
+              <ds-sidebar-group-content-item
+                id="settings"
+                icon="remixSettings3Line"
+                label="Settings"
+                [collapsed]="isCollapsed()"
+                [active]="false"
+                (selected)="onSettingsSelected()"
+              />
+            </ng-content>
+          </footer>
+        }
       </div>
     </nav>
   `,
 })
 export class DsSidebarComponent {
+  // Required inputs
   groups = input.required<SidebarGroup[]>();
+  
+  // Optional inputs
   activeItemId = input<string>();
   collapsed = input<boolean>(false);
-  mode = input<'auto' | 'sidebar' | 'drawer'>('auto');
-  drawerOpen = input<boolean>(false);
+  mode = input<DsSidebarMode>('default');
   showGlobalAction = input<boolean>(false);
   ariaLabel = input<string>('Sidebar');
   width = input<string>('256px');
   hostClass = input<string>('');
-  classes = input<{ header?: string; globalAction?: string; content?: string; footer?: string; group?: string; groupLabel?: string; groupContent?: string; item?: string }>();
+  classes = input<{ 
+    header?: string; 
+    globalAction?: string; 
+    content?: string; 
+    footer?: string; 
+    group?: string; 
+    groupLabel?: string; 
+    groupContent?: string; 
+    item?: string; 
+  }>();
   globalActionLabel = input<string>('Create');
   globalActionIcon = input<string>('remixAddLine');
   globalActionDisabled = input<boolean>(false);
 
+  // Outputs
   itemSelected = output<string>();
   groupToggled = output<{ groupId: string; expanded: boolean }>();
-  drawerOpenChange = output<boolean>();
   collapsedChange = output<boolean>();
   globalActionClick = output<void>();
   expandAllGroups = output<void>();
+  toggleCollapsed = output<void>();
 
+  // Internal state
   protected collapsedSig = signal<boolean>(this.collapsed());
   private groupsExpandedSig = signal<{[key: string]: boolean}>({});
   private isScrolledSig = signal<boolean>(false);
@@ -87,15 +118,34 @@ export class DsSidebarComponent {
 
   hostClasses = computed(() => {
     const classes = ['sidebar-host'];
-    if (this.collapsedSig()) classes.push('sidebar-host--collapsed');
+    if (this.isCollapsed()) classes.push('sidebar-host--collapsed');
     if (this.isScrolledSig()) classes.push('sidebar-host--scrolled');
     if (this.isScrolledToBottomSig()) classes.push('sidebar-host--scrolled-to-bottom');
+    if (this.mode() === 'minimized') classes.push('sidebar-host--minimized');
+    if (this.mode() === 'drawer') classes.push('sidebar-host--drawer');
     const extra = this.hostClass();
     if (extra) classes.push(extra);
     return classes.join(' ');
   });
 
-  effectiveWidth = computed(() => (this.collapsedSig() ? '80px' : this.width()));
+  effectiveWidth = computed(() => {
+    switch (this.mode()) {
+      case 'minimized':
+        return '100%';
+      case 'drawer':
+        return this.isCollapsed() ? '80px' : 'min(300px, 80vw)';
+      default:
+        return this.isCollapsed() ? '80px' : this.width();
+    }
+  });
+
+  isCollapsed = computed(() => {
+    return this.mode() === 'minimized' || this.collapsedSig();
+  });
+
+  showGlobalActionInCurrentMode = computed(() => {
+    return this.mode() !== 'minimized' && this.showGlobalAction();
+  });
 
   constructor() {
     effect(() => {
@@ -105,10 +155,16 @@ export class DsSidebarComponent {
   }
 
   onToggleCollapsed() {
+    if (this.mode() === 'minimized' || this.mode() === 'drawer') {
+      // For minimized and drawer modes, emit the toggle event for parent to handle
+      this.toggleCollapsed.emit();
+      return;
+    }
+
+    // For default mode, handle internal collapsed state
     const next = !this.collapsedSig();
     this.collapsedSig.set(next);
     
-    // When collapsing sidebar, expand all groups
     if (next) {
       this.expandAllGroupsInternal();
     }
@@ -140,8 +196,7 @@ export class DsSidebarComponent {
   }
 
   onSettingsSelected() {
-    // Handle settings selection - could emit an event or navigate
-    console.log('Settings selected');
+    this.itemSelected.emit('settings');
   }
 
   private expandAllGroupsInternal() {
@@ -153,5 +208,3 @@ export class DsSidebarComponent {
     this.expandAllGroups.emit();
   }
 }
-
-

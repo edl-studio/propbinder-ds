@@ -26,12 +26,9 @@
 }
 
 .sidebar-header__brand {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
   position: relative;
   min-height: 40px; /* Ensure consistent height */
+  width: 100%; /* Ensure full width */
 }
 
 .sidebar-header__logo {
@@ -42,21 +39,23 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  flex-shrink: 0;
 }
 
 .sidebar-header__toggle-btn {
   color: var(--text-color-default-primary-inverse);
-  /* Match button's md radius and clip any inner overlays */
   border-radius: 6px;
   overflow: hidden;
   transition: all var(--transition-duration-normal, .2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
-  margin-left: auto;
-  flex-shrink: 0;
-  position: relative;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-/* Background handled within ds-button to preserve border radius */
 
 .sidebar-header__toggle:focus-visible {
   outline: 2px solid var(--outline-color-default);
@@ -69,21 +68,16 @@
   opacity: 0;
 }
 
-:host-context(.sidebar-host--collapsed) .sidebar-header__toggle-btn { 
-  margin-left: 0;
-  margin-right: auto;
+:host-context(.sidebar-host--collapsed) .sidebar-header__toggle-btn {
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, -50%);
 }
 
-/* Keep layout consistent when collapsed */
-:host-context(.sidebar-host--collapsed) .sidebar-header__brand { 
-  justify-content: center;
-  position: relative;
-  min-height: 40px; /* Maintain consistent height */
-}
 
 /* Ensure header maintains consistent dimensions when collapsed */
 :host-context(.sidebar-host--collapsed) .sidebar-header {
-  padding: 24px 20px 24px 20px; /* Same padding as expanded state */
+  padding: 24px 20px 24px 20px;
 }
 
 /* Collapsed and scrolled state */
@@ -91,14 +85,34 @@
   padding: 12px 20px 12px 20px;
 }
 
-/* Ensure tooltip wrapper doesn't interfere with button layout */
-:host-context(.sidebar-host--collapsed) .tooltip-trigger {
-  display: inline-block;
-  width: auto;
-  height: auto;
+/* Minimized mode styles */
+:host-context(.sidebar-host--minimized) .sidebar-header {
+  padding: 12px 24px;
 }
 
-/* Create a downward gradient overlay so content scrolls under header */
+:host-context(.sidebar-host--minimized) .sidebar-header__logo {
+  transform: translateY(-50%);
+  height: 24px;
+  opacity: 1;
+}
 
+:host-context(.sidebar-host--minimized) .sidebar-header__toggle-btn {
+  right: 0;
+  left: auto;
+  transform: translateY(-50%);
+}
 
+/* Drawer mode styles */
+:host-context(.sidebar-host--drawer) .sidebar-header {
+  padding: 20px 20px 20px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 
+:host-context(.sidebar-host--drawer) .sidebar-header__logo {
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
+:host-context(.sidebar-host--drawer) .sidebar-header__toggle-btn {
+  transform: translateY(-50%);
+}

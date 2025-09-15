@@ -6,12 +6,6 @@
   border-bottom: 2px solid var(--border-color-default);
 }
 
-.header-details__container {
-  width: 83.33%; /* 10/12 columns of parent container */
-  max-width: none;
-  margin: 0 auto;
-}
-
 /* Title Row */
 .header-details__title-row {
   display: flex;
@@ -83,13 +77,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-}
-
-/* Responsive behavior */
-@media (max-width: 1312px) {
-  .header-details__container {
-    padding: 0 16px;
-  }
 }
 
 /* Hide primary/secondary actions on xs and sm breakpoints (< 768px) */

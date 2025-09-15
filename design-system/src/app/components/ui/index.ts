@@ -24,6 +24,7 @@ export { DsDataItemComponent } from './data-item/ds-data-item';
 export { type TopbarBreadcrumbItem } from './topbar/ds-topbar-breadcrumb';
 
 export { DsSelectComponent } from './select/ds-select';
+export { DsAppLayoutComponent } from './app-layout/ds-app-layout';
 
 // Type exports
 export type { ButtonVariant, ButtonSize } from './button/ds-button';

@@ -1,0 +1,147 @@
+.app-layout {
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative; /* Create stacking context */
+}
+
+/* Mobile Layout (default) */
+.app-layout {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+}
+
+/* Sidebar container - base styles */
+.app-layout__sidebar {
+  background: var(--sidebar-bg);
+  position: relative;
+}
+
+/* Mobile minimized sidebar */
+.app-layout__sidebar--minimized {
+  grid-row: 1;
+  width: 100%;
+  height: 80px; /* Match topbar height */
+  z-index: 1;
+}
+
+.app-layout__sidebar--minimized ::ng-deep .sidebar__container {
+  width: 100%;
+  height: 100%;
+  padding: 0; /* Let sidebar header handle its own padding */
+}
+
+/* Override sidebar header padding in minimized mode to match topbar */
+.app-layout__sidebar--minimized ::ng-deep .sidebar-header {
+  padding: 0 24px !important; /* Match topbar horizontal padding */
+  height: 80px !important; /* Match topbar height */
+  justify-content: center; /* Center content vertically */
+}
+
+/* Mobile drawer */
+.app-layout__drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: min(300px, 80vw);
+  z-index: 20;
+  background: var(--sidebar-bg);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+  
+  /* Initial state - hidden */
+  transform: translateX(-100%);
+  transition: transform var(--transition-duration-normal) var(--ease-out-quart);
+  will-change: transform;
+  pointer-events: none; /* Prevent interaction when closed */
+}
+
+/* Show drawer when open */
+.app-layout__drawer--open {
+  transform: translateX(0);
+  pointer-events: auto; /* Allow interaction when open */
+}
+
+/* Desktop sidebar */
+.app-layout__sidebar--desktop {
+  grid-column: 1;
+  grid-row: 1;
+  height: 100%;
+  width: 256px;
+  transition: width var(--transition-duration-slow) var(--ease-out-quart);
+  will-change: width;
+  overflow: hidden; /* Prevent content overflow during animation */
+}
+
+/* Desktop Layout */
+@media (min-width: 992px) {
+  .app-layout {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 100%;
+  }
+
+  /* Collapsed desktop sidebar */
+  .app-layout--sidebar-collapsed .app-layout__sidebar--desktop {
+    width: 80px;
+  }
+}
+
+/* Overlay for mobile menu */
+.app-layout__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  
+  /* Initial state - hidden */
+  opacity: 0;
+  backdrop-filter: blur(0px);
+  pointer-events: none;
+  transition: 
+    opacity var(--transition-duration-normal) var(--ease-out-quart),
+    backdrop-filter var(--transition-duration-normal) var(--ease-out-quart);
+  will-change: opacity, backdrop-filter;
+}
+
+/* Show overlay when visible */
+.app-layout__overlay--visible {
+  opacity: 1;
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+/* Main content area */
+.app-layout__main {
+  grid-row: 2;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  position: relative; /* Create stacking context */
+}
+
+@media (min-width: 992px) {
+  .app-layout__main {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
+
+/* Topbar container */
+.app-layout__topbar {
+  width: 100%;
+  min-width: 0;
+  z-index: 5; /* Keep topbar below overlay */
+}
+
+/* Content area */
+.app-layout__content {
+  min-width: 0;
+  width: 100%;
+  overflow: auto;
+}

@@ -10,7 +10,7 @@ import { DsButtonComponent } from '../button/ds-button';
   styleUrls: ['./ds-header-details.css'],
   template: `
     <div class="header-details">
-      <div class="header-details__container content-container">
+      <div class="content-container">
         <!-- Title Row -->
         <div class="header-details__title-row">
           <h1 class="header-details__title ui-2xl-medium">
