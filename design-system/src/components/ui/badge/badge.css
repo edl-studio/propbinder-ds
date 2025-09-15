@@ -1,8 +1,0 @@
-/* Badge component styles */
-
-/* Force icon sizing for Material UI icons */
-[data-slot="badge"] .MuiSvgIcon-root {
-  width: 12px !important;
-  height: 12px !important;
-  font-size: 12px !important;
-} 

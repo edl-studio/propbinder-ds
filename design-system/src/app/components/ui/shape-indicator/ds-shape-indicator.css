@@ -1,0 +1,77 @@
+/* Base shape indicator styles */
+.shape-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+}
+
+/* Shape indicator label */
+.shape-indicator__label {
+  font-size: var(--font-size-xs); /* 12px */
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Color variants for text */
+.shape-indicator--default .shape-indicator__label {
+  color: var(--text-color-default-primary);
+}
+
+.shape-indicator--brand .shape-indicator__label {
+  color: var(--text-color-brand);
+}
+
+.shape-indicator--success .shape-indicator__label {
+  color: var(--color-success-base);
+}
+
+.shape-indicator--warning .shape-indicator__label {
+  color: var(--color-warning-base);
+}
+
+.shape-indicator--destructive .shape-indicator__label {
+  color: var(--color-destructive-base);
+}
+
+.shape-indicator--blue .shape-indicator__label {
+  color: var(--color-blue-base);
+}
+
+.shape-indicator--light-purple .shape-indicator__label {
+  color: var(--color-light-purple-base);
+}
+
+.shape-indicator--pink .shape-indicator__label {
+  color: var(--color-pink-base);
+}
+
+.shape-indicator--salmon-orange .shape-indicator__label {
+  color: var(--color-salmon-orange-base);
+}
+
+.shape-indicator--orange .shape-indicator__label {
+  color: var(--color-orange-base);
+}
+
+.shape-indicator--lime-green .shape-indicator__label {
+  color: var(--color-lime-green-base);
+}
+
+.shape-indicator--grey .shape-indicator__label {
+  color: var(--color-grey-base);
+}
+
+/* SVG styling */
+svg {
+  flex-shrink: 0;
+  display: block;
+  width: 8px;
+  height: 8px;
+}
+
+/* Ensure shapes are centered within their viewBox */
+svg path {
+  vector-effect: non-scaling-stroke;
+}

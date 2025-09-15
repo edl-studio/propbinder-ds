@@ -1,0 +1,70 @@
+/* Topbar Component Styles */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  width: 100%;
+  height: 80px;
+  background-color: var(--background-color-page);
+}
+
+/* Left side: Icon and Title */
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar__icon {
+  flex-shrink: 0;
+}
+
+.topbar__title {
+  margin: 0;
+  color: var(--text-color-default-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Breadcrumbs container */
+.topbar__breadcrumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Right side: Actions and Avatar */
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Action buttons container */
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.topbar__action-btn {
+  flex-shrink: 0;
+}
+
+/* Avatar */
+.topbar__avatar {
+  flex-shrink: 0;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 16px;
+  }
+  
+  .topbar__right {
+    gap: 12px;
+  }
+}

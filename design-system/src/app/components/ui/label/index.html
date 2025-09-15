@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Label Component Preview - Propbinder Design System</title>
+    <link rel="stylesheet" href="../../../styles/globals.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-page text-primary font-['Brockmann',system-ui,-apple-system,sans-serif] p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="mb-12 text-center">
+            <h1 class="text-4xl font-bold text-primary mb-4">Label Component Preview</h1>
+            <p class="text-lg text-secondary max-w-2xl mx-auto">
+                A comprehensive showcase of the label component from the Propbinder Design System, demonstrating various use cases and styling options.
+            </p>
+        </header>
+
+        <main class="space-y-12">
+            <!-- Basic Label Examples -->
+            <section class="bg-container border border-weak rounded-lg p-8">
+                <h2 class="text-2xl font-semibold text-primary mb-6">Basic Label Examples</h2>
+                
+                <h3 class="text-xl font-medium text-primary mb-4">Simple Labels</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Default Label</h4>
+                        <div class="space-y-3">
+                            <label class="ui-sm-regular block" for="default-input">Default Label</label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="default-input" type="text" placeholder="Enter text...">
+                        </div>
+                    </div>
+
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Required Field</h4>
+                        <div class="space-y-3">
+                            <label class="ui-sm-regular block after:content-['_*'] after:text-red-600" for="required-input">
+                                Email Address
+                            </label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="required-input" type="email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Optional Field</h4>
+                        <div class="space-y-3">
+                            <label class="ui-sm-regular block after:content-['_(optional)'] after:text-secondary after:font-normal" for="optional-input">
+                                Middle Name
+                            </label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="optional-input" type="text" placeholder="Optional field">
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-medium text-primary mb-4">Label Variations</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Small Label</h4>
+                        <div class="space-y-3">
+                            <label class="ui-xs-regular block" for="small-input">Small Label Text</label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="small-input" type="text" placeholder="Input field">
+                        </div>
+                    </div>
+
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Medium Weight</h4>
+                        <div class="space-y-3">
+                            <label class="ui-sm-medium block" for="medium-input">Medium Weight Label</label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="medium-input" type="text" placeholder="Input field">
+                        </div>
+                    </div>
+
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Semi-Bold Label</h4>
+                        <div class="space-y-3">
+                            <label class="ui-sm-semiBold block" for="semibold-input">Semi-Bold Label</label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="semibold-input" type="text" placeholder="Input field">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Form Field Examples -->
+            <section class="bg-container border border-weak rounded-lg p-8">
+                <h2 class="text-2xl font-semibold text-primary mb-6">Form Field Examples</h2>
+                
+                <h3 class="text-xl font-medium text-primary mb-4">Text Inputs</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Login Form</h4>
+                        <div class="space-y-6">
+                            <div class="space-y-2">
+                                <label class="ui-sm-regular block after:content-['_*'] after:text-red-600" for="username">
+                                    Username
+                                </label>
+                                <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                       id="username" type="text" placeholder="Enter username">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="ui-sm-regular block after:content-['_*'] after:text-red-600" for="password">
+                                    Password
+                                </label>
+                                <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                       id="password" type="password" placeholder="Enter password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Contact Information</h4>
+                        <div class="space-y-6">
+                            <div class="space-y-2">
+                                <label class="ui-sm-regular block after:content-['_*'] after:text-red-600" for="fullname">
+                                    Full Name
+                                </label>
+                                <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                       id="fullname" type="text" placeholder="John Doe">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="ui-sm-regular block after:content-['_*'] after:text-red-600" for="email">
+                                    Email Address
+                                </label>
+                                <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                       id="email" type="email" placeholder="john@example.com">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="ui-sm-regular block after:content-['_(optional)'] after:text-secondary after:font-normal" for="phone">
+                                    Phone Number
+                                </label>
+                                <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                       id="phone" type="tel" placeholder="+1 (555) 123-4567">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-medium text-primary mb-4">Checkbox and Radio Groups</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Preferences</h4>
+                        <div class="space-y-4">
+                            <label class="ui-sm-regular block mb-3">Notification Preferences</label>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <input class="w-4 h-4 border border-weak rounded bg-controls" 
+                                           type="checkbox" id="email-notifications">
+                                    <label class="ui-sm-regular" for="email-notifications">Email notifications</label>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <input class="w-4 h-4 border border-weak rounded bg-controls" 
+                                           type="checkbox" id="sms-notifications">
+                                    <label class="ui-sm-regular" for="sms-notifications">SMS notifications</label>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <input class="w-4 h-4 border border-weak rounded bg-controls" 
+                                           type="checkbox" id="push-notifications" checked>
+                                    <label class="ui-sm-regular" for="push-notifications">Push notifications</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Account Type</h4>
+                        <div class="space-y-4">
+                            <label class="ui-sm-regular block mb-3 after:content-['_*'] after:text-red-600">
+                                Select Account Type
+                            </label>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <input class="w-4 h-4 border border-weak rounded-full bg-controls" 
+                                           type="radio" id="personal" name="account-type" checked>
+                                    <label class="ui-sm-regular" for="personal">Personal</label>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <input class="w-4 h-4 border border-weak rounded-full bg-controls" 
+                                           type="radio" id="business" name="account-type">
+                                    <label class="ui-sm-regular" for="business">Business</label>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <input class="w-4 h-4 border border-weak rounded-full bg-controls" 
+                                           type="radio" id="enterprise" name="account-type">
+                                    <label class="ui-sm-regular" for="enterprise">Enterprise</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Label States -->
+            <section class="bg-container border border-weak rounded-lg p-8">
+                <h2 class="text-2xl font-semibold text-primary mb-6">Label States</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Success State</h4>
+                        <div class="space-y-3">
+                            <label class="ui-sm-regular block text-green-600" for="success-input">Valid Email</label>
+                            <input class="w-full h-10 px-3 border-2 border-green-500 rounded-md bg-controls" 
+                                   id="success-input" type="email" value="user@example.com">
+                        </div>
+                    </div>
+
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Error State</h4>
+                        <div class="space-y-3">
+                            <label class="ui-sm-regular block text-red-600" for="error-input">Invalid Email</label>
+                            <input class="w-full h-10 px-3 border-2 border-red-500 rounded-md bg-controls" 
+                                   id="error-input" type="email" value="invalid-email">
+                            <div class="text-xs text-red-600" role="alert">Please enter a valid email address.</div>
+                        </div>
+                    </div>
+
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Disabled State</h4>
+                        <div class="space-y-3">
+                            <label class="ui-sm-regular block text-secondary" for="disabled-input">Disabled Field</label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-gray-100 text-secondary cursor-not-allowed" 
+                                   id="disabled-input" type="text" value="Cannot edit" disabled>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Examples -->
+            <section class="bg-container border border-weak rounded-lg p-8">
+                <h2 class="text-2xl font-semibold text-primary mb-6">Advanced Examples</h2>
+                
+                <h3 class="text-xl font-medium text-primary mb-4">Complex Form Layout</h3>
+                <div class="border border-weak rounded-lg p-6 mb-8">
+                    <h4 class="text-base font-medium text-primary mb-6">User Registration Form</h4>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <label class="ui-sm-regular block after:content-['_*'] after:text-red-600" for="first-name">
+                                    First Name
+                                </label>
+                                <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                       id="first-name" type="text" placeholder="John">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="ui-sm-regular block after:content-['_*'] after:text-red-600" for="last-name">
+                                    Last Name
+                                </label>
+                                <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                       id="last-name" type="text" placeholder="Doe">
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <label class="ui-sm-regular block after:content-['_*'] after:text-red-600" for="reg-email">
+                                Email Address
+                            </label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="reg-email" type="email" placeholder="john.doe@example.com">
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <label class="ui-sm-regular block after:content-['_*'] after:text-red-600" for="reg-password">
+                                Password
+                            </label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="reg-password" type="password" placeholder="Create a strong password">
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <label class="ui-sm-regular block after:content-['_(optional)'] after:text-secondary after:font-normal" for="company">
+                                Company
+                            </label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="company" type="text" placeholder="Your company name">
+                        </div>
+                        
+                        <div class="flex items-center gap-3">
+                            <input class="w-4 h-4 border border-weak rounded bg-controls" 
+                                   type="checkbox" id="terms" required>
+                            <label class="ui-sm-regular after:content-['_*'] after:text-red-600" for="terms">
+                                I agree to the Terms of Service and Privacy Policy
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-medium text-primary mb-4">Inline Form Elements</h3>
+                <div class="border border-weak rounded-lg p-6">
+                    <h4 class="text-base font-medium text-primary mb-4">Newsletter Subscription</h4>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                        <label class="ui-sm-regular shrink-0" for="newsletter-email">Email:</label>
+                        <input class="flex-1 h-10 px-3 border border-weak rounded-md bg-controls" 
+                               id="newsletter-email" type="email" placeholder="your@email.com">
+                        <button class="px-4 py-2 bg-brand text-white rounded-md hover:bg-brand-hover transition-colors">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Examples -->
+            <section class="bg-container border border-weak rounded-lg p-8">
+                <h2 class="text-2xl font-semibold text-primary mb-6">Implementation Examples</h2>
+                
+                <h3 class="text-xl font-medium text-primary mb-4">Angular Component Usage</h3>
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6 font-mono text-sm overflow-x-auto">
+                    <pre><code>&lt;!-- Basic Label --&gt;
+&lt;ds-label for="email-input"&gt;Email Address&lt;/ds-label&gt;
+&lt;ds-input id="email-input" placeholder="Enter email"&gt;&lt;/ds-input&gt;
+
+&lt;!-- Label with Custom Classes --&gt;
+&lt;ds-label className="font-semibold text-success" for="success-input"&gt;
+  Valid Input
+&lt;/ds-label&gt;
+
+&lt;!-- Label with ID --&gt;
+&lt;ds-label id="form-label" for="form-input" className="required"&gt;
+  Required Field
+&lt;/ds-label&gt;</code></pre>
+                </div>
+
+                <h3 class="text-xl font-medium text-primary mb-4">HTML Structure</h3>
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                    <pre><code>&lt;label class="ui-sm-regular block" for="input-id"&gt;
+  Label Text
+&lt;/label&gt;
+&lt;input id="input-id" type="text" placeholder="Input field"&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- Accessibility Guidelines -->
+            <section class="bg-container border border-weak rounded-lg p-8">
+                <h2 class="text-2xl font-semibold text-primary mb-6">Accessibility Guidelines</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Proper Association</h4>
+                        <p class="text-sm text-secondary mb-4">Always associate labels with form controls using the <code class="bg-gray-100 px-1 rounded">for</code> attribute.</p>
+                        <div class="space-y-3">
+                            <label class="ui-sm-regular block" for="accessible-input">Accessible Label</label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="accessible-input" type="text" placeholder="This input is properly labeled">
+                        </div>
+                    </div>
+
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Required Fields</h4>
+                        <p class="text-sm text-secondary mb-4">Clearly indicate required fields with visual and programmatic indicators.</p>
+                        <div class="space-y-3">
+                            <label class="ui-sm-regular block after:content-['_*'] after:text-red-600" for="required-field">
+                                Required Field
+                            </label>
+                            <input class="w-full h-10 px-3 border border-weak rounded-md bg-controls" 
+                                   id="required-field" type="text" required aria-required="true">
+                        </div>
+                    </div>
+
+                    <div class="border border-weak rounded-lg p-6">
+                        <h4 class="text-base font-medium text-primary mb-4">Error States</h4>
+                        <p class="text-sm text-secondary mb-4">Use appropriate ARIA attributes for error states.</p>
+                        <div class="space-y-3">
+                            <label class="ui-sm-regular block text-red-600" for="error-field">Invalid Input</label>
+                            <input class="w-full h-10 px-3 border-2 border-red-500 rounded-md bg-controls" 
+                                   id="error-field" type="email" value="invalid" aria-invalid="true" aria-describedby="error-message">
+                            <div id="error-message" class="text-xs text-red-600" role="alert">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

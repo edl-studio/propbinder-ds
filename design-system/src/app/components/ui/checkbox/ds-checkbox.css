@@ -1,0 +1,303 @@
+/* Brockmann Font Definitions */
+@font-face {
+  font-family: 'Brockmann';
+  src: url('/Brockmann/Brockmann-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base component styles */
+:host {
+  display: inline-block;
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+}
+
+/* Checkbox container styles */
+.checkbox-container {
+  @apply tw-inline-flex tw-items-center tw-gap-2;
+  
+  &.checkbox-container--disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  &.checkbox-container--with-label {
+    cursor: pointer;
+  }
+}
+
+/* Size variants for container */
+.checkbox-container--sm {
+  @apply tw-gap-1.5;
+}
+
+.checkbox-container--md {
+  @apply tw-gap-2;
+}
+
+.checkbox-container--lg {
+  @apply tw-gap-2.5;
+}
+
+/* Checkbox styles */
+.checkbox {
+  @apply tw-relative tw-inline-flex tw-items-center tw-justify-center;
+  @apply tw-rounded tw-border tw-transition-all tw-duration-200 tw-ease-in-out;
+  @apply tw-cursor-pointer tw-shrink-0;
+  
+  /* Ensure border is rendered inside Shadow DOM */
+  border-style: solid;
+  border-width: 1px;
+  
+  /* Base colors */
+  background-color: var(--background-color-page);
+  border-color: var(--border-color-default);
+  
+  /* Hover state */
+  &:hover:not(.checkbox--disabled) {
+    background-color: var(--background-color-page);
+    border-color: var(--color-brand-base);
+  }
+  
+  /* Focus state */
+  &:focus-visible {
+    box-shadow: 0 0 0 3px var(--outline-color-default);
+    outline: none;
+    border-color: var(--color-brand-base);
+  }
+  
+  /* Disabled state */
+  &.checkbox--disabled {
+    background-color: var(--background-color-disabled);
+    border-color: var(--border-color-default);
+    cursor: not-allowed;
+  }
+  
+  /* Checked state */
+  &.checkbox--checked {
+    background-color: var(--color-brand-base);
+    border-color: var(--color-brand-base);
+    
+    &:hover:not(.checkbox--disabled) {
+      background-color: var(--color-brand-strong);
+      border-color: var(--color-brand-strong);
+    }
+  }
+  
+  /* Indeterminate state */
+  &.checkbox--indeterminate {
+    background-color: var(--color-brand-base);
+    border-color: var(--color-brand-base);
+    
+    &:hover:not(.checkbox--disabled) {
+      background-color: var(--color-brand-strong);
+      border-color: var(--color-brand-strong);
+    }
+  }
+}
+
+/* Size variants */
+.checkbox--sm {
+  @apply tw-w-4 tw-h-4;
+  border-radius: 0.125rem; /* 2px */
+}
+
+.checkbox--md {
+  @apply tw-w-5 tw-h-5;
+  border-radius: 0.1875rem; /* 3px */
+}
+
+.checkbox--lg {
+  @apply tw-w-6 tw-h-6;
+  border-radius: 0.25rem; /* 4px */
+}
+
+/* Variant styles */
+.checkbox--default {
+  /* Already defined in base styles */
+}
+
+.checkbox--error {
+  border-color: var(--color-destructive-base);
+  
+  &:hover:not(.checkbox--disabled) {
+    border-color: var(--color-destructive-strong);
+  }
+  
+  &.checkbox--checked,
+  &.checkbox--indeterminate {
+    background-color: var(--color-destructive-base);
+    border-color: var(--color-destructive-base);
+    
+    &:hover:not(.checkbox--disabled) {
+      background-color: var(--color-destructive-strong);
+      border-color: var(--color-destructive-strong);
+    }
+  }
+  
+  &:focus-visible {
+    outline-color: var(--color-destructive-base);
+  }
+}
+
+.checkbox--warning {
+  border-color: var(--color-warning-base);
+  
+  &:hover:not(.checkbox--disabled) {
+    border-color: var(--color-warning-strong);
+  }
+  
+  &.checkbox--checked,
+  &.checkbox--indeterminate {
+    background-color: var(--color-warning-base);
+    border-color: var(--color-warning-base);
+    
+    &:hover:not(.checkbox--disabled) {
+      background-color: var(--color-warning-strong);
+      border-color: var(--color-warning-strong);
+    }
+  }
+  
+  &:focus-visible {
+    outline-color: var(--color-warning-base);
+  }
+}
+
+.checkbox--success {
+  border-color: var(--color-success-base);
+  
+  &:hover:not(.checkbox--disabled) {
+    border-color: var(--color-success-strong);
+  }
+  
+  &.checkbox--checked,
+  &.checkbox--indeterminate {
+    background-color: var(--color-success-base);
+    border-color: var(--color-success-base);
+    
+    &:hover:not(.checkbox--disabled) {
+      background-color: var(--color-success-strong);
+      border-color: var(--color-success-strong);
+    }
+  }
+  
+  &:focus-visible {
+    outline-color: var(--color-success-base);
+  }
+}
+
+/* Icon styles */
+.checkbox__icon {
+  @apply tw-transition-all tw-duration-200 tw-ease-in-out;
+  color: var(--text-color-inverted-primary);
+  
+  &.checkbox__icon--checked {
+    /* Checkmark icon */
+  }
+  
+  &.checkbox__icon--indeterminate {
+    /* Minus/subtract icon */
+  }
+}
+
+/* Label styles */
+.checkbox__label {
+  @apply tw-cursor-pointer tw-select-none;
+  color: var(--text-color-default-primary);
+  
+  &.checkbox__label--disabled {
+    color: var(--text-color-disabled);
+    cursor: not-allowed;
+  }
+}
+
+/* Size-specific label styles */
+.checkbox__label--sm {
+  @apply tw-text-sm;
+  line-height: 1.25;
+}
+
+.checkbox__label--md {
+  @apply tw-text-base;
+  line-height: 1.5;
+}
+
+.checkbox__label--lg {
+  @apply tw-text-lg;
+  line-height: 1.75;
+}
+
+/* Variant-specific label styles */
+.checkbox__label--error {
+  color: var(--color-destructive-strong);
+}
+
+.checkbox__label--warning {
+  color: var(--color-warning-strong);
+}
+
+.checkbox__label--success {
+  color: var(--color-success-strong);
+}
+
+/* States for Angular Primitives data attributes */
+span[data-checked] {
+  /* Handled by .checkbox--checked class */
+}
+
+span[data-indeterminate] {
+  /* Handled by .checkbox--indeterminate class */
+}
+
+span[data-disabled] {
+  /* Handled by .checkbox--disabled class */
+}
+
+span[data-hover] {
+  /* Hover state handled by CSS :hover */
+}
+
+span[data-focus-visible] {
+  /* Focus state handled by CSS :focus-visible */
+}
+
+span[data-press] {
+  /* Press state - add slight scale animation */
+  transform: scale(0.95);
+}
+
+/* Animation for state changes */
+.checkbox {
+  transition: all 0.2s ease-in-out;
+}
+
+.checkbox__icon {
+  transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .checkbox,
+  .checkbox__icon {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .checkbox {
+    border-width: 2px;
+  }
+  
+  .checkbox--checked,
+  .checkbox--indeterminate {
+    border-color: ButtonText;
+    background-color: ButtonText;
+  }
+  
+  .checkbox__icon {
+    color: ButtonFace;
+  }
+}

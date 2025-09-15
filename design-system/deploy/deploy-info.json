@@ -1,0 +1,10 @@
+{
+  "buildTime": "2025-09-15T11:29:58.497Z",
+  "version": "0.0.0",
+  "landingPage": "Angular App (SPA)",
+  "components": {
+    "angular": true,
+    "storybook": true,
+    "appShellPreview": true
+  }
+}

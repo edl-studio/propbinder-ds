@@ -1,0 +1,150 @@
+/* Avatar Base Styles */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--background-color-interactive-default);
+  border: 1px solid var(--border-color-default);
+  flex-shrink: 0;
+  transition: all var(--transition-duration-normal) var(--ease-smooth);
+}
+
+/* Icon Avatar Background Override */
+.avatar--icon {
+  background-color: var(--color-brand-base);
+  border: none;
+}
+
+/* Depth classes for icon avatars - replicated from globals.css to work with view encapsulation */
+.avatar--icon.depth-sm {
+  box-shadow: 
+    inset 0 10px 10px rgba(255, 255, 255, 0.2),
+    inset 0 -1.5px 1px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.avatar--icon.depth-md {
+  box-shadow: 
+    inset 0 20px 20px rgba(255, 255, 255, 0.2),
+    inset 0 -3px 2px rgba(0, 0, 0, 0.25),
+    inset 0 2px 2px rgba(255, 255, 255, 0.3);
+}
+
+.avatar--icon.depth-lg {
+  box-shadow: 
+    inset 0 30px 30px rgba(255, 255, 255, 0.2),
+    inset 0 -4.5px 3px rgba(0, 0, 0, 0.25),
+    inset 0 3px 3px rgba(255, 255, 255, 0.3);
+}
+
+/* Size Variants */
+.avatar--xs {
+  width: 20px;
+  height: 20px;
+}
+
+.avatar--sm {
+  width: 24px;
+  height: 24px;
+}
+
+.avatar--md {
+  width: 32px;
+  height: 32px;
+}
+
+.avatar--lg {
+  width: 48px;
+  height: 48px;
+}
+
+.avatar--xl {
+  width: 64px;
+  height: 64px;
+}
+
+/* Type Variants - Radius Rules */
+
+/* Initials and Photo: Always round */
+.avatar--initials,
+.avatar--photo {
+  border-radius: 50%;
+}
+
+/* Icon: Variable radius based on size */
+.avatar--icon.avatar--xs {
+  border-radius: 4px;
+}
+
+.avatar--icon.avatar--sm {
+  border-radius: 6px;
+}
+
+.avatar--icon.avatar--md {
+  border-radius: 8px;
+}
+
+.avatar--icon.avatar--lg {
+  border-radius: 12px;
+}
+
+.avatar--icon.avatar--xl {
+  border-radius: 16px;
+}
+
+/* Initials Styles */
+.avatar__initials {
+  font-weight: 500;
+  color: var(--text-color-default-primary);
+  line-height: 1;
+  user-select: none;
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+}
+
+.avatar__initials--xs {
+  font-size: 8px;
+}
+
+.avatar__initials--sm {
+  font-size: 10px;
+}
+
+.avatar__initials--md {
+  font-size: 12px;
+}
+
+.avatar__initials--lg {
+  font-size: 16px;
+}
+
+.avatar__initials--xl {
+  font-size: 20px;
+}
+
+/* Image Styles */
+.avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* Icon Styles */
+.avatar__icon {
+  color: var(--text-color-default-primary-inverse);
+}
+
+/* Hover States Removed - No hover interactions for avatars */
+
+/* Focus States Removed - Avatars are purely visual elements */
+
+/* Interactive States Removed - No hover interactions for avatars */
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .avatar {
+    transition: none;
+  }
+}

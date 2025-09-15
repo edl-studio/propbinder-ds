@@ -1,0 +1,638 @@
+---
+alwaysApply: false
+---
+
+## Component Architecture
+
+Our design system uses a **hybrid approach** to component encapsulation that balances consistency, flexibility, and maintainability:
+
+### Primitive Components (Shadow DOM)
+**Used for**: Buttons, inputs, icons, badges, avatars - components that must be pixel-consistent and stateful.
+
+- **Encapsulation**: `ViewEncapsulation.ShadowDom`
+- **Styling**: Separate CSS files with semantic class names
+- **Theming**: CSS custom properties that inherit into shadow roots
+- **Flexibility**: Support both predefined design tokens and custom values
+
+### Organism Components (Emulated)
+**Used for**: Layouts, modals, page headers, data grids - composition-heavy components where developers need Tailwind flexibility.
+
+- **Encapsulation**: `ViewEncapsulation.Emulated` (Angular default)
+- **Styling**: Tailwind utilities in templates for maximum flexibility
+- **Layout**: Focus on responsive design and composition patterns
+
+---
+
+## Button Component
+
+### Basic Usage
+
+```html
+<ds-button variant="primary">Primary Button</ds-button>
+<ds-button variant="secondary" [disabled]="true">Disabled Secondary</ds-button>
+<ds-button variant="ghost" [loading]="true">Loading Ghost</ds-button>
+```
+
+### Properties
+
+#### Variants
+- `primary` - Primary brand button (default)
+- `secondary` - Secondary button with subtle background
+- `ghost` - Transparent button for secondary actions
+- `destructive` - Destructive action button
+
+#### Sizes
+- `sm` - Small button (32px height)
+- `md` - Medium button (36px height, default)
+- `lg` - Large button (40px height)
+
+#### States & Icons
+- `disabled` - Disables button interaction
+- `loading` - Shows loading spinner and disables interaction
+- `pressed` - Indicates pressed state for toggle buttons
+- `leadingIcon` - Icon before button text
+- `trailingIcon` - Icon after button text
+
+### Advanced Examples
+
+```html
+<!-- With icons -->
+<ds-button variant="primary" leadingIcon="remixAddLine">
+  Add Item
+</ds-button>
+
+<!-- Loading state -->
+<ds-button variant="secondary" [loading]="isSubmitting">
+  {{ isSubmitting ? 'Saving...' : 'Save Changes' }}
+</ds-button>
+
+<!-- Toggle button -->
+<ds-button 
+  variant="ghost" 
+  [pressed]="isActive"
+  trailingIcon="remixArrowDownLine"
+  (clicked)="toggleDropdown()">
+  Options
+</ds-button>
+```
+
+---
+
+## Icon Component
+
+The icon component demonstrates our **hybrid flexibility approach** - supporting both design system consistency and complete customization freedom.
+
+### Basic Usage
+
+```html
+<ds-icon name="remixHomeLine"></ds-icon>
+<ds-icon name="remixUserLine" size="lg" color="primary"></ds-icon>
+```
+
+### Predefined Sizes
+- `xs` - 12px
+- `sm` - 16px  
+- `md` - 20px (default)
+- `lg` - 24px
+- `xl` - 32px
+
+### Predefined Colors
+- `primary` - Brand color
+- `secondary` - Secondary text color
+- `success` - Success state color
+- `warning` - Warning state color
+- `danger` - Error/destructive color
+- `muted` - Disabled/muted color
+
+### Custom Values
+
+The component accepts **any CSS value** for maximum flexibility:
+
+```html
+<!-- Custom sizes -->
+<ds-icon name="remixHomeLine" size="48px"></ds-icon>
+<ds-icon name="remixHomeLine" size="2.5rem"></ds-icon>
+
+<!-- Custom colors -->
+<ds-icon name="remixHomeLine" color="#FF6B6B"></ds-icon>
+<ds-icon name="remixHomeLine" color="rgb(75, 192, 192)"></ds-icon>
+<ds-icon name="remixHomeLine" color="hsl(280, 100%, 70%)"></ds-icon>
+<ds-icon name="remixHomeLine" color="var(--my-custom-color)"></ds-icon>
+```
+
+### Interactive Icons
+
+```html
+<ds-icon 
+  name="remixSettingsLine" 
+  size="lg" 
+  color="primary"
+  [interactive]="true"
+  (click)="openSettings()">
+</ds-icon>
+```
+
+---
+
+## Input Component
+
+### Basic Usage
+
+```html
+<ds-input variant="default" placeholder="Enter text..."></ds-input>
+<ds-input variant="success" placeholder="Valid input"></ds-input>
+```
+
+### Variants
+
+- `default` - Standard input styling
+- `success` - Success state input
+- `warning` - Warning state input
+- `destructive` - Error state input
+
+---
+
+## Card Component
+
+### Basic Usage
+
+```html
+<ds-card>
+  <h3>Card Title</h3>
+  <p>Card content goes here.</p>
+</ds-card>
+
+<ds-card [interactive]="true">
+  <p>This card shows hover effects</p>
+</ds-card>
+```
+
+### Props
+
+- `interactive` - Enables hover effects for interactive cards
+
+---
+
+## Design Token System
+
+Our design system uses Tailwind CSS v4 with a comprehensive token system defined in `globals.css`. All tokens are automatically available as utility classes.
+
+### Using Design Tokens in Templates
+
+```html
+<!-- Background Colors -->
+<div class="bg-page">Page background</div>
+<div class="bg-interactive-default">Default interactive background</div>
+<div class="bg-interactive-brand">Brand interactive background</div>
+
+<!-- Text Colors -->
+<span class="text-default-primary">Primary text</span>
+<span class="text-default-secondary">Secondary text</span>
+<span class="text-default-tertiary">Tertiary text</span>
+<span class="text-brand">Brand text</span>
+
+<!-- Border Colors -->
+<div class="border border-default">Default border</div>
+
+<!-- State Colors -->
+<div class="bg-success-base text-white">Success message</div>
+<div class="bg-warning-base text-white">Warning message</div>
+<div class="bg-destructive-base text-white">Error message</div>
+```
+
+### Importing Components
+
+```typescript
+import { DsButtonComponent, DsInputComponent, DsCardComponent, DsIconComponent } from './components/ui';
+
+@Component({
+  selector: 'my-component',
+  standalone: true,
+  imports: [DsButtonComponent, DsInputComponent, DsCardComponent, DsIconComponent],
+  template: `
+    <ds-button variant="primary" leadingIcon="remixAddLine">
+      Add Item
+    </ds-button>
+    
+    <ds-icon name="remixHomeLine" size="lg" color="primary"></ds-icon>
+    
+    <ds-input variant="default" placeholder="Enter text..."></ds-input>
+  `
+})
+export class MyComponent {}
+```
+
+---
+
+## Typography System
+
+Our typography system is built around the Brockmann font family with a comprehensive scale of sizes and weights.
+
+### Font Family
+
+The design system uses **Brockmann** as the primary font family with system fallbacks:
+
+```css
+font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+```
+
+### Typography Classes
+
+#### UI Typography Classes (Line-height: 1.2)
+
+UI typography is optimized for interface elements with tighter line spacing.
+
+##### XS Size (10px)
+- `.ui-xs-regular` - Regular weight (400)
+- `.ui-xs-medium` - Medium weight (500)
+- `.ui-xs-semiBold` - Semi-bold weight (600)
+
+##### SM Size (12px)
+- `.ui-sm-regular` - Regular weight (400)
+- `.ui-sm-medium` - Medium weight (500)
+- `.ui-sm-semiBold` - Semi-bold weight (600)
+
+##### Base Size (14px)
+- `.ui-base-regular` - Regular weight (400)
+- `.ui-base-medium` - Medium weight (500)
+- `.ui-base-semiBold` - Semi-bold weight (600)
+
+##### LG Size (16px)
+- `.ui-lg-regular` - Regular weight (400)
+- `.ui-lg-medium` - Medium weight (500)
+- `.ui-lg-semiBold` - Semi-bold weight (600)
+
+#### Body Typography Classes (Line-height: 1.4)
+
+Body typography is optimized for reading with more generous line spacing.
+
+##### 2XS Size (10px)
+- `.body-2xs-regular` - Regular weight (400)
+- `.body-2xs-medium` - Medium weight (500)
+- `.body-2xs-semiBold` - Semi-bold weight (600)
+
+##### XS Size (12px)
+- `.body-xs-regular` - Regular weight (400)
+- `.body-xs-medium` - Medium weight (500)
+- `.body-xs-semiBold` - Semi-bold weight (600)
+
+##### SM Size (14px)
+- `.body-sm-regular` - Regular weight (400)
+- `.body-sm-medium` - Medium weight (500)
+- `.body-sm-semiBold` - Semi-bold weight (600)
+
+##### Base Size (16px)
+- `.body-base-regular` - Regular weight (400)
+- `.body-base-medium` - Medium weight (500)
+- `.body-base-semiBold` - Semi-bold weight (600)
+
+##### LG Size (18px)
+- `.body-lg-regular` - Regular weight (400)
+- `.body-lg-medium` - Medium weight (500)
+- `.body-lg-semiBold` - Semi-bold weight (600)
+
+#### Heading Typography Classes (Line-height: 1.2)
+
+All headings use semi-bold weight (600) for emphasis.
+
+- `.heading-base` - 16px
+- `.heading-lg` - 18px
+- `.heading-xl` - 20px
+- `.heading-2xl` - 24px
+- `.heading-3xl` - 28px
+- `.heading-4xl` - 36px
+
+### Usage Examples
+
+```html
+<!-- UI Elements -->
+<button class="ui-sm-medium">Button Text</button>
+<label class="ui-xs-regular">Form Label</label>
+
+<!-- Body Text -->
+<p class="body-base-regular">Regular body text for reading.</p>
+<p class="body-lg-medium">Emphasized body text.</p>
+
+<!-- Headings -->
+<h1 class="heading-4xl">Main Heading</h1>
+<h2 class="heading-2xl">Section Heading</h2>
+<h3 class="heading-lg">Subsection Heading</h3>
+```
+
+---
+
+## Color System
+
+Our color system follows a semantic naming convention with comprehensive contrast variations.
+
+### Brand Colors
+
+- `--color-brand-base` (#6B5FF5) - Primary brand color
+- `--color-brand-base-hover` (#5D42E9) - Brand color hover state
+- `--color-brand-weak` (#E3E6EB) - Weak brand color
+- `--color-brand-weak-hover` (#CAD0D8) - Weak brand hover
+- `--color-brand-strong` (#202227) - Strong brand color
+- `--color-brand-strong-hover` (#121418) - Strong brand hover
+
+### Background Colors
+
+- `--background-color-page` (#ffffff) - Page background
+- `--background-color-interactive-default` (#ffffff) - Default interactive background
+- `--background-color-interactive-default-hover` (#E3E6EB) - Default interactive hover
+- `--background-color-interactive-default-disabled` (#CAD0D8) - Default interactive disabled
+- `--background-color-interactive-brand` (#6B5FF5) - Brand interactive background
+- `--background-color-interactive-brand-hover` (#5D42E9) - Brand interactive hover
+- `--background-color-interactive-brand-disabled` (#7C8694) - Brand interactive disabled
+
+### Text Colors
+
+- `--text-color-default-primary` (#202227) - Primary text
+- `--text-color-default-secondary` (#545B66) - Secondary text
+- `--text-color-default-tertiary` (#626B78) - Tertiary text
+- `--text-color-default-disabled` (#7C8694) - Disabled text
+- `--text-color-brand` (#6B5FF5) - Brand text
+- `--text-color-brand-disabled` (#CAD0D8) - Brand text disabled
+
+### Border Colors
+
+- `--border-color-default` (#E3E6EB) - Default border
+
+### State Colors
+
+#### Success Colors
+- `--color-success-base` (#158452) - Success base
+- `--color-success-base-hover` (#0f6c3d) - Success hover
+- `--color-success-weak` (#dcfce7) - Success weak
+- `--color-success-weak-hover` (#bbf7d0) - Success weak hover
+- `--color-success-strong` (#065f46) - Success strong
+- `--color-success-strong-hover` (#047857) - Success strong hover
+
+#### Warning Colors
+- `--color-warning-base` (#d97706) - Warning base
+- `--color-warning-base-hover` (#b45309) - Warning hover
+- `--color-warning-weak` (#fef3c7) - Warning weak
+- `--color-warning-weak-hover` (#fde68a) - Warning weak hover
+- `--color-warning-strong` (#92400e) - Warning strong
+- `--color-warning-strong-hover` (#78350f) - Warning strong hover
+
+#### Destructive Colors
+- `--color-destructive-base` (#dc2626) - Destructive base
+- `--color-destructive-base-hover` (#b91c1c) - Destructive hover
+- `--color-destructive-weak` (#fecaca) - Destructive weak
+- `--color-destructive-weak-hover` (#fca5a5) - Destructive weak hover
+- `--color-destructive-strong` (#991b1b) - Destructive strong
+- `--color-destructive-strong-hover` (#7f1d1d) - Destructive strong hover
+
+### Usage Examples
+
+```html
+<!-- Brand Colors -->
+<div class="bg-brand-base text-white">Brand Background</div>
+<div class="bg-brand-weak text-brand-strong">Brand Weak Background</div>
+
+<!-- State Colors -->
+<div class="bg-success-base text-white">Success Message</div>
+<div class="bg-warning-base text-white">Warning Message</div>
+<div class="bg-destructive-base text-white">Error Message</div>
+
+<!-- Text Colors -->
+<h1 class="text-default-primary">Primary Heading</h1>
+<p class="text-default-secondary">Secondary text</p>
+<span class="text-brand">Brand text</span>
+```
+
+---
+
+## Spacing & Layout
+
+Our design system uses Tailwind CSS's default spacing scale, which provides consistent spacing throughout the application.
+
+### Common Spacing Classes
+
+```html
+<!-- Margins -->
+<div class="m-4">Margin all sides</div>
+<div class="mt-2 mb-4">Top and bottom margins</div>
+<div class="mx-auto">Center horizontally</div>
+
+<!-- Padding -->
+<div class="p-4">Padding all sides</div>
+<div class="px-6 py-4">Horizontal and vertical padding</div>
+
+<!-- Gaps -->
+<div class="flex gap-4">Flexbox with gap</div>
+<div class="grid gap-6">Grid with gap</div>
+```
+
+---
+
+## Shadows & Effects
+
+Our design system includes three shadow levels for depth and hierarchy.
+
+### Shadow Classes
+
+- `--box-shadow-sm` - Small shadow for subtle elevation
+- `--box-shadow-md` - Medium shadow for cards and panels
+- `--box-shadow-lg` - Large shadow for modals and overlays
+
+### Usage Examples
+
+```html
+<!-- Shadow Utilities -->
+<div class="shadow-sm">Subtle elevation</div>
+<div class="shadow-md">Card elevation</div>
+<div class="shadow-lg">Modal elevation</div>
+
+<!-- Combined with other utilities -->
+<div class="bg-white shadow-md rounded-lg p-6">Card with shadow</div>
+```
+
+---
+
+## Animation & Transitions
+
+Our design system includes standardized transition durations for consistent animations.
+
+### Transition Durations
+
+- `--transition-duration-fast` (150ms) - Quick transitions
+- `--transition-duration-normal` (200ms) - Standard transitions
+- `--transition-duration-slow` (300ms) - Slow transitions
+
+### Usage Examples
+
+```html
+<!-- Hover Effects -->
+<button class="transition-all duration-normal hover:bg-brand-base-hover">
+  Hover Button
+</button>
+
+<!-- Focus States -->
+<input class="transition-colors duration-fast focus:ring-2 focus:ring-brand-base">
+```
+
+---
+
+## Best Practices
+
+### Component Architecture Guidelines
+
+#### When to Use Shadow DOM (Primitives)
+- ✅ **Buttons, inputs, icons, badges** - Components that need pixel-perfect consistency
+- ✅ **Stateful components** - Components with complex interaction patterns
+- ✅ **Reusable UI elements** - Components used across multiple applications
+- ❌ **Layout components** - Headers, grids, modals that need Tailwind flexibility
+
+#### When to Use Emulated Encapsulation (Organisms)
+- ✅ **Layout components** - Page headers, navigation, modals
+- ✅ **Composition-heavy components** - Data tables, forms, complex layouts
+- ✅ **Application-specific components** - Components with high customization needs
+- ❌ **Basic UI primitives** - Use Shadow DOM for consistency
+
+### Component Design Patterns
+
+#### Primitive Component Structure
+```typescript
+@Component({
+  selector: 'ds-primitive',
+  encapsulation: ViewEncapsulation.ShadowDom,
+  styleUrls: ['./ds-primitive.component.css'], // Separate CSS file
+  template: `<element [class]="computedClasses()">...</element>`
+})
+export class DsPrimitiveComponent {
+  // Use input signals for reactive properties
+  variant = input<'primary' | 'secondary'>('primary');
+  size = input<'sm' | 'md' | 'lg'>('md');
+  
+  // Computed classes for semantic CSS
+  computedClasses = computed(() => {
+    return `primitive primitive--${this.variant()} primitive--${this.size()}`;
+  });
+}
+```
+
+#### CSS File Structure for Primitives
+```css
+/* Base styles */
+.primitive {
+  /* Layout and base styles */
+}
+
+/* Size variants */
+.primitive--sm { /* Small size styles */ }
+.primitive--md { /* Medium size styles */ }
+.primitive--lg { /* Large size styles */ }
+
+/* Color variants using design tokens */
+.primitive--primary {
+  background-color: var(--color-brand-base);
+  color: white;
+}
+
+.primitive--secondary {
+  background-color: var(--background-color-interactive-default);
+  color: var(--text-color-default-primary);
+}
+```
+
+### Flexibility & Customization
+
+#### Hybrid Approach for Size/Color
+```typescript
+// Support both predefined and custom values
+size = input<'xs' | 'sm' | 'md' | 'lg' | 'xl' | string>('md');
+color = input<'primary' | 'secondary' | 'success' | string>();
+
+// Handle in computed properties
+computedSize = computed(() => {
+  const size = this.size();
+  return this.isPredefinedSize(size) ? this.sizeMap[size] : size;
+});
+```
+
+#### Enable Custom Theming
+```css
+/* Expose CSS custom properties for consumer customization */
+:host {
+  --component-bg: var(--color-brand-base);
+  --component-radius: var(--border-radius-md);
+  --component-padding: var(--spacing-4);
+}
+
+.component {
+  background-color: var(--component-bg);
+  border-radius: var(--component-radius);
+  padding: var(--component-padding);
+}
+```
+
+### Component Usage
+
+1. **Always use semantic class names** - Use our design tokens instead of arbitrary values
+2. **Maintain consistency** - Use the same patterns across similar components
+3. **Consider accessibility** - Ensure proper contrast ratios and ARIA labels
+4. **Test responsiveness** - Verify components work across different screen sizes
+5. **Choose the right encapsulation** - Shadow DOM for primitives, Emulated for layouts
+
+### Styling Guidelines - CRITICAL RULES
+
+⚠️ **NEVER add custom CSS styling in ANY HTML pages** ⚠️
+
+#### **Component Styling Hierarchy**
+1. **Primary Styling Source**: All component styling must come from `src/app/styles/globals.css` first
+2. **Component-Specific Styling**: Use dedicated component CSS files (e.g., `ds-button.component.css`) for component-specific styling only
+3. **NO Component Style Overrides**: Never override component styles in HTML pages - this creates UI inconsistencies
+4. **No Inline Styles**: Never add `<style>` tags or inline CSS in ANY HTML files
+5. **Exception Rule**: Custom CSS in HTML is only acceptable if absolutely necessary for critical functionality and must be documented with justification
+
+#### **Layout & Page Styling Rules**
+1. **Page Layout**: Always use **Tailwind utilities** for page and container layout styling
+2. **Responsiveness**: Use **Tailwind responsive utilities** (sm:, md:, lg:, xl:) for responsive design
+3. **Spacing & Positioning**: Use **Tailwind spacing utilities** (p-, m-, gap-, etc.) for layout spacing
+4. **Grid & Flexbox**: Use **Tailwind layout utilities** (flex, grid, etc.) for page structure
+
+#### **Design System Integrity**
+- **Component Consistency**: Components should look identical across all pages and contexts
+- **Centralized Styling**: All component styling lives in globals.css and component CSS files
+- **Layout Flexibility**: Use Tailwind for page-level layout without affecting component styling
+- **No Style Conflicts**: Avoid CSS specificity battles by following the hierarchy
+
+**Why This Matters:**
+- Maintains design system consistency across all pages
+- Prevents CSS specificity conflicts and cascade issues
+- Ensures components behave predictably everywhere
+- Keeps component styling centralized and maintainable
+- Separates component styling from layout concerns
+- Prevents UI inconsistencies and design system violations
+
+### Typography Guidelines
+
+1. **Use UI classes for interface elements** - Buttons, labels, form elements
+2. **Use Body classes for content** - Paragraphs, descriptions, long-form text
+3. **Use Heading classes for hierarchy** - Section titles, page headings
+4. **Maintain line-height consistency** - UI (1.2) vs Body (1.4)
+
+### Color Guidelines
+
+1. **Use semantic color names** - `success`, `warning`, `destructive` instead of `green`, `yellow`, `red`
+2. **Consider state variations** - Always provide hover and disabled states
+3. **Maintain contrast ratios** - Ensure text remains readable on colored backgrounds
+4. **Use brand colors sparingly** - Reserve for primary actions and key elements
+5. **Support custom colors** - Enable both design tokens and custom CSS values
+
+### Accessibility
+
+1. **Provide text alternatives** - Use `aria-label` for icon-only buttons
+2. **Maintain focus indicators** - Ensure keyboard navigation is clear
+3. **Use semantic HTML** - Proper heading hierarchy and form labels
+4. **Test with screen readers** - Verify components work with assistive technology
+5. **Handle focus in Shadow DOM** - Ensure focus styles work within encapsulated components
+
+### Development Workflow
+
+1. **Start with primitives** - Build core UI elements with Shadow DOM first
+2. **Compose organisms** - Build layout components using primitives and Tailwind
+3. **Test isolation** - Verify Shadow DOM components render consistently everywhere
+4. **Document customization** - Clearly document which properties accept custom values
+5. **Maintain design tokens** - Keep CSS custom properties in sync with design decisions

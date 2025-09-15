@@ -1,0 +1,23 @@
+.sidebar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch; /* make children fill full width */
+  width: 100% !important;
+  min-width: 100% !important;
+  transition: gap var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
+  transition-delay: 0s; /* No delay when expanding */
+}
+
+.sidebar-group > * {
+  width: 100%;
+  min-width: 100%;
+}
+
+/* Reduce internal group spacing in collapsed state */
+:host-context(.sidebar-host--collapsed) .sidebar-group {
+  gap: 2px; /* Tighter spacing within groups when collapsed */
+  transition-delay: var(--transition-duration-slow, .3s); /* Delay animation until after sidebar collapse */
+}
+
+

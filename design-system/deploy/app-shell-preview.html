@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Shell Preview - Propbinder Design System</title>
+  <base href="/">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="public/favicon.ico">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <style>
+    /* Import design system CSS variables */
+    @import url('./src/styles.css');
+    /* Full-screen layout for standalone page */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+      background-color: var(--color-background-page);
+    }
+    
+    .standalone-container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .standalone-header {
+      background-color: var(--color-background-interactive-default);
+      border-bottom: 1px solid var(--color-border-default);
+      padding: var(--spacing-4) var(--spacing-6);
+      flex-shrink: 0;
+      z-index: 200;
+    }
+    
+    .standalone-header h1 {
+      margin: 0;
+      color: var(--color-text-primary);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+    }
+    
+    .standalone-header p {
+      margin: var(--spacing-1) 0 0 0;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+    
+    .standalone-content {
+      flex: 1;
+      overflow: hidden;
+    }
+    
+    .app-shell-container {
+      height: 100%;
+    }
+    
+    /* Override app shell styles for standalone */
+    .app-shell-container app-shell-preview .app-shell {
+      height: 100%;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    
+    /* Loading state */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-lg);
+    }
+    
+    .loading.hidden {
+      display: none;
+    }
+    
+    /* Navigation buttons */
+    .nav-buttons {
+      display: flex;
+      gap: var(--spacing-3);
+      margin-top: var(--spacing-2);
+    }
+    
+    .nav-button {
+      padding: var(--spacing-2) var(--spacing-3);
+      background-color: var(--color-background-interactive-default);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--border-radius-md);
+      font-size: var(--font-size-sm);
+      text-decoration: none;
+      transition: all var(--transition-duration-fast) var(--ease-out-quart);
+    }
+    
+    .nav-button:hover {
+      background-color: var(--color-background-interactive-default-hover);
+      transform: translateY(-1px);
+    }
+    
+    .nav-button:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="standalone-container">
+    <!-- Standalone Header -->
+    <header class="standalone-header">
+      <h1>App Shell Preview</h1>
+      <p>Complete application shell with sidebar and header components</p>
+      <div class="nav-buttons">
+        <a href="/" class="nav-button">← Back to Components</a>
+        <a href="/storybook/" class="nav-button" target="_blank">View in Storybook</a>
+      </div>
+    </header>
+    
+    <!-- App Shell Content -->
+    <div class="standalone-content">
+      <app-root></app-root>
+    </div>
+  </div>
+
+  <script>
+    // Set a flag to show app shell preview
+    window.showAppShellPreview = true;
+  </script>
+  
+  <!-- Include Angular app bundles -->
+  <script src="/app/polyfills-B6TNHZQ6.js" type="module"></script>
+  <script src="/app/main-JKTVSQJ4.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!-- Propbinder Design System Demo -->
+<div class="tw-min-h-screen bg-page" [class.tw-p-8]="!showAppShellFullPage">
+  <div class="tw-max-w-4xl tw-mx-auto" [class]="showAppShellFullPage ? 'tw-max-w-none tw-mx-0' : ''">
+    <header class="tw-mb-12" *ngIf="!showAppShellFullPage">
+      <h1 class="display-lg text-primary tw-mb-4">{{ title() }}</h1>
+      <p class="body-lg-regular text-secondary tw-max-w-2xl tw-mb-6">
+        A comprehensive design system built with Angular, Tailwind CSS v4, and Figma MCP integration.
+      </p>
+      
+      <!-- Navigation -->
+      <div class="tw-flex tw-gap-4 tw-flex-wrap">
+        <button 
+          (click)="showTailwindClasses = false; showLabelShowcase = false; showAppShellShowcase = false; showAppShellFullPage = false"
+          [class]="'tw-px-4 tw-py-2 tw-rounded tw-transition-all tw-duration-fast ' + 
+                   (!showTailwindClasses && !showLabelShowcase && !showAppShellShowcase && !showAppShellFullPage ? 'tw-bg-interactive-brand tw-text-white' : 'tw-bg-interactive-default tw-text-primary hover:tw-bg-interactive-default-hover')"
+        >
+          Components Demo
+        </button>
+        <button 
+          (click)="showTailwindClasses = true; showLabelShowcase = false; showAppShellShowcase = false; showAppShellFullPage = false"
+          [class]="'tw-px-4 tw-py-2 tw-rounded tw-transition-all tw-duration-fast ' + 
+                   (showTailwindClasses && !showLabelShowcase && !showAppShellShowcase && !showAppShellFullPage ? 'tw-bg-interactive-brand tw-text-white' : 'tw-bg-interactive-default tw-text-primary hover:tw-bg-interactive-default-hover')"
+        >
+          Tailwind Classes
+        </button>
+        <button 
+          (click)="showLabelShowcase = true; showTailwindClasses = false; showAppShellShowcase = false; showAppShellFullPage = false"
+          [class]="'tw-px-4 tw-py-2 tw-rounded tw-transition-all tw-duration-fast ' + 
+                   (showLabelShowcase && !showTailwindClasses && !showAppShellShowcase && !showAppShellFullPage ? 'tw-bg-interactive-brand tw-text-white' : 'tw-bg-interactive-default tw-text-primary hover:tw-bg-interactive-default-hover')"
+        >
+          Label Preview
+        </button>
+        <button 
+          (click)="showAppShellShowcase = true; showTailwindClasses = false; showLabelShowcase = false; showAppShellFullPage = false"
+          [class]="'tw-px-4 tw-py-2 tw-rounded tw-transition-all tw-duration-fast ' + 
+                   (showAppShellShowcase && !showTailwindClasses && !showLabelShowcase && !showAppShellFullPage ? 'tw-bg-interactive-brand tw-text-white' : 'tw-bg-interactive-default tw-text-primary hover:tw-bg-interactive-default-hover')"
+        >
+          App Shell Showcase
+        </button>
+        <button 
+          (click)="showAppShellFullPage = true; showAppShellShowcase = false; showTailwindClasses = false; showLabelShowcase = false"
+          [class]="'tw-px-4 tw-py-2 tw-rounded tw-transition-all tw-duration-fast tw-inline-flex tw-items-center tw-gap-2 ' + 
+                   (showAppShellFullPage ? 'tw-bg-interactive-brand tw-text-white' : 'tw-bg-interactive-default tw-text-primary hover:tw-bg-interactive-default-hover')"
+        >
+          Full-Page Preview
+          <ds-icon name="remixFullscreenLine" size="16px" color="currentColor"></ds-icon>
+        </button>
+      </div>
+    </header>
+
+    <!-- Conditional Content -->
+    <app-tailwind-showcase *ngIf="showTailwindClasses && !showLabelShowcase && !showAppShellShowcase && !showAppShellFullPage"></app-tailwind-showcase>
+    <app-label-showcase *ngIf="showLabelShowcase && !showTailwindClasses && !showAppShellShowcase && !showAppShellFullPage"></app-label-showcase>
+    <app-shell-showcase *ngIf="showAppShellShowcase && !showTailwindClasses && !showLabelShowcase && !showAppShellFullPage"></app-shell-showcase>
+    
+    <!-- Full-Page App Shell Preview -->
+    <app-shell-showcase 
+      *ngIf="showAppShellFullPage" 
+      class="tw-h-screen tw-w-full"
+      style="height: 100vh; margin: 0; padding: 0;"
+      [fullPageMode]="true"
+      (backToMain)="showAppShellFullPage = false"
+    ></app-shell-showcase>
+    
+    <main class="tw-space-y-12" *ngIf="!showTailwindClasses && !showLabelShowcase && !showAppShellShowcase && !showAppShellFullPage">
+      <!-- Button Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Buttons</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Button Variants</h3>
+          <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-6">
+            <ds-button variant="primary">Primary</ds-button>
+            <ds-button variant="secondary">Secondary</ds-button>
+            <ds-button variant="ghost">Ghost</ds-button>
+            <ds-button variant="destructive">Destructive</ds-button>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Disabled States</h4>
+          <div class="tw-flex tw-flex-wrap tw-gap-4">
+            <ds-button variant="primary" [disabled]="true">Primary Disabled</ds-button>
+            <ds-button variant="secondary" [disabled]="true">Secondary Disabled</ds-button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shape Indicator Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Shape Indicators</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Shape Variants</h3>
+          <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-6">
+            <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+            <ds-shape-indicator shape="square" variant="destructive" label="Stage tags"></ds-shape-indicator>
+            <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+            <ds-shape-indicator shape="triangle" variant="blue" label="Upcoming"></ds-shape-indicator>
+            <ds-shape-indicator shape="pentagon" variant="brand" label="Maintenance"></ds-shape-indicator>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Size Variations</h4>
+          <div class="tw-space-y-3 tw-mb-6">
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-shape-indicator shape="circle" variant="brand" size="sm" label="Small"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="md" label="Medium"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="lg" label="Large"></ds-shape-indicator>
+            </div>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Usage Examples</h4>
+          <div class="tw-space-y-3">
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Stage Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+                <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Category Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="diamond" variant="brand" label="Maintenance"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Status Indicators</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="blue" label="Upcoming"></ds-shape-indicator>
+                <ds-shape-indicator shape="triangle" variant="default" label="Not a defect"></ds-shape-indicator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Input Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Inputs</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Input Variants</h3>
+          <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
+            <div>
+              <label class="tw-block body-sm-medium text-primary tw-mb-2">Default Input</label>
+              <ds-input variant="default" placeholder="Enter text..."></ds-input>
+            </div>
+            <div>
+              <label class="tw-block body-sm-medium text-success-strong tw-mb-2">Success Input</label>
+              <ds-input variant="success" placeholder="Valid input"></ds-input>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shape Indicator Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Shape Indicators</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Shape Variants</h3>
+          <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-6">
+            <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+            <ds-shape-indicator shape="square" variant="destructive" label="Stage tags"></ds-shape-indicator>
+            <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+            <ds-shape-indicator shape="triangle" variant="blue" label="Upcoming"></ds-shape-indicator>
+            <ds-shape-indicator shape="pentagon" variant="brand" label="Maintenance"></ds-shape-indicator>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Size Variations</h4>
+          <div class="tw-space-y-3 tw-mb-6">
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-shape-indicator shape="circle" variant="brand" size="sm" label="Small"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="md" label="Medium"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="lg" label="Large"></ds-shape-indicator>
+            </div>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Usage Examples</h4>
+          <div class="tw-space-y-3">
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Stage Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+                <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Category Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="diamond" variant="brand" label="Maintenance"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Status Indicators</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="blue" label="Upcoming"></ds-shape-indicator>
+                <ds-shape-indicator shape="triangle" variant="default" label="Not a defect"></ds-shape-indicator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Label Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Labels</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Label Usage</h3>
+          <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
+            <div>
+              <ds-label for="demo-input-1">Default Label</ds-label>
+              <ds-input id="demo-input-1" placeholder="Enter text..."></ds-input>
+            </div>
+            <div>
+              <ds-label for="demo-input-2" className="tw-font-semibold">Styled Label</ds-label>
+              <ds-input id="demo-input-2" placeholder="With custom styling"></ds-input>
+            </div>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3 tw-mt-6">Required Field Example</h4>
+          <div class="tw-max-w-md">
+            <ds-label for="required-demo" className="tw-after:content-['_*'] tw-after:text-red-500">Email Address</ds-label>
+            <ds-input id="required-demo" type="email" placeholder="you@example.com"></ds-input>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shape Indicator Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Shape Indicators</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Shape Variants</h3>
+          <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-6">
+            <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+            <ds-shape-indicator shape="square" variant="destructive" label="Stage tags"></ds-shape-indicator>
+            <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+            <ds-shape-indicator shape="triangle" variant="blue" label="Upcoming"></ds-shape-indicator>
+            <ds-shape-indicator shape="pentagon" variant="brand" label="Maintenance"></ds-shape-indicator>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Size Variations</h4>
+          <div class="tw-space-y-3 tw-mb-6">
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-shape-indicator shape="circle" variant="brand" size="sm" label="Small"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="md" label="Medium"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="lg" label="Large"></ds-shape-indicator>
+            </div>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Usage Examples</h4>
+          <div class="tw-space-y-3">
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Stage Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+                <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Category Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="diamond" variant="brand" label="Maintenance"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Status Indicators</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="blue" label="Upcoming"></ds-shape-indicator>
+                <ds-shape-indicator shape="triangle" variant="default" label="Not a defect"></ds-shape-indicator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Form Field Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Form Fields</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Form Field with Input</h3>
+          <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
+            <ds-form-field
+              label="Email Address"
+              description="We will never share your email."
+              labelId="email-label"
+              descriptionId="email-desc"
+            >
+              <ds-input
+                ariaLabelledBy="email-label"
+                ariaDescribedBy="email-desc"
+                placeholder="you@example.com"
+                type="email"
+              ></ds-input>
+            </ds-form-field>
+            
+            <ds-form-field
+              label="Full Name"
+              description="Enter your first and last name."
+              labelId="name-label"
+              descriptionId="name-desc"
+            >
+              <ds-input
+                ariaLabelledBy="name-label"
+                ariaDescribedBy="name-desc"
+                placeholder="John Doe"
+              ></ds-input>
+            </ds-form-field>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shape Indicator Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Shape Indicators</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Shape Variants</h3>
+          <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-6">
+            <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+            <ds-shape-indicator shape="square" variant="destructive" label="Stage tags"></ds-shape-indicator>
+            <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+            <ds-shape-indicator shape="triangle" variant="blue" label="Upcoming"></ds-shape-indicator>
+            <ds-shape-indicator shape="pentagon" variant="brand" label="Maintenance"></ds-shape-indicator>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Size Variations</h4>
+          <div class="tw-space-y-3 tw-mb-6">
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-shape-indicator shape="circle" variant="brand" size="sm" label="Small"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="md" label="Medium"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="lg" label="Large"></ds-shape-indicator>
+            </div>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Usage Examples</h4>
+          <div class="tw-space-y-3">
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Stage Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+                <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Category Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="diamond" variant="brand" label="Maintenance"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Status Indicators</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="blue" label="Upcoming"></ds-shape-indicator>
+                <ds-shape-indicator shape="triangle" variant="default" label="Not a defect"></ds-shape-indicator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Cards</h2>
+        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6">
+          <div class="tw-rounded-lg tw-border tw-p-6">
+            <h3 class="heading-md tw-mb-2">Basic Card</h3>
+            <p class="body-md-regular text-secondary tw-mb-4">
+              This is a basic card component with some content inside.
+            </p>
+            <ds-button variant="primary">Learn More</ds-button>
+          </div>
+
+          <div class="tw-rounded-lg tw-border tw-p-6">
+            <h3 class="heading-md tw-mb-2">Interactive Card</h3>
+            <p class="body-md-regular text-secondary tw-mb-4">
+              This card is interactive and will show hover effects.
+            </p>
+            <ds-button variant="secondary">Action</ds-button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shape Indicator Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Shape Indicators</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Shape Variants</h3>
+          <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-6">
+            <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+            <ds-shape-indicator shape="square" variant="destructive" label="Stage tags"></ds-shape-indicator>
+            <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+            <ds-shape-indicator shape="triangle" variant="blue" label="Upcoming"></ds-shape-indicator>
+            <ds-shape-indicator shape="pentagon" variant="brand" label="Maintenance"></ds-shape-indicator>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Size Variations</h4>
+          <div class="tw-space-y-3 tw-mb-6">
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-shape-indicator shape="circle" variant="brand" size="sm" label="Small"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="md" label="Medium"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="lg" label="Large"></ds-shape-indicator>
+            </div>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Usage Examples</h4>
+          <div class="tw-space-y-3">
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Stage Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+                <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Category Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="diamond" variant="brand" label="Maintenance"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Status Indicators</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="blue" label="Upcoming"></ds-shape-indicator>
+                <ds-shape-indicator shape="triangle" variant="default" label="Not a defect"></ds-shape-indicator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Icon Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Icons</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Remix Icons</h3>
+          <p class="body-md-regular text-secondary tw-mb-6">
+            Our design system uses Remix Icons from ng-icons. Here are some examples:
+          </p>
+          
+          <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-4 tw-gap-6">
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2 tw-p-4 tw-border tw-rounded-lg">
+              <ds-icon name="remixHomeLine" size="24px"></ds-icon>
+              <span class="body-sm-regular text-secondary">Home</span>
+            </div>
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2 tw-p-4 tw-border tw-rounded-lg">
+              <ds-icon name="remixUserLine" size="24px"></ds-icon>
+              <span class="body-sm-regular text-secondary">User</span>
+            </div>
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2 tw-p-4 tw-border tw-rounded-lg">
+              <ds-icon name="remixSettingsLine" size="24px"></ds-icon>
+              <span class="body-sm-regular text-secondary">Settings</span>
+            </div>
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2 tw-p-4 tw-border tw-rounded-lg">
+              <ds-icon name="remixSearchLine" size="24px"></ds-icon>
+              <span class="body-sm-regular text-secondary">Search</span>
+            </div>
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2 tw-p-4 tw-border tw-rounded-lg">
+              <ds-icon name="remixAddLine" size="24px"></ds-icon>
+              <span class="body-sm-regular text-secondary">Add</span>
+            </div>
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2 tw-p-4 tw-border tw-rounded-lg">
+              <ds-icon name="remixEditLine" size="24px"></ds-icon>
+              <span class="body-sm-regular text-secondary">Edit</span>
+            </div>
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2 tw-p-4 tw-border tw-rounded-lg">
+              <ds-icon name="remixDeleteBinLine" size="24px"></ds-icon>
+              <span class="body-sm-regular text-secondary">Delete</span>
+            </div>
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2 tw-p-4 tw-border tw-rounded-lg">
+              <ds-icon name="remixCheckLine" size="24px"></ds-icon>
+              <span class="body-sm-regular text-secondary">Check</span>
+            </div>
+          </div>
+
+          <h4 class="heading-sm tw-mb-3 tw-mt-8">Icon Sizes</h4>
+          <div class="tw-flex tw-items-center tw-gap-4">
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2">
+              <ds-icon name="remixSettingsLine" size="16px"></ds-icon>
+              <span class="body-xs-regular text-secondary">16px</span>
+            </div>
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2">
+              <ds-icon name="remixSettingsLine" size="24px"></ds-icon>
+              <span class="body-xs-regular text-secondary">24px</span>
+            </div>
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2">
+              <ds-icon name="remixSettingsLine" size="32px"></ds-icon>
+              <span class="body-xs-regular text-secondary">32px</span>
+            </div>
+            <div class="tw-flex tw-flex-col tw-items-center tw-gap-2">
+              <ds-icon name="remixSettingsLine" size="48px"></ds-icon>
+              <span class="body-xs-regular text-secondary">48px</span>
+            </div>
+          </div>
+
+          <h4 class="heading-sm tw-mb-3 tw-mt-8">Colored Icons</h4>
+          <div class="tw-flex tw-items-center tw-gap-4">
+            <ds-icon name="remixCheckLine" size="24px" color="#158452"></ds-icon>
+            <ds-icon name="remixCloseLine" size="24px" color="#dc2626"></ds-icon>
+            <ds-icon name="remixSettingsLine" size="24px" color="#6B5FF5"></ds-icon>
+            <ds-icon name="remixSearchLine" size="24px" color="#d97706"></ds-icon>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shape Indicator Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Shape Indicators</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Shape Variants</h3>
+          <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-6">
+            <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+            <ds-shape-indicator shape="square" variant="destructive" label="Stage tags"></ds-shape-indicator>
+            <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+            <ds-shape-indicator shape="triangle" variant="blue" label="Upcoming"></ds-shape-indicator>
+            <ds-shape-indicator shape="pentagon" variant="brand" label="Maintenance"></ds-shape-indicator>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Size Variations</h4>
+          <div class="tw-space-y-3 tw-mb-6">
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-shape-indicator shape="circle" variant="brand" size="sm" label="Small"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="md" label="Medium"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="lg" label="Large"></ds-shape-indicator>
+            </div>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Usage Examples</h4>
+          <div class="tw-space-y-3">
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Stage Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+                <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Category Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="diamond" variant="brand" label="Maintenance"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Status Indicators</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="blue" label="Upcoming"></ds-shape-indicator>
+                <ds-shape-indicator shape="triangle" variant="default" label="Not a defect"></ds-shape-indicator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Badge Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Badges</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Badge Variants</h3>
+          <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-6">
+            <ds-badge content="Default" variant="default"></ds-badge>
+            <ds-badge content="Brand" variant="brand"></ds-badge>
+            <ds-badge content="Success" variant="success"></ds-badge>
+            <ds-badge content="Warning" variant="warning"></ds-badge>
+            <ds-badge content="Destructive" variant="destructive"></ds-badge>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Badge with Icons</h4>
+          <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-6">
+            <ds-badge content="New Feature" leadingIcon="remixStarFill" variant="brand"></ds-badge>
+            <ds-badge content="Go to Settings" trailingIcon="remixArrowRightSLine" variant="default"></ds-badge>
+            <ds-badge content="Premium" leadingIcon="remixVipCrownFill" trailingIcon="remixArrowRightSLine" variant="brand"></ds-badge>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Padding Specifications</h4>
+          <div class="tw-space-y-3">
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-badge content="String only" variant="default"></ds-badge>
+              <span class="body-sm-regular text-secondary">x=8px padding</span>
+            </div>
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-badge content="Icon + String" leadingIcon="remixStarFill" variant="brand"></ds-badge>
+              <span class="body-sm-regular text-secondary">l=6px, r=8px, gap=2px</span>
+            </div>
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-badge content="String + Icon" trailingIcon="remixArrowRightSLine" variant="default"></ds-badge>
+              <span class="body-sm-regular text-secondary">l=8px, r=6px, gap=2px</span>
+            </div>
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-badge content="Both Icons" leadingIcon="remixVipCrownFill" trailingIcon="remixArrowRightSLine" variant="brand"></ds-badge>
+              <span class="body-sm-regular text-secondary">l=6px, r=6px, gap=2px</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shape Indicator Examples -->
+      <section>
+        <h2 class="heading-lg text-primary tw-mb-6">Shape Indicators</h2>
+        <div class="tw-rounded-lg tw-border tw-p-6">
+          <h3 class="heading-md tw-mb-4">Shape Variants</h3>
+          <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-6">
+            <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+            <ds-shape-indicator shape="square" variant="destructive" label="Stage tags"></ds-shape-indicator>
+            <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+            <ds-shape-indicator shape="triangle" variant="blue" label="Upcoming"></ds-shape-indicator>
+            <ds-shape-indicator shape="pentagon" variant="brand" label="Maintenance"></ds-shape-indicator>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Size Variations</h4>
+          <div class="tw-space-y-3 tw-mb-6">
+            <div class="tw-flex tw-items-center tw-gap-3">
+              <ds-shape-indicator shape="circle" variant="brand" size="sm" label="Small"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="md" label="Medium"></ds-shape-indicator>
+              <ds-shape-indicator shape="circle" variant="brand" size="lg" label="Large"></ds-shape-indicator>
+            </div>
+          </div>
+          
+          <h4 class="heading-sm tw-mb-3">Usage Examples</h4>
+          <div class="tw-space-y-3">
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Stage Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="brand" label="Received"></ds-shape-indicator>
+                <ds-shape-indicator shape="diamond" variant="brand" label="Contact"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Category Tags</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="diamond" variant="brand" label="Maintenance"></ds-shape-indicator>
+              </div>
+            </div>
+            <div>
+              <h5 class="body-sm-medium text-primary tw-mb-2">Status Indicators</h5>
+              <div class="tw-flex tw-flex-wrap tw-gap-2">
+                <ds-shape-indicator shape="circle" variant="blue" label="Upcoming"></ds-shape-indicator>
+                <ds-shape-indicator shape="triangle" variant="default" label="Not a defect"></ds-shape-indicator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

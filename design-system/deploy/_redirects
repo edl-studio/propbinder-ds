@@ -1,0 +1,6 @@
+# App shell routes
+/app-shell-preview /app-shell-preview.html 200
+
+# Angular app routes (fallback to index.html for SPA routing)
+# Note: Storybook routes are handled by vercel.json to avoid conflicts
+/* /index.html 200

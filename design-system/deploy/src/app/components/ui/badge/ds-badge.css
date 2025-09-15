@@ -1,0 +1,180 @@
+/* Base badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  border-radius: 6px;
+  font-size: var(--font-size-xs); /* 0.75rem / 12px */
+  font-weight: 500;
+  line-height: 1.2;
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+  white-space: nowrap;
+  box-sizing: border-box;
+  gap: 4px;
+}
+
+/* Badge content */
+.badge__content {
+  display: flex;
+  align-items: center;
+}
+
+/* Badge icon */
+.badge__icon {
+  flex-shrink: 0;
+}
+
+/* Badge indicator */
+.badge__indicator {
+  flex-shrink: 0;
+}
+
+/* Content type specific padding */
+
+/* Text only badges */
+.badge--text {
+  padding: 0 8px;
+}
+
+/* Icon + text badges */
+.badge--icon-text {
+  padding: 0 8px 0 6px;
+}
+
+/* Indicator + text badges (always white background, black text) */
+.badge--indicator-text {
+  padding: 0 8px;
+  background-color: white;
+  color: black;
+  border: 1px solid var(--border-color-default);
+}
+
+/* Color variants for text and icon-text types */
+
+/* Default variant */
+.badge--default {
+  background-color: white;
+  color: black;
+  border: 1px solid var(--border-color-default);
+}
+
+.badge--default .badge__icon {
+  color: black;
+}
+
+/* Brand variant */
+.badge--brand {
+  background-color: var(--background-color-interactive-brand);
+  color: white;
+}
+
+.badge--brand .badge__icon {
+  color: white;
+}
+
+/* Success variant */
+.badge--success {
+  background-color: var(--color-success-weak);
+  color: var(--color-success-strong);
+}
+
+.badge--success .badge__icon {
+  color: var(--color-success-strong);
+}
+
+/* Warning variant */
+.badge--warning {
+  background-color: var(--color-warning-weak);
+  color: var(--color-warning-strong);
+}
+
+.badge--warning .badge__icon {
+  color: var(--color-warning-strong);
+}
+
+/* Destructive variant */
+.badge--destructive {
+  background-color: var(--color-destructive-weak);
+  color: var(--color-destructive-strong);
+}
+
+.badge--destructive .badge__icon {
+  color: var(--color-destructive-strong);
+}
+
+/* Blue variant */
+.badge--blue {
+  background-color: var(--color-blue-weak);
+  color: var(--color-blue-strong);
+}
+
+.badge--blue .badge__icon {
+  color: var(--color-blue-strong);
+}
+
+/* Light Purple variant */
+.badge--light-purple {
+  background-color: var(--color-light-purple-weak);
+  color: var(--color-light-purple-strong);
+}
+
+.badge--light-purple .badge__icon {
+  color: var(--color-light-purple-strong);
+}
+
+/* Pink variant */
+.badge--pink {
+  background-color: var(--color-pink-weak);
+  color: var(--color-pink-strong);
+}
+
+.badge--pink .badge__icon {
+  color: var(--color-pink-strong);
+}
+
+/* Salmon Orange variant */
+.badge--salmon-orange {
+  background-color: var(--color-salmon-orange-weak);
+  color: var(--color-salmon-orange-strong);
+}
+
+.badge--salmon-orange .badge__icon {
+  color: var(--color-salmon-orange-strong);
+}
+
+/* Orange variant */
+.badge--orange {
+  background-color: var(--color-orange-weak);
+  color: var(--color-orange-strong);
+}
+
+.badge--orange .badge__icon {
+  color: var(--color-orange-strong);
+}
+
+/* Lime Green variant */
+.badge--lime-green {
+  background-color: var(--color-lime-green-weak);
+  color: var(--color-lime-green-strong);
+}
+
+.badge--lime-green .badge__icon {
+  color: var(--color-lime-green-strong);
+}
+
+/* Grey variant */
+.badge--grey {
+  background-color: var(--color-grey-weak);
+  color: var(--color-grey-strong);
+}
+
+.badge--grey .badge__icon {
+  color: var(--color-grey-strong);
+}
+
+/* Indicator variant always has white background and black text */
+.badge--indicator-variant {
+  background-color: white;
+  color: black;
+  border: 1px solid var(--border-color-default);
+}

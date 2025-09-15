@@ -1,9 +1,0 @@
-/* Label color overrides */
-[data-slot="label"] {
-  color: var(--text-color-primary) !important;
-}
-
-/* Ensure uppercase labels use secondary color */
-[data-slot="label"][data-style-variant="uppercase"] {
-  color: var(--text-color-secondary) !important;
-} 

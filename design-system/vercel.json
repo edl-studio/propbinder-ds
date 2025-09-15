@@ -1,20 +1,47 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite",
-  "installCommand": "npm install",
+  "buildCommand": "npm run build:deploy",
+  "outputDirectory": "deploy",
+  "installCommand": "npm install --legacy-peer-deps",
+  "framework": null,
+  "headers": [
+    {
+      "source": "/storybook/(.*\\.js)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript"
+        }
+      ]
+    },
+    {
+      "source": "/storybook/(.*\\.css)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/css"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/storybook",
+      "destination": "/storybook/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/storybook/(.*)",
       "destination": "/storybook/$1"
     },
     {
-      "source": "/storybook",
+      "source": "/storybook.html",
       "destination": "/storybook/index.html"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/app-shell-preview",
+      "destination": "/app-shell-preview.html"
     }
   ]
-} 
+}

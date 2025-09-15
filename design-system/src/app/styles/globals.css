@@ -1,0 +1,609 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brockmann Font Family */
+@font-face {
+  font-family: 'Brockmann';
+  src: url('/Brockmann/Brockmann-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brockmann';
+  src: url('/Brockmann/Brockmann-RegularItalic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brockmann';
+  src: url('/Brockmann/Brockmann-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brockmann';
+  src: url('/Brockmann/Brockmann-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brockmann';
+  src: url('/Brockmann/Brockmann-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brockmann';
+  src: url('/Brockmann/Brockmann-SemiBoldItalic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brockmann';
+  src: url('/Brockmann/Brockmann-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brockmann';
+  src: url('/Brockmann/Brockmann-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Custom Design System Theme Variables */
+:root {
+  /* Background Colors */
+  --background-color-page: #ffffff;
+  --background-color-interactive-default: #F6F7F8;
+  --background-color-interactive-default-hover: #E3E6EB;
+  --background-color-interactive-default-disabled: #CAD0D8;
+  --background-color-interactive-brand: #6B5FF5;
+  --background-color-interactive-brand-hover: #5D42E9;
+  --background-color-interactive-brand-disabled: #7C8694;
+
+  /* Text Colors */
+  --text-color-default-primary: #202227;
+  --text-color-default-primary-inverse: #ffffff;
+  --text-color-default-secondary: #545B66;
+  --text-color-default-tertiary: #626B78;
+  --text-color-default-disabled: #7C8694;
+  --text-color-brand: #6B5FF5;
+  --text-color-brand-disabled: #CAD0D8;
+
+  /* Border Colors */
+  --border-color-default: #E3E6EB;
+
+  /* Brand Unscoped Colors */
+  --color-brand-base: #6B5FF5;
+  --color-brand-base-hover: #5D42E9;
+  --color-brand-weak: #EEF0FF;
+  --color-brand-weak-hover: #dfe1f3;
+  --color-brand-strong: #202227;
+  --color-brand-strong-hover: #121418;
+
+  /* Outline Colors for focus states */
+  --outline-color-default: #C6CBFF;
+
+  /* Success Colors */
+  --color-success-base: #158452;
+  --color-success-base-hover: #0f6c3d;
+  --color-success-weak: #dcfce7;
+  --color-success-weak-hover: #bbf7d0;
+  --color-success-strong: #065f46;
+  --color-success-strong-hover: #047857;
+
+  /* Warning Colors */
+  --color-warning-base: #d97706;
+  --color-warning-base-hover: #b45309;
+  --color-warning-weak: #fef3c7;
+  --color-warning-weak-hover: #fde68a;
+  --color-warning-strong: #92400e;
+  --color-warning-strong-hover: #78350f;
+
+  /* Destructive Colors */
+  --color-destructive-base: #dc2626;
+  --color-destructive-base-hover: #b91c1c;
+  --color-destructive-weak: #fecaca;
+  --color-destructive-weak-hover: #fca5a5;
+  --color-destructive-strong: #991b1b;
+  --color-destructive-strong-hover: #7f1d1d;
+
+  /* Blue Colors */
+  --color-blue-base: #1e5aff;
+  --color-blue-base-hover: #1e5aff;
+  --color-blue-weak: #e0e9ff;
+  --color-blue-weak-hover: #e0e9ff;
+  --color-blue-strong: #0036cc;
+  --color-blue-strong-hover: #0036cc;
+
+  /* Light Purple Colors */
+  --color-light-purple-base: #9670ff;
+  --color-light-purple-base-hover: #9670ff;
+  --color-light-purple-weak: #e8e0ff;
+  --color-light-purple-weak-hover: #e8e0ff;
+  --color-light-purple-strong: #6d13ff;
+  --color-light-purple-strong-hover: #6d13ff;
+
+  /* Pink Colors */
+  --color-pink-base: #d244cf;
+  --color-pink-base-hover: #d244cf;
+  --color-pink-weak: #f9e6f9;
+  --color-pink-weak-hover: #f9e6f9;
+  --color-pink-strong: #a527a2;
+  --color-pink-strong-hover: #a527a2;
+
+  /* Salmon Orange Colors */
+  --color-salmon-orange-base: #ff8064;
+  --color-salmon-orange-base-hover: #ff8064;
+  --color-salmon-orange-weak: #ffe6e0;
+  --color-salmon-orange-weak-hover: #ffe6e0;
+  --color-salmon-orange-strong: #df2900;
+  --color-salmon-orange-strong-hover: #df2900;
+
+  /* Orange Colors */
+  --color-orange-base: #ffa764;
+  --color-orange-base-hover: #ffa764;
+  --color-orange-weak: #ffece0;
+  --color-orange-weak-hover: #ffece0;
+  --color-orange-strong: #cc5800;
+  --color-orange-strong-hover: #cc5800;
+
+  /* Lime Green Colors */
+  --color-lime-green-base: #aff264;
+  --color-lime-green-base-hover: #aff264;
+  --color-lime-green-weak: #f0fde3;
+  --color-lime-green-weak-hover: #f0fde3;
+  --color-lime-green-strong: #58a501;
+  --color-lime-green-strong-hover: #58a501;
+
+  /* Grey Colors */
+  --color-grey-base: #a9b3d0;
+  --color-grey-base-hover: #a9b3d0;
+  --color-grey-weak: #eceef3;
+  --color-grey-weak-hover: #eceef3;
+  --color-grey-strong: #696c99;
+  --color-grey-strong-hover: #696c99;
+
+  /* Typography */
+  --font-size-2xs: .625rem;
+  --font-size-xs: .75rem;
+  --font-size-sm: .875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.75rem;
+  --font-size-4xl: 2.25rem;
+
+  /* Shadows */
+  --box-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / .05);
+  --box-shadow-md: 0 4px 6px -1px rgb(0 0 0 / .1), 0 2px 4px -2px rgb(0 0 0 / .1);
+  --box-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / .1), 0 4px 6px -4px rgb(0 0 0 / .1);
+
+  /* Transitions */
+  --transition-duration-fast: .15s;
+  --transition-duration-normal: .2s;
+  --transition-duration-slow: .3s;
+  
+  /* Easing Curves */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Styles */
+body {
+  background-color: var(--background-color-page);
+  color: var(--text-color-default-primary);
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+}
+
+/* UI Text Styles */
+.ui-xs-regular {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.ui-xs-medium {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.ui-xs-semiBold {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.ui-sm-regular {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.ui-sm-medium {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.ui-sm-semiBold {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.ui-base-regular {
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.ui-base-medium {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.ui-base-semiBold {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.ui-lg-regular {
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.ui-lg-medium {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.ui-lg-semiBold {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.ui-xl-regular {
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.ui-xl-medium {
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.ui-xl-semiBold {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.ui-2xl-regular {
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.ui-2xl-medium {
+  font-size: var(--font-size-2xl);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.ui-2xl-semiBold {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Body Text Styles */
+.body-2xs-regular {
+  font-size: var(--font-size-2xs);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.body-2xs-medium {
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.body-2xs-semiBold {
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.body-xs-regular {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.body-xs-medium {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.body-xs-semiBold {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.body-sm-regular {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.body-sm-medium {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.body-sm-semiBold {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.body-base-regular {
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.body-base-medium {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.body-base-semiBold {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.body-lg-regular {
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.body-lg-medium {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.body-lg-semiBold {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Heading Styles */
+.heading-base {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.heading-lg {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.heading-xl {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.heading-2xl {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.heading-3xl {
+  font-size: var(--font-size-3xl);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.heading-4xl {
+  font-size: var(--font-size-4xl);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Content Layout Tokens */
+:root {
+  /* Breakpoints */
+  --breakpoint-xs: 0px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1440px;
+  --breakpoint-2xl: 1768px;
+  --breakpoint-3xl: 1920px;
+  --breakpoint-4xl: 2560px;
+
+  /* Content Max Widths */
+  --content-max-width-xs: 335px;
+  --content-max-width-sm: 526px;
+  --content-max-width-md: 708px;
+  --content-max-width-lg: 696px;
+  --content-max-width-xl: 1140px;
+  --content-max-width-2xl: 1280px;
+  --content-max-width-3xl: 1400px;
+  --content-max-width-4xl: 1600px;
+
+  /* Content Padding */
+  --content-padding-xs: 24px;
+  --content-padding-sm: 32px;
+  --content-padding-md: 40px;
+  --content-padding-lg: 48px;
+  --content-padding-xl: 56px;
+  --content-padding-2xl: 64px;
+  --content-padding-3xl: 72px;
+  --content-padding-4xl: 80px;
+}
+
+/* Test styles for Storybook verification */
+:root {
+  --brand-test: #7c3aed;
+}
+
+._storybook-test-btn {
+  color: var(--brand-test);
+  font-weight: bold;
+}
+
+/* Force Tailwind to generate these classes */
+.tailwind-class-safelist {
+  @apply tw-text-primary tw-text-secondary tw-text-tertiary tw-text-disabled tw-text-brand tw-text-brand-disabled;
+  display: none; /* This class is never used, just forces generation */
+}
+
+/* Force generation of depth utility classes */
+.depth-class-safelist {
+  display: none; /* This class is never used, just ensures depth classes are available */
+}
+
+/* Content Container System */
+.content-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  
+  /* Default (mobile-first) styles */
+  padding-left: var(--content-padding-xs);
+  padding-right: var(--content-padding-xs);
+  max-width: var(--content-max-width-xs);
+}
+
+/* Responsive adjustments */
+@media (min-width: 576px) {
+  .content-container {
+    padding-left: var(--content-padding-sm);
+    padding-right: var(--content-padding-sm);
+    max-width: var(--content-max-width-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .content-container {
+    padding-left: var(--content-padding-md);
+    padding-right: var(--content-padding-md);
+    max-width: var(--content-max-width-md);
+  }
+}
+
+@media (min-width: 992px) {
+  .content-container {
+    padding-left: var(--content-padding-lg);
+    padding-right: var(--content-padding-lg);
+    max-width: var(--content-max-width-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .content-container {
+    padding-left: var(--content-padding-xl);
+    padding-right: var(--content-padding-xl);
+    max-width: var(--content-max-width-xl);
+  }
+}
+
+@media (min-width: 1768px) {
+  .content-container {
+    padding-left: var(--content-padding-2xl);
+    padding-right: var(--content-padding-2xl);
+    max-width: var(--content-max-width-2xl);
+  }
+}
+
+@media (min-width: 1920px) {
+  .content-container {
+    padding-left: var(--content-padding-3xl);
+    padding-right: var(--content-padding-3xl);
+    max-width: var(--content-max-width-3xl);
+  }
+}
+
+@media (min-width: 2560px) {
+  .content-container {
+    padding-left: var(--content-padding-4xl);
+    padding-right: var(--content-padding-4xl);
+    max-width: var(--content-max-width-4xl);
+  }
+}
+
+/* Utility: Capitalised XS Medium (12px, 500, 120% LH, 4% tracking) */
+.capitalised-xs-medium {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.48px; /* 4% of 12px */
+  text-transform: uppercase;
+}
+
+/* Depth Utility Classes - Inner shadow effects for depth simulation */
+.depth-sm {
+  box-shadow: 
+    inset 0 10px 10px rgba(255, 255, 255, 0.2),
+    inset 0 -1.5px 1px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.depth-md {
+  box-shadow: 
+    inset 0 20px 20px rgba(255, 255, 255, 0.2),
+    inset 0 -3px 2px rgba(0, 0, 0, 0.25),
+    inset 0 2px 2px rgba(255, 255, 255, 0.3);
+}
+
+.depth-lg {
+  box-shadow: 
+    inset 0 30px 30px rgba(255, 255, 255, 0.2),
+    inset 0 -4.5px 3px rgba(0, 0, 0, 0.25),
+    inset 0 3px 3px rgba(255, 255, 255, 0.3);
+}

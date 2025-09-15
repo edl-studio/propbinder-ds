@@ -1,0 +1,126 @@
+/* Data Item Base Styles */
+.data-item {
+  display: flex;
+  width: 100%;
+}
+
+/* Layout Variants */
+.data-item--vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0px;
+}
+
+.data-item--horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Label Container */
+.data-item__label {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  min-height: 32px; /* Match value container height */
+}
+
+.data-item__label--vertical {
+  width: auto;
+  min-height: auto; /* Reset for vertical layout */
+}
+
+.data-item__label--horizontal {
+  width: 128px;
+  min-width: 128px;
+}
+
+.data-item__label-text {
+  /* Inherits from ds-label component styles */
+}
+
+/* Value Container */
+.data-item__value {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  height: 32px;
+  flex: 1;
+  gap: 8px; /* Default gap for avatar-text and badge types */
+}
+
+/* Specific gap for icon-text scenarios */
+.data-item__value:has(.data-item__value-icon) {
+  gap: 4px;
+}
+
+.data-item__value--vertical {
+  width: 100%;
+}
+
+.data-item__value--horizontal {
+  flex: 1;
+}
+
+/* Value Content Styles */
+.data-item__value-text {
+  color: var(--text-color-default-primary);
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.data-item__value-icon {
+  flex-shrink: 0;
+  color: var(--text-color-default-secondary);
+  position: relative;
+  bottom: 1px;
+}
+
+.data-item__value-avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 1px;
+}
+
+/* Badge in value container */
+.data-item__value ds-badge {
+  flex-shrink: 0;
+}
+
+/* Typography Classes (ui-sm-regular) */
+.ui-sm-regular {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .data-item--horizontal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+  }
+  
+  .data-item__label--horizontal {
+    width: auto;
+    min-width: auto;
+  }
+  
+  .data-item__value--horizontal {
+    width: 100%;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .data-item {
+    transition: none;
+  }
+}

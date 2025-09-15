@@ -1,0 +1,38 @@
+.sidebar-group-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 20px 12px 20px;
+  flex: 1;
+  width: 100% !important;
+  min-width: 100% !important;
+  transition: padding var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), max-height var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), opacity var(--transition-duration-normal, .2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), transform var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
+  align-items: stretch; /* force children to fill 100% width */
+  overflow: hidden;
+  max-height: 1000px; /* large enough for expanded content */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sidebar-group-content > * {
+  width: 100%;
+  min-width: 100%;
+}
+
+:host-context(.sidebar-host--collapsed) .sidebar-group-content {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Collapsed group content animation */
+:host(.collapsed) .sidebar-group-content {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  transform: translateY(-8px); /* move up when collapsing */
+}
+
+

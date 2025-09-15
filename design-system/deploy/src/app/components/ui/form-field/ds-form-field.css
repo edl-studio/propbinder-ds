@@ -1,0 +1,19 @@
+.ds-form-field {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+
+.ds-form-field__description {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--ds-color-muted, #6b7280);
+}
+
+/* NgpError will project from content; you can style via data attributes */
+[ngpError][data-validator="fail"] {
+  color: var(--ds-color-error, #b91c1c);
+  font-size: 0.75rem;
+}
+
+
