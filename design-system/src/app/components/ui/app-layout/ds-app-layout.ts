@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, input, output, signal, computed, effect, 
 import { CommonModule } from '@angular/common';
 import { DsSidebarComponent, SidebarGroup } from '../sidebar/ds-sidebar';
 import { DsTopbarComponent } from '../topbar/ds-topbar';
+import { ViewportService } from '../../../lib/viewport.service';
 
 @Component({
   selector: 'ds-app-layout',
@@ -25,6 +26,7 @@ import { DsTopbarComponent } from '../topbar/ds-topbar';
             mode="minimized"
             [groups]="[]"
             [collapsed]="true"
+            [activeItemId]="activeItemId()"
             (toggleCollapsed)="toggleMobileMenu()"
           />
         </div>
@@ -37,6 +39,7 @@ import { DsTopbarComponent } from '../topbar/ds-topbar';
             mode="drawer"
             [groups]="sidebarGroups()"
             [collapsed]="false"
+            [activeItemId]="activeItemId()"
             (itemSelected)="handleSidebarItemSelected()"
             (toggleCollapsed)="closeMobileMenu()"
           />
@@ -50,6 +53,7 @@ import { DsTopbarComponent } from '../topbar/ds-topbar';
             mode="default"
             [groups]="sidebarGroups()"
             [collapsed]="shouldCollapseSidebar()"
+            [activeItemId]="activeItemId()"
             (itemSelected)="handleSidebarItemSelected()"
             (collapsedChange)="handleSidebarCollapsedChange($event)"
           />
@@ -83,8 +87,19 @@ import { DsTopbarComponent } from '../topbar/ds-topbar';
 export class DsAppLayoutComponent implements OnDestroy {
   // Inputs - using input signals for better reactivity
   sidebarGroups = input<SidebarGroup[]>([]);
-  isMobile = input<boolean>(false);
   isSidebarCollapsed = input<boolean>(true); // Default to collapsed
+  activeItemId = input<string>();
+
+  // Optional override for mobile detection - if not provided, use ViewportService
+  isMobileOverride = input<boolean | undefined>(undefined);
+
+  // Use viewport service for automatic mobile detection, with optional override
+  isMobile = computed(() => {
+    const override = this.isMobileOverride();
+    return override !== undefined ? override : this.viewportService.isMobile();
+  });
+
+  constructor(private viewportService: ViewportService) {}
 
   // Internal state - mobile menu starts closed
   private mobileMenuOpenSig = signal(false);

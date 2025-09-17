@@ -10,7 +10,6 @@ import { DsButtonComponent } from '../button/ds-button';
   styleUrls: ['./ds-header-details.css'],
   template: `
     <div class="header-details">
-      <div class="content-container">
         <!-- Title Row -->
         <div class="header-details__title-row">
           <h1 class="header-details__title ui-2xl-medium">
@@ -61,7 +60,6 @@ import { DsButtonComponent } from '../button/ds-button';
         <div class="header-details__details-row">
           <ng-content select="[slot=details]"></ng-content>
         </div>
-      </div>
     </div>
   `,
 })

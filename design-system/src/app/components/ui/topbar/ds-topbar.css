@@ -10,6 +10,13 @@
   background-color: var(--background-color-page);
 }
 
+/* Height override for xs, sm, md breakpoints */
+@media (max-width: 991px) {
+  .topbar {
+    height: 64px;
+  }
+}
+
 /* Left side: Icon and Title */
 .topbar__left {
   display: flex;

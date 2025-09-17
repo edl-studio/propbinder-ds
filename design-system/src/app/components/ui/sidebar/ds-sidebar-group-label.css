@@ -1,6 +1,6 @@
 .sidebar-group-label {
   display: grid;
-  grid-template-columns: 16px 1fr;
+  grid-template-columns: 1fr 16px;
   align-items: center;
   width: 100% !important; /* use full available width */
   min-width: 100% !important;
@@ -8,8 +8,7 @@
   row-gap: 0;
   height: 40px; /* fixed height for consistency */
   min-height: 32px;
-  padding-left: 8px;
-  padding-right: 24px;
+  padding: 0 32px 0 20px;
   background: transparent;
   border: none;
   text-align: left;
@@ -21,15 +20,17 @@
   box-sizing: border-box;
 }
 
-/* Default icon + label color with 60% opacity for icon, 80% for text */
-.sidebar-group-label__text {
+/* Default expanded state - 80% opacity */
+.sidebar-group-label__text,
+.sidebar-group-label ds-icon {
   color: rgba(198, 203, 255, 0.8);
+  transition: transform var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), color var(--transition-duration-normal, .2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
-/* Chevron icon rotation animation and opacity */
-.sidebar-group-label ds-icon {
+/* Collapsed state - 60% opacity */
+.sidebar-group-label[aria-expanded="false"] .sidebar-group-label__text,
+.sidebar-group-label[aria-expanded="false"] ds-icon {
   color: rgba(198, 203, 255, 0.6);
-  transition: transform var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), color var(--transition-duration-normal, .2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 /* Default expanded state - rotate right arrow to point down */
@@ -47,7 +48,7 @@
   background: transparent;
 }
 
-/* On hover, bump icon + label to full opacity */
+/* On hover, always bump to full opacity regardless of expanded state */
 .sidebar-group-label:hover .sidebar-group-label__text,
 .sidebar-group-label:hover ds-icon {
   color: rgba(198, 203, 255, 1);

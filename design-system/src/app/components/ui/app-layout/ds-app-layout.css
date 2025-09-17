@@ -22,7 +22,7 @@
 .app-layout__sidebar--minimized {
   grid-row: 1;
   width: 100%;
-  height: 80px; /* Match topbar height */
+  height: 64px; /* Match topbar height */
   z-index: 1;
 }
 
@@ -34,8 +34,8 @@
 
 /* Override sidebar header padding in minimized mode to match topbar */
 .app-layout__sidebar--minimized ::ng-deep .sidebar-header {
-  padding: 0 24px !important; /* Match topbar horizontal padding */
-  height: 80px !important; /* Match topbar height */
+  padding: 0 16px !important; /* Match topbar horizontal padding */
+  height: 64px !important; /* Match topbar height */
   justify-content: center; /* Center content vertically */
 }
 
@@ -52,7 +52,7 @@
   
   /* Initial state - hidden */
   transform: translateX(-100%);
-  transition: transform var(--transition-duration-normal) var(--ease-out-quart);
+  transition: transform var(--transition-duration-slow) var(--ease-in-out-quart);
   will-change: transform;
   pointer-events: none; /* Prevent interaction when closed */
 }
@@ -102,8 +102,8 @@
   backdrop-filter: blur(0px);
   pointer-events: none;
   transition: 
-    opacity var(--transition-duration-normal) var(--ease-out-quart),
-    backdrop-filter var(--transition-duration-normal) var(--ease-out-quart);
+    opacity var(--transition-duration-slow) var(--ease-in-out-quart),
+    backdrop-filter var(--transition-duration-slow) var(--ease-in-out-quart);
   will-change: opacity, backdrop-filter;
 }
 
@@ -144,4 +144,25 @@
   min-width: 0;
   width: 100%;
   overflow: auto;
+  padding: 20px 20px 0; /* Default padding for xs */
+  box-sizing: border-box;
+}
+
+/* Responsive padding for content area */
+@media (min-width: 576px) {
+  .app-layout__content {
+    padding: 24px 24px 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-layout__content {
+    padding: 32px 32px 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .app-layout__content {
+    padding: 40px 40px 0;
+  }
 }

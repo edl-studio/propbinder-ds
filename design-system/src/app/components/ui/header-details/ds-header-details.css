@@ -3,7 +3,6 @@
   width: 100%;
   padding: 24px 0 24px;
   background-color: var(--background-color-page);
-  border-bottom: 2px solid var(--border-color-default);
 }
 
 /* Title Row */

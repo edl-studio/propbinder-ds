@@ -25,49 +25,40 @@ export type DataItemValueType = 'text' | 'icon-text' | 'avatar-text' | 'badge';
       
       <!-- Value Container -->
       <div [class]="valueContainerClasses()">
-        @switch (valueType()) {
-          @case ('text') {
-            <span class="data-item__value-text ui-sm-regular">
-              {{ value() }}
-            </span>
+        <div class="data-item__value-container">
+          @switch (valueType()) {
+            @case ('text') {
+              <span class="data-item__value-text ui-sm-regular">{{ value() }}</span>
+            }
+            
+            @case ('icon-text') {
+              <ds-icon [name]="iconName()!" size="16px" color="secondary" class="data-item__value-icon" />
+              <span class="data-item__value-text ui-sm-regular">{{ value() }}</span>
+            }
+            
+            @case ('avatar-text') {
+              <ds-avatar
+                [type]="avatarType()"
+                [initials]="avatarInitials()"
+                [src]="avatarSrc()"
+                [iconName]="avatarIconName()"
+                size="xs"
+                class="data-item__value-avatar"
+              />
+              <span class="data-item__value-text ui-sm-regular">{{ value() }}</span>
+            }
+            
+            @case ('badge') {
+              <ds-badge
+                [variant]="badgeVariant()"
+                [contentType]="badgeContentType()"
+                [content]="badgeContent()"
+                [leadingIcon]="badgeIcon()"
+                [indicatorShape]="badgeIndicatorShape()"
+              />
+            }
           }
-          
-          @case ('icon-text') {
-            <ds-icon 
-              [name]="iconName()!" 
-              size="16px"
-              color="secondary"
-              class="data-item__value-icon"
-            />
-            <span class="data-item__value-text ui-sm-regular">
-              {{ value() }}
-            </span>
-          }
-          
-          @case ('avatar-text') {
-            <ds-avatar
-              [type]="avatarType()"
-              [initials]="avatarInitials()"
-              [src]="avatarSrc()"
-              [iconName]="avatarIconName()"
-              size="xs"
-              class="data-item__value-avatar"
-            />
-            <span class="data-item__value-text ui-sm-regular">
-              {{ value() }}
-            </span>
-          }
-          
-          @case ('badge') {
-            <ds-badge
-              [variant]="badgeVariant()"
-              [contentType]="badgeContentType()"
-              [content]="badgeContent()"
-              [leadingIcon]="badgeIcon()"
-              [indicatorShape]="badgeIndicatorShape()"
-            />
-          }
-        }
+        </div>
       </div>
     </div>
   `,

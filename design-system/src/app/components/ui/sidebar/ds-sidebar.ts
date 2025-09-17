@@ -62,12 +62,12 @@ export type DsSidebarMode = 'default' | 'minimized' | 'drawer';
           <footer class="sidebar__footer">
             <ng-content select="[sidebar-footer]">
               <ds-sidebar-group-content-item
-                id="settings"
-                icon="remixSettings3Line"
-                label="Settings"
+                id="log-out"
+                icon="remixLogoutBoxLine"
+                label="Log Out"
                 [collapsed]="isCollapsed()"
                 [active]="false"
-                (selected)="onSettingsSelected()"
+                (selected)="onLogOutSelected()"
               />
             </ng-content>
           </footer>
@@ -195,8 +195,8 @@ export class DsSidebarComponent {
     this.isScrolledToBottomSig.set(isScrolledToBottom);
   }
 
-  onSettingsSelected() {
-    this.itemSelected.emit('settings');
+  onLogOutSelected() {
+    this.itemSelected.emit('log-out');
   }
 
   private expandAllGroupsInternal() {

@@ -9,20 +9,20 @@
 
 .sidebar-header {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px 20px 20px 20px;
+  align-items: center;
+  padding: 0 20px;
+  height: 64px;
   background: var(--sidebar-bg);
   background-image: linear-gradient(180deg, rgba(34, 26, 76, 1) 75%, rgba(34, 26, 76, 0) 100%);
   border-bottom: 1px solid transparent;
-  transition: border-color 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), box-shadow 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), padding 0.4s var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
+  transition: border-color 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), box-shadow 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), height 0.4s var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
 }
 
 /* Show border and shadow when scrolled */
 :host-context(.sidebar-host--scrolled) .sidebar-header {
   border-bottom-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 20px 20px rgba(34, 26, 76, 0.6);
-  padding: 12px 20px 12px 20px;
+  height: 72px;
 }
 
 .sidebar-header__brand {
@@ -75,21 +75,19 @@
 }
 
 
-/* Ensure header maintains consistent dimensions when collapsed */
-:host-context(.sidebar-host--collapsed) .sidebar-header {
-  padding: 24px 20px 24px 20px;
-}
+/* Desktop styles (md and up) */
+@media (min-width: 992px) {
+  .sidebar-header {
+    height: 80px;
+    justify-content: center;
+  }
 
-/* Collapsed and scrolled state */
-:host-context(.sidebar-host--collapsed.sidebar-host--scrolled) .sidebar-header {
-  padding: 12px 20px 12px 20px;
+  :host-context(.sidebar-host--scrolled) .sidebar-header {
+    height: 72px;
+  }
 }
 
 /* Minimized mode styles */
-:host-context(.sidebar-host--minimized) .sidebar-header {
-  padding: 12px 24px;
-}
-
 :host-context(.sidebar-host--minimized) .sidebar-header__logo {
   transform: translateY(-50%);
   height: 24px;
@@ -104,8 +102,7 @@
 
 /* Drawer mode styles */
 :host-context(.sidebar-host--drawer) .sidebar-header {
-  padding: 20px 20px 20px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  height: 80px;
 }
 
 :host-context(.sidebar-host--drawer) .sidebar-header__logo {

@@ -192,7 +192,7 @@ export const HorizontalAvatarPhoto: Story = {
     layout: 'horizontal',
     valueType: 'avatar-text',
     avatarType: 'photo',
-    avatarSrc: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+    avatarSrc: '/Dummy-avatars/dummy-portrait-woman.jpg',
   },
 };
 
@@ -253,7 +253,7 @@ export const LayoutComparison: Story = {
           <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 500;">Vertical Layout</h3>
           <div style="display: flex; flex-direction: column; gap: 16px;">
             <ds-data-item
-              label="Email Address"
+              label="Email address"
               value="user@example.com"
               layout="vertical"
               valueType="text"
@@ -280,7 +280,7 @@ export const LayoutComparison: Story = {
           <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 500;">Horizontal Layout</h3>
           <div style="display: flex; flex-direction: column; gap: 16px;">
             <ds-data-item
-              label="Email Address"
+              label="Email address"
               value="user@example.com"
               layout="horizontal"
               valueType="text"
@@ -317,7 +317,7 @@ export const ValueTypesShowcase: Story = {
     template: `
       <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
         <ds-data-item
-          label="Text Value"
+          label="Text value"
           value="Simple text content"
           layout="horizontal"
           valueType="text"
@@ -338,7 +338,7 @@ export const ValueTypesShowcase: Story = {
           avatarInitials="JD"
         />
         <ds-data-item
-          label="Badge Value"
+          label="Badge value"
           layout="horizontal"
           valueType="badge"
           badgeVariant="success"
@@ -363,7 +363,7 @@ export const UserProfile: Story = {
         <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600;">User Profile</h3>
         
         <ds-data-item
-          label="Full Name"
+          label="Full name"
           value="Sarah Wilson"
           layout="horizontal"
           valueType="text"
@@ -441,10 +441,10 @@ export const TaskDetails: Story = {
           layout="horizontal"
           valueType="avatar-text"
           avatarType="photo"
-          avatarSrc="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face"
+          avatarSrc="/Dummy-avatars/dummy-portrait-woman.jpg"
         />
         <ds-data-item
-          label="Due Date"
+          label="Due date"
           value="March 15, 2024"
           layout="horizontal"
           valueType="icon-text"

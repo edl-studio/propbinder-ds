@@ -3,7 +3,7 @@
   display: inline-flex;
   align-items: center;
   height: 24px;
-  border-radius: 6px;
+  border-radius: 9999px;
   font-size: var(--font-size-xs); /* 0.75rem / 12px */
   font-weight: 500;
   line-height: 1.2;

@@ -68,7 +68,6 @@
   transition: transform var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), opacity var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), max-width var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
   grid-column: 2; /* place in second column */
   align-self: center;
-  transform: translateY(1px);
 }
 
 /* NOTE: visually-hidden class is not used for collapse animation anymore */
