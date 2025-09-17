@@ -400,6 +400,261 @@
             "styleUrlsData": "",
             "stylesData": "\n    .app-shell-demo {\n      display: flex;\n      height: 600px;\n      background: #f8f9fa;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n    }\n    \n    :host(.tw-h-screen) .app-shell-demo {\n      height: 100vh;\n      border-radius: 0;\n      box-shadow: none;\n    }\n    \n    .demo-sidebar {\n      flex-shrink: 0;\n      transition: width 0.3s ease;\n    }\n    \n    .demo-main {\n      flex: 1;\n      display: flex;\n      flex-direction: column;\n      min-width: 0;\n    }\n    \n    .demo-topbar {\n      flex-shrink: 0;\n    }\n    \n    .demo-content {\n      flex: 1;\n      overflow: auto;\n      background: white;\n    }\n    \n    .demo-content-inner {\n      padding: 24px;\n    }\n    \n    .demo-title {\n      margin: 0 0 8px 0;\n      font-size: 24px;\n      font-weight: 600;\n      color: #1a1a1a;\n    }\n    \n    .demo-description {\n      margin: 0 0 24px 0;\n      color: #666;\n      line-height: 1.5;\n    }\n    \n    .demo-metrics {\n      display: grid;\n      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n      gap: 16px;\n      margin-bottom: 24px;\n      padding: 16px;\n      background: #f8f9fa;\n      border-radius: 6px;\n    }\n    \n    .demo-metric {\n      display: flex;\n      flex-direction: column;\n      gap: 4px;\n    }\n    \n    .demo-metric-label {\n      font-size: 12px;\n      font-weight: 500;\n      color: #666;\n      text-transform: uppercase;\n      letter-spacing: 0.5px;\n    }\n    \n    .demo-metric-value {\n      font-size: 14px;\n      font-weight: 500;\n      color: #1a1a1a;\n    }\n    \n    .demo-actions {\n      display: flex;\n      gap: 12px;\n      flex-wrap: wrap;\n    }\n    \n    .demo-button {\n      padding: 8px 16px;\n      background: #007bff;\n      color: white;\n      border: none;\n      border-radius: 4px;\n      font-size: 14px;\n      font-weight: 500;\n      cursor: pointer;\n      transition: background-color 0.2s;\n    }\n    \n    .demo-button:hover {\n      background: #0056b3;\n    }\n    \n    .demo-button:active {\n      background: #004085;\n    }\n    \n    .full-page-back-button {\n      position: absolute;\n      top: 16px;\n      left: 16px;\n      z-index: 1000;\n    }\n    \n    .back-button {\n      padding: 8px 16px;\n      background: rgba(0, 0, 0, 0.8);\n      color: white;\n      border: none;\n      border-radius: 6px;\n      font-size: 14px;\n      font-weight: 500;\n      cursor: pointer;\n      transition: all 0.2s ease;\n      backdrop-filter: blur(4px);\n    }\n    \n    .back-button:hover {\n      background: rgba(0, 0, 0, 0.9);\n      transform: translateY(-1px);\n    }\n    \n    .back-button:active {\n      transform: translateY(0);\n    }\n  \n",
             "extends": []
+        },
+        {
+            "name": "DebugWrapperComponent",
+            "id": "component-DebugWrapperComponent-3fed883e1c4d2b1f1214eb8ed263048955ba82afd3c7b21d8f682b6a4af59f70ade6db02095a45054553faf169e9ca95084ceaa3ccaaee64f15d13ffed2c83fa",
+            "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-debug-wrapper",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<ds-app-layout\n  [sidebarGroups]=\"sidebarGroups\"\n  [isMobileOverride]=\"isMobileOverride\"\n  [isSidebarCollapsed]=\"isSidebarCollapsed\"\n  (menuOpenChange)=\"handleMenuOpenChange($event)\"\n  (collapsedChange)=\"handleCollapsedChange($event)\"\n>\n  <ds-topbar\n    [pageTitle]=\"'Page Title'\"\n    [iconName]=\"'remixHome4Line'\"\n    [userInitials]=\"'JD'\"\n    [showFirstAction]=\"true\"\n    [firstActionIcon]=\"'remixNotification3Line'\"\n    [firstActionLabel]=\"'Notifications'\"\n    [showSecondAction]=\"true\"\n    [secondActionIcon]=\"'remixSettings3Line'\"\n    [secondActionLabel]=\"'Settings'\"\n  />\n  <div style=\"padding: 24px;\">\n    <div style=\"max-width: 64rem; margin: 0 auto;\">\n      <h2 style=\"font-size: 1.5rem; font-weight: 600; margin-bottom: 8px;\">Main Content Area</h2>\n      <p style=\"color: rgb(75, 85, 99); margin-bottom: 48px;\">This is where your main content would go. The layout handles the responsive behavior automatically.</p>\n\n      <div style=\"margin-bottom: 48px;\">\n        <div style=\"background: var(--background-color-interactive-default); border-radius: 16px; padding: 24px;\">\n          <span class=\"ui-sm-medium\">Debug Information</span>\n          <div style=\"margin-top: 16px;\">\n            <ds-data-item\n              [label]=\"'Window width'\"\n              [value]=\"windowWidth + 'px'\"\n              [layout]=\"'horizontal'\"\n              [valueType]=\"'text'\"\n            ></ds-data-item>\n            <ds-data-item\n              [label]=\"'Is Mobile'\"\n              [value]=\"isMobile ? 'True' : 'False'\"\n              [layout]=\"'horizontal'\"\n              [valueType]=\"'text'\"\n            ></ds-data-item>\n            <ds-data-item\n              [label]=\"'Menu Open'\"\n              [value]=\"menuOpen ? 'True' : 'False'\"\n              [layout]=\"'horizontal'\"\n              [valueType]=\"'text'\"\n            ></ds-data-item>\n            <ds-data-item\n              [label]=\"'Sidebar Collapsed'\"\n              [value]=\"isSidebarCollapsed ? 'True' : 'False'\"\n              [layout]=\"'horizontal'\"\n              [valueType]=\"'text'\"\n            ></ds-data-item>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</ds-app-layout>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isMobile",
+                    "defaultValue": "computed(() => this.viewportService.isMobile())",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 84
+                },
+                {
+                    "name": "isMobileOverride",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 77
+                },
+                {
+                    "name": "isSidebarCollapsed",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 78
+                },
+                {
+                    "name": "menuOpen",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 80
+                },
+                {
+                    "name": "resizeTimeout",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 86,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "sidebarGroups",
+                    "defaultValue": "demoGroups",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 76
+                },
+                {
+                    "name": "windowWidth",
+                    "defaultValue": "typeof window !== 'undefined' ? window.innerWidth : 0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 79
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "handleCollapsedChange",
+                    "args": [
+                        {
+                            "name": "isCollapsed",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 103,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "isCollapsed",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "handleMenuOpenChange",
+                    "args": [
+                        {
+                            "name": "isOpen",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 99,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "isOpen",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnDestroy",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 107,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onResize",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 89,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'window:resize'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [
+                {
+                    "name": "window:resize",
+                    "args": [],
+                    "argsDecorator": [],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 89
+                }
+            ],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "DsAppLayoutComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "DsTopbarComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "DsSidebarComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "DsDataItemComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';\nimport { Component, HostListener, OnDestroy, computed } from '@angular/core';\nimport { DsAppLayoutComponent } from './ds-app-layout';\nimport { DsTopbarComponent } from '../topbar/ds-topbar';\nimport { DsSidebarComponent } from '../sidebar/ds-sidebar';\nimport { DsDataItemComponent } from '../data-item/ds-data-item';\nimport { ViewportService } from '../../../lib/viewport.service';\nimport { demoGroups } from '../sidebar/ds-sidebar.stories';\n\n@Component({\n  selector: 'ds-debug-wrapper',\n  standalone: true,\n  imports: [DsAppLayoutComponent, DsTopbarComponent, DsSidebarComponent, DsDataItemComponent],\n  // ViewportService is now provided at the module level\n  template: `\n    <ds-app-layout\n      [sidebarGroups]=\"sidebarGroups\"\n      [isMobileOverride]=\"isMobileOverride\"\n      [isSidebarCollapsed]=\"isSidebarCollapsed\"\n      (menuOpenChange)=\"handleMenuOpenChange($event)\"\n      (collapsedChange)=\"handleCollapsedChange($event)\"\n    >\n      <ds-topbar\n        [pageTitle]=\"'Page Title'\"\n        [iconName]=\"'remixHome4Line'\"\n        [userInitials]=\"'JD'\"\n        [showFirstAction]=\"true\"\n        [firstActionIcon]=\"'remixNotification3Line'\"\n        [firstActionLabel]=\"'Notifications'\"\n        [showSecondAction]=\"true\"\n        [secondActionIcon]=\"'remixSettings3Line'\"\n        [secondActionLabel]=\"'Settings'\"\n      />\n      <div style=\"padding: 24px;\">\n        <div style=\"max-width: 64rem; margin: 0 auto;\">\n          <h2 style=\"font-size: 1.5rem; font-weight: 600; margin-bottom: 8px;\">Main Content Area</h2>\n          <p style=\"color: rgb(75, 85, 99); margin-bottom: 48px;\">This is where your main content would go. The layout handles the responsive behavior automatically.</p>\n          \n          <div style=\"margin-bottom: 48px;\">\n            <div style=\"background: var(--background-color-interactive-default); border-radius: 16px; padding: 24px;\">\n              <span class=\"ui-sm-medium\">Debug Information</span>\n              <div style=\"margin-top: 16px;\">\n                <ds-data-item \n                  [label]=\"'Window width'\" \n                  [value]=\"windowWidth + 'px'\" \n                  [layout]=\"'horizontal'\" \n                  [valueType]=\"'text'\"\n                ></ds-data-item>\n                <ds-data-item \n                  [label]=\"'Is Mobile'\" \n                  [value]=\"isMobile ? 'True' : 'False'\" \n                  [layout]=\"'horizontal'\" \n                  [valueType]=\"'text'\"\n                ></ds-data-item>\n                <ds-data-item \n                  [label]=\"'Menu Open'\" \n                  [value]=\"menuOpen ? 'True' : 'False'\" \n                  [layout]=\"'horizontal'\" \n                  [valueType]=\"'text'\"\n                ></ds-data-item>\n                <ds-data-item \n                  [label]=\"'Sidebar Collapsed'\" \n                  [value]=\"isSidebarCollapsed ? 'True' : 'False'\" \n                  [layout]=\"'horizontal'\" \n                  [valueType]=\"'text'\"\n                ></ds-data-item>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </ds-app-layout>\n  `\n})\nclass DebugWrapperComponent implements OnDestroy {\n  sidebarGroups = demoGroups;\n  isMobileOverride?: boolean;\n  isSidebarCollapsed = false;\n  windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;\n  menuOpen = false;\n\n  constructor(private viewportService: ViewportService) {}\n\n  isMobile = computed(() => this.viewportService.isMobile());\n\n  private resizeTimeout: any;\n\n  @HostListener('window:resize')\n  onResize() {\n    // Debounce resize updates\n    if (this.resizeTimeout) {\n      clearTimeout(this.resizeTimeout);\n    }\n    this.resizeTimeout = setTimeout(() => {\n      this.windowWidth = window.innerWidth;\n    }, 100);\n  }\n\n  handleMenuOpenChange(isOpen: boolean) {\n    this.menuOpen = isOpen;\n  }\n\n  handleCollapsedChange(isCollapsed: boolean) {\n    this.isSidebarCollapsed = isCollapsed;\n  }\n\n  ngOnDestroy() {\n    if (this.resizeTimeout) {\n      clearTimeout(this.resizeTimeout);\n    }\n  }\n}\n\nconst meta: Meta<DsAppLayoutComponent> = {\n  title: 'Application shell/App Layout',\n  component: DsAppLayoutComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [DebugWrapperComponent],\n      providers: [ViewportService]\n    }),\n  ],\n  parameters: {\n    layout: 'fullscreen',\n    // Add viewport toolbar to allow easy resizing\n    viewport: {\n      defaultViewport: 'desktop',\n      viewports: {\n        mobile: {\n          name: 'Mobile',\n          styles: {\n            width: '375px',\n            height: '100%',\n          },\n        },\n        tablet: {\n          name: 'Tablet',\n          styles: {\n            width: '768px',\n            height: '100%',\n          },\n        },\n        desktop: {\n          name: 'Desktop',\n          styles: {\n            width: '1024px',\n            height: '100%',\n          },\n        },\n        'large-desktop': {\n          name: 'Large Desktop',\n          styles: {\n            width: '1440px',\n            height: '100%',\n          },\n        },\n      },\n    },\n  },\n  tags: ['autodocs'],\n};\n\nexport default meta;\ntype Story = StoryObj<DsAppLayoutComponent>;\n\nexport const Default: Story = {\n  args: {\n    sidebarGroups: demoGroups,\n    isSidebarCollapsed: false,\n  },\n  render: () => ({\n    template: '<ds-debug-wrapper></ds-debug-wrapper>'\n  })\n};\n\nexport const InitiallyCollapsed: Story = {\n  args: {\n    sidebarGroups: demoGroups,\n    isMobileOverride: false, // Force desktop mode\n    isSidebarCollapsed: true,\n  },\n  render: Default.render,\n};\n\n// Debug story to test topbar in isolation\nexport const AutoResponsive: Story = {\n  args: {\n    sidebarGroups: demoGroups,\n    // No isMobileOverride - let ViewportService handle automatic detection\n    isSidebarCollapsed: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <ds-app-layout\n        [sidebarGroups]=\"sidebarGroups\"\n        [isMobileOverride]=\"isMobileOverride\"\n        [isSidebarCollapsed]=\"isSidebarCollapsed\"\n      >\n        <ds-topbar\n          [pageTitle]=\"'Auto Responsive'\"\n          [iconName]=\"'remixSmartphoneLine'\"\n          [userInitials]=\"'AR'\"\n          [showFirstAction]=\"true\"\n          [firstActionIcon]=\"'remixNotification3Line'\"\n          [firstActionLabel]=\"'Notifications'\"\n          [showSecondAction]=\"true\"\n          [secondActionIcon]=\"'remixSettings3Line'\"\n          [secondActionLabel]=\"'Settings'\"\n        />\n        <div class=\"p-6\">\n          <div class=\"max-w-3xl mx-auto\">\n            <h2 class=\"text-2xl font-semibold mb-4\">Auto-Responsive Layout</h2>\n            <div class=\"space-y-4\">\n              <div class=\"p-4 bg-white rounded-lg border border-gray-200\">\n                <h3 class=\"font-medium mb-2\">🚀 Automatic Viewport Detection</h3>\n                <p class=\"text-gray-600\">\n                  This layout automatically detects your viewport size and switches between mobile and desktop modes at 992px breakpoint.\n                </p>\n                <p class=\"mt-2 text-sm text-gray-500\">\n                  <strong>Try resizing your browser window or using the viewport toolbar above!</strong>\n                </p>\n              </div>\n              \n              <div class=\"p-4 bg-blue-50 rounded-lg border border-blue-200\">\n                <h3 class=\"font-medium mb-2 text-blue-900\">How it works:</h3>\n                <ul class=\"text-sm text-blue-800 space-y-1\">\n                  <li>• <strong>≤ 991px:</strong> Mobile mode with collapsible drawer menu</li>\n                  <li>• <strong>≥ 992px:</strong> Desktop mode with persistent sidebar</li>\n                  <li>• <strong>Automatic:</strong> No manual prop toggling needed!</li>\n                </ul>\n              </div>\n            </div>\n          </div>\n        </div>\n      </ds-app-layout>\n    `,\n  }),\n};\n\nexport const TopbarDebug: Story = {\n  args: {\n    sidebarGroups: demoGroups,\n    isMobileOverride: false, // Force desktop mode\n    isSidebarCollapsed: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <ds-app-layout\n        [sidebarGroups]=\"sidebarGroups\"\n        [isMobileOverride]=\"isMobileOverride\"\n        [isSidebarCollapsed]=\"isSidebarCollapsed\"\n      >\n        <ds-topbar\n          [pageTitle]=\"'Debug Page'\"\n          [iconName]=\"'remixHome4Line'\"\n          [userInitials]=\"'DB'\"\n          [showFirstAction]=\"false\"\n          [showSecondAction]=\"false\"\n        />\n        <div class=\"p-6\">\n          <h2>Debug: Check if topbar renders with minimal props</h2>\n        </div>\n      </ds-app-layout>\n    `,\n  }),\n};",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "viewportService",
+                        "type": "ViewportService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 80,
+                "jsdoctags": [
+                    {
+                        "name": "viewportService",
+                        "type": "ViewportService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "implements": [
+                "OnDestroy"
+            ]
         }
     ],
     "modules": [],
@@ -454,6 +709,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 2rem; align-items: start; flex-wrap: wrap;\">\n        <div style=\"display: flex; flex-direction: column; gap: 1rem;\">\n          <h3 style=\"margin: 0; font-size: 14px; font-weight: 600; color: var(--text-color-default-primary);\">Initials (Always Round)</h3>\n          <div style=\"display: flex; gap: 1rem; align-items: center;\">\n            <ds-avatar type=\"initials\" size=\"sm\" initials=\"JD\"></ds-avatar>\n            <ds-avatar type=\"initials\" size=\"md\" initials=\"JD\"></ds-avatar>\n            <ds-avatar type=\"initials\" size=\"lg\" initials=\"JD\"></ds-avatar>\n            <ds-avatar type=\"initials\" size=\"xl\" initials=\"JD\"></ds-avatar>\n          </div>\n        </div>\n        \n        <div style=\"display: flex; flex-direction: column; gap: 1rem;\">\n          <h3 style=\"margin: 0; font-size: 14px; font-weight: 600; color: var(--text-color-default-primary);\">Photo (Always Round)</h3>\n          <div style=\"display: flex; gap: 1rem; align-items: center;\">\n            <ds-avatar \n              type=\"photo\" \n              size=\"sm\" \n              src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face\"\n              alt=\"Profile\"\n            ></ds-avatar>\n            <ds-avatar \n              type=\"photo\" \n              size=\"md\" \n              src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face\"\n              alt=\"Profile\"\n            ></ds-avatar>\n            <ds-avatar \n              type=\"photo\" \n              size=\"lg\" \n              src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face\"\n              alt=\"Profile\"\n            ></ds-avatar>\n            <ds-avatar \n              type=\"photo\" \n              size=\"xl\" \n              src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face\"\n              alt=\"Profile\"\n            ></ds-avatar>\n          </div>\n        </div>\n        \n        <div style=\"display: flex; flex-direction: column; gap: 1rem;\">\n          <h3 style=\"margin: 0; font-size: 14px; font-weight: 600; color: var(--text-color-default-primary);\">Icon (Brand Background + Depth)</h3>\n          <div style=\"display: flex; gap: 1rem; align-items: center;\">\n            <ds-avatar type=\"icon\" size=\"sm\" iconName=\"remixUser3Fill\"></ds-avatar>\n            <ds-avatar type=\"icon\" size=\"md\" iconName=\"remixUser3Fill\"></ds-avatar>\n            <ds-avatar type=\"icon\" size=\"lg\" iconName=\"remixUser3Fill\"></ds-avatar>\n            <ds-avatar type=\"icon\" size=\"xl\" iconName=\"remixUser3Fill\"></ds-avatar>\n          </div>\n          <div style=\"font-size: 12px; color: var(--text-color-default-secondary);\">\n            6px → 8px → 12px → 16px radius<br/>\n            depth-sm → depth-sm → depth-md → depth-lg\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "AutoResponsive",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    sidebarGroups: demoGroups,\n    // No isMobileOverride - let ViewportService handle automatic detection\n    isSidebarCollapsed: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <ds-app-layout\n        [sidebarGroups]=\"sidebarGroups\"\n        [isMobileOverride]=\"isMobileOverride\"\n        [isSidebarCollapsed]=\"isSidebarCollapsed\"\n      >\n        <ds-topbar\n          [pageTitle]=\"'Auto Responsive'\"\n          [iconName]=\"'remixSmartphoneLine'\"\n          [userInitials]=\"'AR'\"\n          [showFirstAction]=\"true\"\n          [firstActionIcon]=\"'remixNotification3Line'\"\n          [firstActionLabel]=\"'Notifications'\"\n          [showSecondAction]=\"true\"\n          [secondActionIcon]=\"'remixSettings3Line'\"\n          [secondActionLabel]=\"'Settings'\"\n        />\n        <div class=\"p-6\">\n          <div class=\"max-w-3xl mx-auto\">\n            <h2 class=\"text-2xl font-semibold mb-4\">Auto-Responsive Layout</h2>\n            <div class=\"space-y-4\">\n              <div class=\"p-4 bg-white rounded-lg border border-gray-200\">\n                <h3 class=\"font-medium mb-2\">🚀 Automatic Viewport Detection</h3>\n                <p class=\"text-gray-600\">\n                  This layout automatically detects your viewport size and switches between mobile and desktop modes at 992px breakpoint.\n                </p>\n                <p class=\"mt-2 text-sm text-gray-500\">\n                  <strong>Try resizing your browser window or using the viewport toolbar above!</strong>\n                </p>\n              </div>\n              \n              <div class=\"p-4 bg-blue-50 rounded-lg border border-blue-200\">\n                <h3 class=\"font-medium mb-2 text-blue-900\">How it works:</h3>\n                <ul class=\"text-sm text-blue-800 space-y-1\">\n                  <li>• <strong>≤ 991px:</strong> Mobile mode with collapsible drawer menu</li>\n                  <li>• <strong>≥ 992px:</strong> Desktop mode with persistent sidebar</li>\n                  <li>• <strong>Automatic:</strong> No manual prop toggling needed!</li>\n                </ul>\n              </div>\n            </div>\n          </div>\n        </div>\n      </ds-app-layout>\n    `,\n  }),\n}"
             },
             {
                 "name": "ButtonSizes",
@@ -559,6 +824,16 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    sidebarGroups: demoGroups,\n    isSidebarCollapsed: false,\n  },\n  render: () => ({\n    template: '<ds-debug-wrapper></ds-debug-wrapper>'\n  })\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/ui/avatar/ds-avatar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -599,21 +874,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/ui/header-details/ds-header-details.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  parameters: {\n    docs: {\n      description: {\n        story: 'Basic header details example with a primary action and more actions menu. This demonstrates the typical layout for an entity detail page.'\n      }\n    }\n  },\n  args: {\n    title: 'Woods Augusthus',\n    showPrimaryAction: true,\n    primaryActionText: 'Follow',\n    primaryActionIcon: 'remixUserFollowLine',\n    primaryActionVariant: 'primary',\n    showSecondaryAction: false,\n    showMoreActions: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <ds-header-details\n        [title]=\"title\"\n        [showPrimaryAction]=\"showPrimaryAction\"\n        [primaryActionText]=\"primaryActionText\"\n        [primaryActionIcon]=\"primaryActionIcon\"\n        [primaryActionVariant]=\"primaryActionVariant\"\n        [showSecondaryAction]=\"showSecondaryAction\"\n        [secondaryActionText]=\"secondaryActionText\"\n        [secondaryActionIcon]=\"secondaryActionIcon\"\n        [secondaryActionVariant]=\"secondaryActionVariant\"\n        [showMoreActions]=\"showMoreActions\"\n      >\n        <div slot=\"details\" style=\"display: flex; flex-wrap: wrap; gap: 48px;\">\n          <ds-data-item\n            label=\"User name\"\n            value=\"Woods Augusthus\"\n            layout=\"vertical\"\n            valueType=\"avatar-text\"\n            avatarType=\"initials\"\n            avatarInitials=\"WA\"\n          />\n          <ds-data-item\n            label=\"Company name\"\n            value=\"Propbinder Inc.\"\n            layout=\"vertical\"\n            valueType=\"avatar-text\"\n            avatarType=\"initials\"\n            avatarInitials=\"PI\"\n          />\n        </div>\n      </ds-header-details>\n    `\n  })\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"width: 360px;\">\n        <ds-form-field [label]=\"label\" [description]=\"description\" [labelId]=\"labelId\" [descriptionId]=\"descriptionId\">\n          <ds-input ariaLabelledBy=\"email-label\" ariaDescribedBy=\"email-desc\" placeholder=\"you@example.com\"></ds-input>\n        </ds-form-field>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/header-details/ds-header-details.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  parameters: {\n    docs: {\n      description: {\n        story: 'Basic header details example with a primary action and more actions menu. This demonstrates the typical layout for an entity detail page.'\n      }\n    }\n  },\n  args: {\n    title: 'Woods Augusthus',\n    showPrimaryAction: true,\n    primaryActionText: 'Follow',\n    primaryActionIcon: 'remixUserFollowLine',\n    primaryActionVariant: 'primary',\n    showSecondaryAction: false,\n    showMoreActions: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <ds-header-details\n        [title]=\"title\"\n        [showPrimaryAction]=\"showPrimaryAction\"\n        [primaryActionText]=\"primaryActionText\"\n        [primaryActionIcon]=\"primaryActionIcon\"\n        [primaryActionVariant]=\"primaryActionVariant\"\n        [showSecondaryAction]=\"showSecondaryAction\"\n        [secondaryActionText]=\"secondaryActionText\"\n        [secondaryActionIcon]=\"secondaryActionIcon\"\n        [secondaryActionVariant]=\"secondaryActionVariant\"\n        [showMoreActions]=\"showMoreActions\"\n      >\n        <div slot=\"details\" style=\"display: flex; flex-wrap: wrap; gap: 48px;\">\n          <ds-data-item\n            label=\"User name\"\n            value=\"Woods Augusthus\"\n            layout=\"vertical\"\n            valueType=\"avatar-text\"\n            avatarType=\"initials\"\n            avatarInitials=\"WA\"\n          />\n          <ds-data-item\n            label=\"Company name\"\n            value=\"Propbinder Inc.\"\n            layout=\"vertical\"\n            valueType=\"avatar-text\"\n            avatarType=\"initials\"\n            avatarInitials=\"PI\"\n          />\n        </div>\n      </ds-header-details>\n    `\n  })\n}"
             },
             {
                 "name": "Default",
@@ -723,7 +998,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "SidebarGroup[]",
-                "defaultValue": "[\n  {\n    id: 'grp-top',\n    label: '',\n    showLabel: false,\n    items: [\n      { id: 'inbox', icon: 'remixInboxLine', label: 'Inbox', badgeText: '3' },\n      { id: 'my-tasks', icon: 'remixTaskLine', label: 'My tasks' },\n    ],\n  },\n  {\n    id: 'grp-service',\n    label: 'Service hub',\n    items: [\n      { id: 'inquiries', icon: 'remixQuestionAnswerLine', label: 'Inquiries' },\n      { id: 'tasks', icon: 'remixClipboardLine', label: 'Tasks' },\n      { id: 'documents', icon: 'remixFile2Line', label: 'Documents' },\n      { id: 'notices', icon: 'remixNotificationLine', label: 'Notices' },\n    ],\n  },\n  {\n    id: 'grp-company',\n    label: 'Company',\n    items: [\n      { id: 'dashboard', icon: 'remixLayout4Line', label: 'Dashboard' },\n      { id: 'ratings', icon: 'remixStarSmileLine', label: 'Ratings' },\n      { id: 'calendar', icon: 'remixCalendarLine', label: 'Calendar' },\n      { id: 'reports', icon: 'remixBarChart2Line', label: 'Reports' },\n      { id: 'kanban', icon: 'remixStackLine', label: 'Kanban' },\n      { id: 'surveys', icon: 'remixSurveyLine', label: 'Surveys' },\n      { id: 'inspections', icon: 'remixEditBoxLine', label: 'Inspections' },\n    ],\n  },\n  {\n    id: 'grp-catalog',\n    label: 'Catalog',\n    items: [\n      { id: 'customers', icon: 'remixUser3Line', label: 'Customers' },\n      { id: 'portfolios', icon: 'remixFolderLine', label: 'Portfolios' },\n      { id: 'subsidiaries', icon: 'remixGitBranchLine', label: 'Subsidiaries' },\n      { id: 'properties', icon: 'remixBuilding2Line', label: 'Properties' },\n      { id: 'leases', icon: 'remixFileList3Line', label: 'Leases' },\n      { id: 'tenants', icon: 'remixShieldCheckLine', label: 'Tenants' },\n      { id: 'vendors', icon: 'remixUserSettingsLine', label: 'Vendors' },\n      { id: 'vendor-agreements', icon: 'remixFileShield2Line', label: 'Vendor agreements' },\n      { id: 'facilities', icon: 'remixMapPin2Line', label: 'Facilities' },\n    ],\n  },\n]"
+                "defaultValue": "[\n  {\n    id: 'servicehub',\n    label: 'SERVICEHUB',\n    items: [\n      { id: 'inbox', label: 'Inbox', icon: 'remixMailLine', badgeText: '2' },\n      { id: 'inquiries', label: 'Inquiries', icon: 'remixQuestionAnswerLine', badgeText: '2' },\n      { id: 'tasks', label: 'Tasks', icon: 'remixTaskLine' },\n      { id: 'surveys', label: 'Surveys', icon: 'remixSurveyLine' },\n    ],\n  },\n  {\n    id: 'company',\n    label: 'COMPANY',\n    items: [\n      { id: 'dashboard', label: 'Dashboard', icon: 'remixDashboardLine' },\n      { id: 'rating', label: 'Rating', icon: 'remixStarLine' },\n      { id: 'calendar', label: 'Calendar', icon: 'remixCalendarLine' },\n      { id: 'settings', label: 'Settings', icon: 'remixSettings4Line' },\n    ],\n  },\n  {\n    id: 'kartoteker',\n    label: 'KARTOTEKER',\n    items: [\n      { id: 'customers', label: 'Customers', icon: 'remixTeamLine' },\n      { id: 'companies', label: 'Companies', icon: 'remixBuilding4Line' },\n      { id: 'properties', label: 'Properties', icon: 'remixBuilding2Line' },\n      { id: 'leases', label: 'Leases', icon: 'remixFileListLine' },\n      { id: 'tenants', label: 'Tenants', icon: 'remixUserLine' },\n      { id: 'vendors', label: 'Vendors', icon: 'remixStore2Line' },\n      { id: 'vendor-agreements', label: 'Vendor agreements', icon: 'remixFileTextLine' },\n      { id: 'assets', label: 'Assets', icon: 'remixDatabase2Line' },\n      { id: 'real-esg', label: 'Real ESG', icon: 'remixLeafLine' },\n    ],\n  },\n  {\n    id: 'me',\n    label: 'ME',\n      items: [\n        { id: 'my-details', label: 'My details', icon: 'remixUserSettingsLine' },\n        { id: 'whats-new', label: 'What\\'s new', icon: 'remixNotification4Line' },\n      ],\n  },\n]"
             },
             {
                 "name": "Diamond",
@@ -1056,6 +1331,16 @@
                 "defaultValue": "{\n  args: {\n    content: 'Pending',\n    contentType: 'indicator-text',\n    variant: 'warning',\n    indicatorShape: 'triangle',\n  },\n}"
             },
             {
+                "name": "InitiallyCollapsed",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    sidebarGroups: demoGroups,\n    isMobileOverride: false, // Force desktop mode\n    isSidebarCollapsed: true,\n  },\n  render: Default.render,\n}"
+            },
+            {
                 "name": "InitialsType",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1209,6 +1494,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<DsAppLayoutComponent>",
+                "defaultValue": "{\n  title: 'Application shell/App Layout',\n  component: DsAppLayoutComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [DebugWrapperComponent],\n      providers: [ViewportService]\n    }),\n  ],\n  parameters: {\n    layout: 'fullscreen',\n    // Add viewport toolbar to allow easy resizing\n    viewport: {\n      defaultViewport: 'desktop',\n      viewports: {\n        mobile: {\n          name: 'Mobile',\n          styles: {\n            width: '375px',\n            height: '100%',\n          },\n        },\n        tablet: {\n          name: 'Tablet',\n          styles: {\n            width: '768px',\n            height: '100%',\n          },\n        },\n        desktop: {\n          name: 'Desktop',\n          styles: {\n            width: '1024px',\n            height: '100%',\n          },\n        },\n        'large-desktop': {\n          name: 'Large Desktop',\n          styles: {\n            width: '1440px',\n            height: '100%',\n          },\n        },\n      },\n    },\n  },\n  tags: ['autodocs'],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/ui/avatar/ds-avatar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1249,6 +1544,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<DsFormFieldComponent>",
+                "defaultValue": "{\n  title: 'Primitives/Form Field',\n  component: DsFormFieldComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [DsFormFieldComponent, DsInputComponent, NgpError],\n    }),\n  ],\n  tags: ['autodocs'],\n  parameters: { layout: 'centered' },\n  argTypes: {\n    label: { control: 'text' },\n    description: { control: 'text' },\n    labelId: { control: 'text' },\n    descriptionId: { control: 'text' },\n  },\n  args: {\n    label: 'Email',\n    description: 'We will never share your email.',\n    labelId: 'email-label',\n    descriptionId: 'email-desc',\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/ui/data-item/ds-data-item.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1264,16 +1569,6 @@
                 "deprecationMessage": "",
                 "type": "Meta<DsHeaderDetailsComponent>",
                 "defaultValue": "{\n  title: 'Primitives/Headers/Header Details',\n  component: DsHeaderDetailsComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [DsDataItemComponent]\n    })\n  ],\n  parameters: {\n    layout: 'fullscreen',\n    docs: {\n      story: {\n        inline: true,\n        height: 'auto'\n      },\n      description: {\n        component: `\n# Header Details Component\n\nA specialized header component designed for entity detail pages such as Properties, Leases, Inquiries, Assets, and other business entities. It provides a consistent layout with a title row, configurable actions, and flexible content slots for metadata display.\n\n## Design Principles\n\n- **Consistent Spacing**: 24px top padding and gaps for visual hierarchy\n- **Content-First**: Responsive width (10/12 columns of parent) ensures optimal reading experience  \n- **Action-Oriented**: Prominent placement of primary and secondary actions\n- **Flexible Content**: Slot-based architecture for customizable metadata layouts\n- **Responsive**: Adapts gracefully from desktop to mobile viewports\n\n## Anatomy\n\n\\`\\`\\`\n┌─────────────────────────────────────────────────────────────┐\n│  24px padding-top                                           │\n│  ┌───────────────────────────────────────────────────────┐  │\n│  │ Title Row                                             │  │\n│  │ ┌─────────────────┐           ┌─────────────────────┐ │  │\n│  │ │ Entity Title    │           │ Action Buttons      │ │  │\n│  │ │ (H1, 2xl-medium)│           │ [Primary][Secondary]│ │  │\n│  │ └─────────────────┘           └─────────────────────┘ │  │\n│  └───────────────────────────────────────────────────────┘  │\n│  24px gap                                                   │\n│  ┌───────────────────────────────────────────────────────┐  │\n│  │ Details Row (Content Projection)                     │  │\n│  │ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐     │  │\n│  │ │ Data Item 1 │ │ Data Item 2 │ │ Data Item 3 │ ... │  │\n│  │ └─────────────┘ └─────────────┘ └─────────────┘     │  │\n│  └───────────────────────────────────────────────────────┘  │\n│  Width: 83.33% (10/12 columns of parent), centered        │\n└─────────────────────────────────────────────────────────────┘\n\\`\\`\\`\n\n## Usage\n\nPerfect for entity detail pages where you need to display:\n- Entity title (e.g., property name, lease reference)\n- Action buttons (edit, delete, follow, etc.)\n- Metadata items using ds-data-item components\n\nThe details row uses content projection with \\`slot=\"details\"\\` to allow flexible arrangement of data items.\n\n## Content Projection\n\n\\`\\`\\`html\n<ds-header-details title=\"Entity Name\">\n  <div slot=\"details\" style=\"display: flex; flex-wrap: wrap; gap: 24px;\">\n    <ds-data-item label=\"Field 1\" value=\"Value 1\" layout=\"horizontal\" />\n    <ds-data-item label=\"Field 2\" value=\"Value 2\" layout=\"horizontal\" />\n  </div>\n</ds-header-details>\n\\`\\`\\`\n\n## Best Practices\n\n### Do ✅\n- Use descriptive, entity-specific titles\n- Limit to 2-3 primary actions to avoid overwhelming users\n- Use horizontal layout for data items in the details row\n- Provide meaningful action labels and icons\n\n### Don't ❌\n- Don't use generic titles like \"Details\" or \"Entity\"\n- Don't overcrowd the actions area with too many buttons\n- Don't mix vertical and horizontal data item layouts\n- Don't forget to handle action click events\n\n## Responsive Behavior\n\n- **Desktop (>768px)**: Full horizontal layout with side-by-side title and actions\n- **Tablet (≤768px)**: Title and actions stack vertically with reduced spacing  \n- **Mobile (≤480px)**: Compact spacing and optimized touch targets\n        `\n      }\n    }\n  },\n  argTypes: {\n    title: {\n      control: 'text',\n      description: 'The main title displayed in the header'\n    },\n    showPrimaryAction: {\n      control: 'boolean',\n      description: 'Whether to show the primary action button'\n    },\n    primaryActionText: {\n      control: 'text',\n      description: 'Text for the primary action button'\n    },\n    primaryActionIcon: {\n      control: 'text',\n      description: 'Icon for the primary action button'\n    },\n    primaryActionVariant: {\n      control: 'select',\n      options: ['primary', 'secondary', 'ghost', 'destructive'],\n      description: 'Visual variant for the primary action button'\n    },\n    showSecondaryAction: {\n      control: 'boolean',\n      description: 'Whether to show the secondary action button'\n    },\n    secondaryActionText: {\n      control: 'text',\n      description: 'Text for the secondary action button'\n    },\n    secondaryActionIcon: {\n      control: 'text',\n      description: 'Icon for the secondary action button'\n    },\n    secondaryActionVariant: {\n      control: 'select',\n      options: ['primary', 'secondary', 'ghost', 'destructive'],\n      description: 'Visual variant for the secondary action button'\n    },\n    showMoreActions: {\n      control: 'boolean',\n      description: 'Whether to show the more actions (three dots) button'\n    }\n  }\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<DsFormFieldComponent>",
-                "defaultValue": "{\n  title: 'Primitives/Form Field',\n  component: DsFormFieldComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [DsFormFieldComponent, DsInputComponent, NgpError],\n    }),\n  ],\n  tags: ['autodocs'],\n  parameters: { layout: 'centered' },\n  argTypes: {\n    label: { control: 'text' },\n    description: { control: 'text' },\n    labelId: { control: 'text' },\n    descriptionId: { control: 'text' },\n  },\n  args: {\n    label: 'Email',\n    description: 'We will never share your email.',\n    labelId: 'email-label',\n    descriptionId: 'email-desc',\n  },\n}"
             },
             {
                 "name": "meta",
@@ -1786,6 +2081,16 @@
                 "defaultValue": "{\n  args: {\n    content: 'Warning',\n    contentType: 'text',\n    variant: 'warning',\n  },\n}"
             },
             {
+                "name": "TopbarDebug",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    sidebarGroups: demoGroups,\n    isMobileOverride: false, // Force desktop mode\n    isSidebarCollapsed: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <ds-app-layout\n        [sidebarGroups]=\"sidebarGroups\"\n        [isMobileOverride]=\"isMobileOverride\"\n        [isSidebarCollapsed]=\"isSidebarCollapsed\"\n      >\n        <ds-topbar\n          [pageTitle]=\"'Debug Page'\"\n          [iconName]=\"'remixHome4Line'\"\n          [userInitials]=\"'DB'\"\n          [showFirstAction]=\"false\"\n          [showSecondAction]=\"false\"\n        />\n        <div class=\"p-6\">\n          <h2>Debug: Check if topbar renders with minimal props</h2>\n        </div>\n      </ds-app-layout>\n    `,\n  }),\n}"
+            },
+            {
                 "name": "Triangle",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2113,6 +2418,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<DsAppLayoutComponent>",
+                "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<DsAvatarComponent>",
                 "file": "src/app/components/ui/avatar/ds-avatar.stories.ts",
                 "deprecated": false,
@@ -2157,6 +2473,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<DsFormFieldComponent>",
+                "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<DsDataItemComponent>",
                 "file": "src/app/components/ui/data-item/ds-data-item.stories.ts",
                 "deprecated": false,
@@ -2170,17 +2497,6 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<DsHeaderDetailsComponent>",
                 "file": "src/app/components/ui/header-details/ds-header-details.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<DsFormFieldComponent>",
-                "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -2348,7 +2664,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "SidebarGroup[]",
-                    "defaultValue": "[\n  {\n    id: 'grp-top',\n    label: '',\n    showLabel: false,\n    items: [\n      { id: 'inbox', icon: 'remixInboxLine', label: 'Inbox', badgeText: '3' },\n      { id: 'my-tasks', icon: 'remixTaskLine', label: 'My tasks' },\n    ],\n  },\n  {\n    id: 'grp-service',\n    label: 'Service hub',\n    items: [\n      { id: 'inquiries', icon: 'remixQuestionAnswerLine', label: 'Inquiries' },\n      { id: 'tasks', icon: 'remixClipboardLine', label: 'Tasks' },\n      { id: 'documents', icon: 'remixFile2Line', label: 'Documents' },\n      { id: 'notices', icon: 'remixNotificationLine', label: 'Notices' },\n    ],\n  },\n  {\n    id: 'grp-company',\n    label: 'Company',\n    items: [\n      { id: 'dashboard', icon: 'remixLayout4Line', label: 'Dashboard' },\n      { id: 'ratings', icon: 'remixStarSmileLine', label: 'Ratings' },\n      { id: 'calendar', icon: 'remixCalendarLine', label: 'Calendar' },\n      { id: 'reports', icon: 'remixBarChart2Line', label: 'Reports' },\n      { id: 'kanban', icon: 'remixStackLine', label: 'Kanban' },\n      { id: 'surveys', icon: 'remixSurveyLine', label: 'Surveys' },\n      { id: 'inspections', icon: 'remixEditBoxLine', label: 'Inspections' },\n    ],\n  },\n  {\n    id: 'grp-catalog',\n    label: 'Catalog',\n    items: [\n      { id: 'customers', icon: 'remixUser3Line', label: 'Customers' },\n      { id: 'portfolios', icon: 'remixFolderLine', label: 'Portfolios' },\n      { id: 'subsidiaries', icon: 'remixGitBranchLine', label: 'Subsidiaries' },\n      { id: 'properties', icon: 'remixBuilding2Line', label: 'Properties' },\n      { id: 'leases', icon: 'remixFileList3Line', label: 'Leases' },\n      { id: 'tenants', icon: 'remixShieldCheckLine', label: 'Tenants' },\n      { id: 'vendors', icon: 'remixUserSettingsLine', label: 'Vendors' },\n      { id: 'vendor-agreements', icon: 'remixFileShield2Line', label: 'Vendor agreements' },\n      { id: 'facilities', icon: 'remixMapPin2Line', label: 'Facilities' },\n    ],\n  },\n]"
+                    "defaultValue": "[\n  {\n    id: 'servicehub',\n    label: 'SERVICEHUB',\n    items: [\n      { id: 'inbox', label: 'Inbox', icon: 'remixMailLine', badgeText: '2' },\n      { id: 'inquiries', label: 'Inquiries', icon: 'remixQuestionAnswerLine', badgeText: '2' },\n      { id: 'tasks', label: 'Tasks', icon: 'remixTaskLine' },\n      { id: 'surveys', label: 'Surveys', icon: 'remixSurveyLine' },\n    ],\n  },\n  {\n    id: 'company',\n    label: 'COMPANY',\n    items: [\n      { id: 'dashboard', label: 'Dashboard', icon: 'remixDashboardLine' },\n      { id: 'rating', label: 'Rating', icon: 'remixStarLine' },\n      { id: 'calendar', label: 'Calendar', icon: 'remixCalendarLine' },\n      { id: 'settings', label: 'Settings', icon: 'remixSettings4Line' },\n    ],\n  },\n  {\n    id: 'kartoteker',\n    label: 'KARTOTEKER',\n    items: [\n      { id: 'customers', label: 'Customers', icon: 'remixTeamLine' },\n      { id: 'companies', label: 'Companies', icon: 'remixBuilding4Line' },\n      { id: 'properties', label: 'Properties', icon: 'remixBuilding2Line' },\n      { id: 'leases', label: 'Leases', icon: 'remixFileListLine' },\n      { id: 'tenants', label: 'Tenants', icon: 'remixUserLine' },\n      { id: 'vendors', label: 'Vendors', icon: 'remixStore2Line' },\n      { id: 'vendor-agreements', label: 'Vendor agreements', icon: 'remixFileTextLine' },\n      { id: 'assets', label: 'Assets', icon: 'remixDatabase2Line' },\n      { id: 'real-esg', label: 'Real ESG', icon: 'remixLeafLine' },\n    ],\n  },\n  {\n    id: 'me',\n    label: 'ME',\n      items: [\n        { id: 'my-details', label: 'My details', icon: 'remixUserSettingsLine' },\n        { id: 'whats-new', label: 'What\\'s new', icon: 'remixNotification4Line' },\n      ],\n  },\n]"
                 },
                 {
                     "name": "meta",
@@ -2999,6 +3315,58 @@
                     "defaultValue": "{\n  args: {\n    type: 'initials',\n    size: 'md',\n    initials: 'JD',\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1rem; align-items: center;\">\n        <ds-avatar \n          [type]=\"type\"\n          [size]=\"size\"\n          [initials]=\"initials\"\n          [src]=\"src\"\n          [alt]=\"alt\"\n          [iconName]=\"iconName\"\n          [iconColor]=\"iconColor\"\n        ></ds-avatar>\n        <p style=\"font-size: 0.875rem; color: var(--text-color-default-secondary);\">\n          Static avatar with no interactions\n        </p>\n      </div>\n    `,\n  }),\n}"
                 }
             ],
+            "src/app/components/ui/app-layout/ds-app-layout.stories.ts": [
+                {
+                    "name": "AutoResponsive",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    sidebarGroups: demoGroups,\n    // No isMobileOverride - let ViewportService handle automatic detection\n    isSidebarCollapsed: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <ds-app-layout\n        [sidebarGroups]=\"sidebarGroups\"\n        [isMobileOverride]=\"isMobileOverride\"\n        [isSidebarCollapsed]=\"isSidebarCollapsed\"\n      >\n        <ds-topbar\n          [pageTitle]=\"'Auto Responsive'\"\n          [iconName]=\"'remixSmartphoneLine'\"\n          [userInitials]=\"'AR'\"\n          [showFirstAction]=\"true\"\n          [firstActionIcon]=\"'remixNotification3Line'\"\n          [firstActionLabel]=\"'Notifications'\"\n          [showSecondAction]=\"true\"\n          [secondActionIcon]=\"'remixSettings3Line'\"\n          [secondActionLabel]=\"'Settings'\"\n        />\n        <div class=\"p-6\">\n          <div class=\"max-w-3xl mx-auto\">\n            <h2 class=\"text-2xl font-semibold mb-4\">Auto-Responsive Layout</h2>\n            <div class=\"space-y-4\">\n              <div class=\"p-4 bg-white rounded-lg border border-gray-200\">\n                <h3 class=\"font-medium mb-2\">🚀 Automatic Viewport Detection</h3>\n                <p class=\"text-gray-600\">\n                  This layout automatically detects your viewport size and switches between mobile and desktop modes at 992px breakpoint.\n                </p>\n                <p class=\"mt-2 text-sm text-gray-500\">\n                  <strong>Try resizing your browser window or using the viewport toolbar above!</strong>\n                </p>\n              </div>\n              \n              <div class=\"p-4 bg-blue-50 rounded-lg border border-blue-200\">\n                <h3 class=\"font-medium mb-2 text-blue-900\">How it works:</h3>\n                <ul class=\"text-sm text-blue-800 space-y-1\">\n                  <li>• <strong>≤ 991px:</strong> Mobile mode with collapsible drawer menu</li>\n                  <li>• <strong>≥ 992px:</strong> Desktop mode with persistent sidebar</li>\n                  <li>• <strong>Automatic:</strong> No manual prop toggling needed!</li>\n                </ul>\n              </div>\n            </div>\n          </div>\n        </div>\n      </ds-app-layout>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    sidebarGroups: demoGroups,\n    isSidebarCollapsed: false,\n  },\n  render: () => ({\n    template: '<ds-debug-wrapper></ds-debug-wrapper>'\n  })\n}"
+                },
+                {
+                    "name": "InitiallyCollapsed",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    sidebarGroups: demoGroups,\n    isMobileOverride: false, // Force desktop mode\n    isSidebarCollapsed: true,\n  },\n  render: Default.render,\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<DsAppLayoutComponent>",
+                    "defaultValue": "{\n  title: 'Application shell/App Layout',\n  component: DsAppLayoutComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [DebugWrapperComponent],\n      providers: [ViewportService]\n    }),\n  ],\n  parameters: {\n    layout: 'fullscreen',\n    // Add viewport toolbar to allow easy resizing\n    viewport: {\n      defaultViewport: 'desktop',\n      viewports: {\n        mobile: {\n          name: 'Mobile',\n          styles: {\n            width: '375px',\n            height: '100%',\n          },\n        },\n        tablet: {\n          name: 'Tablet',\n          styles: {\n            width: '768px',\n            height: '100%',\n          },\n        },\n        desktop: {\n          name: 'Desktop',\n          styles: {\n            width: '1024px',\n            height: '100%',\n          },\n        },\n        'large-desktop': {\n          name: 'Large Desktop',\n          styles: {\n            width: '1440px',\n            height: '100%',\n          },\n        },\n      },\n    },\n  },\n  tags: ['autodocs'],\n}"
+                },
+                {
+                    "name": "TopbarDebug",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    sidebarGroups: demoGroups,\n    isMobileOverride: false, // Force desktop mode\n    isSidebarCollapsed: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <ds-app-layout\n        [sidebarGroups]=\"sidebarGroups\"\n        [isMobileOverride]=\"isMobileOverride\"\n        [isSidebarCollapsed]=\"isSidebarCollapsed\"\n      >\n        <ds-topbar\n          [pageTitle]=\"'Debug Page'\"\n          [iconName]=\"'remixHome4Line'\"\n          [userInitials]=\"'DB'\"\n          [showFirstAction]=\"false\"\n          [showSecondAction]=\"false\"\n        />\n        <div class=\"p-6\">\n          <h2>Debug: Check if topbar renders with minimal props</h2>\n        </div>\n      </ds-app-layout>\n    `,\n  }),\n}"
+                }
+            ],
             "src/app/components/ui/tooltip/ds-tooltip.stories.ts": [
                 {
                     "name": "ButtonSizes",
@@ -3317,6 +3685,38 @@
                     "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button leadingIcon=\"remixHomeLine\">\n          Home\n        </ds-button>\n        <ds-button trailingIcon=\"remixArrowRightLine\">\n          Continue\n        </ds-button>\n        <ds-button \n          leadingIcon=\"remixUserLine\"\n          variant=\"secondary\"\n        >\n          Profile\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
                 }
             ],
+            "src/app/components/ui/form-field/ds-form-field.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"width: 360px;\">\n        <ds-form-field [label]=\"label\" [description]=\"description\" [labelId]=\"labelId\" [descriptionId]=\"descriptionId\">\n          <ds-input ariaLabelledBy=\"email-label\" ariaDescribedBy=\"email-desc\" placeholder=\"you@example.com\"></ds-input>\n        </ds-form-field>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<DsFormFieldComponent>",
+                    "defaultValue": "{\n  title: 'Primitives/Form Field',\n  component: DsFormFieldComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [DsFormFieldComponent, DsInputComponent, NgpError],\n    }),\n  ],\n  tags: ['autodocs'],\n  parameters: { layout: 'centered' },\n  argTypes: {\n    label: { control: 'text' },\n    description: { control: 'text' },\n    labelId: { control: 'text' },\n    descriptionId: { control: 'text' },\n  },\n  args: {\n    label: 'Email',\n    description: 'We will never share your email.',\n    labelId: 'email-label',\n    descriptionId: 'email-desc',\n  },\n}"
+                },
+                {
+                    "name": "WithError",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"width: 360px;\">\n        <ds-form-field [label]=\"label\" [description]=\"description\" [labelId]=\"labelId\" [descriptionId]=\"descriptionId\">\n          <ds-input ariaLabelledBy=\"email-label\" ariaDescribedBy=\"email-desc\" placeholder=\"you@example.com\"></ds-input>\n          <p ngpError ngpErrorValidator=\"required\">Email is required.</p>\n        </ds-form-field>\n      </div>\n    `,\n  }),\n}"
+                }
+            ],
             "src/app/components/ui/header-details/ds-header-details.stories.ts": [
                 {
                     "name": "Default",
@@ -3387,38 +3787,6 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  parameters: {\n    docs: {\n      description: {\n        story: 'Real estate property management example showing how to display property information with relevant actions like editing and viewing related leases.'\n      }\n    }\n  },\n  args: {\n    title: 'Sunset Boulevard Apartments',\n    showPrimaryAction: true,\n    primaryActionText: 'Edit Property',\n    primaryActionIcon: 'remixEditLine',\n    primaryActionVariant: 'primary',\n    showSecondaryAction: true,\n    secondaryActionText: 'View Leases',\n    secondaryActionIcon: 'remixFileList3Line',\n    secondaryActionVariant: 'secondary',\n    showMoreActions: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <ds-header-details\n        [title]=\"title\"\n        [showPrimaryAction]=\"showPrimaryAction\"\n        [primaryActionText]=\"primaryActionText\"\n        [primaryActionIcon]=\"primaryActionIcon\"\n        [primaryActionVariant]=\"primaryActionVariant\"\n        [showSecondaryAction]=\"showSecondaryAction\"\n        [secondaryActionText]=\"secondaryActionText\"\n        [secondaryActionIcon]=\"secondaryActionIcon\"\n        [secondaryActionVariant]=\"secondaryActionVariant\"\n        [showMoreActions]=\"showMoreActions\"\n      >\n        <div slot=\"details\" style=\"display: flex; flex-wrap: wrap; gap: 48px;\">\n          <ds-data-item\n            label=\"Property Type\"\n            value=\"Residential\"\n            layout=\"vertical\"\n            valueType=\"icon-text\"\n            iconName=\"remixHome4Line\"\n          />\n          <ds-data-item\n            label=\"Status\"\n            value=\"Active\"\n            layout=\"vertical\"\n            valueType=\"badge\"\n            badgeVariant=\"success\"\n            badgeContent=\"Active\"\n            badgeContentType=\"text\"\n          />\n          <ds-data-item\n            label=\"Owner\"\n            value=\"Sarah Johnson\"\n            layout=\"vertical\"\n            valueType=\"avatar-text\"\n            avatarType=\"initials\"\n            avatarInitials=\"SJ\"\n          />\n          <ds-data-item\n            label=\"Units\"\n            value=\"24 units\"\n            layout=\"vertical\"\n            valueType=\"text\"\n          />\n        </div>\n      </ds-header-details>\n    `\n  })\n}"
-                }
-            ],
-            "src/app/components/ui/form-field/ds-form-field.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"width: 360px;\">\n        <ds-form-field [label]=\"label\" [description]=\"description\" [labelId]=\"labelId\" [descriptionId]=\"descriptionId\">\n          <ds-input ariaLabelledBy=\"email-label\" ariaDescribedBy=\"email-desc\" placeholder=\"you@example.com\"></ds-input>\n        </ds-form-field>\n      </div>\n    `,\n  }),\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<DsFormFieldComponent>",
-                    "defaultValue": "{\n  title: 'Primitives/Form Field',\n  component: DsFormFieldComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [DsFormFieldComponent, DsInputComponent, NgpError],\n    }),\n  ],\n  tags: ['autodocs'],\n  parameters: { layout: 'centered' },\n  argTypes: {\n    label: { control: 'text' },\n    description: { control: 'text' },\n    labelId: { control: 'text' },\n    descriptionId: { control: 'text' },\n  },\n  args: {\n    label: 'Email',\n    description: 'We will never share your email.',\n    labelId: 'email-label',\n    descriptionId: 'email-desc',\n  },\n}"
-                },
-                {
-                    "name": "WithError",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div style=\"width: 360px;\">\n        <ds-form-field [label]=\"label\" [description]=\"description\" [labelId]=\"labelId\" [descriptionId]=\"descriptionId\">\n          <ds-input ariaLabelledBy=\"email-label\" ariaDescribedBy=\"email-desc\" placeholder=\"you@example.com\"></ds-input>\n          <p ngpError ngpErrorValidator=\"required\">Email is required.</p>\n        </ds-form-field>\n      </div>\n    `,\n  }),\n}"
                 }
             ],
             "src/app/components/ui/input/ds-input.stories.ts": [
@@ -4044,6 +4412,19 @@
                     "kind": 183
                 }
             ],
+            "src/app/components/ui/app-layout/ds-app-layout.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<DsAppLayoutComponent>",
+                    "file": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "src/app/components/ui/avatar/ds-avatar.stories.ts": [
                 {
                     "name": "Story",
@@ -4096,6 +4477,19 @@
                     "kind": 183
                 }
             ],
+            "src/app/components/ui/form-field/ds-form-field.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<DsFormFieldComponent>",
+                    "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "src/app/components/ui/data-item/ds-data-item.stories.ts": [
                 {
                     "name": "Story",
@@ -4116,19 +4510,6 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<DsHeaderDetailsComponent>",
                     "file": "src/app/components/ui/header-details/ds-header-details.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "src/app/components/ui/form-field/ds-form-field.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<DsFormFieldComponent>",
-                    "file": "src/app/components/ui/form-field/ds-form-field.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -4278,6 +4659,75 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "preview",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DebugWrapperComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/14",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AutoResponsive",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "InitiallyCollapsed",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "TopbarDebug",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/app-layout/ds-app-layout.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

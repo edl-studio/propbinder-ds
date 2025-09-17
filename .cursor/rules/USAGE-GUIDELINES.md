@@ -53,6 +53,42 @@ propbinder-design-system/
 
 ## 🎨 Design Token System
 
+### Background Color Hierarchy
+
+Our design system uses a layered approach to backgrounds that creates visual hierarchy and depth:
+
+#### Page Level (`--background-color-page`)
+The foundational background that represents the "canvas" of your entire page or application.
+
+**Usage:**
+- `<body>` element background
+- Main application wrapper
+- Default background that shows through when no other background is defined
+- Elevated elements that need to "pop" above surfaces (cards, modals, dropdowns)
+
+**Example:**
+```html
+<body class="bg-page">
+<div class="app-wrapper bg-page">
+<div class="modal bg-page shadow-lg">
+```
+
+#### Surface Level (`--background-color-surface`)
+Background for content containers that sit on top of the page but serve as backdrops for other content.
+
+**Usage:**
+- Section backgrounds (`<section>`, `.content-area`)
+- Main content regions
+- Sidebars or panels
+- Areas that group related content together
+
+**Example:**
+```html
+<section class="bg-surface">
+<div class="content-area bg-surface">
+<aside class="sidebar bg-surface">
+```
+
 ### Tailwind CSS v4 Configuration
 
 Defined in `src/app/styles/globals.css` using `@theme`:
@@ -62,16 +98,17 @@ Defined in `src/app/styles/globals.css` using `@theme`:
 @import "tw-animate-css";
 
 @theme {
-  --background-color-brand: #ff8652;
-  --background-color-brand-hover: #e6784a;
+  /* Background Colors */
   --background-color-page: #ffffff;
-  --text-color-primary: #1e293b;
-  --text-color-secondary: #64748b;
-  --border-color-weak: #e2e8f0;
-  --border-color-strong: #1e293b;
-  --color-success-base: #158452;
-  --color-success-base-hover: #0f6c3d;
-  /* ...other scoped variables */
+  --background-color-surface: #F6F7F8;
+  
+  /* Interactive States */
+  --background-color-interactive-default: #F6F7F8;
+  --background-color-interactive-default-hover: #E3E6EB;
+  --background-color-interactive-brand: #6B5FF5;
+  --background-color-interactive-brand-hover: #5D42E9;
+  
+  /* Other tokens... */
 }
 ```
 
@@ -80,6 +117,7 @@ Defined in `src/app/styles/globals.css` using `@theme`:
 - Scoped CSS variables prevent misuse
 - Zero Tailwind config complexity
 - Build-time type safety
+- Consistent visual hierarchy across the application
 
 ---
 
