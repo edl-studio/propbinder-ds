@@ -5,8 +5,16 @@
   align-items: center;
   padding: 0 24px;
   width: 100%;
+  min-width: 0; /* Allow content to shrink if needed */
   height: 80px;
   background-color: var(--background-color-page);
+}
+
+/* Height override for xs, sm, md breakpoints */
+@media (max-width: 991px) {
+  .topbar {
+    height: 64px;
+  }
 }
 
 /* Left side: Icon and Title */
@@ -14,6 +22,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0; /* Enable text truncation */
 }
 
 .topbar__icon {
@@ -26,6 +35,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0; /* Enable text truncation */
 }
 
 /* Breadcrumbs container */
@@ -40,6 +50,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0; /* Prevent right side from shrinking */
 }
 
 /* Action buttons container */

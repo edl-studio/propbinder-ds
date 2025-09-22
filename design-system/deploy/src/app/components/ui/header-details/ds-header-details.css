@@ -3,13 +3,6 @@
   width: 100%;
   padding: 24px 0 24px;
   background-color: var(--background-color-page);
-  border-bottom: 2px solid var(--border-color-default);
-}
-
-.header-details__container {
-  width: 83.33%; /* 10/12 columns of parent container */
-  max-width: none;
-  margin: 0 auto;
 }
 
 /* Title Row */
@@ -83,13 +76,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-}
-
-/* Responsive behavior */
-@media (max-width: 1312px) {
-  .header-details__container {
-    padding: 0 16px;
-  }
 }
 
 /* Hide primary/secondary actions on xs and sm breakpoints (< 768px) */

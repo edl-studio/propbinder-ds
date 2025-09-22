@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation, input } from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 
 @Component({
   selector: 'ds-label',
   standalone: true,
   imports: [CommonModule],
   encapsulation: ViewEncapsulation.Emulated,
+  styleUrls: ['./ds-label.css'],
   template: `
     <label
-      class="!tw-text-secondary block {{ size() === 'sm' ? 'ui-xs-regular' : 'ui-sm-regular' }} {{ className() }}"
+      [class]="labelClasses()"
       [attr.for]="for()"
       [attr.id]="id()"
     >
@@ -21,4 +22,13 @@ export class DsLabelComponent {
   for = input<string | undefined>(undefined);
   id = input<string | undefined>(undefined);
   size = input<'sm' | 'md'>('md');
+
+  labelClasses = computed(() => {
+    const classes = ['ds-label'];
+    classes.push(`ds-label--${this.size()}`);
+    if (this.className()) {
+      classes.push(this.className());
+    }
+    return classes.join(' ');
+  });
 }

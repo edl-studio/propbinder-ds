@@ -15,8 +15,8 @@ import { DsIconComponent } from '../icon/ds-icon';
       [attr.aria-controls]="controlsId()"
       [attr.aria-expanded]="expanded() ? 'true' : 'false'"
     >
-      <ds-icon name="remixArrowRightSLine" size="16px" />
       <span class="sidebar-group-label__text capitalised-xs-medium">{{ label() }}</span>
+      <ds-icon name="remixArrowRightSLine" size="16px" />
     </button>
   `,
 })

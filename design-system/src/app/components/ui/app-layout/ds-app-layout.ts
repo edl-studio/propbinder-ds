@@ -4,6 +4,13 @@ import { DsSidebarComponent, SidebarGroup } from '../sidebar/ds-sidebar';
 import { DsTopbarComponent } from '../topbar/ds-topbar';
 import { ViewportService } from '../../../lib/viewport.service';
 
+/**
+ * Available slots for content projection in DsAppLayout:
+ * - topbar: Projects content into the top bar area of the layout
+ * - default: Default slot for main content (no slot attribute needed)
+ */
+export type DsAppLayoutSlots = 'topbar';
+
 @Component({
   selector: 'ds-app-layout',
   standalone: true,
@@ -74,7 +81,7 @@ import { ViewportService } from '../../../lib/viewport.service';
       <!-- Main content area -->
       <div class="app-layout__main">
         <div class="app-layout__topbar">
-          <ng-content select="ds-topbar"></ng-content>
+          <ng-content select="[slot=topbar]"></ng-content>
         </div>
         
         <div class="app-layout__content">

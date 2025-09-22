@@ -16,10 +16,12 @@ import { DsIconComponent } from '../icon/ds-icon';
         size="md"
         [iconOnly]="collapsed()"
         [disabled]="disabled()"
-        [leadingIcon]="collapsed() ? icon() : undefined"
         (clicked)="onClick()"
         class="sidebar-global-action__button depth-sm"
       >
+        @if (collapsed() && icon()) {
+          <ds-icon slot="leading" [name]="icon()!" size="16px" />
+        }
         <span class="sidebar-global-action__content" [class.sidebar-global-action__content--collapsed]="collapsed()">
           @if (icon() && !collapsed()) {
             <ds-icon [name]="icon()!" size="16px" class="sidebar-global-action__icon" />

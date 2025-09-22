@@ -17,12 +17,12 @@
   gap: 12px;
 }
 
-/* Label Container */
+/* Label Cell */
 .data-item__label {
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  min-height: 32px; /* Match value container height */
+  min-height: 32px; /* Fill height */
 }
 
 .data-item__label--vertical {
@@ -35,23 +35,29 @@
   min-width: 128px;
 }
 
-.data-item__label-text {
-  /* Inherits from ds-label component styles */
-}
-
-/* Value Container */
-.data-item__value {
+/* Label Component (ds-label) */
+ds-label {
   display: flex;
   align-items: center;
-  min-height: 32px;
-  height: 32px;
-  flex: 1;
-  gap: 8px; /* Default gap for avatar-text and badge types */
+  min-height: 24px;
+  height: 24px;
 }
 
-/* Specific gap for icon-text scenarios */
-.data-item__value:has(.data-item__value-icon) {
-  gap: 4px;
+/* Label Text Element */
+ds-label label {
+  display: flex;
+  align-items: center;
+  min-height: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+/* Value Cell */
+.data-item__value {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 32px; /* Fill available height */
 }
 
 .data-item__value--vertical {
@@ -62,13 +68,28 @@
   flex: 1;
 }
 
-/* Value Content Styles */
-.data-item__value-text {
-  color: var(--text-color-default-primary);
-  line-height: 1.4;
+/* Value Container */
+.data-item__value-container {
   display: flex;
   align-items: center;
-  height: 100%;
+  min-height: 24px;
+  height: 24px;
+  gap: 8px; /* Default gap for avatar-text and badge types */
+}
+
+/* Specific gap for icon-text scenarios */
+.data-item__value-container:has(.data-item__value-icon) {
+  gap: 4px;
+}
+
+/* Value Text */
+.data-item__value-text {
+  display: flex;
+  align-items: center;
+  min-height: 20px;
+  height: 20px;
+  line-height: 20px;
+  color: var(--text-color-default-primary);
 }
 
 .data-item__value-icon {
@@ -90,6 +111,14 @@
 /* Badge in value container */
 .data-item__value ds-badge {
   flex-shrink: 0;
+}
+
+/* Multi-badge layout */
+.data-item__value-container:has(ds-badge + ds-badge) {
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: auto;
+  padding: 4px 0;
 }
 
 /* Typography Classes (ui-sm-regular) */

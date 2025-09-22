@@ -3,6 +3,13 @@ import { Component, ViewEncapsulation, input } from '@angular/core';
 import { NgpDescription, NgpFormField, NgpLabel } from 'ng-primitives/form-field';
 import { DsLabelComponent } from '../label/ds-label';
 
+/**
+ * Available slots for content projection in DsFormField:
+ * - error: Projects error content below the form field
+ * - default: Default slot for form field content (no slot attribute needed)
+ */
+export type DsFormFieldSlots = 'error';
+
 @Component({
   selector: 'ds-form-field',
   standalone: true,
@@ -26,7 +33,7 @@ import { DsLabelComponent } from '../label/ds-label';
         <p ngpDescription [attr.id]="descriptionId()" class="ds-form-field__description">{{ description() }}</p>
       }
 
-      <ng-content select="[ngpError]"></ng-content>
+      <ng-content select="[slot=error]"></ng-content>
     </div>
   `,
 })

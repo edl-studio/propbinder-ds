@@ -14,6 +14,12 @@ export interface SidebarGroup {
 
 export type DsSidebarMode = 'default' | 'minimized' | 'drawer';
 
+/**
+ * Available slots for content projection in DsSidebar:
+ * - footer: Projects content into the footer area of the sidebar
+ */
+export type DsSidebarSlots = 'footer';
+
 @Component({
   selector: 'ds-sidebar',
   standalone: true,
@@ -60,7 +66,7 @@ export type DsSidebarMode = 'default' | 'minimized' | 'drawer';
           </div>
 
           <footer class="sidebar__footer">
-            <ng-content select="[sidebar-footer]">
+            <ng-content select="[slot=footer]">
               <ds-sidebar-group-content-item
                 id="log-out"
                 icon="remixLogoutBoxLine"

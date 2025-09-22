@@ -1,11 +1,12 @@
 import { Component, input, ViewEncapsulation, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DsButtonComponent } from '../button/ds-button';
+import { DsIconComponent } from '../icon/ds-icon';
 
 @Component({
   selector: 'ds-header-details',
   standalone: true,
-  imports: [CommonModule, DsButtonComponent],
+  imports: [CommonModule, DsButtonComponent, DsIconComponent],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-header-details.css'],
   template: `
@@ -22,11 +23,13 @@ import { DsButtonComponent } from '../button/ds-button';
               <ds-button
                 [variant]="primaryActionVariant()"
                 [size]="'md'"
-                [leadingIcon]="primaryActionIcon()"
                 (clicked)="onPrimaryActionClick($event)"
                 class="header-details__action-btn header-details__action-btn--primary"
               >
-                {{ primaryActionText() }}
+                @if (primaryActionIcon()) {
+                  <ds-icon slot="leading" [name]="primaryActionIcon()!" size="18px" />
+                }
+                <span>{{ primaryActionText() }}</span>
               </ds-button>
             }
             
@@ -34,11 +37,13 @@ import { DsButtonComponent } from '../button/ds-button';
               <ds-button
                 [variant]="secondaryActionVariant()"
                 [size]="'md'"
-                [leadingIcon]="secondaryActionIcon()"
                 (clicked)="onSecondaryActionClick($event)"
                 class="header-details__action-btn header-details__action-btn--secondary"
               >
-                {{ secondaryActionText() }}
+                @if (secondaryActionIcon()) {
+                  <ds-icon slot="leading" [name]="secondaryActionIcon()!" size="18px" />
+                }
+                <span>{{ secondaryActionText() }}</span>
               </ds-button>
             }
             
@@ -47,11 +52,12 @@ import { DsButtonComponent } from '../button/ds-button';
                 variant="ghost"
                 size="md"
                 [iconOnly]="true"
-                leadingIcon="remixMore2Fill"
                 ariaLabel="More actions"
                 (clicked)="onMoreActionsClick($event)"
                 class="header-details__action-btn header-details__action-btn--more"
-              />
+              >
+                <ds-icon slot="leading" name="remixMore2Fill" size="18px" />
+              </ds-button>
             }
           </div>
         </div>

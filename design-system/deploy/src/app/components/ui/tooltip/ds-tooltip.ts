@@ -4,6 +4,14 @@ import { NgpTooltip, NgpTooltipTrigger } from 'ng-primitives/tooltip';
 
 export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
 
+/**
+ * Available slots for content projection in DsTooltip:
+ * - trigger: Projects custom trigger content
+ * - content: Projects custom tooltip content
+ * - default: Default trigger content (no slot attribute needed)
+ */
+export type DsTooltipSlots = 'trigger' | 'content';
+
 @Component({
   selector: 'ds-tooltip',
   imports: [CommonModule, NgpTooltip, NgpTooltipTrigger],
@@ -18,12 +26,16 @@ export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
       [ngpTooltipTriggerOffset]="offset()"
       class="tooltip-trigger"
     >
-      <ng-content></ng-content>
+      <ng-content select="[slot=trigger]">
+        <ng-content></ng-content>
+      </ng-content>
     </div>
 
     <ng-template #tooltipContent>
       <div ngpTooltip class="tooltip">
-        {{ text() }}
+        <ng-content select="[slot=content]">
+          {{ text() }}
+        </ng-content>
       </div>
     </ng-template>
   `,

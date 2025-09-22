@@ -3,47 +3,83 @@ import { CommonModule } from '@angular/common';
 import { DsAppLayoutComponent } from '../components/ui/app-layout/ds-app-layout';
 import { DsTopbarComponent } from '../components/ui/topbar/ds-topbar';
 import { DsIconComponent } from '../components/ui/icon/ds-icon';
+import { DsAvatarComponent } from '../components/ui/avatar/ds-avatar';
+import { DsButtonComponent } from '../components/ui/button/ds-button';
 
 @Component({
   selector: 'layout-preview',
   standalone: true,
-  imports: [CommonModule, DsAppLayoutComponent, DsTopbarComponent, DsIconComponent],
+  imports: [
+    CommonModule,
+    DsAppLayoutComponent,
+    DsTopbarComponent,
+    DsIconComponent,
+    DsAvatarComponent,
+    DsButtonComponent
+  ],
   template: `
     <ds-app-layout 
       [sidebarGroups]="sidebarGroups"
       [isSidebarCollapsed]="isSidebarCollapsed()"
-      [isMobile]="isMobile()"
+      [isMobileOverride]="isMobile()"
       (menuOpenChange)="menuOpen.set($event)"
       (collapsedChange)="isSidebarCollapsed.set($event)"
     >
-      <ds-topbar 
-        [title]="'Layout Preview'"
-        [iconName]="'remixDashboardLine'"
-        [showFirstAction]="true"
-        [showSecondAction]="true"
-        [firstActionIcon]="'remixNotification3Line'"
-        [secondActionIcon]="'remixMessage2Line'"
-        [userInitials]="'JD'"
-      ></ds-topbar>
+      <ds-topbar slot="topbar">
+        <ds-avatar
+          type="icon"
+          [iconName]="'remixDashboardLine'"
+          size="md"
+        />
+        <h1 class="topbar__title heading-xl">Layout Preview</h1>
+        <ds-button
+          slot="trailing"
+          variant="ghost"
+          size="md"
+          [iconOnly]="true"
+          ariaLabel="Notifications"
+        >
+          <ds-icon slot="leading" name="remixNotification3Line" size="18px" />
+        </ds-button>
+        <ds-button
+          slot="trailing"
+          variant="ghost"
+          size="md"
+          [iconOnly]="true"
+          ariaLabel="Messages"
+        >
+          <ds-icon slot="leading" name="remixMessage2Line" size="18px" />
+        </ds-button>
+        <ds-avatar
+          slot="trailing"
+          type="initials"
+          initials="JD"
+          size="md"
+        />
+      </ds-topbar>
       <div class="content-container">
         <h1>Main Content Area</h1>
         <p>This is where your main content would go. The layout handles the responsive behavior automatically.</p>
         
         <!-- Debug info -->
-        <div style="margin-top: 24px; padding: 16px; background: #f5f5f5; border-radius: 4px;">
-          <h2>Debug Information</h2>
-          <pre>Window width: {{ windowWidth() }}px</pre>
-          <pre>Is Mobile: {{ isMobile() }}</pre>
-          <pre>Menu Open: {{ menuOpen() }}</pre>
-          <pre>Sidebar Collapsed: {{ isSidebarCollapsed() }}</pre>
-          <button (click)="toggleSidebar()">{{ isSidebarCollapsed() ? 'Expand' : 'Collapse' }} Sidebar</button>
-          <button (click)="toggleDevTools()">{{ showDevTools() ? 'Hide' : 'Show' }} Element Inspector</button>
+        <div class="tw-mt-6 tw-p-4 tw-bg-interactive-default tw-rounded">
+          <h2 class="tw-text-xl tw-font-semibold tw-mb-4">Debug Information</h2>
+          <pre class="tw-bg-surface tw-p-2 tw-rounded tw-mb-2">Window width: {{ windowWidth() }}px</pre>
+          <pre class="tw-bg-surface tw-p-2 tw-rounded tw-mb-2">Is Mobile: {{ isMobile() }}</pre>
+          <pre class="tw-bg-surface tw-p-2 tw-rounded tw-mb-2">Menu Open: {{ menuOpen() }}</pre>
+          <pre class="tw-bg-surface tw-p-2 tw-rounded tw-mb-4">Sidebar Collapsed: {{ isSidebarCollapsed() }}</pre>
+          <div class="tw-space-x-4">
+            <button class="tw-px-4 tw-py-2 tw-bg-brand-base tw-text-white tw-rounded tw-transition-colors hover:tw-bg-brand-base-hover" 
+                    (click)="toggleSidebar()">{{ isSidebarCollapsed() ? 'Expand' : 'Collapse' }} Sidebar</button>
+            <button class="tw-px-4 tw-py-2 tw-bg-brand-base tw-text-white tw-rounded tw-transition-colors hover:tw-bg-brand-base-hover" 
+                    (click)="toggleDevTools()">{{ showDevTools() ? 'Hide' : 'Show' }} Element Inspector</button>
+          </div>
           @if (showDevTools()) {
-            <div style="margin-top: 16px;">
-              <h3>Element Inspector</h3>
-              <ul>
-                <li>Sidebar elements: {{ sidebarCount() }}</li>
-                <li>Visible sidebars: {{ visibleSidebarCount() }}</li>
+            <div class="tw-mt-4">
+              <h3 class="tw-text-lg tw-font-medium tw-mb-2">Element Inspector</h3>
+              <ul class="tw-space-y-2">
+                <li class="tw-text-secondary">Sidebar elements: {{ sidebarCount() }}</li>
+                <li class="tw-text-secondary">Visible sidebars: {{ visibleSidebarCount() }}</li>
               </ul>
             </div>
           }
@@ -84,12 +120,46 @@ import { DsIconComponent } from '../components/ui/icon/ds-icon';
 export class LayoutPreviewComponent {
   sidebarGroups = [
     {
-      id: 'main',
-      label: 'Main Navigation',
+      id: 'servicehub',
+      label: 'SERVICEHUB',
+      items: [
+        { id: 'inbox', label: 'Inbox', icon: 'remixMailLine', badgeText: '2' },
+        { id: 'inquiries', label: 'Inquiries', icon: 'remixQuestionAnswerLine', badgeText: '2' },
+        { id: 'tasks', label: 'Tasks', icon: 'remixTaskLine' },
+        { id: 'surveys', label: 'Surveys', icon: 'remixSurveyLine' },
+      ],
+    },
+    {
+      id: 'company',
+      label: 'COMPANY',
       items: [
         { id: 'dashboard', label: 'Dashboard', icon: 'remixDashboardLine' },
-        { id: 'properties', label: 'Properties', icon: 'remixBuilding2Line' },
+        { id: 'rating', label: 'Rating', icon: 'remixStarLine' },
+        { id: 'calendar', label: 'Calendar', icon: 'remixCalendarLine' },
         { id: 'settings', label: 'Settings', icon: 'remixSettings4Line' },
+      ],
+    },
+    {
+      id: 'kartoteker',
+      label: 'KARTOTEKER',
+      items: [
+        { id: 'customers', label: 'Customers', icon: 'remixTeamLine' },
+        { id: 'companies', label: 'Companies', icon: 'remixBuilding4Line' },
+        { id: 'properties', label: 'Properties', icon: 'remixBuilding2Line' },
+        { id: 'leases', label: 'Leases', icon: 'remixFileListLine' },
+        { id: 'tenants', label: 'Tenants', icon: 'remixUserLine' },
+        { id: 'vendors', label: 'Vendors', icon: 'remixStore2Line' },
+        { id: 'vendor-agreements', label: 'Vendor agreements', icon: 'remixFileTextLine' },
+        { id: 'assets', label: 'Assets', icon: 'remixDatabase2Line' },
+        { id: 'real-esg', label: 'Real ESG', icon: 'remixLeafLine' },
+      ],
+    },
+    {
+      id: 'me',
+      label: 'ME',
+      items: [
+        { id: 'my-details', label: 'My details', icon: 'remixUserSettingsLine' },
+        { id: 'whats-new', label: 'What\'s new', icon: 'remixNotification4Line' },
       ],
     },
   ];

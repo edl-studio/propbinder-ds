@@ -42,6 +42,7 @@ module.exports = {
       backgroundColor: {
         // Page and layout colors
         'page': 'var(--background-color-page)',
+        'surface': 'var(--background-color-surface)',
         
         // Interactive element backgrounds
         'interactive': {

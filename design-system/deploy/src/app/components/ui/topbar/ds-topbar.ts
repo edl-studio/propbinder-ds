@@ -42,22 +42,24 @@ import { DsTopbarBreadcrumbComponent, TopbarBreadcrumbItem } from './ds-topbar-b
               variant="ghost"
               size="md"
               [iconOnly]="true"
-              [leadingIcon]="firstActionIcon()"
               [ariaLabel]="firstActionLabel()"
               (clicked)="onFirstActionClick($event)"
               class="topbar__action-btn"
-            />
+            >
+              <ds-icon slot="leading" [name]="firstActionIcon()!" size="18px" />
+            </ds-button>
           }
           @if (showSecondAction()) {
             <ds-button
               variant="ghost"
               size="md"
               [iconOnly]="true"
-              [leadingIcon]="secondActionIcon()"
               [ariaLabel]="secondActionLabel()"
               (clicked)="onSecondActionClick($event)"
               class="topbar__action-btn"
-            />
+            >
+              <ds-icon slot="leading" [name]="secondActionIcon()!" size="18px" />
+            </ds-button>
           }
         </div>
         

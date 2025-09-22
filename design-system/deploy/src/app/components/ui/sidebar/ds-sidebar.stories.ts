@@ -1,53 +1,49 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { DsSidebarComponent, SidebarGroup } from './ds-sidebar';
 
-const demoGroups: SidebarGroup[] = [
+export const demoGroups: SidebarGroup[] = [
   {
-    id: 'grp-top',
-    label: '',
-    showLabel: false,
+    id: 'servicehub',
+    label: 'SERVICEHUB',
     items: [
-      { id: 'inbox', icon: 'remixInboxLine', label: 'Inbox', badgeText: '3' },
-      { id: 'my-tasks', icon: 'remixTaskLine', label: 'My tasks' },
+      { id: 'inbox', label: 'Inbox', icon: 'remixMailLine', badgeText: '2' },
+      { id: 'inquiries', label: 'Inquiries', icon: 'remixQuestionAnswerLine', badgeText: '2' },
+      { id: 'tasks', label: 'Tasks', icon: 'remixTaskLine' },
+      { id: 'surveys', label: 'Surveys', icon: 'remixSurveyLine' },
     ],
   },
   {
-    id: 'grp-service',
-    label: 'Service hub',
+    id: 'company',
+    label: 'COMPANY',
     items: [
-      { id: 'inquiries', icon: 'remixQuestionAnswerLine', label: 'Inquiries' },
-      { id: 'tasks', icon: 'remixClipboardLine', label: 'Tasks' },
-      { id: 'documents', icon: 'remixFile2Line', label: 'Documents' },
-      { id: 'notices', icon: 'remixNotificationLine', label: 'Notices' },
+      { id: 'dashboard', label: 'Dashboard', icon: 'remixDashboardLine' },
+      { id: 'rating', label: 'Rating', icon: 'remixStarLine' },
+      { id: 'calendar', label: 'Calendar', icon: 'remixCalendarLine' },
+      { id: 'settings', label: 'Settings', icon: 'remixSettings4Line' },
     ],
   },
   {
-    id: 'grp-company',
-    label: 'Company',
+    id: 'kartoteker',
+    label: 'KARTOTEKER',
     items: [
-      { id: 'dashboard', icon: 'remixLayout4Line', label: 'Dashboard' },
-      { id: 'ratings', icon: 'remixStarSmileLine', label: 'Ratings' },
-      { id: 'calendar', icon: 'remixCalendarLine', label: 'Calendar' },
-      { id: 'reports', icon: 'remixBarChart2Line', label: 'Reports' },
-      { id: 'kanban', icon: 'remixStackLine', label: 'Kanban' },
-      { id: 'surveys', icon: 'remixSurveyLine', label: 'Surveys' },
-      { id: 'inspections', icon: 'remixEditBoxLine', label: 'Inspections' },
+      { id: 'customers', label: 'Customers', icon: 'remixTeamLine' },
+      { id: 'companies', label: 'Companies', icon: 'remixBuilding4Line' },
+      { id: 'properties', label: 'Properties', icon: 'remixBuilding2Line' },
+      { id: 'leases', label: 'Leases', icon: 'remixFileListLine' },
+      { id: 'tenants', label: 'Tenants', icon: 'remixUserLine' },
+      { id: 'vendors', label: 'Vendors', icon: 'remixStore2Line' },
+      { id: 'vendor-agreements', label: 'Vendor agreements', icon: 'remixFileTextLine' },
+      { id: 'assets', label: 'Assets', icon: 'remixDatabase2Line' },
+      { id: 'real-esg', label: 'Real ESG', icon: 'remixLeafLine' },
     ],
   },
   {
-    id: 'grp-catalog',
-    label: 'Catalog',
-    items: [
-      { id: 'customers', icon: 'remixUser3Line', label: 'Customers' },
-      { id: 'portfolios', icon: 'remixFolderLine', label: 'Portfolios' },
-      { id: 'subsidiaries', icon: 'remixGitBranchLine', label: 'Subsidiaries' },
-      { id: 'properties', icon: 'remixBuilding2Line', label: 'Properties' },
-      { id: 'leases', icon: 'remixFileList3Line', label: 'Leases' },
-      { id: 'tenants', icon: 'remixShieldCheckLine', label: 'Tenants' },
-      { id: 'vendors', icon: 'remixUserSettingsLine', label: 'Vendors' },
-      { id: 'vendor-agreements', icon: 'remixFileShield2Line', label: 'Vendor agreements' },
-      { id: 'facilities', icon: 'remixMapPin2Line', label: 'Facilities' },
-    ],
+    id: 'me',
+    label: 'ME',
+      items: [
+        { id: 'my-details', label: 'My details', icon: 'remixUserSettingsLine' },
+        { id: 'whats-new', label: 'What\'s new', icon: 'remixNotification4Line' },
+      ],
   },
 ];
 

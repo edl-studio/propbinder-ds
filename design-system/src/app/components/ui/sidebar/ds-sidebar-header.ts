@@ -34,11 +34,12 @@ import { DsSidebarGlobalActionComponent } from './ds-sidebar-global-action';
           variant="ghost"
           [iconOnly]="true"
           [ariaLabel]="toggleButtonLabel()"
-          [leadingIcon]="toggleButtonIcon()"
           [title]="toggleButtonLabel()"
           (clicked)="toggleCollapsed.emit()"
           class="sidebar-header__toggle-btn"
-        ></ds-button>
+        >
+          <ds-icon slot="leading" [name]="toggleButtonIcon()!" size="18px" />
+        </ds-button>
       </div>
 
       <!-- Global action button (hidden in minimized mode) -->

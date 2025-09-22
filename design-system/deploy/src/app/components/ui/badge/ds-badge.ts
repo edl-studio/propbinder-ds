@@ -3,6 +3,20 @@ import { CommonModule } from '@angular/common';
 import { DsIconComponent } from '../icon/ds-icon';
 import { DsShapeIndicatorComponent, ShapeVariant } from '../shape-indicator/ds-shape-indicator';
 
+/** Visual style variant of the badge
+ * - default: Default grey badge
+ * - brand: Primary brand color
+ * - success: Positive action or status
+ * - warning: Warning or attention required
+ * - destructive: Error or destructive action
+ * - blue: Information or neutral status
+ * - light-purple: Alternative highlight
+ * - pink: Alternative highlight
+ * - salmon-orange: Alternative highlight
+ * - orange: Alternative highlight
+ * - lime-green: Alternative success variant
+ * - grey: Neutral or disabled state
+ */
 export type BadgeVariant = 
   | 'default' 
   | 'brand' 
@@ -16,8 +30,42 @@ export type BadgeVariant =
   | 'orange' 
   | 'lime-green' 
   | 'grey';
+
+/** Content display type for the badge
+ * - text: Simple text content
+ * - icon-text: Text with a leading icon
+ * - indicator-text: Text with a leading shape indicator
+ */
 export type BadgeContentType = 'text' | 'icon-text' | 'indicator-text';
 
+/**
+ * A versatile badge component for displaying status, labels, or metadata.
+ * Supports multiple visual variants and content types including text, icons, and indicators.
+ * 
+ * @example
+ * Basic text badge:
+ * ```html
+ * <ds-badge variant="success">Active</ds-badge>
+ * ```
+ * 
+ * Badge with icon:
+ * ```html
+ * <ds-badge
+ *   variant="warning"
+ *   contentType="icon-text"
+ *   leadingIcon="remixAlertLine"
+ * >Warning</ds-badge>
+ * ```
+ * 
+ * Badge with indicator:
+ * ```html
+ * <ds-badge
+ *   variant="success"
+ *   contentType="indicator-text"
+ *   indicatorShape="circle"
+ * >Online</ds-badge>
+ * ```
+ */
 @Component({
   selector: 'ds-badge',
   standalone: true,
@@ -71,12 +119,28 @@ export type BadgeContentType = 'text' | 'icon-text' | 'indicator-text';
   `,
 })
 export class DsBadgeComponent {
-  // Input signals
+  /** Visual style variant of the badge
+   * @default 'default'
+   */
   variant = input<BadgeVariant>('default');
+
+  /** How the badge content should be displayed
+   * @default 'text'
+   */
   contentType = input<BadgeContentType>('text');
+
+  /** Text content of the badge. If not provided, uses ng-content projection */
   content = input<string>();
-  leadingIcon = input<string>(); // Only for icon-text type
-  indicatorShape = input<ShapeVariant>('circle'); // Only for indicator-text type
+
+  /** Icon name to display before the text when contentType is 'icon-text'
+   * @example 'remixCheckLine'
+   */
+  leadingIcon = input<string>();
+
+  /** Shape of the indicator when contentType is 'indicator-text'
+   * @default 'circle'
+   */
+  indicatorShape = input<ShapeVariant>('circle');
   
   // Computed classes
   badgeClasses = computed(() => {

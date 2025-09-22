@@ -6,7 +6,15 @@ import { DsAvatarComponent } from '../avatar/ds-avatar';
 import { DsBadgeComponent } from '../badge/ds-badge';
 
 export type DataItemLayout = 'vertical' | 'horizontal';
-export type DataItemValueType = 'text' | 'icon-text' | 'avatar-text' | 'badge';
+export type DataItemValueType = 'text' | 'icon-text' | 'avatar-text' | 'badge' | 'multi-badge';
+
+export interface DataItemBadgeConfig {
+  variant?: 'default' | 'brand' | 'success' | 'warning' | 'destructive' | 'blue' | 'light-purple' | 'pink' | 'salmon-orange' | 'orange' | 'lime-green' | 'grey';
+  content: string;
+  contentType?: 'text' | 'icon-text' | 'indicator-text';
+  leadingIcon?: string;
+  indicatorShape?: 'circle' | 'square';
+}
 
 @Component({
   selector: 'ds-data-item',
@@ -57,6 +65,19 @@ export type DataItemValueType = 'text' | 'icon-text' | 'avatar-text' | 'badge';
                 [indicatorShape]="badgeIndicatorShape()"
               />
             }
+            @case ('multi-badge') {
+              @if (badges()?.length) {
+                @for (badge of badges(); track badge.content) {
+                  <ds-badge
+                    [variant]="badge.variant || 'default'"
+                    [contentType]="badge.contentType || 'text'"
+                    [content]="badge.content"
+                    [leadingIcon]="badge.leadingIcon"
+                    [indicatorShape]="badge.indicatorShape || 'circle'"
+                  />
+                }
+              }
+            }
           }
         </div>
       </div>
@@ -85,7 +106,10 @@ export class DsDataItemComponent {
   badgeContent = input<string>('');
   badgeIcon = input<string>();
   badgeIndicatorShape = input<'circle' | 'square'>('circle');
-  
+
+  // Multi-badge specific inputs
+  badges = input<DataItemBadgeConfig[]>();
+
   // Computed classes
   containerClasses = computed(() => {
     const classes = ['data-item'];

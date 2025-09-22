@@ -113,6 +113,14 @@ ds-label label {
   flex-shrink: 0;
 }
 
+/* Multi-badge layout */
+.data-item__value-container:has(ds-badge + ds-badge) {
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: auto;
+  padding: 4px 0;
+}
+
 /* Typography Classes (ui-sm-regular) */
 .ui-sm-regular {
   font-size: 14px;

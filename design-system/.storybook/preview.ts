@@ -2,11 +2,12 @@ import type { Preview } from '@storybook/angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import { applicationConfig } from '@storybook/angular';
 import { provideAllRemixIcons } from '../src/app/lib/icons';
-
 const preview: Preview = {
   decorators: [
     applicationConfig({
-      providers: [provideAllRemixIcons()]
+      providers: [
+        provideAllRemixIcons()
+      ]
     })
   ],
   parameters: {

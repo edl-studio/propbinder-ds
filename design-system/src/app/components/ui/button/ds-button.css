@@ -32,7 +32,8 @@
 /* Base button styles */
 .btn {
   /* Layout */
-  @apply tw-relative tw-inline-flex tw-items-center tw-justify-center tw-gap-2;
+  @apply tw-relative tw-inline-flex tw-items-center tw-justify-center;
+  gap: 4px;
   @apply tw-rounded-md tw-font-medium tw-border tw-no-underline tw-whitespace-nowrap;
   
   /* Typography */
@@ -73,23 +74,23 @@
 
 /* Padding variants based on icon presence */
 .btn--padding-default {
-  @apply tw-px-4;
-}
-
-.btn--padding-default-sm {
   @apply tw-px-3;
 }
 
+.btn--padding-default-sm {
+  @apply tw-px-2.5;
+}
+
 .btn--padding-with-leading {
-  @apply tw-pl-3 tw-pr-4;
+  @apply tw-pl-2 tw-pr-3;
 }
 
 .btn--padding-with-trailing {
-  @apply tw-pl-4 tw-pr-3;
+  @apply tw-pl-3 tw-pr-2;
 }
 
 .btn--padding-with-both {
-  @apply tw-pl-3 tw-pr-3;
+  @apply tw-pl-2 tw-pr-2;
 }
 
 /* Icon-only button padding (square) */

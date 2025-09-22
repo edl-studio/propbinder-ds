@@ -39,6 +39,28 @@ Places label and value side-by-side with 12px gap. Label container has fixed 128
 
 ## Value Types
 
+### Multi-Badge Support
+The data item component now supports displaying multiple badges using the `multi-badge` value type. This is perfect for showing multiple statuses, tags, or categories.
+
+```html
+<ds-data-item 
+  label="Status" 
+  valueType="multi-badge"
+  [badges]="[
+    { variant: 'success', content: 'Active' },
+    { variant: 'blue', content: 'Premium', leadingIcon: 'remixStarFill' },
+    { variant: 'warning', content: 'Pending Review' }
+  ]">
+</ds-data-item>
+```
+
+Each badge in the array can have the following properties:
+- `variant`: Badge color variant (optional, defaults to 'default')
+- `content`: Badge text content (required)
+- `contentType`: Type of content display (optional, defaults to 'text')
+- `leadingIcon`: Icon name for icon-text type (optional)
+- `indicatorShape`: Shape of the indicator for indicator-text type (optional, defaults to 'circle')
+
 ### 1. Text Only
 Simple text display using ui-sm-regular typography with primary text color.
 
@@ -256,9 +278,10 @@ Full badge component with all variants and content types. Perfect for status, pr
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
 | `label` | `string` | **required** | The label text to display |
-| `value` | `string` | `''` | The value text (not used for badge type) |
+| `value` | `string` | `''` | The value text (not used for badge types) |
 | `layout` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout arrangement of label and value |
-| `valueType` | `'text' \| 'icon-text' \| 'avatar-text' \| 'badge'` | `'text'` | Type of value display |
+| `valueType` | `'text' \| 'icon-text' \| 'avatar-text' \| 'badge' \| 'multi-badge'` | `'text'` | Type of value display |
+| `badges` | `DataItemBadgeConfig[]` | `undefined` | Array of badge configurations for multi-badge type |
 
 ### Icon-Text Properties
 | Property | Type | Default | Description |

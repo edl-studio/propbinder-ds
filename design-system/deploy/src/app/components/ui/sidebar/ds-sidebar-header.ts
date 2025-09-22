@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import { DsIconComponent } from '../icon/ds-icon';
 import { DsButtonComponent } from '../button/ds-button';
 import { DsSidebarGlobalActionComponent } from './ds-sidebar-global-action';
-import { DsTooltipComponent } from '../tooltip/ds-tooltip';
 
 @Component({
   selector: 'ds-sidebar-header',
   standalone: true,
-  imports: [CommonModule, DsIconComponent, DsSidebarGlobalActionComponent, DsButtonComponent, DsTooltipComponent],
+  imports: [CommonModule, DsIconComponent, DsSidebarGlobalActionComponent, DsButtonComponent],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-sidebar-header.css'],
   template: `
     <header class="sidebar-header" role="banner" [class]="headerClass()">
       <div class="sidebar-header__brand">
+        <!-- Logo SVG -->
         <svg class="sidebar-header__logo" role="img" aria-label="Propbinder" width="154" height="28" viewBox="0 0 154 28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M33.6699 22.1904V4.43311H40.5263C44.3214 4.43311 46.6996 7.04597 46.6996 10.0393C46.6996 13.5908 44.372 16.0768 40.5263 16.0768H36.9337V22.1904H33.6699ZM36.9337 13.1088H40.4251C42.2467 13.1088 43.4106 11.8912 43.4106 10.2423C43.4106 8.64412 42.2214 7.40111 40.4251 7.40111H36.9337V13.1088Z" fill="white"/>
           <path d="M47.8045 22.1904V8.99926H50.9923V11.257L55.6729 8.69485V12.0687L50.9923 14.4786V22.1904H47.8045Z" fill="white"/>
@@ -28,28 +28,22 @@ import { DsTooltipComponent } from '../tooltip/ds-tooltip';
           <path d="M27.2911 4.43018H18.6076V7.08838H20.9114C21.1063 7.08838 21.2658 7.24788 21.2658 7.44281V10.2782C21.2658 10.4732 21.1063 10.6327 20.9114 10.6327H18.6076V11.5187H20.9114C21.1063 11.5187 21.2658 11.6782 21.2658 11.8732V14.7086C21.2658 14.9035 21.1063 15.063 20.9114 15.063H18.6076V15.9491H20.9114C21.1063 15.9491 21.2658 16.1086 21.2658 16.3035V19.1389C21.2658 19.3339 21.1063 19.4934 20.9114 19.4934H18.6076V21.0883C18.6076 21.4799 18.4907 21.845 18.2904 22.1516H22.1519L25.6962 25.6958V22.1516H27.2911C27.8777 22.1516 28.3544 21.6749 28.3544 21.0883V5.49346C28.3544 4.90688 27.8777 4.43018 27.2911 4.43018ZM25.6962 19.1389C25.6962 19.3339 25.5367 19.4934 25.3417 19.4934H22.5063C22.3114 19.4934 22.1519 19.3339 22.1519 19.1389V16.3035C22.1519 16.1086 22.3114 15.9491 22.5063 15.9491H25.3417C25.5367 15.9491 25.6962 16.1086 25.6962 16.3035V19.1389ZM25.6962 14.7086C25.6962 14.9035 25.5367 15.063 25.3417 15.063H22.5063C22.3114 15.063 22.1519 14.9035 22.1519 14.7086V11.8732C22.1519 11.6782 22.3114 11.5187 22.5063 11.5187H25.3417C25.5367 11.5187 25.6962 11.6782 25.6962 11.8732V14.7086ZM25.6962 10.2782C25.6962 10.4732 25.5367 10.6327 25.3417 10.6327H22.5063C22.3114 10.6327 22.1519 10.4732 22.1519 10.2782V7.44281C22.1519 7.24788 22.3114 7.08838 22.5063 7.08838H25.3417C25.5367 7.08838 25.6962 7.24788 25.6962 7.44281V10.2782Z" fill="white"/>
           <path d="M16.6581 0H1.06328C0.476706 0 0 0.476705 0 1.06328V21.0885C0 21.675 0.476706 22.1517 1.06328 22.1517H2.65821V25.696L6.20249 22.1517H16.6581C17.2447 22.1517 17.7214 21.675 17.7214 21.0885V1.06328C17.7214 0.476705 17.2447 0 16.6581 0ZM6.20249 19.1391C6.20249 19.334 6.043 19.4935 5.84806 19.4935H3.01264C2.8177 19.4935 2.65821 19.334 2.65821 19.1391V16.3037C2.65821 16.1087 2.8177 15.9493 3.01264 15.9493H5.84806C6.043 15.9493 6.20249 16.1087 6.20249 16.3037V19.1391ZM6.20249 14.7088C6.20249 14.9037 6.043 15.0632 5.84806 15.0632H3.01264C2.8177 15.0632 2.65821 14.9037 2.65821 14.7088V11.8733C2.65821 11.6784 2.8177 11.5189 3.01264 11.5189H5.84806C6.043 11.5189 6.20249 11.6784 6.20249 11.8733V14.7088ZM6.20249 10.2784C6.20249 10.4733 6.043 10.6328 5.84806 10.6328H3.01264C2.8177 10.6328 2.65821 10.4733 2.65821 10.2784V7.44298C2.65821 7.24805 2.8177 7.08856 3.01264 7.08856H5.84806C6.043 7.08856 6.20249 7.24805 6.20249 7.44298V10.2784ZM6.20249 5.84806C6.20249 6.04299 6.043 6.20249 5.84806 6.20249H3.01264C2.8177 6.20249 2.65821 6.04299 2.65821 5.84806V3.01264C2.65821 2.8177 2.8177 2.65821 3.01264 2.65821H5.84806C6.043 2.65821 6.20249 2.8177 6.20249 3.01264V5.84806ZM10.6328 19.1391C10.6328 19.334 10.4733 19.4935 10.2784 19.4935H7.44299C7.24805 19.4935 7.08856 19.334 7.08856 19.1391V16.3037C7.08856 16.1087 7.24805 15.9493 7.44299 15.9493H10.2784C10.4733 15.9493 10.6328 16.1087 10.6328 16.3037V19.1391ZM10.6328 14.7088C10.6328 14.9037 10.4733 15.0632 10.2784 15.0632H7.44299C7.24805 15.0632 7.08856 14.9037 7.08856 14.7088V11.8733C7.08856 11.6784 7.24805 11.5189 7.44299 11.5189H10.2784C10.4733 11.5189 10.6328 11.6784 10.6328 11.8733V14.7088ZM10.6328 10.2784C10.6328 10.4733 10.4733 10.6328 10.2784 10.6328H7.44299C7.24805 10.6328 7.08856 10.4733 7.08856 10.2784V7.44298C7.08856 7.24805 7.24805 7.08856 7.44299 7.08856H10.2784C10.4733 7.08856 10.6328 7.24805 10.6328 7.44298V10.2784ZM10.6328 5.49363V5.84806C10.6328 6.04299 10.4733 6.20249 10.2784 6.20249H7.44299C7.24805 6.20249 7.08856 6.04299 7.08856 5.84806V3.01264C7.08856 2.8177 7.24805 2.65821 7.44299 2.65821H10.2784C10.4733 2.65821 10.6328 2.8177 10.6328 3.01264V5.49363ZM15.0632 19.1391C15.0632 19.334 14.9037 19.4935 14.7088 19.4935H11.8733C11.6784 19.4935 11.5189 19.334 11.5189 19.1391V16.3037C11.5189 16.1087 11.6784 15.9493 11.8733 15.9493H14.7088C14.9037 15.9493 15.0632 16.1087 15.0632 16.3037V19.1391ZM15.0632 14.7088C15.0632 14.9037 14.9037 15.0632 14.7088 15.0632H11.8733C11.6784 15.0632 11.5189 14.9037 11.5189 14.7088V11.8733C11.5189 11.6784 11.6784 11.5189 11.8733 11.5189H14.7088C14.9037 11.5189 15.0632 11.6784 15.0632 11.8733V14.7088ZM15.0632 10.2784C15.0632 10.4733 14.9037 10.6328 14.7088 10.6328H11.8733C11.6784 10.6328 11.5189 10.4733 11.5189 10.2784V7.44298C11.5189 7.24805 11.6784 7.08856 11.8733 7.08856H14.7088C14.9037 7.08856 15.0632 7.24805 15.0632 7.44298V10.2784ZM15.0632 4.43035V5.84806C15.0632 6.04299 14.9037 6.20249 14.7088 6.20249H11.8733C11.6784 6.20249 11.5189 6.04299 11.5189 5.84806V3.01264C11.5189 2.8177 11.6784 2.65821 11.8733 2.65821H14.7088C14.9037 2.65821 15.0632 2.8177 15.0632 3.01264V4.43035Z" fill="white"/>
         </svg>
-        <ds-tooltip [text]="collapsed() ? 'Expand sidebar' : 'Collapse sidebar'" placement="right" [offset]="8" *ngIf="collapsed()">
-          <ds-button 
-            variant="ghost"
-            [iconOnly]="true"
-            [ariaLabel]="collapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
-            [leadingIcon]="collapsed() ? 'remixMenuUnfoldLine' : 'remixMenuFoldLine'"
-            (clicked)="toggleCollapsed.emit()"
-            class="sidebar-header__toggle-btn"
-          ></ds-button>
-        </ds-tooltip>
+
+        <!-- Toggle button -->
         <ds-button 
-          *ngIf="!collapsed()"
           variant="ghost"
           [iconOnly]="true"
-          [ariaLabel]="collapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
-          [leadingIcon]="collapsed() ? 'remixMenuUnfoldLine' : 'remixMenuFoldLine'"
+          [ariaLabel]="toggleButtonLabel()"
+          [title]="toggleButtonLabel()"
           (clicked)="toggleCollapsed.emit()"
           class="sidebar-header__toggle-btn"
-        ></ds-button>
+        >
+          <ds-icon slot="leading" [name]="toggleButtonIcon()!" size="18px" />
+        </ds-button>
       </div>
 
-      @if (showGlobalAction()) {
+      <!-- Global action button (hidden in minimized mode) -->
+      @if (showGlobalAction() && !collapsed()) {
         <ds-sidebar-global-action
           [label]="globalActionLabel()"
           [icon]="globalActionIcon()"
@@ -65,6 +59,7 @@ import { DsTooltipComponent } from '../tooltip/ds-tooltip';
 export class DsSidebarHeaderComponent {
   // Inputs
   collapsed = input<boolean>(false);
+  mode = input<'default' | 'minimized' | 'drawer'>('default');
   showGlobalAction = input<boolean>(false);
   globalActionLabel = input<string>('Create');
   globalActionIcon = input<string>('remixAddLine');
@@ -76,7 +71,30 @@ export class DsSidebarHeaderComponent {
   toggleCollapsed = output<void>();
   globalActionClick = output<void>();
 
+  // Computed properties for button behavior based on mode
+  toggleButtonIcon = computed(() => {
+    switch (this.mode()) {
+      case 'minimized':
+        return 'remixMenuLine'; // Hamburger menu icon
+      case 'drawer':
+        return 'remixCloseLine'; // Close icon
+      case 'default':
+      default:
+        return this.collapsed() ? 'remixMenuUnfoldLine' : 'remixMenuFoldLine'; // Expand/collapse icons
+    }
+  });
+
+  toggleButtonLabel = computed(() => {
+    switch (this.mode()) {
+      case 'minimized':
+        return 'Open menu';
+      case 'drawer':
+        return 'Close menu';
+      case 'default':
+      default:
+        return this.collapsed() ? 'Expand sidebar' : 'Collapse sidebar';
+    }
+  });
+
   headerClass = computed(() => ['sidebar-header', this.hostClass()].filter(Boolean).join(' '));
 }
-
-

@@ -3,9 +3,54 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { DsIconComponent } from '../icon/ds-icon';
 
+/** Visual style variant of the button
+ * - primary: Main call-to-action button
+ * - secondary: Alternative emphasis button
+ * - ghost: Minimal visual emphasis button
+ * - destructive: Indicates destructive or dangerous action
+ */
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive';
+
+/** Size variant of the button
+ * - sm: Compact size for tight spaces
+ * - md: Default size for most use cases
+ * - lg: Large size for prominent actions
+ */
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
+/**
+ * A versatile button component that supports multiple visual styles, sizes, and content configurations.
+ * Includes support for icons, loading states, and custom content projection via slots.
+ * 
+ * @example
+ * Basic button:
+ * ```html
+ * <ds-button variant="primary">Save Changes</ds-button>
+ * ```
+ * 
+ * Button with icons:
+ * ```html
+ * <ds-button variant="ghost" leadingIcon="remixEdit">
+ *   Edit Profile
+ * </ds-button>
+ * ```
+ * 
+ * Button with custom content:
+ * ```html
+ * <ds-button variant="secondary">
+ *   <span slot="leading">⚡</span>
+ *   Custom Content
+ *   <ds-icon slot="trailing" name="remixArrowRight" />
+ * </ds-button>
+ * ```
+ * 
+ * Loading state:
+ * ```html
+ * <ds-button variant="primary" [loading]="true">
+ *   Processing...
+ * </ds-button>
+ * ```
+ */
 @Component({
   selector: 'ds-button',
   imports: [CommonModule, DsIconComponent],
@@ -23,7 +68,8 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
       (blur)="onBlur()"
       #buttonElement
     >
-      <!-- Leading Icon -->
+      <!-- Leading Icon/Content -->
+      <ng-content select="[slot=leading]"></ng-content>
       @if (leadingIcon() && !loading()) {
         <ds-icon 
           [name]="leadingIcon()!" 
@@ -37,7 +83,8 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
         <ng-content></ng-content>
       </span>
       
-      <!-- Trailing Icon -->
+      <!-- Trailing Icon/Content -->
+      <ng-content select="[slot=trailing]"></ng-content>
       @if (trailingIcon() && !loading()) {
         <ds-icon 
           [name]="trailingIcon()!" 
@@ -61,21 +108,69 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 
 })
 export class DsButtonComponent {
-  // Input signals
+  /** Visual style variant of the button
+   * @default 'primary'
+   */
   variant = input<ButtonVariant>('primary');
+
+  /** Size variant of the button
+   * @default 'md'
+   */
   size = input<ButtonSize>('md');
+
+  /** Whether the button is disabled
+   * @default false
+   */
   disabled = input<boolean>(false);
+
+  /** Whether the button is in a loading state
+   * @default false
+   */
   loading = input<boolean>(false);
+
+  /** Whether the button is in a pressed state (for toggle buttons)
+   * @default false
+   */
   pressed = input<boolean>(false);
+
+  /** Whether the button controls an expanded element
+   * @default false
+   */
   expanded = input<boolean>(false);
+
+  /** Icon name to display before the button content
+   * @example 'remixEdit'
+   */
   leadingIcon = input<string>();
+
+  /** Icon name to display after the button content
+   * @example 'remixArrowRight'
+   */
   trailingIcon = input<string>();
+
+  /** Accessible label for the button
+   * @example 'Close dialog'
+   */
   ariaLabel = input<string>();
+
+  /** Whether the button should only display icons without text content
+   * @default false
+   */
   iconOnly = input<boolean>(false);
   
-  // Output signals
+  /** Emitted when the button is clicked
+   * @event MouseEvent
+   */
   clicked = output<MouseEvent>();
+
+  /** Emitted when the button receives focus
+   * @event FocusEvent
+   */
   focused = output<FocusEvent>();
+
+  /** Emitted when the button loses focus
+   * @event FocusEvent
+   */
   blurred = output<FocusEvent>();
   
   // Internal state
