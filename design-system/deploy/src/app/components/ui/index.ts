@@ -21,10 +21,14 @@ export { DsTopbarComponent } from './topbar/ds-topbar';
 export { DsHeaderDetailsComponent } from './header-details/ds-header-details';
 export { DsSidebarComponent, type SidebarGroup } from './sidebar/ds-sidebar';
 export { DsDataItemComponent } from './data-item/ds-data-item';
+export { DsMetadataItemComponent } from './metadata-item/ds-metadata-item';
+export { DsListItemComponent } from './list-item/ds-list-item';
+export { DsListComponent } from './list/ds-list';
 export { type TopbarBreadcrumbItem } from './topbar/ds-topbar-breadcrumb';
 
 export { DsSelectComponent } from './select/ds-select';
 export { DsAppLayoutComponent } from './app-layout/ds-app-layout';
+export { DsDrawerComponent } from './drawer/ds-drawer';
 
 // Type exports
 export type { ButtonVariant, ButtonSize } from './button/ds-button';

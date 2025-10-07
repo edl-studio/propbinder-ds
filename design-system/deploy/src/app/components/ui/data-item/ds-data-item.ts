@@ -6,6 +6,11 @@ import { DsAvatarComponent } from '../avatar/ds-avatar';
 import { DsBadgeComponent } from '../badge/ds-badge';
 
 export type DataItemLayout = 'vertical' | 'horizontal';
+
+/**
+ * @deprecated Use DsMetadataItem component instead for metadata displays
+ */
+export type LegacyDataItemLayout = DataItemLayout | 'metadata';
 export type DataItemValueType = 'text' | 'icon-text' | 'avatar-text' | 'badge' | 'multi-badge';
 
 export interface DataItemBadgeConfig {
@@ -25,16 +30,18 @@ export interface DataItemBadgeConfig {
   template: `
     <div [class]="containerClasses()">
       <!-- Label Container -->
-      <div [class]="labelContainerClasses()">
-        <ds-label [className]="labelClassName()" [size]="layout() === 'horizontal' ? 'md' : 'sm'">
-          {{ label() }}
-        </ds-label>
-      </div>
+      @if (label() && layout() !== 'metadata') {
+        <div [class]="labelContainerClasses()">
+          <ds-label [className]="labelClassName()" [size]="layout() === 'horizontal' ? 'md' : 'sm'">
+            {{ label() }}
+          </ds-label>
+        </div>
+      }
       
       <!-- Value Container -->
       <div [class]="valueContainerClasses()">
         <div class="data-item__value-container">
-          @switch (valueType()) {
+          @switch (effectiveValueType()) {
             @case ('text') {
               <span class="data-item__value-text ui-sm-regular">{{ value() }}</span>
             }
@@ -86,10 +93,15 @@ export interface DataItemBadgeConfig {
 })
 export class DsDataItemComponent {
   // Basic inputs
-  label = input.required<string>();
+  label = input<string>();
   value = input<string>('');
-  layout = input<DataItemLayout>('vertical');
+  layout = input<LegacyDataItemLayout>('vertical');
   valueType = input<DataItemValueType>('text');
+
+  // Computed properties
+  readonly effectiveValueType = computed(() => {
+    return this.valueType();
+  });
   
   // Icon-text specific inputs
   iconName = input<string>();

@@ -25,7 +25,10 @@ export type DsSidebarSlots = 'footer';
   standalone: true,
   imports: [CommonModule, DsSidebarHeaderComponent, DsSidebarGroupComponent, DsSidebarGroupContentItemComponent],
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./ds-sidebar.css'],
+  styleUrls: [
+    './ds-sidebar-variables.css',
+    './ds-sidebar.css'
+  ],
   template: `
     <nav 
       class="sidebar" 

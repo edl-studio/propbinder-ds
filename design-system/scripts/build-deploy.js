@@ -134,9 +134,13 @@ async function main() {
   console.log('🎨 Copying public assets...');
   const publicDir = path.join(sourceDir, 'public');
   if (fs.existsSync(publicDir)) {
+    // Copy to /public subdirectory for backup
     const publicDestDir = path.join(deployDir, 'public');
     copyRecursive(publicDir, publicDestDir);
-    console.log('✅ Public assets copied successfully');
+    
+    // Also copy public assets to root level for main app access
+    copyRecursive(publicDir, deployDir);
+    console.log('✅ Public assets copied to both /public and root level');
   }
 
   // Copy source files that might be referenced

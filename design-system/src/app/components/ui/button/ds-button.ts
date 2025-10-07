@@ -8,8 +8,10 @@ import { DsIconComponent } from '../icon/ds-icon';
  * - secondary: Alternative emphasis button
  * - ghost: Minimal visual emphasis button
  * - destructive: Indicates destructive or dangerous action
+ * - ai-primary: AI-themed button with gradient text and light background
+ * - ai-ghost: AI-themed button with gradient text and transparent background
  */
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive' | 'ai-primary' | 'ai-ghost';
 
 /** Size variant of the button
  * - sm: Compact size for tight spaces

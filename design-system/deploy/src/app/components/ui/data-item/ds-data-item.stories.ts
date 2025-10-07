@@ -152,13 +152,13 @@ export const HorizontalText: Story = {
   },
 };
 
+
 // Icon + Text Examples
 export const VerticalIconText: Story = {
   args: {
     label: 'Status',
     value: 'Active',
     layout: 'vertical',
-    valueType: 'icon-text',
     iconName: 'remixCheckboxCircleFill',
   },
 };
@@ -168,7 +168,6 @@ export const HorizontalIconText: Story = {
     label: 'Location',
     value: 'New York, NY',
     layout: 'horizontal',
-    valueType: 'icon-text',
     iconName: 'remixMapPin2Fill',
   },
 };

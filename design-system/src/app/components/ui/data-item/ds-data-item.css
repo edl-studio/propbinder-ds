@@ -17,6 +17,14 @@
   gap: 12px;
 }
 
+.data-item--metadata {
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  min-height: 20px;
+  height: 20px;
+}
+
 /* Label Cell */
 .data-item__label {
   flex-shrink: 0;
@@ -60,6 +68,11 @@ ds-label label {
   min-height: 32px; /* Fill available height */
 }
 
+.data-item--metadata .data-item__value {
+  min-height: 20px;
+  height: 20px;
+}
+
 .data-item__value--vertical {
   width: 100%;
 }
@@ -92,11 +105,42 @@ ds-label label {
   color: var(--text-color-default-primary);
 }
 
+/* Link container inherits text styles for consistent height */
+.data-item__value-text ds-link {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+/* Icon alignment and colors */
 .data-item__value-icon {
   flex-shrink: 0;
   color: var(--text-color-default-secondary);
-  position: relative;
-  bottom: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+}
+
+/* Link icon variant */
+.data-item__value-icon--link {
+  color: var(--text-color-brand);
+}
+
+/* Link icon hover state */
+.data-item__value-text:hover .data-item__value-icon--link {
+  color: var(--background-color-interactive-brand-hover);
+}
+
+/* Ensure link content stays horizontal */
+.data-item__value-text ds-link a {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
 }
 
 .data-item__value-avatar {

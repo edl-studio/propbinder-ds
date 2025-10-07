@@ -1,4 +1,11 @@
 /* Topbar Component Styles */
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: block;
+}
+
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -8,6 +15,10 @@
   min-width: 0; /* Allow content to shrink if needed */
   height: 80px;
   background-color: var(--background-color-page);
+  background-image: linear-gradient(180deg, var(--background-color-page) 75%, var(--background-color-page) 100%);
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  transition: border-color 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), box-shadow 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 /* Height override for xs, sm, md breakpoints */
@@ -67,6 +78,13 @@
 /* Avatar */
 .topbar__avatar {
   flex-shrink: 0;
+}
+
+/* Scrolled state styles */
+ds-topbar.scrolled .topbar,
+:host(.scrolled) .topbar {
+  border-bottom: 2px solid red !important; /* Temporary for debugging */
+  box-shadow: var(--shadow-sm);
 }
 
 /* Responsive behavior */

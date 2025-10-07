@@ -11,7 +11,7 @@ const meta: Meta<DsButtonComponent> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'ghost', 'destructive'],
+      options: ['primary', 'secondary', 'ghost', 'destructive', 'ai-primary', 'ai-ghost'],
       description: 'The visual style variant of the button',
     },
     size: {
@@ -78,6 +78,14 @@ export const Variants: Story = {
         <ds-button variant="secondary">Secondary</ds-button>
         <ds-button variant="ghost">Ghost</ds-button>
         <ds-button variant="destructive">Destructive</ds-button>
+        <ds-button variant="ai-primary" class="depth-xs">
+          <ds-icon slot="leading" name="remixSparkling2Fill" [color]="'var(--ai-gradient-color-1)'" />
+          <span>AI Primary</span>
+        </ds-button>
+        <ds-button variant="ai-ghost" class="depth-xs">
+          <ds-icon slot="leading" name="remixSparkling2Fill" [color]="'var(--ai-gradient-color-1)'" />
+          <span>AI Ghost</span>
+        </ds-button>
       </div>
     `,
   }),
@@ -200,6 +208,23 @@ export const LoadingStates: Story = {
   }),
 };
 
+
+export const AIVariants: Story = {
+  render: () => ({
+    template: `
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+        <ds-button variant="ai-primary" class="depth-xs">
+          <ds-icon slot="leading" name="remixSparkling2Fill" />
+          <span>Generate suggestions</span>
+        </ds-button>
+        <ds-button variant="ai-ghost" class="depth-xs">
+          <ds-icon slot="leading" name="remixSparkling2Fill" />
+          <span>Generate suggestions</span>
+        </ds-button>
+      </div>
+    `,
+  }),
+};
 
 export const Interactive: Story = {
   args: {

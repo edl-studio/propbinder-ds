@@ -125,8 +125,9 @@ export class LayoutPreviewComponent {
       items: [
         { id: 'inbox', label: 'Inbox', icon: 'remixMailLine', badgeText: '2' },
         { id: 'inquiries', label: 'Inquiries', icon: 'remixQuestionAnswerLine', badgeText: '2' },
-        { id: 'tasks', label: 'Tasks', icon: 'remixTaskLine' },
-        { id: 'surveys', label: 'Surveys', icon: 'remixSurveyLine' },
+      { id: 'tasks', label: 'Tasks', icon: 'remixTaskLine' },
+      { id: 'invoices', label: 'Invoices', icon: 'remixFileList3Line' },
+      { id: 'surveys', label: 'Surveys', icon: 'remixSurveyLine' },
       ],
     },
     {
@@ -141,7 +142,7 @@ export class LayoutPreviewComponent {
     },
     {
       id: 'kartoteker',
-      label: 'KARTOTEKER',
+      label: 'CATALOG',
       items: [
         { id: 'customers', label: 'Customers', icon: 'remixTeamLine' },
         { id: 'companies', label: 'Companies', icon: 'remixBuilding4Line' },

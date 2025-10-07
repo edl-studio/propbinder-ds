@@ -25,6 +25,10 @@ interface TabState {
     [ngpTabList] {
       position: relative;
     }
+    .tabs-divider {
+      position: absolute !important;
+      bottom: -2px !important;
+    }
     [ngpTabButton] {
       position: relative;
       z-index: 1;
@@ -39,7 +43,7 @@ interface TabState {
     [ngpTabButton]:not([data-active])[data-hover] .tab-label {
       background-color: var(--background-color-interactive-default);
     }
-    [ngpTabButton]([data-active]).pressed .tab-label {
+    [ngpTabButton][data-active].pressed .tab-label {
       background-color: var(--background-color-interactive-default);
     }
    
@@ -66,7 +70,7 @@ interface TabState {
 
     /* Active indicator specific styles */
     .active-indicator {
-      transition: transform 0.2s ease, width 0.2s ease;
+      transition: transform 0.35s ease, width 0.35s ease;
       transform-origin: left;
       background-color: var(--color-brand-base);
     }
@@ -176,7 +180,9 @@ interface TabState {
   `,
   template: `
     <div ngpTabset>
-      <div #tabList ngpTabList class="tw-flex tw-gap-4 tw-py-2.5" style="border-bottom: 2px solid var(--border-color-default);">
+      <div #tabList ngpTabList class="tw-flex tw-gap-4 tw-py-2.5 tw-relative">
+        <!-- Edge-to-edge divider -->
+        <div class="edge-to-edge-divider tabs-divider"></div>
         @for (tab of visibleTabs(); track tab.value()) {
           <button 
             #tabButton

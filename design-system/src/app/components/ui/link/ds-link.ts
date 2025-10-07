@@ -6,10 +6,10 @@ import { DsIconComponent } from '../icon/ds-icon';
   selector: 'ds-link',
   standalone: true,
   imports: [CommonModule, DsIconComponent],
-  encapsulation: ViewEncapsulation.ShadowDom,
+  encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-link.css'],
   template: `
-    <a [class]="linkClasses()" [href]="href()" [target]="target()" [rel]="rel()">
+    <a [class]="linkClasses()" [href]="href()" [target]="target()" [rel]="rel()" class="ui-sm-regular">
       @if (showIcon()) {
         <ds-icon 
           [name]="iconName()!" 

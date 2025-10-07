@@ -23,6 +23,7 @@ export type DsAppLayoutSlots = 'topbar';
       [class.app-layout--mobile]="isMobile()"
       [class.app-layout--sidebar-open]="shouldShowMobileDrawer()"
       [class.app-layout--sidebar-collapsed]="shouldCollapseSidebar()"
+      [class.app-layout--scrolled]="isScrolledSig()"
       role="application"
       aria-label="Application layout"
     >
@@ -79,7 +80,7 @@ export type DsAppLayoutSlots = 'topbar';
       }
 
       <!-- Main content area -->
-      <div class="app-layout__main">
+      <div class="app-layout__main" (scroll)="handleContentScroll($event)">
         <div class="app-layout__topbar">
           <ng-content select="[slot=topbar]"></ng-content>
         </div>
@@ -108,8 +109,9 @@ export class DsAppLayoutComponent implements OnDestroy {
 
   constructor(private viewportService: ViewportService) {}
 
-  // Internal state - mobile menu starts closed
+  // Internal state
   private mobileMenuOpenSig = signal(false);
+  protected isScrolledSig = signal(false);
   
   // Outputs
   menuOpenChange = output<boolean>();
@@ -191,6 +193,16 @@ export class DsAppLayoutComponent implements OnDestroy {
   private restoreBodyScroll() {
     if (typeof document !== 'undefined') {
       document.body.style.overflow = '';
+    }
+  }
+
+  handleContentScroll(event: Event) {
+    const target = event.target as HTMLElement;
+    const isScrolled = target.scrollTop > 0;
+    
+    // Only update if the state changes to avoid unnecessary renders
+    if (this.isScrolledSig() !== isScrolled) {
+      this.isScrolledSig.set(isScrolled);
     }
   }
 }

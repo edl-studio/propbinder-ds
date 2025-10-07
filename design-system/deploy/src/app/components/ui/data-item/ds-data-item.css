@@ -17,6 +17,14 @@
   gap: 12px;
 }
 
+.data-item--metadata {
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  min-height: 20px;
+  height: 20px;
+}
+
 /* Label Cell */
 .data-item__label {
   flex-shrink: 0;
@@ -58,6 +66,11 @@ ds-label label {
   display: flex;
   align-items: center;
   min-height: 32px; /* Fill available height */
+}
+
+.data-item--metadata .data-item__value {
+  min-height: 20px;
+  height: 20px;
 }
 
 .data-item__value--vertical {

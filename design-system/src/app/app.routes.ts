@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LayoutPreviewComponent } from './pages/layout-preview';
 import { LandingComponent } from './pages/landing';
 import { PropertyDetailsComponent } from './pages/property-details';
+import { InvoiceDetailsComponent } from './pages/invoice-details';
 
 export const routes: Routes = [
   {
@@ -11,6 +12,10 @@ export const routes: Routes = [
   {
     path: 'property-details',
     component: PropertyDetailsComponent
+  },
+  {
+    path: 'invoice-details',
+    component: InvoiceDetailsComponent
   },
   {
     path: '',

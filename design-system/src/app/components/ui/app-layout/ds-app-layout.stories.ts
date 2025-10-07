@@ -5,7 +5,7 @@ import { DsTopbarComponent } from '../topbar/ds-topbar';
 import { DsSidebarComponent } from '../sidebar/ds-sidebar';
 import { DsDataItemComponent } from '../data-item/ds-data-item';
 import { ViewportService } from '../../../lib/viewport.service';
-import { demoGroups } from '../sidebar/ds-sidebar.stories';
+import { demoGroups } from '../sidebar/demo-data';
 
 @Component({
   selector: 'ds-debug-wrapper',

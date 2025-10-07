@@ -1,4 +1,4 @@
-import { Component, input, ViewEncapsulation } from '@angular/core';
+import { Component, input, ViewEncapsulation, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DsButtonComponent } from '../button/ds-button';
 import { DsAvatarComponent } from '../avatar/ds-avatar';
@@ -74,7 +74,29 @@ import { DsTopbarBreadcrumbComponent, TopbarBreadcrumbItem } from './ds-topbar-b
     </header>
   `,
 })
-export class DsTopbarComponent {
+export class DsTopbarComponent implements AfterViewInit, OnDestroy {
+  private scrollListener: (() => void) | null = null;
+
+  constructor(private elementRef: ElementRef) {}
+
+  ngAfterViewInit() {
+    // Add scroll listener
+    this.scrollListener = () => {
+      const scrolled = window.scrollY > 0;
+      console.log('Scroll position:', window.scrollY, 'Scrolled:', scrolled);
+      console.log('Adding class to:', this.elementRef.nativeElement);
+      this.elementRef.nativeElement.classList.toggle('scrolled', scrolled);
+    };
+    window.addEventListener('scroll', this.scrollListener);
+  }
+
+  ngOnDestroy() {
+    // Remove scroll listener
+    if (this.scrollListener) {
+      window.removeEventListener('scroll', this.scrollListener);
+      this.scrollListener = null;
+    }
+  }
   // Input signals
   pageTitle = input<string>('Page Title');
   iconName = input<string>('remixHome4Line');

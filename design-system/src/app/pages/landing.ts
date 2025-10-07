@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
   template: `
     <div class="landing">
       <div class="landing__header">
-        <img src="favicon.ico" alt="Propbinder Logo" class="landing__logo" />
+        <img src="/favicon.ico" alt="Propbinder Logo" class="landing__logo" />
         <h1 class="landing__title">Propbinder Design System</h1>
         <p class="landing__description">
           Explore our comprehensive design system with interactive components and documentation.

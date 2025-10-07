@@ -1,0 +1,116 @@
+/* Overlay styles - to be used on the ngpDialogOverlay */
+.ds-drawer-overlay {
+  @apply tw-fixed tw-inset-0 tw-bg-black/50 tw-z-50;
+  animation: fadeIn 150ms ease-out;
+}
+
+.ds-drawer-overlay[data-exit] {
+  animation: fadeOut 150ms ease-in;
+}
+
+/* Drawer styles - applied to the ds-drawer component */
+.ds-drawer {
+  @apply tw-bg-white tw-shadow-xl tw-w-[480px] tw-flex tw-flex-col tw-h-full tw-fixed tw-inset-y-0;
+}
+
+.ds-drawer--right {
+  @apply tw-right-0;
+  animation: slideInRight 250ms ease-out;
+}
+
+.ds-drawer--right[data-exit] {
+  animation: slideOutRight 200ms ease-in;
+}
+
+.ds-drawer--left {
+  @apply tw-left-0;
+  animation: slideInLeft 250ms ease-out;
+}
+
+.ds-drawer--left[data-exit] {
+  animation: slideOutLeft 200ms ease-in;
+}
+
+.ds-drawer__header {
+  @apply tw-p-6 tw-border-b tw-border-neutral-100 tw-flex-shrink-0;
+}
+
+.ds-drawer__content {
+  @apply tw-flex-1 tw-overflow-y-auto tw-p-6;
+}
+
+.ds-drawer__footer {
+  @apply tw-p-6 tw-border-t tw-border-neutral-100 tw-flex tw-gap-3 tw-justify-end tw-flex-shrink-0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

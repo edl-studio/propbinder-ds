@@ -23,6 +23,42 @@
   font-display: swap;
 }
 
+/* AI Gradient Variables */
+:host {
+  --ai-gradient-color-1: #5D42E9;
+  --ai-gradient-color-2: #7C1DEC;
+  --ai-gradient-color-3: #9218DC;
+  --ai-gradient-color-4: #C800F5;
+  --ai-gradient-color-5: #F414BC;
+
+  --ai-gradient: linear-gradient(
+    90deg,
+    var(--ai-gradient-color-1) 0%,
+    var(--ai-gradient-color-2) 25%,
+    var(--ai-gradient-color-3) 50%,
+    var(--ai-gradient-color-4) 75%,
+    var(--ai-gradient-color-5) 100%
+  );
+
+  --ai-gradient-alpha-5: linear-gradient(
+    90deg,
+    rgba(93, 66, 233, 0.05) 0%,
+    rgba(124, 29, 236, 0.05) 25%,
+    rgba(146, 24, 220, 0.05) 50%,
+    rgba(200, 0, 245, 0.05) 75%,
+    rgba(244, 20, 188, 0.05) 100%
+  );
+
+  --ai-gradient-alpha-10: linear-gradient(
+    90deg,
+    rgba(93, 66, 233, 0.1) 0%,
+    rgba(124, 29, 236, 0.1) 25%,
+    rgba(146, 24, 220, 0.1) 50%,
+    rgba(200, 0, 245, 0.1) 75%,
+    rgba(244, 20, 188, 0.1) 100%
+  );
+}
+
 /* Base component styles */
 :host {
   display: inline-block;
@@ -226,6 +262,72 @@
 
 :host(.sidebar-global-action__button) .btn {
   width: 100% !important;
+}
+
+/* AI Button Variants */
+/* Primary AI variant with background */
+.btn.btn--ai-primary,
+.btn.btn--ai-ghost {
+  position: relative;
+  background: transparent;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(124, 29, 236, 0.1);
+
+  /* Gradient Text */
+  .btn__content,
+  .btn__icon,
+  ds-icon {
+    background: var(--ai-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  ds-icon {
+    --icon-color: var(--ai-gradient-color-1) !important;
+  }
+}
+
+.btn.btn--ai-ghost {
+  border: none;
+}
+
+/* Base pseudo-element styles for both variants */
+.btn.btn--ai-primary::before,
+.btn.btn--ai-ghost::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ai-gradient);
+  transition: opacity 0.2s ease-in-out;
+  z-index: -1;
+  box-sizing: border-box;
+}
+
+/* Variant-specific opacity settings */
+.btn.btn--ai-primary::before {
+  opacity: 0.05;
+}
+
+.btn.btn--ai-primary:hover:not(:disabled)::before {
+  opacity: 0.1;
+}
+
+.btn.btn--ai-primary:active:not(:disabled)::before {
+  opacity: 0.05;
+}
+
+.btn.btn--ai-ghost::before {
+  opacity: 0;
+}
+
+.btn.btn--ai-ghost:hover:not(:disabled)::before {
+  opacity: 0.05;
+}
+
+.btn.btn--ai-ghost:active:not(:disabled)::before {
+  opacity: 0;
 }
 
 /* Ensure icons in primary buttons are white */

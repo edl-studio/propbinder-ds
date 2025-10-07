@@ -1,60 +1,64 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { DsSidebarComponent, SidebarGroup } from './ds-sidebar';
-
-export const demoGroups: SidebarGroup[] = [
-  {
-    id: 'servicehub',
-    label: 'SERVICEHUB',
-    items: [
-      { id: 'inbox', label: 'Inbox', icon: 'remixMailLine', badgeText: '2' },
-      { id: 'inquiries', label: 'Inquiries', icon: 'remixQuestionAnswerLine', badgeText: '2' },
-      { id: 'tasks', label: 'Tasks', icon: 'remixTaskLine' },
-      { id: 'surveys', label: 'Surveys', icon: 'remixSurveyLine' },
-    ],
-  },
-  {
-    id: 'company',
-    label: 'COMPANY',
-    items: [
-      { id: 'dashboard', label: 'Dashboard', icon: 'remixDashboardLine' },
-      { id: 'rating', label: 'Rating', icon: 'remixStarLine' },
-      { id: 'calendar', label: 'Calendar', icon: 'remixCalendarLine' },
-      { id: 'settings', label: 'Settings', icon: 'remixSettings4Line' },
-    ],
-  },
-  {
-    id: 'kartoteker',
-    label: 'KARTOTEKER',
-    items: [
-      { id: 'customers', label: 'Customers', icon: 'remixTeamLine' },
-      { id: 'companies', label: 'Companies', icon: 'remixBuilding4Line' },
-      { id: 'properties', label: 'Properties', icon: 'remixBuilding2Line' },
-      { id: 'leases', label: 'Leases', icon: 'remixFileListLine' },
-      { id: 'tenants', label: 'Tenants', icon: 'remixUserLine' },
-      { id: 'vendors', label: 'Vendors', icon: 'remixStore2Line' },
-      { id: 'vendor-agreements', label: 'Vendor agreements', icon: 'remixFileTextLine' },
-      { id: 'assets', label: 'Assets', icon: 'remixDatabase2Line' },
-      { id: 'real-esg', label: 'Real ESG', icon: 'remixLeafLine' },
-    ],
-  },
-  {
-    id: 'me',
-    label: 'ME',
-      items: [
-        { id: 'my-details', label: 'My details', icon: 'remixUserSettingsLine' },
-        { id: 'whats-new', label: 'What\'s new', icon: 'remixNotification4Line' },
-      ],
-  },
-];
+import { DsSidebarComponent } from './ds-sidebar';
+import { demoGroups } from './demo-data';
 
 const meta: Meta<DsSidebarComponent> = {
-  title: 'Application shell/Sidebar',
+  title: 'Components/Sidebar',
   component: DsSidebarComponent,
   parameters: {
     layout: 'fullscreen',
+    docs: {
+      story: { inline: true },
+      source: { excludeDecorators: true }
+    }
   },
   tags: ['autodocs'],
-  argTypes: {},
+  args: {
+    groups: demoGroups,
+  },
+  argTypes: {
+    groups: {
+      description: 'Array of sidebar groups with their items',
+      control: 'object',
+      table: {
+        type: { 
+          summary: 'SidebarGroup[]',
+          detail: `interface SidebarGroup {
+  id: string;
+  label: string;
+  items: {
+    id: string;
+    label: string;
+    icon?: string;
+    badgeText?: string;
+  }[];
+  expanded?: boolean;
+  showLabel?: boolean;
+}`
+        }
+      }
+    },
+    activeItemId: {
+      description: 'ID of the currently active item',
+      control: 'text'
+    },
+    collapsed: {
+      description: 'Whether the sidebar is collapsed',
+      control: 'boolean'
+    },
+    showGlobalAction: {
+      description: 'Whether to show the global action button',
+      control: 'boolean'
+    },
+    globalActionLabel: {
+      description: 'Label for the global action button',
+      control: 'text'
+    },
+    globalActionIcon: {
+      description: 'Icon for the global action button',
+      control: 'text'
+    }
+  }
 };
 
 export default meta;
@@ -62,7 +66,6 @@ type Story = StoryObj<DsSidebarComponent>;
 
 export const Default: Story = {
   args: {
-    groups: demoGroups,
     ariaLabel: 'Main navigation',
   },
   render: (args) => ({
@@ -76,7 +79,11 @@ export const Default: Story = {
 };
 
 export const WithGlobalAction: Story = {
-  args: { groups: demoGroups, showGlobalAction: true, globalActionLabel: 'New', globalActionIcon: 'remixAddLine' },
+  args: { 
+    showGlobalAction: true, 
+    globalActionLabel: 'New', 
+    globalActionIcon: 'remixAddLine' 
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -88,7 +95,9 @@ export const WithGlobalAction: Story = {
 };
 
 export const Collapsed: Story = {
-  args: { groups: demoGroups, collapsed: true },
+  args: { 
+    collapsed: true 
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -100,7 +109,9 @@ export const Collapsed: Story = {
 };
 
 export const ActiveItem: Story = {
-  args: { groups: demoGroups, activeItemId: 'inbox' },
+  args: { 
+    activeItemId: 'inbox' 
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -113,7 +124,6 @@ export const ActiveItem: Story = {
 
 export const CollapsedWithGlobalAction: Story = {
   args: { 
-    groups: demoGroups, 
     collapsed: true, 
     showGlobalAction: true, 
     globalActionLabel: 'Create New', 
@@ -134,5 +144,3 @@ export const CollapsedWithGlobalAction: Story = {
     `,
   }),
 };
-
-

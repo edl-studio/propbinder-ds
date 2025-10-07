@@ -102,14 +102,19 @@ module.exports = {
       },
       
       textColor: {
-        // Text-specific color mappings for cleaner class names
-        'primary': 'var(--text-color-default-primary)',
-        'primary-inverse': 'var(--text-color-default-primary-inverse)',
-        'secondary': 'var(--text-color-default-secondary)',
-        'tertiary': 'var(--text-color-default-tertiary)',
-        'disabled': 'var(--text-color-default-disabled)',
-        'brand': 'var(--text-color-brand)',
-        'brand-disabled': 'var(--text-color-brand-disabled)',
+        // Default/neutral text colors
+        'default': {
+          'primary': 'var(--text-color-default-primary)',
+          'primary-inverse': 'var(--text-color-default-primary-inverse)',
+          'secondary': 'var(--text-color-default-secondary)',
+          'tertiary': 'var(--text-color-default-tertiary)',
+          'disabled': 'var(--text-color-default-disabled)',
+        },
+        // Brand text colors
+        'brand': {
+          'DEFAULT': 'var(--text-color-brand)',
+          'disabled': 'var(--text-color-brand-disabled)',
+        },
       },
       
       fontSize: {
@@ -153,4 +158,26 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    // Text colors
+    {
+      pattern: /^tw-text-(default|brand)-(primary|secondary|tertiary|disabled|primary-inverse)$/,
+    },
+    // Background colors
+    {
+      pattern: /^tw-bg-(page|surface|interactive-(default|brand)(-hover|-disabled)?)$/,
+    },
+    // Border colors
+    {
+      pattern: /^tw-border-(default)$/,
+    },
+    // Brand colors
+    {
+      pattern: /^tw-(text|bg|border)-brand-(base|weak|strong)(-hover)?$/,
+    },
+    // Status colors (success, warning, destructive)
+    {
+      pattern: /^tw-(text|bg|border)-(success|warning|destructive)-(base|weak|strong)(-hover)?$/,
+    },
+  ],
 };

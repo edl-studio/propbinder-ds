@@ -1,0 +1,67 @@
+/* Container styles */
+.ai-sparks-static {
+  position: relative;
+  overflow: visible;
+  width: 48px;
+  height: 48px;
+  --spark-rotation: 45;
+}
+
+/* Base spark styles */
+.ai-sparks-static__spark {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px var(--color-brand-weak));
+  will-change: transform, opacity;
+}
+
+/* Size variants */
+.ai-sparks-static__spark--large {
+  @apply tw-w-8 tw-h-8; /* 32px */
+}
+
+.ai-sparks-static__spark--medium {
+  width: 18px;
+  height: 18px;
+}
+
+.ai-sparks-static__spark--small {
+  width: 14px;
+  height: 14px;
+}
+
+/* Initial states */
+.ai-sparks-static__spark--appear {
+  opacity: 0;
+  transform: scale(0) rotate(calc(var(--spark-rotation) * -1deg));
+}
+
+.ai-sparks-static__spark--static {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.ai-sparks-static__spark--disappear {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Animation states */
+.ai-sparks-static__spark--appear.ai-sparks-static__spark--animating {
+  animation: sparkAppear 800ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.ai-sparks-static__spark--disappear.ai-sparks-static__spark--animating {
+  animation: sparkAppear 800ms cubic-bezier(0.34, 1.56, 0.64, 1) reverse both;
+}
+
+@keyframes sparkAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(calc(var(--spark-rotation) * -1deg));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
