@@ -12,35 +12,35 @@
         <button 
           (click)="showTailwindClasses = false; showLabelShowcase = false; showAppShellShowcase = false; showAppShellFullPage = false"
           [class]="'tw-px-4 tw-py-2 tw-rounded tw-transition-all tw-duration-fast ' + 
-                   (!showTailwindClasses && !showLabelShowcase && !showAppShellShowcase && !showAppShellFullPage ? 'tw-bg-interactive-brand tw-text-white' : 'tw-bg-interactive-default tw-text-primary hover:tw-bg-interactive-default-hover')"
+                   (!showTailwindClasses && !showLabelShowcase && !showAppShellShowcase && !showAppShellFullPage ? 'tw-bg-brand tw-text-white' : 'tw-bg-neutral-secondary tw-text-primary hover:tw-bg-neutral-secondary-hover')"
         >
           Components Demo
         </button>
         <button 
           (click)="showTailwindClasses = true; showLabelShowcase = false; showAppShellShowcase = false; showAppShellFullPage = false"
           [class]="'tw-px-4 tw-py-2 tw-rounded tw-transition-all tw-duration-fast ' + 
-                   (showTailwindClasses && !showLabelShowcase && !showAppShellShowcase && !showAppShellFullPage ? 'tw-bg-interactive-brand tw-text-white' : 'tw-bg-interactive-default tw-text-primary hover:tw-bg-interactive-default-hover')"
+                   (showTailwindClasses && !showLabelShowcase && !showAppShellShowcase && !showAppShellFullPage ? 'tw-bg-brand tw-text-white' : 'tw-bg-neutral-secondary tw-text-primary hover:tw-bg-neutral-secondary-hover')"
         >
           Tailwind Classes
         </button>
         <button 
           (click)="showLabelShowcase = true; showTailwindClasses = false; showAppShellShowcase = false; showAppShellFullPage = false"
           [class]="'tw-px-4 tw-py-2 tw-rounded tw-transition-all tw-duration-fast ' + 
-                   (showLabelShowcase && !showTailwindClasses && !showAppShellShowcase && !showAppShellFullPage ? 'tw-bg-interactive-brand tw-text-white' : 'tw-bg-interactive-default tw-text-primary hover:tw-bg-interactive-default-hover')"
+                   (showLabelShowcase && !showTailwindClasses && !showAppShellShowcase && !showAppShellFullPage ? 'tw-bg-brand tw-text-white' : 'tw-bg-neutral-secondary tw-text-primary hover:tw-bg-neutral-secondary-hover')"
         >
           Label Preview
         </button>
         <button 
           (click)="showAppShellShowcase = true; showTailwindClasses = false; showLabelShowcase = false; showAppShellFullPage = false"
           [class]="'tw-px-4 tw-py-2 tw-rounded tw-transition-all tw-duration-fast ' + 
-                   (showAppShellShowcase && !showTailwindClasses && !showLabelShowcase && !showAppShellFullPage ? 'tw-bg-interactive-brand tw-text-white' : 'tw-bg-interactive-default tw-text-primary hover:tw-bg-interactive-default-hover')"
+                   (showAppShellShowcase && !showTailwindClasses && !showLabelShowcase && !showAppShellFullPage ? 'tw-bg-brand tw-text-white' : 'tw-bg-neutral-secondary tw-text-primary hover:tw-bg-neutral-secondary-hover')"
         >
           App Shell Showcase
         </button>
         <button 
           (click)="showAppShellFullPage = true; showAppShellShowcase = false; showTailwindClasses = false; showLabelShowcase = false"
           [class]="'tw-px-4 tw-py-2 tw-rounded tw-transition-all tw-duration-fast tw-inline-flex tw-items-center tw-gap-2 ' + 
-                   (showAppShellFullPage ? 'tw-bg-interactive-brand tw-text-white' : 'tw-bg-interactive-default tw-text-primary hover:tw-bg-interactive-default-hover')"
+                   (showAppShellFullPage ? 'tw-bg-brand tw-text-white' : 'tw-bg-neutral-secondary tw-text-primary hover:tw-bg-neutral-secondary-hover')"
         >
           Full-Page Preview
           <ds-icon name="remixFullscreenLine" size="16px" color="currentColor"></ds-icon>

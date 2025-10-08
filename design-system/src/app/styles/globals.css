@@ -40,31 +40,26 @@
 :root {
   /* Background Colors */
   
-  /* Page Level Background
-   * The foundational background that represents the "canvas" of the entire page/app
-   * Usage:
-   * - <body> element background
-   * - Main application wrapper
-   * - Default background that shows through when no other background is defined
-   * - Elevated elements that need to "pop" above surfaces (cards, modals, dropdowns)
+  /* Neutral Background Hierarchy
+   * Intensity-based backgrounds from lightest to darkest
+   * Each level includes hover and/or disabled variants for interactive states
    */
-  --background-color-page: #ffffff;
+  --color-background-neutral-primary: #ffffff;
+  --color-background-neutral-primary-hover: #F6F7F8;
+  
+  
+  --color-background-neutral-secondary: #F6F7F8;
+  --color-background-neutral-secondary-hover: #E3E6EB;
+  
+  --color-background-neutral-tertiary: #E3E6EB;
+  --color-background-neutral-tertiary-hover: #CAD0D8;
+  
+  --color-background-neutral-disabled: #CAD0D8;
 
-  /* Surface Level Background
-   * Background for content containers that sit on top of the page
-   * Usage:
-   * - Section backgrounds (<section>, .content-area)
-   * - Main content regions
-   * - Sidebars or panels
-   * - Areas that group related content together
-   */
-  --background-color-surface: #F6F7F8;
-  --background-color-interactive-default: #F6F7F8;
-  --background-color-interactive-default-hover: #E3E6EB;
-  --background-color-interactive-default-disabled: #CAD0D8;
-  --background-color-interactive-brand: #6B5FF5;
-  --background-color-interactive-brand-hover: #5D42E9;
-  --background-color-interactive-brand-disabled: #7C8694;
+  /* Brand Backgrounds */
+  --color-background-brand: #6B5FF5;
+  --color-background-brand-hover: #5D42E9;
+  --color-background-brand-disabled: #7C8694;
 
   /* Text Colors */
   --text-color-default-primary: #202227;
@@ -199,7 +194,7 @@
 
 /* Global Styles */
 body {
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-secondary);
   color: var(--text-color-default-primary);
   font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
 }
@@ -497,17 +492,19 @@ body {
   color: var(--text-color-brand);               /* -> tw-text-brand */
   color: var(--text-color-brand-disabled);      /* -> tw-text-brand-disabled */
   
-  /* Background Colors */
-  background-color: var(--background-color-page);    /* -> tw-bg-page */
-  background-color: var(--background-color-surface); /* -> tw-bg-surface */
+  /* Background Colors - Neutral Hierarchy */
+  background-color: var(--color-background-neutral-primary);              /* -> tw-bg-neutral-primary */
+  background-color: var(--color-background-neutral-primary-hover);        /* -> tw-bg-neutral-primary-hover */
+  background-color: var(--color-background-neutral-secondary);            /* -> tw-bg-neutral-secondary */
+  background-color: var(--color-background-neutral-secondary-hover);      /* -> tw-bg-neutral-secondary-hover */
+  background-color: var(--color-background-neutral-tertiary);             /* -> tw-bg-neutral-tertiary */
+  background-color: var(--color-background-neutral-tertiary-hover);       /* -> tw-bg-neutral-tertiary-hover */
+  background-color: var(--color-background-neutral-disabled);             /* -> tw-bg-neutral-disabled */
   
-  /* Interactive Background Colors */
-  background-color: var(--background-color-interactive-default);         /* -> tw-bg-interactive-default */
-  background-color: var(--background-color-interactive-default-hover);   /* -> tw-bg-interactive-default-hover */
-  background-color: var(--background-color-interactive-default-disabled);/* -> tw-bg-interactive-default-disabled */
-  background-color: var(--background-color-interactive-brand);          /* -> tw-bg-interactive-brand */
-  background-color: var(--background-color-interactive-brand-hover);    /* -> tw-bg-interactive-brand-hover */
-  background-color: var(--background-color-interactive-brand-disabled); /* -> tw-bg-interactive-brand-disabled */
+  /* Background Colors - Brand */
+  background-color: var(--color-background-brand);                        /* -> tw-bg-brand */
+  background-color: var(--color-background-brand-hover);                  /* -> tw-bg-brand-hover */
+  background-color: var(--color-background-brand-disabled);               /* -> tw-bg-brand-disabled */
   
   /* Border Colors */
   border-color: var(--border-color-default);    /* -> tw-border-default */

@@ -41,10 +41,10 @@ interface TabState {
       color: var(--text-color-default-secondary);
     }
     [ngpTabButton]:not([data-active])[data-hover] .tab-label {
-      background-color: var(--background-color-interactive-default);
+      background-color: var(--color-background-neutral-secondary);
     }
     [ngpTabButton][data-active].pressed .tab-label {
-      background-color: var(--background-color-interactive-default);
+      background-color: var(--color-background-neutral-secondary);
     }
    
     /* Base styles for both indicators */
@@ -84,7 +84,7 @@ interface TabState {
       padding: 0 4px;
       margin-left: 6px;
       border-radius: 6px;
-      background-color: var(--background-color-interactive-default-hover);
+      background-color: var(--color-background-neutral-secondary-hover);
       color: var(--text-color-default-tertiary);
       font-size: 11px;
       line-height: 1;
@@ -128,7 +128,7 @@ interface TabState {
     }
 
     .more-button:hover .tab-label {
-      background-color: var(--background-color-interactive-default);
+      background-color: var(--color-background-neutral-secondary);
     }
 
     /* Dropdown using ng-primitives menu */
@@ -138,7 +138,7 @@ interface TabState {
       top: 100%;
       right: 0;
       margin-top: 4px;
-      background-color: var(--background-color-page);
+      background-color: var(--color-background-neutral-primary);
       border-radius: 6px;
       border: 1px solid var(--border-color-default);
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -164,7 +164,7 @@ interface TabState {
 
     .overflow-item[data-hover],
     .overflow-item[data-press] {
-      background-color: var(--background-color-interactive-default);
+      background-color: var(--color-background-neutral-secondary);
     }
 
     .overflow-item[data-active] {

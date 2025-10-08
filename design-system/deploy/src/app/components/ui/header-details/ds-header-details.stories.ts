@@ -4,7 +4,7 @@ import { DsDataItemComponent } from '../data-item/ds-data-item';
 import { moduleMetadata } from '@storybook/angular';
 
 const meta: Meta<DsHeaderDetailsComponent> = {
-  title: 'Primitives/Headers/Header Details',
+  title: 'Primitives/Header Details',
   component: DsHeaderDetailsComponent,
   tags: ['autodocs'],
   decorators: [

@@ -3,7 +3,7 @@ import { DsSidebarComponent } from './ds-sidebar';
 import { demoGroups } from './demo-data';
 
 const meta: Meta<DsSidebarComponent> = {
-  title: 'Components/Sidebar',
+  title: 'Application shell/Sidebar',
   component: DsSidebarComponent,
   parameters: {
     layout: 'fullscreen',

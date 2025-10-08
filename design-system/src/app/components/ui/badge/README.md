@@ -123,7 +123,7 @@ Shape indicator with text. **Always white background and black text**, only the 
 ### Text & Icon-Text Types
 **Core Variants:**
 - **Default**: White background, light grey border, black text/icons
-- **Brand**: Purple background (`--background-color-interactive-brand`), white text/icons
+- **Brand**: Purple background (`--color-background-brand`), white text/icons
 - **Success**: Light green background (`--color-success-weak`), dark green text/icons (`--color-success-strong`)
 - **Warning**: Light yellow background (`--color-warning-weak`), dark yellow text/icons (`--color-warning-strong`)
 - **Destructive**: Light red background (`--color-destructive-weak`), dark red text/icons (`--color-destructive-strong`)
@@ -144,8 +144,8 @@ Shape indicator with text. **Always white background and black text**, only the 
 - **Border**: Uses `--border-color-default`
 
 **Available Indicator Colors:**
-- **Default**: `--background-color-interactive-default`
-- **Brand**: `--background-color-interactive-brand` (purple)
+- **Default**: `--color-background-neutral-secondary`
+- **Brand**: `--color-background-brand` (purple)
 - **Success**: `--color-success-base` (green)
 - **Warning**: `--color-warning-base` (yellow)
 - **Destructive**: `--color-destructive-base` (red)

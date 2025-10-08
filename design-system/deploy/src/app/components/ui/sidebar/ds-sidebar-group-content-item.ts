@@ -8,7 +8,10 @@ import { DsTooltipComponent } from '../tooltip/ds-tooltip';
   standalone: true,
   imports: [CommonModule, DsIconComponent, DsTooltipComponent],
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./ds-sidebar-group-content-item.css'],
+  styleUrls: [
+    './ds-sidebar-variables.css',
+    './ds-sidebar-group-content-item.css'
+  ],
   template: `
     <ng-container [ngSwitch]="hasHref()">
       <!-- Anchor elements -->
@@ -109,5 +112,3 @@ export class DsSidebarGroupContentItemComponent {
     this.selected.emit(this.id());
   }
 }
-
-

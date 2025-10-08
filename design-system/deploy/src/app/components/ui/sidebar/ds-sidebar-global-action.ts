@@ -8,7 +8,10 @@ import { DsIconComponent } from '../icon/ds-icon';
   standalone: true,
   imports: [CommonModule, DsButtonComponent, DsIconComponent],
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./ds-sidebar-global-action.css'],
+  styleUrls: [
+    './ds-sidebar-variables.css',
+    './ds-sidebar-global-action.css'
+  ],
   template: `
     <div class="sidebar-global-action" [class]="containerClasses()">
       <ds-button
@@ -47,5 +50,3 @@ export class DsSidebarGlobalActionComponent {
     if (!this.disabled()) this.clicked.emit();
   }
 }
-
-

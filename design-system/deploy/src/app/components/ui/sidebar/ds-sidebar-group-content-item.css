@@ -6,11 +6,11 @@
   width: 100%;
   min-width: 100%;
   padding: 0;
-  height: 40px;
+  height: 36px;
   border-radius: 8px;
   border: none;
   background: rgba(255, 255, 255, 0);
-  color: var(--text-color-default-primary-inverse);
+  color: var(--sidebar-content-primary);
   text-decoration: none;
   font-size: var(--font-size-sm);
   cursor: pointer;
@@ -32,7 +32,7 @@
 .sidebar-item[aria-current="page"],
 .sidebar-item.active {
   background: var(--background-color-interactive-brand);
-  color: white;
+  color: var(--sidebar-content-primary);
 }
 
 .sidebar-item[aria-disabled="true"],
@@ -43,9 +43,9 @@
 
 .sidebar-item__icon {
   justify-self: start; /* align to start of the 40px column */
-  color: #9AA1FE;
+  color: var(--sidebar-content-tertiary);
   width: 40px;
-  height: 40px;
+  height: 36px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -54,7 +54,7 @@
 
 .sidebar-item[aria-current="page"] .sidebar-item__icon,
 .sidebar-item.active .sidebar-item__icon {
-  color: white;
+  color: var(--sidebar-content-primary);
 }
 
 .sidebar-item__label {
@@ -75,7 +75,7 @@
 .sidebar-item__badge {
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 12px;
   transform: translateY(-50%);
   color: var(--text-color-default-primary);
   width: 16px;
@@ -106,7 +106,7 @@
 :host-context(.sidebar-host--collapsed) .sidebar-item {
   width: 40px;
   min-width: 40px;
-  height: 40px;
+  height: 36px;
   grid-template-columns: 40px; /* only icon column when collapsed */
   /* No align-self change - keep consistent positioning */
 }
@@ -143,5 +143,3 @@
 :host-context(.collapsed) .sidebar-item:nth-child(4) { transition-delay: 60ms; }
 :host-context(.collapsed) .sidebar-item:nth-child(5) { transition-delay: 80ms; }
 :host-context(.collapsed) .sidebar-item:nth-child(6) { transition-delay: 100ms; }
-
-

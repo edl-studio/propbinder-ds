@@ -5,7 +5,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   standalone: true,
   encapsulation: ViewEncapsulation.Emulated,
   template: `
-    <div class="tw-min-h-screen tw-bg-page tw-p-8">
+    <div class="tw-min-h-screen tw-bg-neutral-primary tw-p-8">
       <div class="tw-max-w-6xl tw-mx-auto tw-space-y-12">
         
         <!-- Header -->
@@ -22,50 +22,64 @@ import { Component, ViewEncapsulation } from '@angular/core';
           <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-4">
             
             <div class="tw-p-4 tw-rounded-lg tw-border tw-border-default">
-              <div class="tw-bg-page tw-p-4 tw-rounded tw-border tw-mb-2">
-                <code class="tw-text-sm">tw-bg-page</code>
+              <div class="tw-bg-neutral-primary tw-p-4 tw-rounded tw-border tw-mb-2">
+                <code class="tw-text-sm">tw-bg-neutral-primary</code>
               </div>
               <small class="tw-text-tertiary">Page background</small>
             </div>
 
             <div class="tw-p-4 tw-rounded-lg tw-border tw-border-default">
-              <div class="tw-bg-interactive-default tw-p-4 tw-rounded tw-mb-2">
-                <code class="tw-text-sm">tw-bg-interactive-default</code>
+              <div class="tw-bg-neutral-secondary tw-p-4 tw-rounded tw-mb-2">
+                <code class="tw-text-sm">tw-bg-neutral-secondary</code>
               </div>
               <small class="tw-text-tertiary">Interactive default</small>
             </div>
 
             <div class="tw-p-4 tw-rounded-lg tw-border tw-border-default">
-              <div class="tw-bg-interactive-default-hover tw-p-4 tw-rounded tw-mb-2">
-                <code class="tw-text-sm">tw-bg-interactive-default-hover</code>
+              <div class="tw-bg-neutral-secondary-hover tw-p-4 tw-rounded tw-mb-2">
+                <code class="tw-text-sm">tw-bg-neutral-secondary-hover</code>
               </div>
-              <small class="tw-text-tertiary">Interactive default hover</small>
+              <small class="tw-text-tertiary">Neutral secondary hover</small>
             </div>
 
             <div class="tw-p-4 tw-rounded-lg tw-border tw-border-default">
-              <div class="tw-bg-interactive-default-disabled tw-p-4 tw-rounded tw-mb-2">
-                <code class="tw-text-sm">tw-bg-interactive-default-disabled</code>
+              <div class="tw-bg-neutral-tertiary tw-p-4 tw-rounded tw-mb-2">
+                <code class="tw-text-sm">tw-bg-neutral-tertiary</code>
               </div>
-              <small class="tw-text-tertiary">Interactive default disabled</small>
+              <small class="tw-text-tertiary">Neutral tertiary</small>
             </div>
 
             <div class="tw-p-4 tw-rounded-lg tw-border tw-border-default">
-              <div class="tw-bg-interactive-brand tw-p-4 tw-rounded tw-mb-2 tw-text-white">
-                <code class="tw-text-sm">tw-bg-interactive-brand</code>
+              <div class="tw-bg-neutral-tertiary-hover tw-p-4 tw-rounded tw-mb-2">
+                <code class="tw-text-sm">tw-bg-neutral-tertiary-hover</code>
+              </div>
+              <small class="tw-text-tertiary">Neutral tertiary hover</small>
+            </div>
+
+            <div class="tw-p-4 tw-rounded-lg tw-border tw-border-default">
+              <div class="tw-bg-neutral-disabled tw-p-4 tw-rounded tw-mb-2">
+                <code class="tw-text-sm">tw-bg-neutral-disabled</code>
+              </div>
+              <small class="tw-text-tertiary">Neutral disabled</small>
+            </div>
+
+            <div class="tw-p-4 tw-rounded-lg tw-border tw-border-default">
+              <div class="tw-bg-brand tw-p-4 tw-rounded tw-mb-2 tw-text-white">
+                <code class="tw-text-sm">tw-bg-brand</code>
               </div>
               <small class="tw-text-tertiary">Interactive brand</small>
             </div>
 
             <div class="tw-p-4 tw-rounded-lg tw-border tw-border-default">
-              <div class="tw-bg-interactive-brand-hover tw-p-4 tw-rounded tw-mb-2 tw-text-white">
-                <code class="tw-text-sm">tw-bg-interactive-brand-hover</code>
+              <div class="tw-bg-brand-hover tw-p-4 tw-rounded tw-mb-2 tw-text-white">
+                <code class="tw-text-sm">tw-bg-brand-hover</code>
               </div>
               <small class="tw-text-tertiary">Interactive brand hover</small>
             </div>
 
             <div class="tw-p-4 tw-rounded-lg tw-border tw-border-default">
-              <div class="tw-bg-interactive-brand-disabled tw-p-4 tw-rounded tw-mb-2 tw-text-white">
-                <code class="tw-text-sm">tw-bg-interactive-brand-disabled</code>
+              <div class="tw-bg-brand-disabled tw-p-4 tw-rounded tw-mb-2 tw-text-white">
+                <code class="tw-text-sm">tw-bg-brand-disabled</code>
               </div>
               <small class="tw-text-tertiary">Interactive brand disabled</small>
             </div>
@@ -367,17 +381,17 @@ import { Component, ViewEncapsulation } from '@angular/core';
           <h2 class="tw-text-2xl tw-text-primary tw-font-semibold tw-mb-6">Box Shadows</h2>
           <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-6">
             
-            <div class="tw-p-6 tw-rounded-lg tw-bg-page tw-shadow-sm tw-border tw-border-default">
+            <div class="tw-p-6 tw-rounded-lg tw-bg-neutral-primary tw-shadow-sm tw-border tw-border-default">
               <h3 class="tw-text-lg tw-text-primary tw-font-medium tw-mb-2">Small Shadow</h3>
               <code class="tw-text-sm tw-text-tertiary">tw-shadow-sm</code>
             </div>
 
-            <div class="tw-p-6 tw-rounded-lg tw-bg-page tw-shadow-md tw-border tw-border-default">
+            <div class="tw-p-6 tw-rounded-lg tw-bg-neutral-primary tw-shadow-md tw-border tw-border-default">
               <h3 class="tw-text-lg tw-text-primary tw-font-medium tw-mb-2">Medium Shadow</h3>
               <code class="tw-text-sm tw-text-tertiary">tw-shadow-md</code>
             </div>
 
-            <div class="tw-p-6 tw-rounded-lg tw-bg-page tw-shadow-lg tw-border tw-border-default">
+            <div class="tw-p-6 tw-rounded-lg tw-bg-neutral-primary tw-shadow-lg tw-border tw-border-default">
               <h3 class="tw-text-lg tw-text-primary tw-font-medium tw-mb-2">Large Shadow</h3>
               <code class="tw-text-sm tw-text-tertiary">tw-shadow-lg</code>
             </div>
@@ -389,21 +403,21 @@ import { Component, ViewEncapsulation } from '@angular/core';
           <h2 class="tw-text-2xl tw-text-primary tw-font-semibold tw-mb-6">Transition Durations</h2>
           <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-6">
             
-            <button class="tw-p-4 tw-rounded-lg tw-bg-interactive-brand tw-text-white tw-transition-all tw-duration-fast hover:tw-bg-interactive-brand-hover hover:tw-scale-98">
+            <button class="tw-p-4 tw-rounded-lg tw-bg-brand tw-text-white tw-transition-all tw-duration-fast hover:tw-bg-brand-hover hover:tw-scale-98">
               <div class="tw-text-center">
                 <p class="tw-font-medium tw-mb-1">Fast Transition</p>
                 <code class="tw-text-sm">tw-duration-fast</code>
               </div>
             </button>
 
-            <button class="tw-p-4 tw-rounded-lg tw-bg-interactive-brand tw-text-white tw-transition-all tw-duration-normal hover:tw-bg-interactive-brand-hover hover:tw-scale-98">
+            <button class="tw-p-4 tw-rounded-lg tw-bg-brand tw-text-white tw-transition-all tw-duration-normal hover:tw-bg-brand-hover hover:tw-scale-98">
               <div class="tw-text-center">
                 <p class="tw-font-medium tw-mb-1">Normal Transition</p>
                 <code class="tw-text-sm">tw-duration-normal</code>
               </div>
             </button>
 
-            <button class="tw-p-4 tw-rounded-lg tw-bg-interactive-brand tw-text-white tw-transition-all tw-duration-slow hover:tw-bg-interactive-brand-hover hover:tw-scale-98">
+            <button class="tw-p-4 tw-rounded-lg tw-bg-brand tw-text-white tw-transition-all tw-duration-slow hover:tw-bg-brand-hover hover:tw-scale-98">
               <div class="tw-text-center">
                 <p class="tw-font-medium tw-mb-1">Slow Transition</p>
                 <code class="tw-text-sm">tw-duration-slow</code>
@@ -421,7 +435,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
             <div class="tw-p-6 tw-rounded-lg tw-border tw-border-default">
               <h3 class="tw-text-lg tw-text-primary tw-font-medium tw-mb-4">Button Combinations</h3>
               <div class="tw-flex tw-flex-wrap tw-gap-4">
-                <button class="tw-px-4 tw-py-2 tw-rounded tw-bg-interactive-brand tw-text-white tw-transition-all tw-duration-fast hover:tw-bg-interactive-brand-hover">
+                <button class="tw-px-4 tw-py-2 tw-rounded tw-bg-brand tw-text-white tw-transition-all tw-duration-fast hover:tw-bg-brand-hover">
                   Brand Button
                 </button>
                 <button class="tw-px-4 tw-py-2 tw-rounded tw-bg-success-base tw-text-white tw-transition-all tw-duration-fast hover:tw-bg-success-base-hover">
@@ -468,20 +482,23 @@ import { Component, ViewEncapsulation } from '@angular/core';
         <!-- Code Reference Section -->
         <section>
           <h2 class="tw-text-2xl tw-text-primary tw-font-semibold tw-mb-6">Complete Class Reference</h2>
-          <div class="tw-bg-interactive-default tw-p-6 tw-rounded-lg">
+          <div class="tw-bg-neutral-secondary tw-p-6 tw-rounded-lg">
             <h3 class="tw-text-lg tw-text-primary tw-font-medium tw-mb-4">Available Classes</h3>
             <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-4 tw-text-sm">
               
               <div>
                 <h4 class="tw-text-primary tw-font-medium tw-mb-2">Background Colors</h4>
                 <ul class="tw-space-y-1 tw-text-secondary">
-                  <li><code>tw-bg-page</code></li>
-                  <li><code>tw-bg-interactive-default</code></li>
-                  <li><code>tw-bg-interactive-default-hover</code></li>
-                  <li><code>tw-bg-interactive-default-disabled</code></li>
-                  <li><code>tw-bg-interactive-brand</code></li>
-                  <li><code>tw-bg-interactive-brand-hover</code></li>
-                  <li><code>tw-bg-interactive-brand-disabled</code></li>
+                  <li><code>tw-bg-neutral-primary</code></li>
+                  <li><code>tw-bg-neutral-primary-hover</code></li>
+                  <li><code>tw-bg-neutral-secondary</code></li>
+                  <li><code>tw-bg-neutral-secondary-hover</code></li>
+                  <li><code>tw-bg-neutral-tertiary</code></li>
+                  <li><code>tw-bg-neutral-tertiary-hover</code></li>
+                  <li><code>tw-bg-neutral-disabled</code></li>
+                  <li><code>tw-bg-brand</code></li>
+                  <li><code>tw-bg-brand-hover</code></li>
+                  <li><code>tw-bg-brand-disabled</code></li>
                 </ul>
               </div>
 

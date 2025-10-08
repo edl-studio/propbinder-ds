@@ -4,6 +4,7 @@ import { DsLabelComponent } from '../label/ds-label';
 import { DsIconComponent } from '../icon/ds-icon';
 import { DsAvatarComponent } from '../avatar/ds-avatar';
 import { DsBadgeComponent } from '../badge/ds-badge';
+import { DsLinkComponent } from '../link/ds-link';
 
 export type DataItemLayout = 'vertical' | 'horizontal';
 
@@ -11,7 +12,7 @@ export type DataItemLayout = 'vertical' | 'horizontal';
  * @deprecated Use DsMetadataItem component instead for metadata displays
  */
 export type LegacyDataItemLayout = DataItemLayout | 'metadata';
-export type DataItemValueType = 'text' | 'icon-text' | 'avatar-text' | 'badge' | 'multi-badge';
+export type DataItemValueType = 'text' | 'icon-text' | 'avatar-text' | 'badge' | 'multi-badge' | 'link' | 'icon-link';
 
 export interface DataItemBadgeConfig {
   variant?: 'default' | 'brand' | 'success' | 'warning' | 'destructive' | 'blue' | 'light-purple' | 'pink' | 'salmon-orange' | 'orange' | 'lime-green' | 'grey';
@@ -24,7 +25,7 @@ export interface DataItemBadgeConfig {
 @Component({
   selector: 'ds-data-item',
   standalone: true,
-  imports: [CommonModule, DsLabelComponent, DsIconComponent, DsAvatarComponent, DsBadgeComponent],
+  imports: [CommonModule, DsLabelComponent, DsIconComponent, DsAvatarComponent, DsBadgeComponent, DsLinkComponent],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-data-item.css'],
   template: `
@@ -61,6 +62,19 @@ export interface DataItemBadgeConfig {
                 class="data-item__value-avatar"
               />
               <span class="data-item__value-text ui-sm-regular">{{ value() }}</span>
+            }
+
+            @case ('link') {
+              <div class="data-item__value-text">
+                <ds-link [href]="linkHref()" [target]="linkTarget()">{{ value() }}</ds-link>
+              </div>
+            }
+
+            @case ('icon-link') {
+              <ds-icon [name]="iconName()!" size="16px" color="brand" class="data-item__value-icon data-item__value-icon--link" />
+              <div class="data-item__value-text">
+                <ds-link [href]="linkHref()" [target]="linkTarget()">{{ value() }}</ds-link>
+              </div>
             }
             
             @case ('badge') {
@@ -121,6 +135,10 @@ export class DsDataItemComponent {
 
   // Multi-badge specific inputs
   badges = input<DataItemBadgeConfig[]>();
+
+  // Link specific inputs
+  linkHref = input<string>('');
+  linkTarget = input<'_blank' | '_self'>('_self');
 
   // Computed classes
   containerClasses = computed(() => {

@@ -62,12 +62,12 @@ import { DsButtonComponent } from '../components/ui/button/ds-button';
         <p>This is where your main content would go. The layout handles the responsive behavior automatically.</p>
         
         <!-- Debug info -->
-        <div class="tw-mt-6 tw-p-4 tw-bg-interactive-default tw-rounded">
+        <div class="tw-mt-6 tw-p-4 tw-bg-neutral-secondary tw-rounded">
           <h2 class="tw-text-xl tw-font-semibold tw-mb-4">Debug Information</h2>
-          <pre class="tw-bg-surface tw-p-2 tw-rounded tw-mb-2">Window width: {{ windowWidth() }}px</pre>
-          <pre class="tw-bg-surface tw-p-2 tw-rounded tw-mb-2">Is Mobile: {{ isMobile() }}</pre>
-          <pre class="tw-bg-surface tw-p-2 tw-rounded tw-mb-2">Menu Open: {{ menuOpen() }}</pre>
-          <pre class="tw-bg-surface tw-p-2 tw-rounded tw-mb-4">Sidebar Collapsed: {{ isSidebarCollapsed() }}</pre>
+          <pre class="tw-bg-neutral-secondary tw-p-2 tw-rounded tw-mb-2">Window width: {{ windowWidth() }}px</pre>
+          <pre class="tw-bg-neutral-secondary tw-p-2 tw-rounded tw-mb-2">Is Mobile: {{ isMobile() }}</pre>
+          <pre class="tw-bg-neutral-secondary tw-p-2 tw-rounded tw-mb-2">Menu Open: {{ menuOpen() }}</pre>
+          <pre class="tw-bg-neutral-secondary tw-p-2 tw-rounded tw-mb-4">Sidebar Collapsed: {{ isSidebarCollapsed() }}</pre>
           <div class="tw-space-x-4">
             <button class="tw-px-4 tw-py-2 tw-bg-brand-base tw-text-white tw-rounded tw-transition-colors hover:tw-bg-brand-base-hover" 
                     (click)="toggleSidebar()">{{ isSidebarCollapsed() ? 'Expand' : 'Collapse' }} Sidebar</button>

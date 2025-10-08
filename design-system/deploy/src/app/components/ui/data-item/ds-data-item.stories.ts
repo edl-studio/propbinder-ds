@@ -15,7 +15,7 @@ A flexible data item component for displaying label-value pairs with multiple la
 
 - **Two Layout Types**: Vertical and horizontal arrangements for different use cases
 - **Fixed Value Height**: 32px height for consistent alignment across all value types
-- **Four Value Types**: Text, Icon+Text, Avatar+Text, and Badge variants
+- **Six Value Types**: Text, Icon+Text, Avatar+Text, Badge, Link, and Icon+Link variants
 - **Responsive Design**: Horizontal layout automatically collapses to vertical on mobile
 - **Consistent Spacing**: 8px gap between elements in value container
 - **Semantic Typography**: Uses ui-sm-regular (14px, 400 weight) for value text
@@ -42,6 +42,12 @@ Simple text display using ui-sm-regular typography with primary text color.
 ### Badge
 Full badge component with all variants and content types. Perfect for status, priority, categories, or any labeled information.
 
+### Link
+Clickable link using the ds-link component. Ideal for navigation, references, or any interactive text that should lead to another page or action.
+
+### Icon + Link
+Link with a leading icon for enhanced visual context. Perfect for document links, external references, or any clickable content that benefits from visual indicators.
+
 For complete documentation, properties reference, and implementation guidelines, see the [Data Item README](/?path=/docs/components-data-item--docs).
         `,
       },
@@ -64,13 +70,12 @@ For complete documentation, properties reference, and implementation guidelines,
     },
     valueType: {
       control: 'select',
-      options: ['text', 'icon-text', 'avatar-text', 'badge'],
+      options: ['text', 'icon-text', 'avatar-text', 'badge', 'link', 'icon-link'],
       description: 'Type of value display',
     },
     iconName: {
       control: 'text',
-      description: 'Icon name for icon-text type',
-      if: { arg: 'valueType', eq: 'icon-text' },
+      description: 'Icon name for icon-text and icon-link types',
     },
     avatarType: {
       control: 'select',
@@ -121,6 +126,18 @@ For complete documentation, properties reference, and implementation guidelines,
       description: 'Badge indicator shape for indicator-text type',
       if: { arg: 'valueType', eq: 'badge' },
     },
+    linkHref: {
+      control: 'text',
+      description: 'Link URL',
+      if: { arg: 'valueType', eq: 'link' },
+    },
+    linkTarget: {
+      control: 'select',
+      options: ['_blank', '_self'],
+      description: 'Link target (_blank for new tab)',
+      if: { arg: 'valueType', eq: 'link' },
+    },
+    // iconName is used for both icon-text and icon-link types
   },
   args: {
     label: 'Email',
@@ -242,6 +259,30 @@ export const HorizontalBadgeIndicator: Story = {
   },
 };
 
+// Link Examples
+export const VerticalLink: Story = {
+  args: {
+    label: 'Documentation',
+    value: 'View API docs',
+    layout: 'vertical',
+    valueType: 'link',
+    linkHref: 'https://api.example.com/docs',
+    linkTarget: '_blank',
+  },
+};
+
+export const HorizontalIconLink: Story = {
+  args: {
+    label: 'Download',
+    value: 'Download PDF report',
+    layout: 'horizontal',
+    valueType: 'icon-link',
+    linkHref: 'https://example.com/report.pdf',
+    linkTarget: '_blank',
+    iconName: 'remixFileDownloadLine',
+  },
+};
+
 // Layout Comparison
 export const LayoutComparison: Story = {
   render: (args) => ({
@@ -344,6 +385,23 @@ export const ValueTypesShowcase: Story = {
           badgeContentType="icon-text"
           badgeContent="Verified"
           badgeIcon="remixShieldCheckFill"
+        />
+        <ds-data-item
+          label="Link value"
+          value="Visit documentation"
+          layout="horizontal"
+          valueType="link"
+          linkHref="https://example.com/docs"
+          linkTarget="_blank"
+        />
+        <ds-data-item
+          label="Icon + Link"
+          value="Download report"
+          layout="horizontal"
+          valueType="icon-link"
+          linkHref="https://example.com/report.pdf"
+          linkTarget="_blank"
+          iconName="remixFileDownloadLine"
         />
       </div>
     `,

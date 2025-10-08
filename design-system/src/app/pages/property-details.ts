@@ -2,7 +2,6 @@ import { Component, signal, inject, TemplateRef, ViewChild } from '@angular/core
 import { PropertySuggestion } from '../components/ui/property-suggestions/ds-property-suggestions.component';
 import { CommonModule } from '@angular/common';
 import { DsAppLayoutComponent } from '../components/ui/app-layout/ds-app-layout';
-import { DsTopbarComponent } from '../components/ui/topbar/ds-topbar';
 import { DsHeaderDetailsComponent } from '../components/ui/header-details/ds-header-details';
 import { DsDataItemComponent } from '../components/ui/data-item/ds-data-item';
 import { DsTabs } from '../components/ui/tabs/ds-tabs';
@@ -19,7 +18,6 @@ import { NgpDialogTrigger, NgpDialogOverlay, NgpDialog, NgpDialogManager } from 
   imports: [
     CommonModule,
     DsAppLayoutComponent,
-    DsTopbarComponent,
     DsHeaderDetailsComponent,
     DsDataItemComponent,
     DsTabs,
@@ -37,25 +35,20 @@ import { NgpDialogTrigger, NgpDialogOverlay, NgpDialog, NgpDialogManager } from 
       [sidebarGroups]="sidebarGroups"
       [isSidebarCollapsed]="isSidebarCollapsed()"
       [activeItemId]="activeItemId()"
+      [pageTitle]="'Properties'"
+      [iconName]="'remixBuilding2Line'"
+      [showFirstAction]="true"
+      [showSecondAction]="true"
+      [firstActionIcon]="'remixNotification3Line'"
+      [secondActionIcon]="'remixMessage2Line'"
+      [userInitials]="'JD'"
+      [showBreadcrumbs]="true"
+      [breadcrumbItems]="[
+        { label: 'Properties', path: '/properties', isLast: false },
+        { label: 'Nørrebrogade 44', path: '', isLast: true }
+      ]"
       (collapsedChange)="isSidebarCollapsed.set($event)"
     >
-      <!-- Topbar -->
-      <ds-topbar 
-        slot="topbar"
-        [pageTitle]="'Properties'"
-        [iconName]="'remixBuilding2Line'"
-        [showFirstAction]="true"
-        [showSecondAction]="true"
-        [firstActionIcon]="'remixNotification3Line'"
-        [secondActionIcon]="'remixMessage2Line'"
-        [userInitials]="'JD'"
-        [showBreadcrumbs]="true"
-        [breadcrumbItems]="[
-          { label: 'Properties', path: '/properties', isLast: false },
-          { label: 'Nørrebrogade 44', path: '', isLast: true }
-        ]"
-      ></ds-topbar>
-
       <!-- Main Content -->
       <div class="content-container">
         <!-- Header Details -->
@@ -707,7 +700,7 @@ import { NgpDialogTrigger, NgpDialogOverlay, NgpDialog, NgpDialogManager } from 
 
     :host ::ng-deep ds-button.header-details__action-btn--primary .btn.btn--ghost:hover {
       color: var(--color-brand-base) !important;
-      background-color: var(--background-color-interactive-default-hover);
+      background-color: var(--color-background-neutral-secondary-hover);
     }
 
     :host ::ng-deep ds-button.header-details__action-btn--primary .btn.btn--ghost .btn__icon {

@@ -26,12 +26,12 @@
   border-width: 1px;
   
   /* Base colors */
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--border-color-default);
   
   /* Hover state */
   &:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
-    background-color: var(--background-color-page);
+    background-color: var(--color-background-neutral-primary);
     border-color: var(--color-brand-base);
   }
   
@@ -42,7 +42,7 @@
   
   /* Disabled state */
   &.textarea-container--disabled {
-    background-color: var(--background-color-disabled);
+    background-color: var(--color-background-disabled);
     border-color: var(--border-color-default);
     cursor: not-allowed;
     opacity: 0.6;
@@ -50,7 +50,7 @@
   
   /* Readonly state */
   &.textarea-container--readonly {
-    background-color: var(--background-color-container);
+    background-color: var(--color-background-container);
     border-color: var(--border-color-default);
     cursor: default;
   }
@@ -232,7 +232,7 @@ textarea[data-disabled] {
 }
 
 .textarea::-webkit-scrollbar-track {
-  background: var(--background-color-container);
+  background: var(--color-background-container);
   border-radius: 3px;
 }
 
@@ -248,5 +248,5 @@ textarea[data-disabled] {
 /* Firefox scrollbar */
 .textarea {
   scrollbar-width: thin;
-  scrollbar-color: var(--border-color-default) var(--background-color-container);
+  scrollbar-color: var(--border-color-default) var(--color-background-container);
 }

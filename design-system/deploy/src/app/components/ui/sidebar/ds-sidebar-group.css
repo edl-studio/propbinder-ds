@@ -1,7 +1,6 @@
 .sidebar-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
   align-items: stretch; /* make children fill full width */
   width: 100% !important;
   min-width: 100% !important;

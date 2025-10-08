@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DsAppLayoutComponent } from '../components/ui/app-layout/ds-app-layout';
-import { DsTopbarComponent } from '../components/ui/topbar/ds-topbar';
 import { DsHeaderDetailsComponent } from '../components/ui/header-details/ds-header-details';
 import { DsDataItemComponent } from '../components/ui/data-item/ds-data-item';
 import { DsButtonComponent } from '../components/ui/button/ds-button';
@@ -12,7 +11,6 @@ import { DsButtonComponent } from '../components/ui/button/ds-button';
   imports: [
     CommonModule,
     DsAppLayoutComponent,
-    DsTopbarComponent,
     DsHeaderDetailsComponent,
     DsDataItemComponent,
     DsButtonComponent,
@@ -22,25 +20,20 @@ import { DsButtonComponent } from '../components/ui/button/ds-button';
       [sidebarGroups]="sidebarGroups"
       [isSidebarCollapsed]="isSidebarCollapsed()"
       [activeItemId]="activeItemId()"
+      [pageTitle]="'Invoices'"
+      [iconName]="'remixFileList3Line'"
+      [showFirstAction]="true"
+      [showSecondAction]="true"
+      [firstActionIcon]="'remixNotification3Line'"
+      [secondActionIcon]="'remixMessage2Line'"
+      [userInitials]="'JD'"
+      [showBreadcrumbs]="true"
+      [breadcrumbItems]="[
+        { label: 'Invoices', path: '/invoices', isLast: false },
+        { label: 'INV-2024-001', path: '', isLast: true }
+      ]"
       (collapsedChange)="isSidebarCollapsed.set($event)"
     >
-      <!-- Topbar -->
-      <ds-topbar 
-        slot="topbar"
-        [pageTitle]="'Invoices'"
-        [iconName]="'remixFileList3Line'"
-        [showFirstAction]="true"
-        [showSecondAction]="true"
-        [firstActionIcon]="'remixNotification3Line'"
-        [secondActionIcon]="'remixMessage2Line'"
-        [userInitials]="'JD'"
-        [showBreadcrumbs]="true"
-        [breadcrumbItems]="[
-          { label: 'Invoices', path: '/invoices', isLast: false },
-          { label: 'INV-2024-001', path: '', isLast: true }
-        ]"
-      ></ds-topbar>
-
       <!-- Main Content -->
       <div class="content-container">
         <!-- Header Details -->
@@ -64,13 +57,31 @@ import { DsButtonComponent } from '../components/ui/button/ds-button';
               label="Task"
               value="Fix ventilation canal"
               valueType="icon-link"
-              iconName="remixTaskLine"
+              iconName="remixCheckboxMultipleLine"
               linkHref="/tasks/fix-ventilation-canal"
             />
 
             <ds-data-item
               label="Invoice number"
               value="Not available"
+              valueType="text"
+            />
+
+            <ds-data-item
+              label="Coverage per hour"
+              value="150,00 DKK"
+              valueType="text"
+            />
+
+            <ds-data-item
+              label="Contribution margin"
+              value="3.075,00 DKK"
+              valueType="text"
+            />
+
+            <ds-data-item
+              label="Contribution ratio"
+              value="13,0 %"
               valueType="text"
             />
           </div>
@@ -81,7 +92,15 @@ import { DsButtonComponent } from '../components/ui/button/ds-button';
 
         <!-- Content area for invoice details -->
         <div class="tw-p-8">
-          <!-- Add invoice content here -->
+          <div class="tw-flex tw-flex-col tw-gap-4">
+            <!-- Invoice lines section -->
+            <div class="elevation-tile tw-rounded-lg tw-p-6">
+              <div class="heading-xl">
+                Invoice lines
+              </div>
+              <!-- Content will go here -->
+            </div>
+          </div>
         </div>
       </div>
     </ds-app-layout>

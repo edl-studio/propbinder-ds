@@ -1,0 +1,311 @@
+/* Data Table Component Styles */
+
+.ds-data-table {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Header Section */
+.ds-data-table__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color-default);
+}
+
+@media (min-width: 640px) {
+  .ds-data-table__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.ds-data-table__search {
+  flex: 1;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .ds-data-table__search {
+    max-width: 320px;
+  }
+}
+
+.ds-data-table__actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Column Visibility Panel */
+.ds-data-table__column-panel {
+  background: var(--color-background-neutral-primary);
+  border: 1px solid var(--border-color-default);
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.ds-data-table__column-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color-default);
+}
+
+.ds-data-table__column-panel-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: var(--text-color-default-secondary);
+  transition: all 0.2s;
+}
+
+.ds-data-table__column-panel-close:hover {
+  background: var(--color-background-neutral-secondary);
+  color: var(--text-color-default-primary);
+}
+
+.ds-data-table__column-panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ds-data-table__column-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.ds-data-table__column-toggle:hover {
+  background: var(--color-background-neutral-secondary);
+}
+
+.ds-data-table__column-toggle input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-background-brand);
+}
+
+/* Table Container */
+.ds-data-table__container {
+  background: var(--color-background-neutral-primary);
+  border: 1px solid var(--border-color-default);
+  overflow: hidden;
+}
+
+.ds-data-table__scroll {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 600px;
+}
+
+/* Table */
+.ds-data-table__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+/* Table Header */
+.ds-data-table__thead {
+  position: sticky;
+  top: 0;
+  background: var(--color-background-neutral-primary);
+  z-index: 10;
+  border-bottom: 1px solid var(--border-color-default);
+}
+
+.ds-data-table__th {
+  padding: 12px 16px;
+  text-align: left;
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-color-default-tertiary);
+  background: var(--color-background-neutral-primary);
+  border-bottom: 1px solid var(--border-color-default);
+  white-space: nowrap;
+}
+
+.ds-data-table__th--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Sort Button */
+.ds-data-table__sort-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  transition: color 0.2s;
+}
+
+.ds-data-table__sort-button:hover {
+  color: var(--text-color-default-primary);
+}
+
+/* Active sorting state - both text and icon should be primary */
+.ds-data-table__sort-button--active {
+  color: var(--text-color-default-primary);
+}
+
+.ds-data-table__sort-icon {
+  flex-shrink: 0;
+}
+
+/* Table Body */
+.ds-data-table__tbody {
+  background: var(--color-background-neutral-primary);
+}
+
+.ds-data-table__tr--body:hover {
+  background: var(--color-background-neutral-secondary);
+}
+
+.ds-data-table__tr--clickable {
+  cursor: pointer;
+}
+
+.ds-data-table__tr--selected {
+  background: var(--color-background-neutral-secondary);
+}
+
+.ds-data-table__td {
+  padding: 12px 16px;
+  font-family: var(--font-family-primary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--text-color-default-primary);
+  vertical-align: middle;
+}
+
+.ds-data-table__td--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Empty State */
+.ds-data-table__td--empty {
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.ds-data-table__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-color-default-secondary);
+}
+
+
+/* Footer / Pagination */
+.ds-data-table__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-top: 1px solid var(--border-color-default);
+}
+
+@media (min-width: 640px) {
+  .ds-data-table__footer {
+    flex-direction: row;
+  }
+}
+
+.ds-data-table__info {
+  display: flex;
+  align-items: center;
+}
+
+.ds-data-table__pagination {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .ds-data-table__pagination {
+    flex-direction: row;
+    gap: 24px;
+  }
+}
+
+.ds-data-table__page-size {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ds-data-table__pagination-buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Inline Edit Input */
+.ds-data-table__edit-input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid var(--border-color-default);
+  border-radius: 4px;
+  background: white;
+  color: var(--text-color-default-primary);
+  font-family: inherit;
+  font-size: inherit;
+  transition: all 0.2s;
+}
+
+.ds-data-table__edit-input:focus {
+  outline: 2px solid var(--color-background-brand);
+  outline-offset: 1px;
+  border-color: var(--color-background-brand);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ds-data-table__th,
+  .ds-data-table__td {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .ds-data-table__scroll {
+    max-height: 400px;
+  }
+}
+

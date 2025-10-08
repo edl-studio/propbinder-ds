@@ -27,7 +27,6 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
   align-items: stretch; /* force all children to fill 100% width */
   min-height: 0; /* allow flex item to shrink */
   transition: gap var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));

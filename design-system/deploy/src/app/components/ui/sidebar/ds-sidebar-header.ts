@@ -9,7 +9,10 @@ import { DsSidebarGlobalActionComponent } from './ds-sidebar-global-action';
   standalone: true,
   imports: [CommonModule, DsIconComponent, DsSidebarGlobalActionComponent, DsButtonComponent],
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./ds-sidebar-header.css'],
+  styleUrls: [
+    './ds-sidebar-variables.css',
+    './ds-sidebar-header.css'
+  ],
   template: `
     <header class="sidebar-header" role="banner" [class]="headerClass()">
       <div class="sidebar-header__brand">
