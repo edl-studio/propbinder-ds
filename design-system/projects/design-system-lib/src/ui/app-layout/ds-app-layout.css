@@ -1,0 +1,208 @@
+.app-layout {
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  position: relative; /* Create stacking context */
+}
+
+/* Scrolled state class - applied by app-layout component */
+/* .app-layout--scrolled class is used to trigger styles in child components via :host-context() */
+
+/* Mobile Layout (default) */
+.app-layout {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+}
+
+/* Sidebar container - base styles */
+.app-layout__sidebar {
+  background: var(--sidebar-bg);
+  position: relative;
+}
+
+/* Mobile minimized sidebar */
+.app-layout__sidebar--minimized {
+  grid-row: 1;
+  width: 100%;
+  height: 64px; /* Match topbar height */
+  z-index: 1;
+}
+
+.app-layout__sidebar--minimized ::ng-deep .sidebar__container {
+  width: 100%;
+  height: 100%;
+  padding: 0; /* Let sidebar header handle its own padding */
+}
+
+/* Override sidebar header padding in minimized mode to match topbar */
+.app-layout__sidebar--minimized ::ng-deep .sidebar-header {
+  padding: 0 12px 0 20px; /* Match sidebar padding */
+  height: 64px; /* Match topbar height */
+  justify-content: center; /* Center content vertically */
+}
+
+/* Mobile drawer */
+.app-layout__drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: min(300px, 80vw);
+  z-index: 20;
+  background: var(--sidebar-bg);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+  
+  /* Initial state - hidden */
+  transform: translateX(-100%);
+  transition: transform var(--transition-duration-slow) var(--ease-in-out-quart);
+  will-change: transform;
+  pointer-events: none; /* Prevent interaction when closed */
+}
+
+/* Show drawer when open */
+.app-layout__drawer--open {
+  transform: translateX(0);
+  pointer-events: auto; /* Allow interaction when open */
+}
+
+/* Desktop sidebar */
+.app-layout__sidebar--desktop {
+  grid-column: 1;
+  grid-row: 1;
+  height: 100%;
+  width: 256px;
+  transition: width var(--transition-duration-slow) var(--ease-out-quart);
+  will-change: width;
+  /* Remove overflow: hidden to allow sidebar content to scroll */
+}
+
+/* Desktop Layout */
+@media (min-width: 992px) {
+  .app-layout {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 100%;
+  }
+
+  /* Collapsed desktop sidebar */
+  .app-layout--sidebar-collapsed .app-layout__sidebar--desktop {
+    width: 80px;
+  }
+}
+
+/* Overlay for mobile menu */
+.app-layout__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  
+  /* Initial state - hidden */
+  opacity: 0;
+  -webkit-backdrop-filter: blur(0px);
+          backdrop-filter: blur(0px);
+  pointer-events: none;
+  transition: 
+    opacity var(--transition-duration-slow) var(--ease-in-out-quart),
+    -webkit-backdrop-filter var(--transition-duration-slow) var(--ease-in-out-quart);
+  transition: 
+    opacity var(--transition-duration-slow) var(--ease-in-out-quart),
+    backdrop-filter var(--transition-duration-slow) var(--ease-in-out-quart);
+  transition: 
+    opacity var(--transition-duration-slow) var(--ease-in-out-quart),
+    backdrop-filter var(--transition-duration-slow) var(--ease-in-out-quart),
+    -webkit-backdrop-filter var(--transition-duration-slow) var(--ease-in-out-quart);
+  will-change: opacity, backdrop-filter;
+}
+
+/* Show overlay when visible */
+.app-layout__overlay--visible {
+  opacity: 1;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+/* Main content area */
+.app-layout__main {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  position: relative; /* Create stacking context */
+  overflow-y: auto; /* Main scrolls, not content */
+  overflow-x: hidden;
+}
+
+@media (min-width: 992px) {
+  .app-layout__main {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
+
+/* Topbar container */
+.app-layout__topbar {
+  width: 100%;
+  min-width: 0;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10; /* Keep topbar above content but below overlay */
+}
+
+/* Content area */
+.app-layout__content {
+  min-width: 0;
+  width: 100%;
+  flex: 1 1 auto;
+  padding-top: var(--content-padding-xs); /* Only top padding, horizontal padding moved to content-container */
+  box-sizing: border-box;
+  position: relative; /* Establish positioning context for edge-to-edge elements */
+}
+
+/* Responsive padding for content area */
+@media (min-width: 576px) {
+  .app-layout__content {
+    padding-top: var(--content-padding-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .app-layout__content {
+    padding-top: var(--content-padding-sm);
+  }
+}
+
+@media (min-width: 992px) {
+  .app-layout__content {
+    padding-top: var(--content-padding-sm);
+  }
+}
+
+@media (min-width: 1440px) {
+  .app-layout__content {
+    padding-top: var(--content-padding-md);
+  }
+}
+
+@media (min-width: 1768px) {
+  .app-layout__content {
+    padding-top: var(--content-padding-xl);
+  }
+}
+
+@media (min-width: 1920px) {
+  .app-layout__content {
+    padding-top: var(--content-padding-2xl);
+  }
+}
+
+@media (min-width: 2560px) {
+  .app-layout__content {
+    padding-top: var(--content-padding-3xl);
+  }
+}

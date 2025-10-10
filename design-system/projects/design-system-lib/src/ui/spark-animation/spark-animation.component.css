@@ -1,0 +1,114 @@
+/* Container styles */
+.spark-animation {
+  position: relative;
+  overflow: visible;
+  --spark-rotation: 45;
+  --orbit-radius: 4px;
+}
+
+/* Base spark styles */
+.spark-animation__spark {
+  position: absolute;
+  pointer-events: none;
+  /* Using our design system's brand color for the glow effect */
+  filter: drop-shadow(0 0 8px var(--color-brand-weak));
+  will-change: transform, opacity;
+}
+
+/* Initial states */
+.spark-animation__spark--appear {
+  opacity: 0;
+  transform: scale(0) rotate(calc(var(--spark-rotation) * -1deg));
+}
+
+.spark-animation__spark--disappear {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Static state */
+.spark-animation__spark--static {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Loading state - match exact initial position of animation */
+.spark-animation__spark--loading {
+  opacity: 1;
+  transform: rotate(0deg) translate(4px) rotate(0deg);
+}
+
+/* Size variants using our design system sizes */
+.spark-animation__spark--large {
+  @apply tw-w-8 tw-h-8; /* 32px */
+}
+
+.spark-animation__spark--medium {
+  width: 18px;
+  height: 18px;
+}
+
+.spark-animation__spark--small {
+  width: 14px;
+  height: 14px;
+}
+
+/* Animation states */
+.spark-animation__spark--static {
+  transition: transform var(--transition-duration-normal) var(--ease-out-quart);
+  transform: rotate(0deg) !important;
+}
+
+.spark-animation__spark--appear.spark-animation__spark--animating {
+  animation: sparkAppear 800ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.spark-animation__spark--loading.spark-animation__spark--large {
+  --orbit-radius: 6px;
+  animation-duration: 4s;
+  transform-origin: 50% 150%;
+  transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg);
+}
+
+.spark-animation__spark--loading.spark-animation__spark--medium {
+  --orbit-radius: 5px;
+  animation-duration: 3s;
+  transform-origin: 150% 50%;
+  transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg);
+}
+
+.spark-animation__spark--loading.spark-animation__spark--small {
+  --orbit-radius: 4px;
+  animation-duration: 2s;
+  transform-origin: 50% -50%;
+  transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg);
+}
+
+.spark-animation__spark--loading.spark-animation__spark--animating {
+  animation: sparkPulse 3s linear infinite;
+}
+
+.spark-animation__spark--disappear.spark-animation__spark--animating {
+  animation: sparkAppear 800ms cubic-bezier(0.34, 1.56, 0.64, 1) reverse both;
+}
+
+/* Keyframe animations */
+@keyframes sparkAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(calc(var(--spark-rotation) * -1deg));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes sparkPulse {
+  from {
+    transform: rotate(0deg) translate(var(--orbit-radius, 4px)) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translate(var(--orbit-radius, 4px)) rotate(-360deg);
+  }
+}

@@ -1,0 +1,76 @@
+.sidebar-group-label {
+  display: grid;
+  grid-template-columns: 1fr 16px;
+  align-items: center;
+  width: 100% !important; /* use full available width */
+  min-width: 100% !important;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+  row-gap: 0;
+  height: 40px; /* fixed height for consistency */
+  min-height: 32px;
+  padding: 0 24px 0 24px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--transition-duration-slow, 1.2s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), opacity var(--transition-duration-normal, .9s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), height var(--transition-duration-slow, 1.2s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), min-height var(--transition-duration-slow, 1.2s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
+  transition-delay: var(--transition-duration-slow, 1.2s), var(--transition-duration-slow, 1.2s), 0s, 0s; /* Delay visual animations when expanding */
+  position: relative;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* Default expanded state - 80% opacity */
+.sidebar-group-label__text,
+.sidebar-group-label ds-icon {
+  color: var(--sidebar-content-secondary);
+  opacity: 1;
+  transition: transform var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), color var(--transition-duration-normal, .2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), opacity var(--transition-duration-normal, .2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+/* Default expanded state - rotate right arrow to point down */
+.sidebar-group-label[aria-expanded="true"] ds-icon {
+  transform: rotate(90deg);
+}
+
+/* Collapsed state - keep right arrow pointing right */
+.sidebar-group-label[aria-expanded="false"] ds-icon {
+  transform: rotate(0deg);
+}
+
+/* Remove hover background on the parent; only color change on inner elements */
+.sidebar-group-label:hover {
+  background: transparent;
+}
+
+/* On hover, always bump to full opacity regardless of expanded state */
+.sidebar-group-label:hover .sidebar-group-label__text,
+.sidebar-group-label:hover ds-icon {
+  opacity: 0.8;
+}
+
+.sidebar-group-label:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 2px;
+}
+
+.sidebar-group-label__text {
+  font-weight: 500;
+  transition: transform var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), opacity var(--transition-duration-normal, .2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-self: center;
+}
+
+/* Collapse animation: slide/fade entire label */
+:host-context(.sidebar-host--collapsed) .sidebar-group-label {
+  height: 1px; /* minimal height when collapsed */
+  min-height: 1px;
+  padding-right: 24px; /* keep consistent padding */
+  transform: translateX(-24px); /* Move labels further to the left when collapsing */
+  opacity: 0;
+  pointer-events: none;
+  transition-delay: 0s, 0s, var(--transition-duration-slow, 1.2s), var(--transition-duration-slow, 1.2s); /* Delay only height animations */
+}

@@ -3,6 +3,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "design-system-lib": ["./dist/design-system-lib"],
+      "@design-root": ["index.ts"],
+      "@design-src/*": ["src/*"]
+    },
+
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -24,11 +31,9 @@
   },
   "files": [],
   "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.spec.json" },
+    { "path": "./projects/design-system-lib/tsconfig.lib.json" },
+    { "path": "./projects/design-system-lib/tsconfig.spec.json" }
   ]
 }

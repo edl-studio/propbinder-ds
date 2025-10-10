@@ -1,0 +1,145 @@
+.sidebar-item {
+  display: grid;
+  grid-template-columns: 40px 1fr auto; /* fixed 40px icon slot */
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  min-width: 100%;
+  padding: 0;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0);
+  color: var(--sidebar-content-primary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: background var(--transition-duration-fast), color var(--transition-duration-fast), width var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), transform var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
+  position: relative;
+  box-sizing: border-box;
+  transform: translateY(0px);
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-item:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 2px;
+}
+
+.sidebar-item[aria-current="page"],
+.sidebar-item.active {
+  background: var(--background-color-interactive-brand);
+  color: var(--sidebar-content-primary);
+}
+
+.sidebar-item[aria-disabled="true"],
+.sidebar-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sidebar-item__icon {
+  justify-self: start; /* align to start of the 40px column */
+  color: var(--sidebar-content-tertiary);
+  width: 40px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  min-width: 40px;
+}
+
+.sidebar-item[aria-current="page"] .sidebar-item__icon,
+.sidebar-item.active .sidebar-item__icon {
+  color: var(--sidebar-content-primary);
+}
+
+.sidebar-item__label {
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 1;
+  pointer-events: auto;
+  max-width: 100%;
+  transition: transform var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), opacity var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), max-width var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
+  grid-column: 2; /* place in second column */
+  align-self: center;
+}
+
+/* NOTE: visually-hidden class is not used for collapse animation anymore */
+
+.sidebar-item__badge {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: var(--text-color-default-primary);
+  width: 16px;
+  height: 16px;
+  background: white;
+  outline: 2px solid var(--sidebar-bg);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  line-height: 1;
+  z-index: 1;
+  transition: top var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), transform var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), right var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), outline-color var(--transition-duration-fast) ease;
+  /* Ensure perfect centering for digits */
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Badge outline matches active menu item color */
+.sidebar-item[aria-current="page"] .sidebar-item__badge,
+.sidebar-item.active .sidebar-item__badge {
+  outline-color: var(--background-color-interactive-brand);
+}
+
+/* Collapse animation: slide/fade label left */
+:host-context(.sidebar-host--collapsed) .sidebar-item {
+  width: 40px;
+  min-width: 40px;
+  height: 36px;
+  grid-template-columns: 40px; /* only icon column when collapsed */
+  /* No align-self change - keep consistent positioning */
+}
+
+/* Ensure tooltip wrapper doesn't interfere with sidebar item layout */
+:host-context(.sidebar-host--collapsed) .tooltip-trigger {
+  width: 40px;
+  display: block;
+}
+
+:host-context(.sidebar-host--collapsed) .sidebar-item__label {
+  opacity: 0;
+  pointer-events: none;
+  max-width: 0;
+  overflow: hidden;
+}
+
+:host-context(.sidebar-host--collapsed) .sidebar-item__badge {
+  top: 4px;
+  right: 4px;
+  transform: translateY(0);
+}
+
+/* Menu item animations when group collapses/expands */
+:host-context(.collapsed) .sidebar-item {
+  transform: translateY(-4px);
+  opacity: 0.7;
+}
+
+/* Staggered animation delays for menu items */
+:host-context(.collapsed) .sidebar-item:nth-child(1) { transition-delay: 0ms; }
+:host-context(.collapsed) .sidebar-item:nth-child(2) { transition-delay: 20ms; }
+:host-context(.collapsed) .sidebar-item:nth-child(3) { transition-delay: 40ms; }
+:host-context(.collapsed) .sidebar-item:nth-child(4) { transition-delay: 60ms; }
+:host-context(.collapsed) .sidebar-item:nth-child(5) { transition-delay: 80ms; }
+:host-context(.collapsed) .sidebar-item:nth-child(6) { transition-delay: 100ms; }

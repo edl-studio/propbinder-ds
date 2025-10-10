@@ -36,7 +36,7 @@
 
 /* Override sidebar header padding in minimized mode to match topbar */
 .app-layout__sidebar--minimized ::ng-deep .sidebar-header {
-  padding: 0 20px; /* Match sidebar padding */
+  padding: 0 12px 0 20px; /* Match sidebar padding */
   height: 64px; /* Match topbar height */
   justify-content: center; /* Center content vertically */
 }

@@ -1,0 +1,107 @@
+/* Header Details Component Styles */
+.header-details {
+  width: 100%;
+  background-color: var(--background-color-page);
+}
+
+/* Title Row */
+.header-details__title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-details__title {
+  margin: 0;
+  color: var(--text-color-default-primary);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Actions */
+.header-details__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.header-details__action-btn {
+  flex-shrink: 0;
+}
+
+/* Details Row */
+.header-details__details-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 48px;
+  padding: 24px 0;
+}
+
+/* Style the slotted content */
+.header-details__details-row ::ng-deep [slot="details"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 48px;
+  width: 100%;
+}
+
+/* Adjust vertical gap for md and below */
+@media (max-width: 991px) {
+  .header-details__details-row ::ng-deep [slot="details"] {
+    gap: 24px 48px !important;
+  }
+}
+
+/* Data item constraints */
+.header-details__details-row ::ng-deep ds-data-item {
+  max-width: 256px;
+  flex-shrink: 0;
+}
+
+/* Ensure text truncation in data items */
+.header-details__details-row ::ng-deep ds-data-item .data-item__value-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.header-details__details-row ::ng-deep ds-data-item .data-item__label-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Hide primary/secondary actions on xs and sm breakpoints (< 768px) */
+@media (max-width: 767px) {
+  .header-details__action-btn--primary,
+  .header-details__action-btn--secondary {
+    display: none;
+  }
+  
+  /* Keep more actions visible */
+  .header-details__action-btn--more {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-details__title {
+    margin-right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-details {
+    padding-top: 16px;
+  }
+  
+  .header-details__actions {
+    gap: 4px;
+  }
+}

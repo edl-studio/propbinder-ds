@@ -1,0 +1,5 @@
+.sidebar {
+  --sidebar-content-primary: var(--text-color-default-primary-inverse);
+  --sidebar-content-secondary: #C6CBFF;
+  --sidebar-content-tertiary: #9AA1FE;
+}

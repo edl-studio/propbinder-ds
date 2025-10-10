@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/lib",
+    "declaration": true,
+    "declarationMap": true,
+    "types": [],
+    "baseUrl": "."
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.stories.ts",
+    "**/*.story.ts",
+    "**/*.mdx"
+  ],
+  "angularCompilerOptions": { "compilationMode": "full" }
+}

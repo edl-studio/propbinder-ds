@@ -1,0 +1,38 @@
+.sidebar-global-action {
+  display: flex;
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* Ensure the button takes full width */
+.sidebar-global-action__button {
+  width: 100% !important;
+  display: block !important;
+}
+
+.sidebar-global-action__content {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sidebar-content-primary);
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-duration-normal, .2s) ease;
+  overflow: hidden;
+}
+
+.sidebar-global-action__content--collapsed {
+  opacity: 0;
+  width: 0;
+  gap: 0;
+}
+
+.sidebar-global-action__icon {
+  color: var(--sidebar-content-primary) !important;
+  transition: all var(--transition-duration-normal, .2s) ease;
+}
+
+.sidebar-global-action__label {
+  line-height: 1.25;
+  transition: all var(--transition-duration-normal, .2s) ease;
+  white-space: nowrap;
+}
