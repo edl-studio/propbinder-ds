@@ -40,19 +40,21 @@ module.exports = {
         'content-4xl': 'var(--content-padding-4xl)',
       },
       backgroundColor: {
-        // Page and layout colors
-        'page': 'var(--background-color-page)',
-        'surface': 'var(--background-color-surface)',
-        
-        // Interactive element backgrounds
-        'interactive': {
-          'default': 'var(--background-color-interactive-default)',
-          'default-hover': 'var(--background-color-interactive-default-hover)',
-          'default-disabled': 'var(--background-color-interactive-default-disabled)',
-          'brand': 'var(--background-color-interactive-brand)',
-          'brand-hover': 'var(--background-color-interactive-brand-hover)',
-          'brand-disabled': 'var(--background-color-interactive-brand-disabled)',
+        // Neutral background hierarchy
+        'neutral': {
+          'primary': 'var(--color-background-neutral-primary)',
+          'primary-hover': 'var(--color-background-neutral-primary-hover)',
+          'secondary': 'var(--color-background-neutral-secondary)',
+          'secondary-hover': 'var(--color-background-neutral-secondary-hover)',
+          'tertiary': 'var(--color-background-neutral-tertiary)',
+          'tertiary-hover': 'var(--color-background-neutral-tertiary-hover)',
+          'disabled': 'var(--color-background-neutral-disabled)',
         },
+        
+        // Brand backgrounds
+        'brand': 'var(--color-background-brand)',
+        'brand-hover': 'var(--color-background-brand-hover)',
+        'brand-disabled': 'var(--color-background-brand-disabled)',
       },
       
       borderColor: {
@@ -165,7 +167,7 @@ module.exports = {
     },
     // Background colors
     {
-      pattern: /^tw-bg-(page|surface|interactive-(default|brand)(-hover|-disabled)?)$/,
+      pattern: /^tw-bg-(neutral-(primary|secondary|tertiary)(-hover|-disabled)?|neutral-disabled|brand(-hover|-disabled)?)$/,
     },
     // Border colors
     {

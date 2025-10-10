@@ -1,6 +1,7 @@
 .sidebar-global-action {
   display: flex;
   width: 100%;
+  margin-top: 4px;
 }
 
 /* Ensure the button takes full width */
@@ -13,7 +14,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #ffffff;
+  color: var(--sidebar-content-primary);
   font-size: var(--font-size-sm);
   transition: all var(--transition-duration-normal, .2s) ease;
   overflow: hidden;
@@ -26,7 +27,7 @@
 }
 
 .sidebar-global-action__icon {
-  color: white !important;
+  color: var(--sidebar-content-primary) !important;
   transition: all var(--transition-duration-normal, .2s) ease;
 }
 
@@ -35,11 +36,3 @@
   transition: all var(--transition-duration-normal, .2s) ease;
   white-space: nowrap;
 }
-
-.sidebar-global-action__label--collapsed {
-  opacity: 0;
-  width: 0;
-  overflow: hidden;
-}
-
-

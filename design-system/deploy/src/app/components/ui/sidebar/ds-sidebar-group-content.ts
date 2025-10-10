@@ -6,7 +6,10 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./ds-sidebar-group-content.css'],
+  styleUrls: [
+    './ds-sidebar-variables.css',
+    './ds-sidebar-group-content.css'
+  ],
   template: `
     <div class="sidebar-group-content" role="list" [id]="id()">
       <ng-content />
@@ -16,5 +19,3 @@ import { CommonModule } from '@angular/common';
 export class DsSidebarGroupContentComponent {
   id = input.required<string>();
 }
-
-

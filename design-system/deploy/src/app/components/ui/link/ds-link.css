@@ -2,10 +2,8 @@
 
 /* Link Base Styles */
 .link {
-  /* Typography - ui-sm-medium */
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  line-height: 1.2;
+  /* Typography */
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
   
   /* Brand color styling */
   color: var(--text-color-brand);

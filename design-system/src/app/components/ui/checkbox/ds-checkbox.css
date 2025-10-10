@@ -64,7 +64,7 @@
   border-width: 1px;
   
   /* Base colors */
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--border-color-default);
   
   /* Hover state */
@@ -82,7 +82,7 @@
   
   /* Disabled state */
   &.checkbox--disabled {
-    background-color: var(--background-color-disabled);
+    background-color: var(--color-background-disabled);
     border-color: var(--border-color-default);
     cursor: not-allowed;
   }

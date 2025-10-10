@@ -44,7 +44,7 @@ export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
 
       @if (clearable() && value() && !effectiveDisabled() && !readonly()) {
         <button type="button" class="ds-input__clear" (click)="clear()" aria-label="Clear input">
-          <ds-icon name="remixCloseLine" [size]="iconSize()" class="ds-input__icon" />
+          <ds-icon name="remixCloseLine" [size]="iconSize()" />
         </button>
       }
     </div>

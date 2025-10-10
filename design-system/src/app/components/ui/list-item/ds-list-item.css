@@ -9,7 +9,7 @@
 }
 
 .list-item:hover {
-  background-color: var(--background-color-interactive-default);
+  background-color: var(--color-background-neutral-secondary);
 }
 
 /* Main content area */

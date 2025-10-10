@@ -13,7 +13,7 @@
   border-width: 1px;
   
   /* Base colors */
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--border-color-default);
   
   /* Box sizing to match select */
@@ -21,7 +21,7 @@
 }
 
 .ds-input:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--color-brand-base);
 }
 
@@ -32,21 +32,21 @@
 }
 
 .ds-input--disabled {
-  background-color: var(--background-color-disabled);
+  background-color: var(--color-background-disabled);
   border-color: var(--border-color-default);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .ds-input--readonly {
-  background-color: var(--background-color-container);
+  background-color: var(--color-background-container);
   border-color: var(--border-color-default);
   cursor: default;
 }
 
 /* Variant styles */
 .ds-input--error {
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--color-destructive-base);
 }
 
@@ -60,7 +60,7 @@
 }
 
 .ds-input--warning {
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--color-warning-base);
 }
 
@@ -74,7 +74,7 @@
 }
 
 .ds-input--success {
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--color-success-base);
 }
 
@@ -163,6 +163,7 @@
   @apply tw-absolute tw-p-0 tw-bg-transparent tw-border-0;
   @apply tw-cursor-pointer tw-rounded-sm tw-outline-none;
   @apply tw-transition-colors tw-duration-200 tw-ease-in-out;
+  @apply tw-flex tw-items-center tw-justify-center;
   right: 8px;
   width: 18px;
   height: 18px;
@@ -172,7 +173,7 @@
 
 .ds-input__clear:hover {
   color: var(--text-color-default-primary);
-  background-color: var(--background-color-container-hover);
+  background-color: var(--color-background-container-hover);
 }
 
 .ds-input__clear:focus-visible {
@@ -191,7 +192,7 @@
 
 /* Autofill styles */
 .ds-input__field[data-autofill] {
-  background-color: var(--background-color-container) !important;
-  -webkit-box-shadow: 0 0 0 1000px var(--background-color-container) inset !important;
+  background-color: var(--color-background-container) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--color-background-container) inset !important;
   -webkit-text-fill-color: var(--text-color-default-primary) !important;
 }

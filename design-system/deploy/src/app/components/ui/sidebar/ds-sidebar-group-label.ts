@@ -7,7 +7,10 @@ import { DsIconComponent } from '../icon/ds-icon';
   standalone: true,
   imports: [CommonModule, DsIconComponent],
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./ds-sidebar-group-label.css'],
+  styleUrls: [
+    './ds-sidebar-variables.css',
+    './ds-sidebar-group-label.css'
+  ],
   template: `
     <button
       type="button"
@@ -25,5 +28,3 @@ export class DsSidebarGroupLabelComponent {
   controlsId = input.required<string>();
   expanded = input<boolean>(true);
 }
-
-

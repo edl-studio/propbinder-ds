@@ -11,7 +11,10 @@ export interface SidebarItem { id: string; icon: string; label: string; href?: s
   standalone: true,
   imports: [CommonModule, DsSidebarGroupLabelComponent, DsSidebarGroupContentComponent, DsSidebarGroupContentItemComponent],
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./ds-sidebar-group.css'],
+  styleUrls: [
+    './ds-sidebar-variables.css',
+    './ds-sidebar-group.css'
+  ],
   template: `
     <section class="sidebar-group">
       @if (showLabel()) {
@@ -75,5 +78,3 @@ export class DsSidebarGroupComponent implements OnChanges {
     this.itemSelected.emit(itemId);
   }
 }
-
-
