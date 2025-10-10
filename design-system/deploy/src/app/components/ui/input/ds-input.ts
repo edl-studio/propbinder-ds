@@ -44,7 +44,7 @@ export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
 
       @if (clearable() && value() && !effectiveDisabled() && !readonly()) {
         <button type="button" class="ds-input__clear" (click)="clear()" aria-label="Clear input">
-          <ds-icon name="remixCloseLine" [size]="iconSize()" class="ds-input__icon" />
+          <ds-icon name="remixCloseLine" [size]="iconSize()" />
         </button>
       }
     </div>
@@ -59,6 +59,7 @@ export class DsInputComponent implements ControlValueAccessor {
   readonly = input<boolean>(false);
   required = input<boolean>(false);
   clearable = input<boolean>(false);
+  ghost = input<boolean>(false);
   leadingIcon = input<string>();
   trailingIcon = input<string>();
   ariaLabel = input<string>();
@@ -82,6 +83,7 @@ export class DsInputComponent implements ControlValueAccessor {
     const classes = ['ds-input', `ds-input--${this.variant()}`];
     if (this.effectiveDisabled()) classes.push('ds-input--disabled');
     if (this.readonly()) classes.push('ds-input--readonly');
+    if (this.ghost()) classes.push('ds-input--ghost');
     if (this.leadingIcon()) classes.push('ds-input--with-leading-icon');
     if (this.trailingIcon() || this.clearable()) classes.push('ds-input--with-trailing-icon');
     return classes.join(' ');

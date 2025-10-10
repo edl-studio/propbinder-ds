@@ -8,7 +8,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
   imports: [CommonModule, DsLabelComponent],
   encapsulation: ViewEncapsulation.Emulated,
   template: `
-    <div class="tw-min-h-screen tw-bg-page tw-text-primary tw-p-8">
+    <div class="tw-min-h-screen tw-bg-neutral-primary tw-text-primary tw-p-8">
       <div class="tw-max-w-6xl tw-mx-auto">
         <!-- Header -->
         <header class="tw-mb-12 tw-text-center">
@@ -20,7 +20,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
 
         <main class="tw-space-y-12">
           <!-- Basic Label Examples -->
-          <section class="tw-bg-interactive-default tw-border tw-border-border-default tw-rounded-lg tw-p-8">
+          <section class="tw-bg-neutral-secondary tw-border tw-border-border-default tw-rounded-lg tw-p-8">
             <h2 class="tw-text-2xl tw-font-semibold tw-text-primary tw-mb-6">Basic Label Examples</h2>
             
             <h3 class="tw-text-xl tw-font-medium tw-text-primary tw-mb-4">Simple Labels</h3>
@@ -29,7 +29,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                 <h4 class="tw-text-base tw-font-medium tw-text-primary tw-mb-4">Default Label</h4>
                 <div class="tw-space-y-3">
                   <ds-label for="default-input">Default Label</ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary" 
                          id="default-input" type="text" placeholder="Enter text...">
                 </div>
               </div>
@@ -40,7 +40,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="required-input" className="after:content-['_*'] after:tw-text-destructive-base">
                     Email Address
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary" 
                          id="required-input" type="email" placeholder="you@example.com" required>
                 </div>
               </div>
@@ -51,7 +51,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="optional-input" className="after:content-['_(optional)'] after:tw-text-secondary after:tw-font-normal">
                     Middle Name
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary" 
                          id="optional-input" type="text" placeholder="Optional field">
                 </div>
               </div>
@@ -67,7 +67,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="small-input" className="tw-text-xs">
                     Small Label Text
                   </ds-label>
-                  <input class="tw-w-full tw-h-8 tw-px-2 tw-text-sm tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default" 
+                  <input class="tw-w-full tw-h-8 tw-px-2 tw-text-sm tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary" 
                          id="small-input" type="text" placeholder="Small input">
                 </div>
               </div>
@@ -78,7 +78,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="medium-input" className="tw-font-medium">
                     Medium Weight Label
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary" 
                          id="medium-input" type="text" placeholder="Medium weight">
                 </div>
               </div>
@@ -89,7 +89,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="bold-input" className="tw-font-semibold">
                     Bold Label Text
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary" 
                          id="bold-input" type="text" placeholder="Bold label">
                 </div>
               </div>
@@ -100,7 +100,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="brand-input" className="tw-text-brand">
                     Brand Colored Label
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-brand-base tw-rounded-md tw-bg-interactive-default tw-focus:tw-ring-2 tw-focus:tw-ring-brand-weak" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-brand-base tw-rounded-md tw-bg-neutral-secondary tw-focus:tw-ring-2 tw-focus:tw-ring-brand-weak" 
                          id="brand-input" type="text" placeholder="Brand themed">
                 </div>
               </div>
@@ -108,7 +108,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
           </section>
 
           <!-- Form Examples -->
-          <section class="tw-bg-interactive-default tw-border tw-border-border-default tw-rounded-lg tw-p-8">
+          <section class="tw-bg-neutral-secondary tw-border tw-border-border-default tw-rounded-lg tw-p-8">
             <h2 class="tw-text-2xl tw-font-semibold tw-text-primary tw-mb-6">Form Examples</h2>
             
             <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-8">
@@ -120,7 +120,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                     <ds-label for="login-email" className="after:content-['_*'] after:tw-text-destructive-base">
                       Email Address
                     </ds-label>
-                    <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default tw-mt-1" 
+                    <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary tw-mt-1" 
                            id="login-email" type="email" placeholder="you@example.com" required>
                   </div>
                   
@@ -128,7 +128,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                     <ds-label for="login-password" className="after:content-['_*'] after:tw-text-destructive-base">
                       Password
                     </ds-label>
-                    <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default tw-mt-1" 
+                    <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary tw-mt-1" 
                            id="login-password" type="password" placeholder="••••••••" required>
                   </div>
                   
@@ -149,7 +149,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                     <ds-label for="contact-name" className="after:content-['_*'] after:tw-text-destructive-base">
                       Full Name
                     </ds-label>
-                    <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default tw-mt-1" 
+                    <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary tw-mt-1" 
                            id="contact-name" type="text" placeholder="John Doe" required>
                   </div>
                   
@@ -157,7 +157,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                     <ds-label for="contact-email" className="after:content-['_*'] after:tw-text-destructive-base">
                       Email Address
                     </ds-label>
-                    <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default tw-mt-1" 
+                    <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary tw-mt-1" 
                            id="contact-email" type="email" placeholder="john@example.com" required>
                   </div>
                   
@@ -165,7 +165,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                     <ds-label for="contact-phone" className="after:content-['_(optional)'] after:tw-text-secondary after:tw-font-normal">
                       Phone Number
                     </ds-label>
-                    <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default tw-mt-1" 
+                    <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary tw-mt-1" 
                            id="contact-phone" type="tel" placeholder="+1 (555) 123-4567">
                   </div>
                   
@@ -173,7 +173,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                     <ds-label for="contact-message" className="after:content-['_*'] after:tw-text-destructive-base">
                       Message
                     </ds-label>
-                    <textarea class="tw-w-full tw-h-24 tw-px-3 tw-py-2 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default tw-mt-1 tw-resize-none" 
+                    <textarea class="tw-w-full tw-h-24 tw-px-3 tw-py-2 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary tw-mt-1 tw-resize-none" 
                               id="contact-message" placeholder="Your message here..." required></textarea>
                   </div>
                 </form>
@@ -182,7 +182,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
           </section>
 
           <!-- State Examples -->
-          <section class="tw-bg-interactive-default tw-border tw-border-border-default tw-rounded-lg tw-p-8">
+          <section class="tw-bg-neutral-secondary tw-border tw-border-border-default tw-rounded-lg tw-p-8">
             <h2 class="tw-text-2xl tw-font-semibold tw-text-primary tw-mb-6">State Examples</h2>
             
             <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-6">
@@ -194,7 +194,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="success-input" className="tw-text-success-strong">
                     Valid Email
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-success-base tw-rounded-md tw-bg-page" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-success-base tw-rounded-md tw-bg-neutral-primary" 
                          id="success-input" type="email" value="user@example.com" readonly>
                   <p class="tw-text-xs tw-text-success-base">✓ Email address is valid</p>
                 </div>
@@ -207,7 +207,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="warning-input" className="tw-text-warning-strong">
                     Password Strength
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-warning-base tw-rounded-md tw-bg-page" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-warning-base tw-rounded-md tw-bg-neutral-primary" 
                          id="warning-input" type="password" placeholder="Enter password">
                   <p class="tw-text-xs tw-text-warning-base">⚠ Password should be stronger</p>
                 </div>
@@ -220,7 +220,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="error-input" className="tw-text-destructive-strong">
                     Invalid Input
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-destructive-base tw-rounded-md tw-bg-page" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-destructive-base tw-rounded-md tw-bg-neutral-primary" 
                          id="error-input" type="email" value="invalid-email" readonly>
                   <p class="tw-text-xs tw-text-destructive-base">✗ Please enter a valid email address</p>
                 </div>
@@ -233,7 +233,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="disabled-input" className="tw-text-disabled">
                     Disabled Field
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default-disabled tw-cursor-not-allowed" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary-disabled tw-cursor-not-allowed" 
                          id="disabled-input" type="text" placeholder="Cannot edit" disabled>
                   <p class="tw-text-xs tw-text-disabled">This field is currently disabled</p>
                 </div>
@@ -246,7 +246,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="focus-input" className="tw-text-brand-strong">
                     Focused Input
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border-2 tw-border-brand-base tw-rounded-md tw-bg-page tw-ring-2 tw-ring-brand-weak" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border-2 tw-border-brand-base tw-rounded-md tw-bg-neutral-primary tw-ring-2 tw-ring-brand-weak" 
                          id="focus-input" type="text" placeholder="Click to focus">
                   <p class="tw-text-xs tw-text-brand-base">Input is currently focused</p>
                 </div>
@@ -260,7 +260,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                     <span>Processing...</span>
                     <div class="tw-ml-2 tw-animate-spin tw-h-4 tw-w-4 tw-border-2 tw-border-brand-base tw-border-t-transparent tw-rounded-full"></div>
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default tw-animate-pulse" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary tw-animate-pulse" 
                          id="loading-input" type="text" placeholder="Loading..." readonly>
                   <p class="tw-text-xs tw-text-secondary">Please wait while we process your request</p>
                 </div>
@@ -269,7 +269,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
           </section>
 
           <!-- Accessibility Examples -->
-          <section class="tw-bg-interactive-default tw-border tw-border-border-default tw-rounded-lg tw-p-8">
+          <section class="tw-bg-neutral-secondary tw-border tw-border-border-default tw-rounded-lg tw-p-8">
             <h2 class="tw-text-2xl tw-font-semibold tw-text-primary tw-mb-6">Accessibility Features</h2>
             
             <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6">
@@ -280,7 +280,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="sr-input" className="tw-sr-only">
                     Screen Reader Only Label
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-interactive-default" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border tw-border-border-default tw-rounded-md tw-bg-neutral-secondary" 
                          id="sr-input" type="text" placeholder="Label only visible to screen readers" 
                          aria-label="Screen Reader Only Label">
                   <p class="tw-text-xs tw-text-secondary">Label is hidden visually but available to screen readers</p>
@@ -293,7 +293,7 @@ import { DsLabelComponent } from '../components/ui/label/ds-label';
                   <ds-label for="contrast-input" className="tw-text-primary tw-font-semibold">
                     High Contrast Label
                   </ds-label>
-                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border-2 tw-border-primary tw-rounded-md tw-bg-page tw-text-primary" 
+                  <input class="tw-w-full tw-h-10 tw-px-3 tw-border-2 tw-border-primary tw-rounded-md tw-bg-neutral-primary tw-text-primary" 
                          id="contrast-input" type="text" placeholder="High contrast styling">
                   <p class="tw-text-xs tw-text-primary">Enhanced contrast for better accessibility</p>
                 </div>

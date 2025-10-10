@@ -31,7 +31,7 @@
 
 .sidebar-item[aria-current="page"],
 .sidebar-item.active {
-  background: var(--background-color-interactive-brand);
+  background: var(--color-background-brand);
   color: var(--sidebar-content-primary);
 }
 
@@ -99,7 +99,7 @@
 /* Badge outline matches active menu item color */
 .sidebar-item[aria-current="page"] .sidebar-item__badge,
 .sidebar-item.active .sidebar-item__badge {
-  outline-color: var(--background-color-interactive-brand);
+  outline-color: var(--color-background-brand);
 }
 
 /* Collapse animation: slide/fade label left */

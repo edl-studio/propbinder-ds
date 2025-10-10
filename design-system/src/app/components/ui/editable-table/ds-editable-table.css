@@ -1,0 +1,295 @@
+/* ========================================================================
+   Editable Table Component Styles
+   ======================================================================== */
+
+.ds-editable-table {
+  @apply tw-w-full;
+}
+
+.ds-editable-table__container {
+  @apply tw-w-full tw-overflow-hidden;
+}
+
+/* ========================================================================
+   Scrollable Container
+   ======================================================================== */
+
+.ds-editable-table__scroll {
+  @apply tw-w-full tw-overflow-x-auto;
+}
+
+/* ========================================================================
+   Table
+   ======================================================================== */
+
+.ds-editable-table__table {
+  @apply tw-w-full tw-border-collapse;
+  border-spacing: 0;
+}
+
+/* ========================================================================
+   Table Head
+   ======================================================================== */
+
+.ds-editable-table__thead {
+  position: sticky;
+  top: 0;
+  background: var(--color-background-neutral-primary);
+  z-index: 10;
+  border-bottom: 1px solid var(--border-color-default);
+}
+
+.ds-editable-table__th {
+  padding: 8px 8px;
+  text-align: left;
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-color-default-tertiary);
+  background-color: var(--color-background-neutral-primary);
+  white-space: nowrap;
+}
+
+.ds-editable-table__th:first-child {
+  padding-left: 16px;
+}
+
+.ds-editable-table__th:last-child {
+  padding-right: 16px;
+}
+
+/* Header content wrapper to align with input/select padding */
+.ds-editable-table__header-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+}
+
+/* Cell content wrapper for read-only cells to align with input/select padding */
+.ds-editable-table__cell-content {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 32px;
+}
+
+.ds-editable-table__th--truncate {
+  @apply tw-overflow-hidden tw-text-ellipsis;
+}
+
+.ds-editable-table__th--align-right {
+  text-align: right;
+}
+
+.ds-editable-table__th--align-center {
+  text-align: center;
+}
+
+/* ========================================================================
+   Sortable Headers
+   ======================================================================== */
+
+.ds-editable-table__sort-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  transition: color 200ms ease-in-out;
+  width: 100%;
+  text-align: left;
+}
+
+.ds-editable-table__sort-button:hover {
+  color: var(--text-color-default-primary);
+}
+
+.ds-editable-table__sort-button--active {
+  color: var(--text-color-default-primary);
+}
+
+.ds-editable-table__sort-button--align-right {
+  text-align: right;
+}
+
+.ds-editable-table__sort-button--align-center {
+  text-align: center;
+}
+
+.ds-editable-table__sort-icon {
+  flex-shrink: 0;
+}
+
+/* ========================================================================
+   Table Body
+   ======================================================================== */
+
+.ds-editable-table__tbody {
+  @apply tw-bg-white;
+}
+
+/* Drag and drop placeholder */
+.ds-editable-table__tbody.cdk-drop-list-dragging .ds-editable-table__tr--body:not(.cdk-drag-placeholder) {
+  @apply tw-transition-transform tw-duration-200;
+}
+
+.ds-editable-table__tr--body.cdk-drag-placeholder {
+  @apply tw-opacity-0;
+}
+
+/* ========================================================================
+   Table Rows
+   ======================================================================== */
+
+.ds-editable-table__tr {
+  @apply tw-transition-colors tw-duration-150;
+}
+
+.ds-editable-table__tr--body:hover {
+  background-color: var(--color-background-neutral-secondary);
+}
+
+/* Show input/select borders on row hover */
+.ds-editable-table__tr--body:hover ::ng-deep .ds-input--ghost:not(:focus-within) {
+  border-color: var(--border-color-default) !important;
+  background-color: var(--color-background-neutral-primary) !important;
+}
+
+.ds-editable-table__tr--body:hover ::ng-deep .ds-select--ghost .ds-select__trigger:not(:focus-within) {
+  border-color: var(--border-color-default) !important;
+  background-color: var(--color-background-neutral-primary) !important;
+}
+
+/* Draggable row styles */
+.ds-editable-table__tr--draggable.cdk-drag-animating {
+  @apply tw-transition-transform tw-duration-200;
+}
+
+/* ========================================================================
+   Table Cells
+   ======================================================================== */
+
+.ds-editable-table__td {
+  padding: 8px 8px;
+  color: var(--text-color-default-primary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.ds-editable-table__td:first-child {
+  padding-left: 16px;
+}
+
+.ds-editable-table__td:last-child {
+  padding-right: 16px;
+}
+
+.ds-editable-table__td--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-editable-table__td--align-right {
+  text-align: right;
+}
+
+.ds-editable-table__td--align-center {
+  text-align: center;
+}
+
+/* Empty state cell */
+.ds-editable-table__td--empty {
+  @apply tw-py-12;
+}
+
+/* ========================================================================
+   Drag Preview
+   ======================================================================== */
+
+.ds-editable-table__drag-preview {
+  @apply tw-rounded-lg;
+  background-color: var(--color-background-neutral-primary);
+  border: 1px solid var(--border-color-default);
+  box-shadow: var(--box-shadow-lg);
+  opacity: 0.95;
+  overflow: hidden;
+}
+
+.ds-editable-table__drag-preview-content {
+  @apply tw-flex tw-gap-4 tw-p-4;
+}
+
+.ds-editable-table__drag-preview-cell {
+  @apply tw-text-default-primary;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* ========================================================================
+   Empty State
+   ======================================================================== */
+
+.ds-editable-table__empty {
+  @apply tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-3;
+  @apply tw-text-default-secondary;
+}
+
+/* ========================================================================
+   Footer (Add Row Button)
+   ======================================================================== */
+
+.ds-editable-table__footer {
+  @apply tw-px-4 tw-py-3;
+  @apply tw-border-t;
+  border-color: var(--border-color-default);
+  background-color: var(--color-background-container);
+}
+
+.ds-editable-table__footer--centered {
+  @apply tw-flex tw-items-center tw-justify-center;
+}
+
+/* Make the add button full-width */
+.ds-editable-table__footer ::ng-deep ds-button {
+  @apply tw-w-full;
+}
+
+.ds-editable-table__footer ::ng-deep ds-button button {
+  @apply tw-w-full tw-justify-center;
+}
+
+/* ========================================================================
+   CDK Drag-Drop Overrides
+   ======================================================================== */
+
+/* Hide the drag preview when not dragging */
+.cdk-drag-preview {
+  box-sizing: border-box;
+}
+
+/* Drag placeholder style */
+.cdk-drag-placeholder {
+  opacity: 0.4;
+}
+
+/* Animate rows when dragging */
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Drop list receiving class */
+.ds-editable-table__tbody.cdk-drop-list-receiving {
+  @apply tw-bg-blue-50;
+}
+

@@ -81,8 +81,10 @@
   
   /* Focus styles */
   &:focus-visible {
-    @apply tw-outline-[3px] tw-outline-offset-0;
-    outline-color: var(--color-brand-base);
+    @apply tw-outline-[2px];
+    outline-offset: 2px;
+    outline-color: var(--outline-color-default);
+    transition: outline 0s, outline-offset 0s;
   }
   
   /* Disabled styles */
@@ -161,11 +163,6 @@
 
 .btn--primary:disabled {
   background-color: var(--color-background-brand-disabled);
-  border: none;
-}
-
-.btn--primary:focus-visible {
-  outline: none;
   border: none;
 }
 

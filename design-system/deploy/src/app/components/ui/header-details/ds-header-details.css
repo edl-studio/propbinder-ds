@@ -1,7 +1,7 @@
 /* Header Details Component Styles */
 .header-details {
   width: 100%;
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
 }
 
 /* Title Row */

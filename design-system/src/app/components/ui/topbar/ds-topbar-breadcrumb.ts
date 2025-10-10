@@ -12,7 +12,7 @@ export interface TopbarBreadcrumbItem {
 @Component({
   selector: 'ds-topbar-breadcrumb',
   standalone: true,
-  imports: [CommonModule, RouterModule, DsIconComponent],
+  imports: [CommonModule, RouterModule],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-topbar-breadcrumb.css'],
   template: `

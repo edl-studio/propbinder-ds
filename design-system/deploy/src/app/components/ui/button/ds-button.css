@@ -81,8 +81,10 @@
   
   /* Focus styles */
   &:focus-visible {
-    @apply tw-outline-[3px] tw-outline-offset-0;
-    outline-color: var(--color-brand-base);
+    @apply tw-outline-[2px];
+    outline-offset: 2px;
+    outline-color: var(--outline-color-default);
+    transition: outline 0s, outline-offset 0s;
   }
   
   /* Disabled styles */
@@ -144,43 +146,38 @@
 
 /* Color variants using design tokens */
 .btn--primary {
-  background-color: var(--background-color-interactive-brand);
+  background-color: var(--color-background-brand);
   color: white;
   border: none;
 }
 
 .btn--primary:hover:not(:disabled) {
-  background-color: var(--background-color-interactive-brand-hover);
+  background-color: var(--color-background-brand-hover);
   border: none;
 }
 
 .btn--primary:active:not(:disabled) {
-  background-color: var(--background-color-interactive-brand);
+  background-color: var(--color-background-brand);
   border: none;
 }
 
 .btn--primary:disabled {
-  background-color: var(--background-color-interactive-brand-disabled);
-  border: none;
-}
-
-.btn--primary:focus-visible {
-  outline: none;
+  background-color: var(--color-background-brand-disabled);
   border: none;
 }
 
 .btn--secondary {
-  background-color: var(--background-color-interactive-default);
+  background-color: var(--color-background-neutral-secondary);
   color: var(--text-color-default-primary);
   border-color: transparent;
 }
 
 .btn--secondary:hover:not(:disabled) {
-  background-color: var(--background-color-interactive-default-hover);
+  background-color: var(--color-background-neutral-secondary-hover);
 }
 
 .btn--secondary:active:not(:disabled) {
-  background-color: var(--background-color-interactive-default);
+  background-color: var(--color-background-neutral-secondary);
 }
 
 .btn--ghost {
@@ -190,12 +187,12 @@
 }
 
 .btn--ghost:hover:not(:disabled) {
-  background-color: var(--background-color-interactive-default-hover);
+  background-color: var(--color-background-neutral-secondary-hover);
   color: var(--text-color-default-primary);
 }
 
 .btn--ghost:active:not(:disabled) {
-  background-color: var(--background-color-interactive-default);
+  background-color: var(--color-background-neutral-secondary);
 }
 
 .btn--destructive {

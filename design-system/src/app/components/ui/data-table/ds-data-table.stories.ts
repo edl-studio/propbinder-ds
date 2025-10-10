@@ -347,7 +347,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Basic data table with column sizing, sorting, search, and pagination. Columns use size variants (xs, sm, md, lg, xl) for consistent width constraints.',
+        story: 'Basic data table with column sizing, sorting, search, pagination, and column visibility management. Click the column icon button to show/hide columns dynamically. Columns use size variants (xs, sm, md, lg, xl) for consistent width constraints.',
       },
     },
   },
@@ -587,6 +587,31 @@ export const WithColumnSizing: Story = {
 - **No truncation** with \`truncate: false\` to allow text wrapping
 
 Try resizing the browser to see how columns behave with long content.`,
+      },
+    },
+  },
+};
+
+export const WithColumnManagement: Story = {
+  args: {
+    data: sampleUsers,
+    columns: userColumnsWithActions,
+    searchable: true,
+    paginated: true,
+    pageSize: 8,
+    showColumnVisibility: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `Demonstrates column visibility management using the refactored ds-listbox component:
+- **Content Projection**: The column icon button trigger uses content projection for flexibility
+- **Portal Dropdown**: Column selector appears as an overlay dropdown using CDK Portal
+- **Multi-Select**: Toggle multiple columns on/off simultaneously
+- **Persistent State**: Selected columns are reflected with checkmarks
+- **Auto-Close**: Single selection closes the dropdown, multi-selection keeps it open
+
+Click the column icon button in the toolbar to manage which columns are visible. The dropdown uses the same portal and trigger pattern as ds-menu for consistency.`,
       },
     },
   },

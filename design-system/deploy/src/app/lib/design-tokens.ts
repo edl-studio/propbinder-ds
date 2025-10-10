@@ -8,13 +8,13 @@
 export interface ColorTokens {
   brand: string;
   brandHover: string;
-  page: string;
-  container: string;
-  containerHover: string;
-  controls: string;
-  controlsHover: string;
-  disabled: string;
-  disabledInverse: string;
+  neutralPrimary: string;
+  neutralPrimaryHover: string;
+  neutralSecondary: string;
+  neutralSecondaryHover: string;
+  neutralTertiary: string;
+  neutralTertiaryHover: string;
+  neutralDisabled: string;
 }
 
 export interface TextColorTokens {
@@ -98,19 +98,27 @@ export interface DesignTokens {
  * Design token mappings for Tailwind CSS classes
  */
 export const designTokenMap = {
-  // Background colors
-  'bg-brand': 'var(--color-brand-base)',
-  'bg-brand-hover': 'var(--color-brand-base-hover)',
-  'bg-brand-weak': 'var(--color-brand-weak)',
-  'bg-brand-weak-hover': 'var(--color-brand-weak-hover)',
-  'bg-brand-strong': 'var(--color-brand-strong)',
-  'bg-page': 'var(--background-color-page)',
-  'bg-container': 'var(--background-color-container)',
-  'bg-container-hover': 'var(--background-color-container-hover)',
-  'bg-controls': 'var(--background-color-interactive-default)',
-  'bg-controls-hover': 'var(--background-color-interactive-default-hover)',
-  'bg-disabled': 'var(--background-color-disabled)',
-  'bg-disabled-inverse': 'var(--background-color-disabled-inverse)',
+  // Background colors - Neutral
+  'bg-neutral-primary': 'var(--color-background-neutral-primary)',
+  'bg-neutral-primary-hover': 'var(--color-background-neutral-primary-hover)',
+  'bg-neutral-secondary': 'var(--color-background-neutral-secondary)',
+  'bg-neutral-secondary-hover': 'var(--color-background-neutral-secondary-hover)',
+  'bg-neutral-tertiary': 'var(--color-background-neutral-tertiary)',
+  'bg-neutral-tertiary-hover': 'var(--color-background-neutral-tertiary-hover)',
+  'bg-neutral-disabled': 'var(--color-background-neutral-disabled)',
+  
+  // Background colors - Brand
+  'bg-brand': 'var(--color-background-brand)',
+  'bg-brand-hover': 'var(--color-background-brand-hover)',
+  'bg-brand-disabled': 'var(--color-background-brand-disabled)',
+  
+  // Brand unscoped colors (for non-background uses)
+  'brand-base': 'var(--color-brand-base)',
+  'brand-base-hover': 'var(--color-brand-base-hover)',
+  'brand-weak': 'var(--color-brand-weak)',
+  'brand-weak-hover': 'var(--color-brand-weak-hover)',
+  'brand-strong': 'var(--color-brand-strong)',
+  'brand-strong-hover': 'var(--color-brand-strong-hover)',
 
   // Text colors
   'text-primary': 'var(--text-color-default-primary)',
@@ -167,19 +175,19 @@ export function getDesignToken(tokenName: keyof typeof designTokenMap): string {
 export const componentVariants = {
   button: {
     primary: 'bg-brand text-white hover:bg-brand-hover',
-    outline: 'bg-controls border border-weak text-primary hover:bg-controls-hover',
+    outline: 'bg-neutral-secondary border border-weak text-primary hover:bg-neutral-secondary-hover',
     success: 'bg-success-base text-white hover:bg-success-base-hover',
     warning: 'bg-warning-base text-white hover:bg-warning-base-hover',
     destructive: 'bg-destructive-base text-white hover:bg-destructive-base-hover',
   },
   input: {
-    default: 'bg-controls border-weak text-primary hover:bg-controls-hover',
+    default: 'bg-neutral-secondary border-weak text-primary hover:bg-neutral-secondary-hover',
     success: 'bg-success-weak border-success-base text-success-strong',
     warning: 'bg-warning-weak border-warning-base text-warning-strong',
     destructive: 'bg-destructive-weak border-destructive-base text-destructive-strong',
   },
   card: {
-    default: 'bg-container rounded-md p-4',
-    interactive: 'bg-container hover:bg-container-hover cursor-pointer transition-colors rounded-md p-4',
+    default: 'bg-neutral-primary rounded-md p-4',
+    interactive: 'bg-neutral-primary hover:bg-neutral-primary-hover cursor-pointer transition-colors rounded-md p-4',
   },
 } as const;

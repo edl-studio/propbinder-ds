@@ -13,77 +13,179 @@
   border-width: 1px;
   
   /* Base colors */
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--border-color-default);
   
   /* Box sizing to match select */
   box-sizing: border-box;
 }
 
-.ds-input:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
-  background-color: var(--background-color-page);
-  border-color: var(--color-brand-base);
+.ds-input:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary-hover);
 }
 
 .ds-input:focus-within {
-  box-shadow: 0 0 0 3px var(--color-brand-weak);
-  outline: none;
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
   border-color: var(--color-brand-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary);
 }
 
 .ds-input--disabled {
-  background-color: var(--background-color-disabled);
+  background-color: var(--color-background-disabled);
   border-color: var(--border-color-default);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .ds-input--readonly {
-  background-color: var(--background-color-container);
+  background-color: var(--color-background-container);
   border-color: var(--border-color-default);
   cursor: default;
 }
 
 /* Variant styles */
 .ds-input--error {
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--color-destructive-base);
 }
 
-.ds-input--error:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
-  border-color: var(--color-destructive-strong);
+.ds-input--error:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary-hover);
 }
 
 .ds-input--error:focus-within {
-  box-shadow: 0 0 0 3px var(--color-destructive-weak);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
   border-color: var(--color-destructive-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--error:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary);
 }
 
 .ds-input--warning {
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--color-warning-base);
 }
 
-.ds-input--warning:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
-  border-color: var(--color-warning-strong);
+.ds-input--warning:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary-hover);
 }
 
 .ds-input--warning:focus-within {
-  box-shadow: 0 0 0 3px var(--color-warning-weak);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
   border-color: var(--color-warning-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--warning:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary);
 }
 
 .ds-input--success {
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
   border-color: var(--color-success-base);
 }
 
-.ds-input--success:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
-  border-color: var(--color-success-strong);
+.ds-input--success:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary-hover);
 }
 
 .ds-input--success:focus-within {
-  box-shadow: 0 0 0 3px var(--color-success-weak);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--success:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary);
+}
+
+/* Ghost variant */
+.ds-input--ghost {
+  border-color: transparent;
+}
+
+.ds-input--ghost:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--border-color-default);
+}
+
+.ds-input--ghost:focus-within {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-brand-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--ghost:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-brand-base);
+}
+
+/* Ghost variant with error */
+.ds-input--ghost.ds-input--error {
+  border-color: transparent;
+}
+
+.ds-input--ghost.ds-input--error:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-destructive-base);
+}
+
+.ds-input--ghost.ds-input--error:focus-within {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-destructive-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--ghost.ds-input--error:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-destructive-base);
+}
+
+/* Ghost variant with warning */
+.ds-input--ghost.ds-input--warning {
+  border-color: transparent;
+}
+
+.ds-input--ghost.ds-input--warning:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-warning-base);
+}
+
+.ds-input--ghost.ds-input--warning:focus-within {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-warning-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--ghost.ds-input--warning:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-warning-base);
+}
+
+/* Ghost variant with success */
+.ds-input--ghost.ds-input--success {
+  border-color: transparent;
+}
+
+.ds-input--ghost.ds-input--success:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-success-base);
+}
+
+.ds-input--ghost.ds-input--success:focus-within {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--ghost.ds-input--success:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
   border-color: var(--color-success-base);
 }
 
@@ -163,6 +265,7 @@
   @apply tw-absolute tw-p-0 tw-bg-transparent tw-border-0;
   @apply tw-cursor-pointer tw-rounded-sm tw-outline-none;
   @apply tw-transition-colors tw-duration-200 tw-ease-in-out;
+  @apply tw-flex tw-items-center tw-justify-center;
   right: 8px;
   width: 18px;
   height: 18px;
@@ -172,12 +275,12 @@
 
 .ds-input__clear:hover {
   color: var(--text-color-default-primary);
-  background-color: var(--background-color-container-hover);
+  background-color: var(--color-background-container-hover);
 }
 
 .ds-input__clear:focus-visible {
-  @apply tw-outline-2 tw-outline-offset-1;
-  outline-color: var(--color-brand-base);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
 }
 
 /* Icon spacing */
@@ -191,7 +294,7 @@
 
 /* Autofill styles */
 .ds-input__field[data-autofill] {
-  background-color: var(--background-color-container) !important;
-  -webkit-box-shadow: 0 0 0 1000px var(--background-color-container) inset !important;
+  background-color: var(--color-background-container) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--color-background-container) inset !important;
   -webkit-text-fill-color: var(--text-color-default-primary) !important;
 }

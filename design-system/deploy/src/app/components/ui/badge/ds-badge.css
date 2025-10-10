@@ -1,3 +1,8 @@
+/* Host element styling to prevent stretching in flex containers */
+:host {
+  display: inline-flex;
+}
+
 /* Base badge styles */
 .badge {
   display: inline-flex;
@@ -64,7 +69,7 @@
 
 /* Brand variant */
 .badge--brand {
-  background-color: var(--background-color-interactive-brand);
+  background-color: var(--color-background-brand);
   color: white;
 }
 

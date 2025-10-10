@@ -39,6 +39,9 @@ const meta: Meta<DsSelectComponent> = {
     required: {
       control: 'boolean',
     },
+    ghost: {
+      control: 'boolean',
+    },
   },
 };
 
@@ -68,6 +71,7 @@ export const Default: Story = {
     variant: 'default',
     disabled: false,
     required: false,
+    ghost: false,
   },
 };
 
@@ -120,5 +124,21 @@ export const WithDisabledOptions: Story = {
       { id: '4', label: 'Option 4', value: 4, disabled: true },
     ],
     placeholder: 'Select an option',
+  },
+};
+
+export const Ghost: Story = {
+  args: {
+    options: simpleOptions,
+    placeholder: 'Ghost select',
+    ghost: true,
+  },
+};
+
+export const GhostWithGroups: Story = {
+  args: {
+    options: groupedOptions,
+    placeholder: 'Ghost select with groups',
+    ghost: true,
   },
 };

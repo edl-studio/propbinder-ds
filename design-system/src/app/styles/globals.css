@@ -82,7 +82,7 @@
   --color-brand-strong-hover: #121418;
 
   /* Outline Colors for focus states */
-  --outline-color-default: #C6CBFF;
+  --outline-color-default: var(--color-brand-weak);
 
   /* Success Colors */
   --color-success-base: #158452;
@@ -198,7 +198,7 @@
 
 /* Global Styles */
 body {
-  background-color: var(--color-background-neutral-secondary);
+  background-color: var(--color-background-neutral-primary);
   color: var(--text-color-default-primary);
   font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
 }

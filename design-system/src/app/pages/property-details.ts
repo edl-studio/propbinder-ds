@@ -25,8 +25,6 @@ import { NgpDialogTrigger, NgpDialogOverlay, NgpDialog, NgpDialogManager } from 
     DsPropertySuggestionsComponent,
     DsDrawerComponent,
     DsButtonComponent,
-    DsBadgeComponent,
-    NgpDialogTrigger,
     NgpDialogOverlay,
     NgpDialog
   ],

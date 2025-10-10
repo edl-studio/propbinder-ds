@@ -35,15 +35,15 @@ export interface DsSelectOption<T = unknown> {
         #trigger
         type="button" 
         [class]="triggerClasses()"
+        [disabled]="effectiveDisabled()"
         [attr.aria-label]="ariaLabel()"
         [attr.aria-describedby]="ariaDescribedBy()"
         [attr.aria-labelledby]="ariaLabelledBy()"
       >
-        @if (selectedOption(); as option) {
-          <span class="ds-select__value body-sm-regular">{{ option.label }}</span>
-        } @else {
-          <span class="ds-select__placeholder body-sm-regular">{{ placeholder() }}</span>
-        }
+        <span 
+          [class]="selectedOption() ? 'ds-select__value body-sm-regular' : 'ds-select__placeholder body-sm-regular'">
+          {{ displayText() }}
+        </span>
         
         <ds-icon 
           name="remixArrowDownSLine" 
@@ -63,12 +63,21 @@ export interface DsSelectOption<T = unknown> {
               @for (option of group.options; track option.id) {
                 <div
                   [ngpSelectOptionValue]="option.value"
+                  [ngpSelectOptionDisabled]="option.disabled"
                   class="ds-select__option body-sm-regular"
                   role="option"
                   [attr.aria-disabled]="option.disabled"
+                  [attr.data-disabled]="option.disabled ? '' : null"
                   ngpSelectOption
                 >
                   <span class="ds-select__option-content">{{ option.label }}</span>
+                  @if (isOptionSelected(option.value)) {
+                    <ds-icon 
+                      name="remixCheckLine" 
+                      size="16px" 
+                      class="ds-select__checkmark"
+                    />
+                  }
                 </div>
               }
             </div>
@@ -88,6 +97,7 @@ export class DsSelectComponent<T = unknown> implements ControlValueAccessor {
   placeholder = input<string>('Select an option');
   disabled = input<boolean>(false);
   required = input<boolean>(false);
+  ghost = input<boolean>(false);
   options = input<DsSelectOption<T>[]>([]);
   ariaLabel = input<string>();
   ariaDescribedBy = input<string>();
@@ -118,8 +128,16 @@ export class DsSelectComponent<T = unknown> implements ControlValueAccessor {
   effectiveDisabled = computed(() => this.disabled() || this.disabledFromCva());
   
   selectedOption = computed(() => {
-    return this.options().find(opt => opt.value === this.value());
+    return this.options().find(opt => opt.value === this.valueSig());
   });
+
+  displayText = computed(() => {
+    return this.selectedOption()?.label || this.placeholder();
+  });
+
+  isOptionSelected(value: T): boolean {
+    return this.valueSig() === value;
+  }
 
   groupedOptions = computed(() => {
     const groups = new Map<string, DsSelectOption<T>[]>();
@@ -154,6 +172,7 @@ export class DsSelectComponent<T = unknown> implements ControlValueAccessor {
   containerClasses = computed(() => {
     const classes = ['ds-select', `ds-select--${this.variant()}`];
     if (this.effectiveDisabled()) classes.push('ds-select--disabled');
+    if (this.ghost()) classes.push('ds-select--ghost');
     if (this.isOpen()) classes.push('ds-select--open');
     return classes.join(' ');
   });
