@@ -1,0 +1,119 @@
+/* Apply sticky positioning to the component host element */
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex-shrink: 0;
+  display: block;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  padding: 0 12px 0 20px;
+  height: 64px;
+  background: var(--sidebar-bg);
+  background-image: linear-gradient(180deg, rgba(34, 26, 76, 1) 75%, rgba(34, 26, 76, 0) 100%);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), box-shadow 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), height 0.4s var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), padding 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+/* Show border and shadow when scrolled */
+:host-context(.sidebar-host--scrolled) .sidebar-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 20px 20px rgba(34, 26, 76, 0.6);
+  height: 72px;
+}
+
+.sidebar-header__brand {
+  position: relative;
+  min-height: 40px; /* Ensure consistent height */
+  width: 100%; /* Ensure full width */
+}
+
+.sidebar-header__logo {
+  height: 24px;
+  width: auto;
+  transition: transform var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), opacity var(--transition-duration-normal, .2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sidebar-header__toggle-btn {
+  color: var(--text-color-default-primary-inverse);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all var(--transition-duration-normal, .2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-header__toggle:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 2px;
+}
+
+/* Collapsed animations: move logo out left, fade; move toggle to center */
+:host-context(.sidebar-host--collapsed) .sidebar-header {
+  padding: 0 20px;
+}
+
+:host-context(.sidebar-host--collapsed) .sidebar-header__logo {
+  transform: translate(-64px, -50%);
+  opacity: 0;
+}
+
+:host-context(.sidebar-host--collapsed) .sidebar-header__toggle-btn {
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, -50%);
+}
+
+
+/* Desktop styles (md and up) */
+@media (min-width: 992px) {
+  .sidebar-header {
+    height: 80px;
+    justify-content: center;
+  }
+
+  :host-context(.sidebar-host--scrolled) .sidebar-header {
+    height: 72px;
+  }
+}
+
+/* Minimized mode styles */
+:host-context(.sidebar-host--minimized) .sidebar-header__logo {
+  transform: translateY(-50%);
+  height: 24px;
+  opacity: 1;
+}
+
+:host-context(.sidebar-host--minimized) .sidebar-header__toggle-btn {
+  right: 0;
+  left: auto;
+  transform: translateY(-50%);
+}
+
+/* Drawer mode styles */
+:host-context(.sidebar-host--drawer) .sidebar-header {
+  height: 80px;
+}
+
+:host-context(.sidebar-host--drawer) .sidebar-header__logo {
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
+:host-context(.sidebar-host--drawer) .sidebar-header__toggle-btn {
+  transform: translateY(-50%);
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/design-system-lib",
+  "lib": { 
+    "entryFile": "src/public-api.ts",
+    "flatModuleFile": "design-system"
+  },
+  "assets": [
+    { "glob": "**/*.css", "input": "src/ui",     "output": "ui" },
+    { "glob": "**/*.css", "input": "src/styles", "output": "styles" },
+    { "glob": "**/*",     "input": "src/assets", "output": "assets" }
+  ]
+}

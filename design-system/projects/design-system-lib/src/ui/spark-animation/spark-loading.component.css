@@ -1,0 +1,66 @@
+/* Container styles */
+.spark-loading {
+  position: relative;
+  overflow: visible;
+  width: 48px;
+  height: 48px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+.spark-loading--animating {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Base spark styles */
+.spark-loading__spark {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px var(--color-brand-weak));
+  will-change: transform, opacity;
+}
+
+/* Size variants with orbit settings */
+.spark-loading__spark--large {
+  @apply tw-w-8 tw-h-8; /* 32px */
+  --orbit-radius: 6px;
+  transform-origin: 50% 150%;
+  transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg);
+  animation-duration: 4s;
+}
+
+.spark-loading__spark--medium {
+  width: 18px;
+  height: 18px;
+  --orbit-radius: 5px;
+  transform-origin: 150% 50%;
+  transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg);
+  animation-duration: 3s;
+}
+
+.spark-loading__spark--small {
+  width: 14px;
+  height: 14px;
+  --orbit-radius: 4px;
+  transform-origin: 50% -50%;
+  transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg);
+  animation-duration: 2s;
+}
+
+/* Animation states */
+.spark-loading__spark--animating {
+  opacity: 1;
+  animation: sparkOrbit var(--orbit-duration, 3s) linear infinite;
+}
+
+@keyframes sparkOrbit {
+  from {
+    transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translate(var(--orbit-radius)) rotate(-360deg);
+  }
+}

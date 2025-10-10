@@ -1,0 +1,64 @@
+@import '../../styles/globals.css';
+/* Link Base Styles */
+.link {
+  /* Typography */
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+  
+  /* Brand color styling */
+  color: var(--text-color-brand);
+  
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  
+  /* Remove default underline */
+  text-decoration: none;
+  
+  /* Transition for smooth hover effects */
+  transition: color 0.15s ease, -webkit-text-decoration 0.15s ease;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+  transition: color 0.15s ease, text-decoration 0.15s ease, -webkit-text-decoration 0.15s ease;
+  
+  /* Focus styles */
+  outline: none;
+  border-radius: 2px;
+}
+
+/* Hover state - add underline */
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+/* Focus state */
+.link:focus-visible {
+  outline: 2px solid var(--text-color-brand);
+  outline-offset: 2px;
+}
+
+/* Active state */
+.link:active {
+  color: var(--color-background-brand-hover);
+}
+
+/* Icon styling */
+.link__icon {
+  flex-shrink: 0;
+}
+
+/* Content styling */
+.link__content {
+  display: inline;
+}
+
+/* With icon variant */
+.link--with-icon {
+  /* Already handled by base gap */
+}
+
+/* Ensure proper alignment when icon is present */
+.link--with-icon .link__content {
+  align-self: center;
+}

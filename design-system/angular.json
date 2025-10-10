@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -122,6 +123,36 @@
             "outputDir": "storybook-static",
             "styles": [
               "src/app/styles/globals.css"
+            ]
+          }
+        }
+      }
+    },
+    "design-system-lib": {
+      "projectType": "library",
+      "root": "projects/design-system-lib",
+      "sourceRoot": "projects/design-system-lib/src",
+      "prefix": "ds",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/design-system-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/design-system-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/design-system-lib/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
             ]
           }
         }

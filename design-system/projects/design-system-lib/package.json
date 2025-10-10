@@ -1,0 +1,29 @@
+{
+  "name": "@propbinder/design-system",
+  "version": "0.1.9",
+  "description": "Propbinder Design System for Angular",
+  "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "peerDependencies": {
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0"
+  },
+  "sideEffects": [
+    "./styles/**/*.css",
+    "./ui/**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./public-api.d.ts",
+      "default": "./fesm2022/design-system.mjs"
+    },
+    "./styles/*": {
+      "default": "./styles/*"
+    }
+  },
+  "scripts": {
+    "postinstall": "node postinstall.js"
+  }
+}

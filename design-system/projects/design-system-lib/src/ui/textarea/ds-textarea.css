@@ -1,0 +1,295 @@
+/* Brockmann Font Definitions */
+
+
+/* Base component styles */
+:host {
+  display: block;
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  width: 100%;
+}
+
+/* Textarea container styles */
+.textarea-container {
+  /* Layout */
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  border-radius: 0.375rem;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Ensure border is rendered inside Shadow DOM */
+  border-style: solid;
+  border-width: 1px;
+  
+  /* Base colors */
+  background-color: var(--color-background-neutral-primary);
+  border-color: var(--border-color-default);
+  
+  /* Hover state */
+  &:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    background-color: var(--color-background-neutral-primary);
+    border-color: var(--color-brand-base);
+  }
+  
+  /* Focus state (class-based fallback) */
+  &.textarea-container--focused {
+    border-color: var(--color-brand-base);
+  }
+  
+  /* Disabled state */
+  &.textarea-container--disabled {
+    background-color: var(--color-background-disabled);
+    border-color: var(--border-color-default);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  /* Readonly state */
+  &.textarea-container--readonly {
+    background-color: var(--color-background-container);
+    border-color: var(--border-color-default);
+    cursor: default;
+  }
+}
+
+/* Keyboard/mouse focus ring using :focus-within (works in Shadow DOM) */
+.textarea-container:focus-within {
+  box-shadow: 0 0 0 3px var(--outline-color-default);
+  outline: none;
+  border-color: var(--color-brand-base);
+}
+
+/* Preserve class-based focus hook but without visual changes (state only) */
+.textarea-container--focused {
+  /* no visual changes; ring handled by :focus-within */
+}
+
+/* Size variants */
+.textarea-container--sm {
+  padding: 0.5rem;
+  font-size: var(--font-size-sm);
+  min-height: 5rem; /* ~80px */
+}
+
+.textarea-container--md {
+  padding: 0.75rem;
+  font-size: var(--font-size-base);
+  min-height: 6rem; /* ~96px */
+}
+
+.textarea-container--lg {
+  padding: 1rem;
+  font-size: var(--font-size-lg);
+  min-height: 7rem; /* ~112px */
+}
+
+/* Variant styles */
+.textarea-container--default {
+  /* Already defined in base styles */
+}
+
+.textarea-container--error {
+  background-color: var(--color-destructive-weak);
+  border-color: var(--color-destructive-base);
+  
+  &:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--color-destructive-strong);
+  }
+  
+  &.textarea-container--focused {
+    outline-color: var(--color-destructive-base);
+  }
+}
+
+.textarea-container--warning {
+  background-color: var(--color-warning-weak);
+  border-color: var(--color-warning-base);
+  
+  &:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--color-warning-strong);
+  }
+  
+  &.textarea-container--focused {
+    outline-color: var(--color-warning-base);
+  }
+}
+
+.textarea-container--success {
+  background-color: var(--color-success-weak);
+  border-color: var(--color-success-base);
+  
+  &:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--color-success-strong);
+  }
+  
+  &.textarea-container--focused {
+    outline-color: var(--color-success-base);
+  }
+}
+
+/* Textarea element styles */
+.textarea {
+  /* Layout */
+  flex: 1 1 0%;
+  resize: vertical;
+  border-width: 0px;
+  background-color: transparent;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  font-size: var(--font-size-base);
+  line-height: 1.625
+}
+.textarea::-moz-placeholder {
+  --tw-placeholder-opacity: 0.6;
+}
+.textarea::placeholder {
+  --tw-placeholder-opacity: 0.6;
+}
+.textarea {
+  
+  /* Typography */
+  font-family: inherit;
+  color: var(--text-color-default-primary);
+  width: 100%;
+  
+  /* Remove default styling */
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  /* Placeholder styles */
+  &::-moz-placeholder {
+    color: var(--text-color-default-secondary);
+    opacity: 0.6;
+  }
+  &::placeholder {
+    color: var(--text-color-default-secondary);
+    opacity: 0.6;
+  }
+  
+  /* Disabled state */
+  &:disabled {
+    color: var(--text-color-disabled);
+    cursor: not-allowed;
+    resize: none;
+    
+    &::-moz-placeholder {
+      color: var(--text-color-disabled);
+    }
+    
+    &::placeholder {
+      color: var(--text-color-disabled);
+    }
+  }
+  
+  /* Readonly state */
+  &:-moz-read-only {
+    cursor: default;
+    resize: none;
+  }
+  &:read-only {
+    cursor: default;
+    resize: none;
+  }
+}
+
+/* Size-specific textarea styles */
+.textarea--sm {
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+
+.textarea--md {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+
+.textarea--lg {
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+}
+
+/* Variant-specific textarea styles */
+.textarea--error {
+  color: var(--color-destructive-strong);
+  
+  &::-moz-placeholder {
+    color: var(--color-destructive-base);
+    opacity: 0.7;
+  }
+  
+  &::placeholder {
+    color: var(--color-destructive-base);
+    opacity: 0.7;
+  }
+}
+
+.textarea--warning {
+  color: var(--color-warning-strong);
+  
+  &::-moz-placeholder {
+    color: var(--color-warning-base);
+    opacity: 0.7;
+  }
+  
+  &::placeholder {
+    color: var(--color-warning-base);
+    opacity: 0.7;
+  }
+}
+
+.textarea--success {
+  color: var(--color-success-strong);
+  
+  &::-moz-placeholder {
+    color: var(--color-success-base);
+    opacity: 0.7;
+  }
+  
+  &::placeholder {
+    color: var(--color-success-base);
+    opacity: 0.7;
+  }
+}
+
+/* States for Angular Primitives data attributes */
+textarea[data-hover] {
+  /* Hover state handled by container */
+}
+
+textarea[data-focus] {
+  /* Focus state handled by container */
+}
+
+textarea[data-disabled] {
+  /* Disabled state handled by textarea styles */
+}
+
+/* Custom scrollbar styles for textarea */
+.textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.textarea::-webkit-scrollbar-track {
+  background: var(--color-background-container);
+  border-radius: 3px;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background: var(--border-color-default);
+  border-radius: 3px;
+  
+  &:hover {
+    background: var(--text-color-default-secondary);
+  }
+}
+
+/* Firefox scrollbar */
+.textarea {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color-default) var(--color-background-container);
+}

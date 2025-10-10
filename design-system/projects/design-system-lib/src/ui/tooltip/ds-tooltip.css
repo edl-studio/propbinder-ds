@@ -1,0 +1,137 @@
+/* Tooltip Trigger Styles - Use inline-block for reliable anchor positioning */
+.tooltip-trigger {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 8px;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative;
+}
+
+/* Ensure sidebar items maintain their styling when wrapped */
+.tooltip-trigger .sidebar-item {
+  border-radius: 8px !important;
+}
+
+
+/* Tooltip Content Styles */
+.tooltip {
+  position: absolute;
+  background-color: var(--text-color-default-primary);
+  color: var(--text-color-default-primary-inverse);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  max-width: 200px;
+  word-wrap: break-word;
+  transform-origin: var(--ngp-tooltip-transform-origin);
+  /* Improved positioning for better anchor alignment */
+  will-change: transform, opacity;
+}
+
+/* Tooltip Arrow Styles */
+.tooltip__arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--text-color-default-primary);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* Arrow positioning based on tooltip placement */
+.tooltip__arrow[data-placement='top'] {
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.tooltip__arrow[data-placement='bottom'] {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.tooltip__arrow[data-placement='left'] {
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.tooltip__arrow[data-placement='right'] {
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* Tooltip Animation Styles */
+.tooltip[data-enter] {
+  animation: tooltip-fade-in 0.15s ease-out;
+}
+
+.tooltip[data-exit] {
+  animation: tooltip-fade-out 0.1s ease-in;
+}
+
+@keyframes tooltip-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes tooltip-fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-2px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .tooltip {
+    font-size: 11px;
+    padding: 6px 8px;
+    max-width: 160px;
+  }
+  
+  .tooltip__arrow {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .tooltip__arrow[data-placement='top'],
+  .tooltip__arrow[data-placement='bottom'] {
+    bottom: -3px;
+  }
+  
+  .tooltip__arrow[data-placement='bottom'] {
+    top: -3px;
+  }
+  
+  .tooltip__arrow[data-placement='left'] {
+    right: -3px;
+  }
+  
+  .tooltip__arrow[data-placement='right'] {
+    left: -3px;
+  }
+}

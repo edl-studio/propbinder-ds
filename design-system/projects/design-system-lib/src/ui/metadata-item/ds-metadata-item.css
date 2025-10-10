@@ -1,0 +1,22 @@
+.metadata-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 20px;
+  height: 20px;
+}
+
+.metadata-item__icon {
+  flex-shrink: 0;
+  color: var(--text-color-default-tertiary);
+  transform: translateY(-0.5px);
+}
+
+.metadata-item__text {
+  color: var(--text-color-default-tertiary);
+  display: flex;
+  align-items: center;
+  min-height: 20px;
+  height: 20px;
+  line-height: 20px;
+}
