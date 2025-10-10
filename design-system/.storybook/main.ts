@@ -2,11 +2,14 @@ import type { StorybookConfig } from '@storybook/angular';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+
   addons: [
     '@storybook/addon-docs',
     '@storybook/addon-onboarding',
   ],
+
   staticDirs: [{ from: '../public', to: '/' }],
+
   framework: {
     name: '@storybook/angular',
     options: {
@@ -17,12 +20,11 @@ const config: StorybookConfig = {
       }
     },
   },
-  docs: {
-    autodocs: 'tag',
-  },
+
   typescript: {
     check: false,
   },
+
   webpackFinal: async (config) => {
     // Ensure TypeScript files are processed with proper decorator support
     const tsRule = config.module?.rules?.find((rule: any) => 
@@ -74,8 +76,7 @@ const config: StorybookConfig = {
     }
     
     return config;
-  },
-
+  }
 };
 
 export default config;
