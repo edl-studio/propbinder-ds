@@ -2,14 +2,10 @@ import { Component, ViewEncapsulation, input, output, signal, computed, effect, 
 import { CommonModule } from '@angular/common';
 import { DsSidebarComponent, SidebarGroup } from '../sidebar/ds-sidebar';
 import { DsTopbarComponent } from '../topbar/ds-topbar';
+import { TopbarBreadcrumbItem } from '../topbar/ds-topbar-breadcrumb';
 import { ViewportService } from '../../lib/viewport.service';
 
-/**
- * Available slots for content projection in DsAppLayout:
- * - topbar: Projects content into the top bar area of the layout
- * - default: Default slot for main content (no slot attribute needed)
- */
-export type DsAppLayoutSlots = 'topbar';
+// Topbar is now automatically rendered like sidebar - no slots needed except for main content
 
 @Component({
   selector: 'ds-app-layout',
@@ -82,7 +78,19 @@ export type DsAppLayoutSlots = 'topbar';
       <!-- Main content area -->
       <div class="app-layout__main" (scroll)="handleContentScroll($event)">
         <div class="app-layout__topbar">
-          <ng-content select="[slot=topbar]"></ng-content>
+          <ds-topbar
+            [pageTitle]="pageTitle()"
+            [iconName]="iconName()"
+            [userInitials]="userInitials()"
+            [showBreadcrumbs]="showBreadcrumbs()"
+            [breadcrumbItems]="breadcrumbItems()"
+            [showFirstAction]="showFirstAction()"
+            [firstActionIcon]="firstActionIcon()"
+            [firstActionLabel]="firstActionLabel()"
+            [showSecondAction]="showSecondAction()"
+            [secondActionIcon]="secondActionIcon()"
+            [secondActionLabel]="secondActionLabel()"
+          />
         </div>
         
         <div class="app-layout__content">
@@ -93,10 +101,23 @@ export type DsAppLayoutSlots = 'topbar';
   `,
 })
 export class DsAppLayoutComponent implements OnDestroy {
-  // Inputs - using input signals for better reactivity
+  // Sidebar inputs
   sidebarGroups = input<SidebarGroup[]>([]);
   isSidebarCollapsed = input<boolean>(true); // Default to collapsed
   activeItemId = input<string>();
+
+  // Topbar inputs
+  pageTitle = input<string>('Page Title');
+  iconName = input<string>('remixHome4Line');
+  userInitials = input<string>('JD');
+  showBreadcrumbs = input<boolean>(false);
+  breadcrumbItems = input<TopbarBreadcrumbItem[]>([]);
+  showFirstAction = input<boolean>(true);
+  firstActionIcon = input<string>('remixNotification3Line');
+  firstActionLabel = input<string>('Notifications');
+  showSecondAction = input<boolean>(true);
+  secondActionIcon = input<string>('remixSettings3Line');
+  secondActionLabel = input<string>('Settings');
 
   // Optional override for mobile detection - if not provided, use ViewportService
   isMobileOverride = input<boolean | undefined>(undefined);

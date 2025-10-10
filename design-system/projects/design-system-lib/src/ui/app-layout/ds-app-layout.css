@@ -101,27 +101,18 @@
   
   /* Initial state - hidden */
   opacity: 0;
-  -webkit-backdrop-filter: blur(0px);
-          backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
   pointer-events: none;
   transition: 
     opacity var(--transition-duration-slow) var(--ease-in-out-quart),
-    -webkit-backdrop-filter var(--transition-duration-slow) var(--ease-in-out-quart);
-  transition: 
-    opacity var(--transition-duration-slow) var(--ease-in-out-quart),
     backdrop-filter var(--transition-duration-slow) var(--ease-in-out-quart);
-  transition: 
-    opacity var(--transition-duration-slow) var(--ease-in-out-quart),
-    backdrop-filter var(--transition-duration-slow) var(--ease-in-out-quart),
-    -webkit-backdrop-filter var(--transition-duration-slow) var(--ease-in-out-quart);
   will-change: opacity, backdrop-filter;
 }
 
 /* Show overlay when visible */
 .app-layout__overlay--visible {
   opacity: 1;
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   pointer-events: auto;
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "@propbinder/design-system",
-  "version": "0.1.7",
+  "version": "0.1.9",
   "description": "Propbinder Design System for Angular",
   "license": "UNLICENSED",
   "publishConfig": {

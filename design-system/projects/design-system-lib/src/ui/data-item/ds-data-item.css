@@ -132,7 +132,7 @@ ds-label label {
 
 /* Link icon hover state */
 .data-item__value-text:hover .data-item__value-icon--link {
-  color: var(--background-color-interactive-brand-hover);
+  color: var(--color-background-brand-hover);
 }
 
 /* Ensure link content stays horizontal */

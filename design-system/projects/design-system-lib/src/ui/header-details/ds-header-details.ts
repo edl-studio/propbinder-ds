@@ -13,7 +13,7 @@ import { DsIconComponent } from '../icon/ds-icon';
     <div class="header-details">
         <!-- Title Row -->
         <div class="header-details__title-row">
-          <h1 class="header-details__title ui-2xl-medium">
+          <h1 class="header-details__title heading-2xl">
             {{ title() }}
           </h1>
           

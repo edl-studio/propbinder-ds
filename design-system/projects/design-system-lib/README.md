@@ -22,7 +22,7 @@ npm login
 # Install the design system
 npm i @propbinder/design-system
 # Required peer deps (used by DS components)
-npm i @ng-icons/core @ng-icons/remixicon ng-primitives@^0.83.0 @floating-ui/core@^1.7.3 @floating-ui/dom@^1.7.4
+npm i @ng-icons/core @ng-icons/remixicon ng-primitives@^0.83.0 @floating-ui/core@^1.7.3 @floating-ui/dom@^1.7.4 @tanstack/angular-table
 ```
 
 Optional project-level `.npmrc` for convenience:
@@ -165,6 +165,7 @@ The consumer app must provide:
 - `@ng-icons/core` and `@ng-icons/remixicon` (icons used by DS)
 - `ng-primitives@^0.83.0` (DS relies on several sub-entrypoints)
 - `@floating-ui/core@^1.7.3` and `@floating-ui/dom@^1.7.4` (positioning)
+- `@tanstack/angular-table`
 
 > Tailwind CSS is optional (only needed if your app uses `tw-` classes).
 

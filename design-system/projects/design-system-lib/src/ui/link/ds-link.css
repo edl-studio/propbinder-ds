@@ -40,7 +40,7 @@
 
 /* Active state */
 .link:active {
-  color: var(--background-color-interactive-brand-hover);
+  color: var(--color-background-brand-hover);
 }
 
 /* Icon styling */

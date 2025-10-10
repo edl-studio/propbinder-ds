@@ -1,7 +1,7 @@
 /* Header Details Component Styles */
 .header-details {
   width: 100%;
-  background-color: var(--background-color-page);
+  background-color: var(--color-background-neutral-primary);
 }
 
 /* Title Row */
@@ -10,6 +10,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 24px;
+  height: 36px;
 }
 
 .header-details__title {

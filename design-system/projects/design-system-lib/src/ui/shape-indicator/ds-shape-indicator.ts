@@ -83,8 +83,8 @@ export class DsShapeIndicatorComponent {
   currentColor = computed(() => {
     // Map color variants to CSS custom properties
     const colorMap: Record<ShapeColorVariant, string> = {
-      default: 'var(--background-color-interactive-default)',
-      brand: 'var(--background-color-interactive-brand)',
+      default: 'var(--color-background-neutral-secondary)',
+      brand: 'var(--color-background-brand)',
       success: 'var(--color-success-base)',
       warning: 'var(--color-warning-base)',
       destructive: 'var(--color-destructive-base)',

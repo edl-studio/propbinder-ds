@@ -29,6 +29,15 @@ export { type TopbarBreadcrumbItem } from './topbar/ds-topbar-breadcrumb';
 export { DsSelectComponent } from './select/ds-select';
 export { DsAppLayoutComponent } from './app-layout/ds-app-layout';
 export { DsDrawerComponent } from './drawer/ds-drawer';
+export { DsDataTableComponent } from './data-table/ds-data-table';
+export { 
+  DsDataTableEditableCell,
+  DsDataTableActionsCell,
+  DsDataTableBadgeCell,
+  DsDataTableCheckboxCell,
+  createEditableColumn,
+  createActionsColumn
+} from './data-table/ds-data-table-cells';
 
 // Type exports
 export type { ButtonVariant, ButtonSize } from './button/ds-button';
@@ -40,3 +49,8 @@ export type { BadgeVariant, BadgeContentType } from './badge/ds-badge';
 export type { ShapeVariant, ShapeColorVariant } from './shape-indicator/ds-shape-indicator';
 export type { DataItemLayout, DataItemValueType } from './data-item/ds-data-item';
 export type { SelectVariant, DsSelectOption } from './select/ds-select';
+export type { 
+  DataTableColumn, 
+  ColumnSizing, 
+  DsDataTableColumnMeta 
+} from './data-table/ds-data-table';

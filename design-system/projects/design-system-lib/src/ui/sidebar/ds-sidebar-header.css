@@ -15,7 +15,7 @@
   background: var(--sidebar-bg);
   background-image: linear-gradient(180deg, rgba(34, 26, 76, 1) 75%, rgba(34, 26, 76, 0) 100%);
   border-bottom: 1px solid transparent;
-  transition: border-color 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), box-shadow 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), height 0.4s var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
+  transition: border-color 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), box-shadow 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)), height 0.4s var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)), padding 0.4s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 /* Show border and shadow when scrolled */
@@ -63,6 +63,10 @@
 }
 
 /* Collapsed animations: move logo out left, fade; move toggle to center */
+:host-context(.sidebar-host--collapsed) .sidebar-header {
+  padding: 0 20px;
+}
+
 :host-context(.sidebar-host--collapsed) .sidebar-header__logo {
   transform: translate(-64px, -50%);
   opacity: 0;
