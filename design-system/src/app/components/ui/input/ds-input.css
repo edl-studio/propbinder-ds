@@ -2,6 +2,7 @@
   @apply tw-relative tw-inline-flex tw-w-full;
   max-width: 480px;
   outline: none;
+  cursor: text;
   
   /* Base styles */
   @apply tw-h-8;
@@ -43,14 +44,14 @@
 .ds-input--disabled {
   background-color: var(--color-background-disabled);
   border-color: var(--border-color-default);
-  cursor: not-allowed;
+  cursor: not-allowed !important;
   opacity: 0.6;
 }
 
 .ds-input--readonly {
   background-color: var(--color-background-container);
   border-color: var(--border-color-default);
-  cursor: default;
+  cursor: pointer !important;
 }
 
 /* Variant styles */
@@ -237,7 +238,7 @@
 }
 
 .ds-input__field:read-only {
-  cursor: default;
+  cursor: pointer;
 }
 
 /* Hide number input spinners */
@@ -305,9 +306,10 @@
 .ds-input__prefix,
 .ds-input__suffix {
   @apply tw-flex-shrink-0 tw-pointer-events-none;
-  color: var(--text-color-default-secondary);
+  color: var(--text-color-default-tertiary);
   user-select: none;
   white-space: nowrap;
+  transform: translateY(1px);
 }
 
 .ds-input__prefix {
@@ -329,7 +331,6 @@
   display: flex;
   align-items: center;
   line-height: 1;
-  transform: translateY(1px);
 }
 
 /* Hide suffix when input is empty */

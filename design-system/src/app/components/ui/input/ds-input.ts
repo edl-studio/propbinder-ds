@@ -40,7 +40,7 @@ export interface NumberFormatConfig {
   styleUrls: ['./ds-input.css'],
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DsInputComponent), multi: true }],
   template: `
-    <div [class]="containerClasses()">
+    <div [class]="containerClasses()" (click)="handleContainerClick($event)">
       @if (leadingIcon()) {
         <ds-icon [name]="leadingIcon()!" [size]="iconSize()" class="ds-input__icon ds-input__icon--leading" />
       }
@@ -272,8 +272,36 @@ export class DsInputComponent implements ControlValueAccessor {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    // Only restrict input if formatting is enabled
     const format = this.effectiveFormat();
+    
+    // Handle Enter key to apply final formatting
+    if (event.key === 'Enter' && format) {
+      event.preventDefault();
+      
+      // Apply final formatting
+      const currentValue = this.value();
+      const rawValue = this.unformatNumber(currentValue, format);
+      const formatted = this.formatNumber(rawValue, format, true);
+      
+      this.valueSig.set(formatted);
+      this.rawValueSig.set(rawValue);
+      
+      // Emit the raw value
+      this.onChangeFn(rawValue);
+      this.valueChange.emit(rawValue);
+      
+      // Update input element
+      const inputEl = this.inputElement()?.nativeElement;
+      if (inputEl) {
+        inputEl.value = formatted;
+        // Blur the input to remove focus
+        inputEl.blur();
+      }
+      
+      return;
+    }
+    
+    // Only restrict input if formatting is enabled
     if (!format) return;
 
     // Allow control keys (backspace, delete, tab, arrows, etc.)
@@ -359,6 +387,33 @@ export class DsInputComponent implements ControlValueAccessor {
   }
 
   /**
+   * Handle clicks on the container to focus the input
+   * Prevents focusing when clicking on interactive elements like the clear button
+   */
+  handleContainerClick(event: MouseEvent) {
+    // Don't focus if clicking on the clear button or if disabled/readonly
+    if (this.effectiveDisabled() || this.readonly()) {
+      return;
+    }
+    
+    // Don't focus if the target is already the input element
+    const inputEl = this.inputElement()?.nativeElement;
+    if (event.target === inputEl) {
+      return;
+    }
+    
+    // Don't focus if clicking on a button (like the clear button)
+    if ((event.target as HTMLElement).tagName === 'BUTTON') {
+      return;
+    }
+    
+    // Focus the input
+    if (inputEl) {
+      inputEl.focus();
+    }
+  }
+
+  /**
    * Calculate and update the position of the inline suffix based on text width
    */
   private updateSuffixPosition() {
@@ -409,16 +464,17 @@ export class DsInputComponent implements ControlValueAccessor {
   private formatNumber(value: string, format: Required<Omit<NumberFormatConfig, 'preset'>>, isFinal: boolean): string {
     if (!value || value === '' || value === '-') return value;
     
-    // Parse the number
+    // Parse the number to validate it's valid
     const num = parseFloat(value);
     if (isNaN(num)) return value;
     
     // Handle negative sign
-    const isNegative = num < 0;
-    const absNum = Math.abs(num);
+    const isNegative = value.startsWith('-');
+    const absValue = isNegative ? value.substring(1) : value;
     
-    // Split into integer and decimal parts
-    const parts = absNum.toString().split('.');
+    // Split into integer and decimal parts from the raw string (not parsed number)
+    // This preserves trailing zeros that parseFloat would remove
+    const parts = absValue.split('.');
     let integerPart = parts[0];
     let decimalPart = parts[1] || '';
     

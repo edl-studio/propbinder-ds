@@ -71,7 +71,7 @@
 .ds-editable-table__cell-content {
   display: flex;
   align-items: center;
-  padding: 6px 8px;
+  padding: 0 8px;
   width: 100%;
   box-sizing: border-box;
   min-height: 32px;
@@ -260,13 +260,19 @@
   @apply tw-flex tw-items-center tw-justify-center;
 }
 
-/* Make the add button full-width */
+/* Add buttons container */
+.ds-editable-table__footer-buttons {
+  @apply tw-flex tw-gap-2;
+}
+
+/* Auto-width buttons */
 .ds-editable-table__footer ::ng-deep ds-button {
-  @apply tw-w-full;
+  width: auto;
 }
 
 .ds-editable-table__footer ::ng-deep ds-button button {
-  @apply tw-w-full tw-justify-center;
+  width: auto;
+  justify-content: flex-start;
 }
 
 /* ========================================================================
