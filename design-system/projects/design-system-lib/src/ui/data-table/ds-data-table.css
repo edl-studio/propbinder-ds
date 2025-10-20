@@ -1,9 +1,6 @@
 /* Data Table Component Styles */
 
 .ds-data-table {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   width: 100%;
 }
 
@@ -12,7 +9,9 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--border-color-default);
 }
 
@@ -41,73 +40,10 @@
   align-items: center;
 }
 
-/* Column Visibility Panel */
-.ds-data-table__column-panel {
-  background: var(--color-background-neutral-primary);
-  border: 1px solid var(--border-color-default);
-  padding: 16px;
-  margin-bottom: 8px;
-}
-
-.ds-data-table__column-panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-color-default);
-}
-
-.ds-data-table__column-panel-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  color: var(--text-color-default-secondary);
-  transition: all 0.2s;
-}
-
-.ds-data-table__column-panel-close:hover {
-  background: var(--color-background-neutral-secondary);
-  color: var(--text-color-default-primary);
-}
-
-.ds-data-table__column-panel-content {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.ds-data-table__column-toggle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-
-.ds-data-table__column-toggle:hover {
-  background: var(--color-background-neutral-secondary);
-}
-
-.ds-data-table__column-toggle input[type="checkbox"] {
-  cursor: pointer;
-  width: 16px;
-  height: 16px;
-  accent-color: var(--color-background-brand);
-}
-
 /* Table Container */
 .ds-data-table__container {
-  background: var(--color-background-neutral-primary);
-  border: 1px solid var(--border-color-default);
-  overflow: hidden;
+  width: 100%;
+  overflow: visible;
 }
 
 .ds-data-table__scroll {
@@ -149,6 +85,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.ds-data-table__th:first-child {
+  padding-left: 24px;
+}
+
+.ds-data-table__th:last-child {
+  padding-right: 24px;
 }
 
 /* Sort Button */
@@ -214,6 +158,14 @@
   white-space: nowrap;
 }
 
+.ds-data-table__td:first-child {
+  padding-left: 24px;
+}
+
+.ds-data-table__td:last-child {
+  padding-right: 24px;
+}
+
 /* Empty State */
 .ds-data-table__td--empty {
   padding: 48px 16px;
@@ -236,7 +188,9 @@
   gap: 16px;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 12px;
   border-top: 1px solid var(--border-color-default);
 }
 

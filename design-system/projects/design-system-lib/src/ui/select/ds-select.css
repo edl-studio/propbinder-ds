@@ -3,6 +3,11 @@
   display: inline-flex;
   width: 100%;
   max-width: 480px;
+  outline: none;
+}
+
+.ds-select:focus-visible {
+  outline: none;
 }
 
 .ds-select__trigger {
@@ -18,6 +23,8 @@
   transition-property: all;
   transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   
   /* Ensure border is rendered inside Shadow DOM */
   border-style: solid;
@@ -32,20 +39,36 @@
   box-sizing: border-box;
 }
 
-.ds-select__trigger:hover:not(:disabled) {
-  background-color: var(--color-background-neutral-primary);
+.ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
   border-color: var(--color-brand-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
-.ds-select:focus-within .ds-select__trigger {
-  box-shadow: 0 0 0 3px var(--color-brand-weak);
-  outline: none;
+.ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-select--ghost .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary);
+}
+
+.ds-select:focus-within .ds-select__trigger:not(:disabled) {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
   border-color: var(--color-brand-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select:not(.ds-select--ghost):focus-within .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary);
 }
 
 .ds-select__trigger:disabled {
-  background-color: var(--color-background-disabled);
-  border-color: var(--border-color-default);
+  background-color: var(--color-background-neutral-tertiary);
+  border-color: transparent;
+  color: var(--text-color-default-disabled);
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -55,38 +78,215 @@
   border-color: var(--color-destructive-base);
 }
 
-.ds-select--error .ds-select__trigger:hover:not(:disabled) {
-  border-color: var(--color-destructive-strong);
+.ds-select--error .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-destructive-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
-.ds-select--error:focus-within .ds-select__trigger {
-  box-shadow: 0 0 0 3px var(--color-destructive-weak);
+.ds-select--error .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-select--ghost.ds-select--error .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary);
+}
+
+.ds-select--error:focus-within .ds-select__trigger:not(:disabled) {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
   border-color: var(--color-destructive-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--error:not(.ds-select--ghost):focus-within .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary);
 }
 
 .ds-select--warning .ds-select__trigger {
   border-color: var(--color-warning-base);
 }
 
-.ds-select--warning .ds-select__trigger:hover:not(:disabled) {
-  border-color: var(--color-warning-strong);
+.ds-select--warning .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-warning-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
-.ds-select--warning:focus-within .ds-select__trigger {
-  box-shadow: 0 0 0 3px var(--color-warning-weak);
+.ds-select--warning .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-select--ghost.ds-select--warning .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary);
+}
+
+.ds-select--warning:focus-within .ds-select__trigger:not(:disabled) {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
   border-color: var(--color-warning-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--warning:not(.ds-select--ghost):focus-within .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary);
 }
 
 .ds-select--success .ds-select__trigger {
   border-color: var(--color-success-base);
 }
 
-.ds-select--success .ds-select__trigger:hover:not(:disabled) {
-  border-color: var(--color-success-strong);
+.ds-select--success .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
-.ds-select--success:focus-within .ds-select__trigger {
-  box-shadow: 0 0 0 3px var(--color-success-weak);
+.ds-select--success .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-select--ghost.ds-select--success .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary);
+}
+
+.ds-select--success:focus-within .ds-select__trigger:not(:disabled) {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--success:not(.ds-select--ghost):focus-within .ds-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary);
+}
+
+/* Ghost variant */
+.ds-select--ghost .ds-select__trigger {
+  border-color: transparent;
+}
+
+.ds-select--ghost .ds-select__trigger:hover:not(:disabled) {
+  border-color: var(--border-color-default);
+}
+
+.ds-select--ghost .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-brand-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--ghost:focus-within .ds-select__trigger:not(:disabled) {
+  outline: 2px solid var(--outline-color-default);
+  border-color: var(--color-brand-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--ghost:focus-within .ds-select__trigger:hover:not(:disabled) {
+  border-color: var(--color-brand-base);
+}
+
+.ds-select--ghost .ds-select__trigger[data-expanded]:not(:disabled) {
+  border-color: var(--color-brand-base);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+/* Ghost variant with error */
+.ds-select--ghost.ds-select--error .ds-select__trigger {
+  border-color: transparent;
+}
+
+.ds-select--ghost.ds-select--error .ds-select__trigger:hover:not(:disabled) {
+  border-color: var(--color-destructive-base);
+}
+
+.ds-select--ghost.ds-select--error .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-destructive-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--ghost.ds-select--error:focus-within .ds-select__trigger:not(:disabled) {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-destructive-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--ghost.ds-select--error:focus-within .ds-select__trigger:hover:not(:disabled) {
+  border-color: var(--color-destructive-base);
+}
+
+.ds-select--ghost.ds-select--error .ds-select__trigger[data-expanded]:not(:disabled) {
+  border-color: var(--color-destructive-base);
+}
+
+/* Ghost variant with warning */
+.ds-select--ghost.ds-select--warning .ds-select__trigger {
+  border-color: transparent;
+}
+
+.ds-select--ghost.ds-select--warning .ds-select__trigger:hover:not(:disabled) {
+  border-color: var(--color-warning-base);
+}
+
+.ds-select--ghost.ds-select--warning .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-warning-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--ghost.ds-select--warning:focus-within .ds-select__trigger:not(:disabled) {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-warning-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--ghost.ds-select--warning:focus-within .ds-select__trigger:hover:not(:disabled) {
+  border-color: var(--color-warning-base);
+}
+
+.ds-select--ghost.ds-select--warning .ds-select__trigger[data-expanded]:not(:disabled) {
+  border-color: var(--color-warning-base);
+}
+
+/* Ghost variant with success */
+.ds-select--ghost.ds-select--success .ds-select__trigger {
+  border-color: transparent;
+}
+
+.ds-select--ghost.ds-select--success .ds-select__trigger:hover:not(:disabled) {
+  border-color: var(--color-success-base);
+}
+
+.ds-select--ghost.ds-select--success .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--ghost.ds-select--success:focus-within .ds-select__trigger:not(:disabled) {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-select--ghost.ds-select--success:focus-within .ds-select__trigger:hover:not(:disabled) {
+  border-color: var(--color-success-base);
+}
+
+.ds-select--ghost.ds-select--success .ds-select__trigger[data-expanded]:not(:disabled) {
   border-color: var(--color-success-base);
 }
 
@@ -100,15 +300,13 @@
   border-style: solid;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-  --tw-shadow: var(--box-shadow-lg);
-  --tw-shadow-colored: var(--box-shadow-lg);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   
   border-color: var(--border-color-default);
   background-color: var(--color-background-neutral-primary);
   width: var(--ngp-select-width);
   min-width: 180px;
   box-sizing: border-box;
+  box-shadow: var(--box-shadow-lg);
 }
 
 .ds-select__options {
@@ -144,21 +342,36 @@
   
   color: var(--text-color-default-primary);
   border-radius: 6px;
+  padding-right: calc(8px + 16px + 8px); /* Reserve space for checkmark: padding + icon + gap */
 }
 
-.ds-select__option[data-hover],
-.ds-select__option[data-press] {
-  background-color: var(--color-interactive-default-hover);
+/* All items hover (selected and unselected) */
+.ds-select__option:hover:not([data-disabled]),
+.ds-select__option[data-hover]:not([data-disabled]),
+.ds-select__option[data-press]:not([data-disabled]) {
+  background-color: var(--color-background-neutral-primary-hover);
 }
 
-.ds-select__option[data-active] {
-  background-color: var(--color-brand-weak);
-}
-
+/* Disabled individual options */
 .ds-select__option[data-disabled] {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
   color: var(--text-color-disabled);
+}
+
+/* Disabled select - all options get not-allowed cursor */
+.ds-select--disabled .ds-select__option {
+  cursor: not-allowed;
+}
+
+/* Checkmark Icon */
+.ds-select__checkmark {
+  position: absolute;
+  right: 8px;
+  color: var(--color-brand-base);
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
 }
 
 .ds-select__group-label {
@@ -193,9 +406,11 @@
 }
 
 /* Animation classes */
-.ds-select__trigger[data-expanded] {
+.ds-select__trigger[data-expanded]:not(:disabled) {
   border-color: var(--color-brand-base);
-  box-shadow: 0 0 0 3px var(--color-brand-weak);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .ds-select__trigger[data-expanded] .ds-select__icon--trailing {

@@ -1,0 +1,57 @@
+/* Tile Component Styles */
+
+/* Base tile container */
+.ds-tile {
+  background: var(--color-background-neutral-primary);
+  border: 1px solid var(--border-color-default);
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Vertical layout (default) - sections stack */
+.ds-tile--vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Horizontal layout - sections side-by-side */
+.ds-tile--horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+/* ========================================
+   Tile Section
+   ======================================== */
+
+
+/* ========================================
+   Section Header
+   ======================================== */
+
+/* Section wrapper - contains header and content */
+.ds-tile-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 8px; /* Gap between header and content */
+}
+
+/* ========================================
+   Section Content
+   ======================================== */
+
+/* Content projected directly into .ds-tile-section */
+
+/* ========================================
+   Responsive Adjustments
+   ======================================== */
+
+/* Mobile: Force horizontal tiles to stack vertically */
+@media (max-width: 768px) {
+  .ds-tile--horizontal {
+    flex-direction: column;
+  }
+}
+
