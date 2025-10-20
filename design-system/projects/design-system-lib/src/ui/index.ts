@@ -28,6 +28,7 @@ export { DsListComponent } from './list/ds-list';
 export { type TopbarBreadcrumbItem } from './topbar/ds-topbar-breadcrumb';
 
 export { DsSelectComponent } from './select/ds-select';
+export { DsDatepickerComponent } from './datepicker/ds-datepicker';
 export { DsAppLayoutComponent } from './app-layout/ds-app-layout';
 export { DsDrawerComponent } from './drawer/ds-drawer';
 export { DsDataTableComponent } from './data-table/ds-data-table';
@@ -39,6 +40,44 @@ export {
   createEditableColumn,
   createActionsColumn
 } from './data-table/ds-data-table-cells';
+export {
+  IconTextCellComponent,
+  BadgeCellComponent,
+  DateCellComponent,
+  type IconTextCellData,
+  type BadgeCellData,
+  type DateCellData,
+  type CellComponentData
+} from './data-table/cells';
+export {
+  iconTextCell,
+  badgeCell,
+  dateCell,
+  type ComponentCell
+} from './data-table/cell-helpers';
+export { 
+  DsEditableTableComponent,
+  type EditableTableColumn,
+  type EditableColumnSizing,
+  type DsEditableTableColumnMeta
+} from './editable-table/ds-editable-table';
+export {
+  EditableTextCellComponent,
+  EditableNumberCellComponent,
+  EditableSelectCellComponent,
+  type EditableTextCellData,
+  type EditableNumberCellData,
+  type EditableSelectCellData
+} from './editable-table/cells';
+export {
+  editableTextCell,
+  editableNumberCell,
+  editableSelectCell,
+  type EditableComponentCell
+} from './editable-table/editable-cell-helpers';
+export { DsTileComponent } from './tile/ds-tile';
+export { DsTileSectionComponent } from './tile/ds-tile-section';
+export { TileHeaderComponent } from './tile/tile-header';
 
 // Type exports
 export type { ButtonVariant, ButtonSize } from './button/ds-button';
@@ -51,8 +90,10 @@ export type { ShapeVariant, ShapeColorVariant } from './shape-indicator/ds-shape
 export type { InlineMessageVariant } from './inline-message/ds-inline-message';
 export type { DataItemLayout, DataItemValueType } from './data-item/ds-data-item';
 export type { SelectVariant, DsSelectOption } from './select/ds-select';
+export type { DatePickerVariant } from './datepicker/ds-datepicker';
 export type { 
   DataTableColumn, 
   ColumnSizing, 
   DsDataTableColumnMeta 
 } from './data-table/ds-data-table';
+export type { TileOrientation } from './tile/ds-tile';

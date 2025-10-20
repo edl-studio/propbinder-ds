@@ -44,12 +44,12 @@ export interface DataItemBadgeConfig {
         <div class="data-item__value-container">
           @switch (effectiveValueType()) {
             @case ('text') {
-              <span class="data-item__value-text ui-sm-regular">{{ value() }}</span>
+              <span [class]="'data-item__value-text ' + (valueClassName() || 'ui-sm-regular')">{{ value() }}</span>
             }
             
             @case ('icon-text') {
               <ds-icon [name]="iconName()!" size="16px" color="secondary" class="data-item__value-icon" />
-              <span class="data-item__value-text ui-sm-regular">{{ value() }}</span>
+              <span [class]="'data-item__value-text ' + (valueClassName() || 'ui-sm-regular')">{{ value() }}</span>
             }
             
             @case ('avatar-text') {
@@ -61,7 +61,7 @@ export interface DataItemBadgeConfig {
                 size="xs"
                 class="data-item__value-avatar"
               />
-              <span class="data-item__value-text ui-sm-regular">{{ value() }}</span>
+              <span [class]="'data-item__value-text ' + (valueClassName() || 'ui-sm-regular')">{{ value() }}</span>
             }
 
             @case ('link') {
@@ -140,6 +140,10 @@ export class DsDataItemComponent {
   linkHref = input<string>('');
   linkTarget = input<'_blank' | '_self'>('_self');
 
+  // Custom class names for styling
+  labelClassName = input<string>('');
+  valueClassName = input<string>('');
+
   // Computed classes
   containerClasses = computed(() => {
     const classes = ['data-item'];
@@ -157,9 +161,5 @@ export class DsDataItemComponent {
     const classes = ['data-item__value'];
     classes.push(`data-item__value--${this.layout()}`);
     return classes.join(' ');
-  });
-  
-  labelClassName = computed(() => {
-    return 'data-item__label-text';
   });
 }

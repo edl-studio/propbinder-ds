@@ -23,6 +23,8 @@ import { DsIconComponent } from '../icon/ds-icon';
               <ds-button
                 [variant]="primaryActionVariant()"
                 [size]="'md'"
+                [disabled]="primaryActionDisabled()"
+                [loading]="primaryActionLoading()"
                 (clicked)="onPrimaryActionClick($event)"
                 class="header-details__action-btn header-details__action-btn--primary"
               >
@@ -78,6 +80,8 @@ export class DsHeaderDetailsComponent {
   primaryActionText = input<string>('Primary Action');
   primaryActionIcon = input<string>();
   primaryActionVariant = input<'primary' | 'secondary' | 'ghost' | 'destructive'>('primary');
+  primaryActionDisabled = input<boolean>(false);
+  primaryActionLoading = input<boolean>(false);
   
   // Secondary action
   showSecondaryAction = input<boolean>(false);

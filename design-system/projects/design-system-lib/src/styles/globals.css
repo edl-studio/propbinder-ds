@@ -82,7 +82,7 @@
   --color-brand-strong-hover: #121418;
 
   /* Outline Colors for focus states */
-  --outline-color-default: #C6CBFF;
+  --outline-color-default: var(--color-brand-weak);
 
   /* Success Colors */
   --color-success-base: #158452;
@@ -112,7 +112,7 @@
   --color-blue-base: #1e5aff;
   --color-blue-base-hover: #1e5aff;
   --color-blue-weak: #e0e9ff;
-  --color-blue-weak-hover: #e0e9ff;
+  --color-blue-weak-hover: #c7d2fe;
   --color-blue-strong: #0036cc;
   --color-blue-strong-hover: #0036cc;
 
@@ -198,7 +198,7 @@
 
 /* Global Styles */
 body {
-  background-color: var(--color-background-neutral-secondary);
+  background-color: var(--color-background-neutral-primary);
   color: var(--text-color-default-primary);
   font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
 }

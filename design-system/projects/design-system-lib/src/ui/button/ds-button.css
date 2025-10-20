@@ -80,13 +80,12 @@
   
   /* Focus styles */
   &:focus-visible {
-    outline-width: 3px;
+    outline-width: 2px;
   }
   &:focus-visible {
-    outline-offset: 0px;
-  }
-  &:focus-visible {
-    outline-color: var(--color-brand-base);
+    outline-offset: 2px;
+    outline-color: var(--outline-color-default);
+    transition: outline 0s, outline-offset 0s;
   }
   
   /* Disabled styles */
@@ -185,11 +184,6 @@
 
 .btn--primary:disabled {
   background-color: var(--color-background-brand-disabled);
-  border: none;
-}
-
-.btn--primary:focus-visible {
-  outline: none;
   border: none;
 }
 
