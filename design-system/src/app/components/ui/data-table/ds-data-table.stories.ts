@@ -261,7 +261,7 @@ const userColumnsWithActions: ColumnDef<User>[] = [
 ];
 
 const meta: Meta<DsDataTableComponent> = {
-  title: 'Components/Data Table',
+  title: 'Primitives/Data Table',
   component: DsDataTableComponent,
   decorators: [
     applicationConfig({

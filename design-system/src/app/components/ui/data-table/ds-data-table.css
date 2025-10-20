@@ -1,9 +1,6 @@
 /* Data Table Component Styles */
 
 .ds-data-table {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   width: 100%;
 }
 
@@ -45,8 +42,8 @@
 
 /* Table Container */
 .ds-data-table__container {
-  background: transparent;
-  overflow: hidden;
+  width: 100%;
+  overflow: visible;
 }
 
 .ds-data-table__scroll {

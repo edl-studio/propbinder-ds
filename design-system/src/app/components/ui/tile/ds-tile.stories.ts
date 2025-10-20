@@ -54,7 +54,7 @@ const invoiceColumns: ColumnDef<InvoiceLine>[] = [
 ];
 
 const meta: Meta<DsTileComponent> = {
-  title: 'Layout/Tile',
+  title: 'Primitives/Tile',
   component: DsTileComponent,
   decorators: [
     applicationConfig({

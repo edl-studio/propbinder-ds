@@ -5,10 +5,10 @@
 /* Brockmann Font Family */
 @font-face {
   font-family: 'Brockmann';
-  src: local('Brockmann Regular'),
-       local('Brockmann-Regular'),
-       url('/Brockmann/brockmann-regular-webfont.woff2') format('woff2'),
-       url('/Brockmann/Brockmann-Regular.otf') format('opentype');
+  src:
+    local('Brockmann Regular'),
+    local('Brockmann-Regular'),
+    url('/Brockmann/brockmann-regular-webfont.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -16,10 +16,10 @@
 
 @font-face {
   font-family: 'Brockmann';
-  src: local('Brockmann Medium'),
-       local('Brockmann-Medium'),
-       url('/Brockmann/brockmann-medium-webfont.woff2') format('woff2'),
-       url('/Brockmann/Brockmann-Medium.otf') format('opentype');
+  src:
+    local('Brockmann Medium'),
+    local('Brockmann-Medium'),
+    url('/Brockmann/brockmann-medium-webfont.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -27,10 +27,10 @@
 
 @font-face {
   font-family: 'Brockmann';
-  src: local('Brockmann SemiBold'),
-       local('Brockmann-SemiBold'),
-       url('/Brockmann/brockmann-semibold-webfont.woff2') format('woff2'),
-       url('/Brockmann/Brockmann-SemiBold.otf') format('opentype');
+  src:
+    local('Brockmann SemiBold'),
+    local('Brockmann-SemiBold'),
+    url('/Brockmann/brockmann-semibold-webfont.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -112,7 +112,7 @@
   --color-blue-base: #1e5aff;
   --color-blue-base-hover: #1e5aff;
   --color-blue-weak: #e0e9ff;
-  --color-blue-weak-hover: #e0e9ff;
+  --color-blue-weak-hover: #c7d2fe;
   --color-blue-strong: #0036cc;
   --color-blue-strong-hover: #0036cc;
 
@@ -184,12 +184,16 @@
   --transition-duration-fast: .15s;
   --transition-duration-normal: .2s;
   --transition-duration-slow: .3s;
-  
+
   /* Easing Curves */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
 }
 
 /* Global Styles */
@@ -482,12 +486,17 @@ body {
  */
 .design-system-color-classes {
   /* Text Colors - Default/Neutral */
-  color: var(--text-color-default-primary);      /* -> tw-text-default-primary */
-  color: var(--text-color-default-secondary);    /* -> tw-text-default-secondary */
-  color: var(--text-color-default-tertiary);     /* -> tw-text-default-tertiary */
-  color: var(--text-color-default-disabled);     /* -> tw-text-default-disabled */
-  color: var(--text-color-default-primary-inverse); /* -> tw-text-default-primary-inverse */
-  
+  color: var(--text-color-default-primary);
+  /* -> tw-text-default-primary */
+  color: var(--text-color-default-secondary);
+  /* -> tw-text-default-secondary */
+  color: var(--text-color-default-tertiary);
+  /* -> tw-text-default-tertiary */
+  color: var(--text-color-default-disabled);
+  /* -> tw-text-default-disabled */
+  color: var(--text-color-default-primary-inverse);
+  /* -> tw-text-default-primary-inverse */
+
   /* Text Colors - Brand */
   color: var(--text-color-brand);               /* -> tw-text-brand */
   color: var(--text-color-brand-disabled);      /* -> tw-text-brand-disabled */
@@ -507,14 +516,17 @@ body {
   background-color: var(--color-background-brand-disabled);               /* -> tw-bg-brand-disabled */
   
   /* Border Colors */
-  border-color: var(--border-color-default);    /* -> tw-border-default */
-  
-  display: none; /* This class is never used, just documents the mapping */
+  border-color: var(--border-color-default);
+  /* -> tw-border-default */
+
+  display: none;
+  /* This class is never used, just documents the mapping */
 }
 
 /* Force generation of depth utility classes */
 .depth-class-safelist {
-  display: none; /* This class is never used, just ensures depth classes are available */
+  display: none;
+  /* This class is never used, just ensures depth classes are available */
 }
 
 
@@ -592,7 +604,8 @@ body {
   font-size: var(--font-size-xs);
   font-weight: 500;
   line-height: 1.2;
-  letter-spacing: 0.48px; /* 4% of 12px */
+  letter-spacing: 0.48px;
+  /* 4% of 12px */
   text-transform: uppercase;
 }
 
@@ -606,21 +619,21 @@ body {
 
 /* Inner Shadow Classes */
 .depth-sm {
-  box-shadow: 
+  box-shadow:
     inset 0 10px 10px rgba(255, 255, 255, 0.2),
     inset 0 -1.5px 1px rgba(0, 0, 0, 0.25),
     inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .depth-md {
-  box-shadow: 
+  box-shadow:
     inset 0 20px 20px rgba(255, 255, 255, 0.2),
     inset 0 -3px 2px rgba(0, 0, 0, 0.25),
     inset 0 2px 2px rgba(255, 255, 255, 0.3);
 }
 
 .depth-lg {
-  box-shadow: 
+  box-shadow:
     inset 0 30px 30px rgba(255, 255, 255, 0.2),
     inset 0 -4.5px 3px rgba(0, 0, 0, 0.25),
     inset 0 3px 3px rgba(255, 255, 255, 0.3);
@@ -639,14 +652,12 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 40%,
-    rgba(255, 255, 255, 1) 50%,
-    transparent 60%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(255, 255, 255, 1) 50%,
+      transparent 60%,
+      transparent 100%);
   background-size: 300px 100%;
   background-repeat: no-repeat;
   animation: shimmer 2s infinite linear;
@@ -655,12 +666,10 @@ body {
 }
 
 .shimmer-text-subtle {
-  background: linear-gradient(
-    90deg,
-    currentColor 30%,
-    rgba(255, 255, 255, 0.6) 50%,
-    currentColor 70%
-  );
+  background: linear-gradient(90deg,
+      currentColor 30%,
+      rgba(255, 255, 255, 0.6) 50%,
+      currentColor 70%);
   background-size: 150px 100%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -669,12 +678,10 @@ body {
 }
 
 .shimmer-text-fast {
-  background: linear-gradient(
-    90deg,
-    currentColor 25%,
-    rgba(255, 255, 255, 0.8) 50%,
-    currentColor 75%
-  );
+  background: linear-gradient(90deg,
+      currentColor 25%,
+      rgba(255, 255, 255, 0.8) 50%,
+      currentColor 75%);
   background-size: 150px 100%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -683,12 +690,10 @@ body {
 }
 
 .shimmer-text-wide {
-  background: linear-gradient(
-    90deg,
-    currentColor 20%,
-    rgba(255, 255, 255, 0.8) 50%,
-    currentColor 80%
-  );
+  background: linear-gradient(90deg,
+      currentColor 20%,
+      rgba(255, 255, 255, 0.8) 50%,
+      currentColor 80%);
   background-size: 320px 100%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -700,6 +705,7 @@ body {
   0% {
     background-position: -300px 0;
   }
+
   100% {
     background-position: calc(100% + 300px) 0;
   }
@@ -719,6 +725,7 @@ body {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -728,6 +735,7 @@ body {
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }

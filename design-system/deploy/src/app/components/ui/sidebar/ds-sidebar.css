@@ -22,8 +22,9 @@
 
 .sidebar__content {
   flex: 1 1 auto;
-  position: relative;
+  position: none;
   overflow-y: auto; /* content area is the scroll container */
+  overflow-x: hidden; /* prevent horizontal scroll */
   padding: 0;
   display: flex;
   flex-direction: column;

@@ -28,7 +28,10 @@
 }
 
 .ds-select__trigger:focus-visible {
-  outline: none;
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-brand-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .ds-select__trigger:hover:not(:disabled) {
@@ -63,6 +66,13 @@
   border-color: var(--color-destructive-base);
 }
 
+.ds-select--error .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-destructive-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
 .ds-select--error .ds-select__trigger:hover:not(:disabled) {
   background-color: var(--color-background-neutral-primary-hover);
 }
@@ -86,6 +96,13 @@
   border-color: var(--color-warning-base);
 }
 
+.ds-select--warning .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-warning-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
 .ds-select--warning .ds-select__trigger:hover:not(:disabled) {
   background-color: var(--color-background-neutral-primary-hover);
 }
@@ -107,6 +124,13 @@
 
 .ds-select--success .ds-select__trigger {
   border-color: var(--color-success-base);
+}
+
+.ds-select--success .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .ds-select--success .ds-select__trigger:hover:not(:disabled) {
@@ -137,6 +161,13 @@
   border-color: var(--border-color-default);
 }
 
+.ds-select--ghost .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-brand-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
 .ds-select--ghost:focus-within .ds-select__trigger:not(:disabled) {
   outline: 2px solid var(--outline-color-default);
   border-color: var(--color-brand-base);
@@ -163,6 +194,13 @@
   border-color: var(--color-destructive-base);
 }
 
+.ds-select--ghost.ds-select--error .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-destructive-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
 .ds-select--ghost.ds-select--error:focus-within .ds-select__trigger:not(:disabled) {
   outline: 2px solid var(--outline-color-default);
   outline-offset: 0;
@@ -187,6 +225,13 @@
   border-color: var(--color-warning-base);
 }
 
+.ds-select--ghost.ds-select--warning .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-warning-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
 .ds-select--ghost.ds-select--warning:focus-within .ds-select__trigger:not(:disabled) {
   outline: 2px solid var(--outline-color-default);
   outline-offset: 0;
@@ -209,6 +254,13 @@
 
 .ds-select--ghost.ds-select--success .ds-select__trigger:hover:not(:disabled) {
   border-color: var(--color-success-base);
+}
+
+.ds-select--ghost.ds-select--success .ds-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .ds-select--ghost.ds-select--success:focus-within .ds-select__trigger:not(:disabled) {

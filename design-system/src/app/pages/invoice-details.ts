@@ -1,4 +1,4 @@
-import { Component, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, signal, computed, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DsAppLayoutComponent } from '../components/ui/app-layout/ds-app-layout';
 import { DsHeaderDetailsComponent } from '../components/ui/header-details/ds-header-details';
@@ -8,6 +8,9 @@ import { editableTextCell, editableNumberCell, editableDatepickerCell } from '..
 import { DsTileComponent } from '../components/ui/tile/ds-tile';
 import { DsTileSectionComponent } from '../components/ui/tile/ds-tile-section';
 import { TileHeaderComponent } from '../components/ui/tile/tile-header';
+import { DsButtonComponent } from '../components/ui/button/ds-button';
+import { DsComboboxComponent } from '../components/ui/combobox/ds-combobox';
+import { DsInlineMessageComponent } from '../components/ui/inline-message/ds-inline-message';
 
 // Invoice line interface
 interface InvoiceLine {
@@ -37,13 +40,16 @@ interface InvoiceLine {
     DsTileComponent,
     DsTileSectionComponent,
     TileHeaderComponent,
+    DsButtonComponent,
+    DsComboboxComponent,
+    DsInlineMessageComponent,
   ],
   template: `
     <ds-app-layout
       [sidebarGroups]="sidebarGroups"
       [isSidebarCollapsed]="isSidebarCollapsed()"
       [activeItemId]="activeItemId()"
-      [pageTitle]="'Invoices'"
+      [pageTitle]="'Billable tasks'"
       [iconName]="'remixFileList3Line'"
       [showFirstAction]="true"
       [showSecondAction]="true"
@@ -52,7 +58,7 @@ interface InvoiceLine {
       [userInitials]="'JD'"
       [showBreadcrumbs]="true"
       [breadcrumbItems]="[
-        { label: 'Invoices', path: '/invoices', isLast: false },
+        { label: 'Billable tasks', path: '/invoices', isLast: false },
         { label: 'INV-2024-001', path: '', isLast: true }
       ]"
       (collapsedChange)="isSidebarCollapsed.set($event)"
@@ -65,8 +71,11 @@ interface InvoiceLine {
           [showPrimaryAction]="true"
           [primaryActionText]="'Send invoice'"
           [primaryActionIcon]="'remixSendPlane2Line'"
+          [primaryActionLoading]="isSendingInvoice()"
+          [primaryActionDisabled]="invoiceSent() || isSendingInvoice()"
           [showSecondaryAction]="false"
           [showMoreActions]="false"
+          (primaryActionClick)="handleSendInvoice()"
         >
           <!-- Invoice Details -->
           <div slot="details" class="tw-flex tw-flex-wrap tw-gap-8">
@@ -110,6 +119,17 @@ interface InvoiceLine {
               valueType="text"
             />
           </div>
+          
+          <!-- Invoice Sent Message -->
+          @if (invoiceSent()) {
+            <div slot="details" style="flex: 1 1 100%; width: 100%; max-width: 100%;">
+              <ds-inline-message
+                variant="success"
+                title="Invoice sent">
+                You have sent the invoice on {{ invoiceSentDate() }}.
+              </ds-inline-message>
+            </div>
+          }
         </ds-header-details>
 
         <!-- Edge-to-edge divider -->
@@ -128,13 +148,39 @@ interface InvoiceLine {
               </ds-tile-section>
               
               <ds-tile-section [padding]="false">
-                <ds-editable-table 
-                  [(data)]="invoiceLines" 
-                  [columns]="invoiceColumns()"
-                  [reorderable]="true"
-                  [allowAddRow]="true"
-                  [allowDeleteRow]="true">
-                </ds-editable-table>
+              <ds-editable-table 
+                [(data)]="invoiceLines" 
+                [columns]="invoiceColumns()"
+                [reorderable]="true"
+                [allowAddRow]="false"
+                [allowDeleteRow]="true"
+                (cellEdited)="onCellEdited($event)">
+              </ds-editable-table>
+              </ds-tile-section>
+              
+              <ds-tile-section>
+                <div style="display: flex; gap: 8px;">
+                  <ds-combobox
+                    [options]="materialOptions"
+                    [placeholder]="'Search'"
+                    [selectPlaceholder]="'Select material'"
+                    [width]="'320px'"
+                    (valueChange)="onMaterialSelected($event)">
+                    <ds-button 
+                      variant="ghost" 
+                      size="sm"
+                      leadingIcon="remixMenuAddLine">
+                      Add material
+                    </ds-button>
+                  </ds-combobox>
+                  <ds-button 
+                    variant="ghost" 
+                    size="sm"
+                    leadingIcon="remixTimeLine"
+                    (clicked)="addTimeRow()">
+                    Add time
+                  </ds-button>
+                </div>
               </ds-tile-section>
               
               <ds-tile-section>
@@ -142,7 +188,7 @@ interface InvoiceLine {
                   <div style="background: var(--color-background-neutral-secondary); border-radius: 6px; width: 192px; padding: 8px 12px;">
                     <ds-data-item 
                       label="Total cost price" 
-                      value="20.500,00 DKK" 
+                      [value]="totalCostPrice()" 
                       layout="vertical"
                       [labelClassName]="'ui-xs-regular'"
                       [valueClassName]="'ui-lg-medium'" />
@@ -150,7 +196,7 @@ interface InvoiceLine {
                   <div style="background: var(--color-background-neutral-secondary); border-radius: 6px; width: 192px; padding: 8px 12px;">
                     <ds-data-item 
                       label="Total price (excl. vat)" 
-                      value="23.575,00 DKK" 
+                      [value]="totalPriceExclVat()" 
                       layout="vertical"
                       [labelClassName]="'ui-xs-regular'"
                       [valueClassName]="'ui-lg-medium'" />
@@ -158,7 +204,7 @@ interface InvoiceLine {
                   <div style="background: var(--color-background-neutral-secondary); border-radius: 6px; width: 192px; padding: 8px 12px;">
                     <ds-data-item 
                       label="Total price (incl. vat)" 
-                      value="29.468,75 DKK" 
+                      [value]="totalPriceInclVat()" 
                       layout="vertical"
                       [labelClassName]="'body-sm-semibold'"
                       [valueClassName]="'ui-lg-medium tw-text-brand'" />
@@ -184,6 +230,170 @@ export class InvoiceDetailsComponent {
   // Reactive state
   isSidebarCollapsed = signal(false);
   activeItemId = signal('invoices');
+  isSendingInvoice = signal(false);
+  invoiceSent = signal(false);
+  invoiceSentDate = signal('');
+
+  // VAT rate (25% in Denmark)
+  private readonly VAT_RATE = 0.25;
+
+  // Material options for combobox
+  materialOptions = [
+    '001 - Administration fee',
+    '002 - Property sale fee',
+    '003 - Broker correspondence',
+    '004 - Miscellaneous',
+    '005 - Copying',
+    '006 - Other professional fees',
+  ];
+
+  // Material pricing data
+  private materialPricing: Record<string, { costPrice: number; salesPrice: number }> = {
+    '001 - Administration fee': { costPrice: 500, salesPrice: 575 },
+    '002 - Property sale fee': { costPrice: 300, salesPrice: 345 },
+    '003 - Broker correspondence': { costPrice: 200, salesPrice: 230 },
+    '004 - Miscellaneous': { costPrice: 400, salesPrice: 460 },
+    '005 - Copying': { costPrice: 50, salesPrice: 58 },
+    '006 - Other professional fees': { costPrice: 600, salesPrice: 690 },
+  };
+
+  // Helper method to calculate margin from cost and sales price
+  private calculateMargin(costPrice: number, salesPrice: number): number {
+    if (costPrice === 0) return 0;
+    return Math.round(((salesPrice - costPrice) / costPrice) * 100);
+  }
+
+  // Helper method to calculate sales price from cost and margin
+  private calculateSalesPrice(costPrice: number, margin: number): number {
+    return costPrice * (1 + margin / 100);
+  }
+
+  // Helper method to calculate cost price from sales and margin
+  private calculateCostPrice(salesPrice: number, margin: number): number {
+    return salesPrice / (1 + margin / 100);
+  }
+
+  // Helper method to format total
+  private formatTotal(amount: number): string {
+    return `${amount.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')} DKK`;
+  }
+
+  // Computed totals
+  totalCostPrice = computed(() => {
+    const total = this.invoiceLines().reduce((sum, line) => {
+      return sum + (line.costPrice * line.quantity);
+    }, 0);
+    return this.formatTotal(total);
+  });
+
+  totalPriceExclVat = computed(() => {
+    const total = this.invoiceLines().reduce((sum, line) => {
+      const lineTotal = (line.quantity * line.salesPrice) - line.discount;
+      return sum + lineTotal;
+    }, 0);
+    return this.formatTotal(total);
+  });
+
+  totalPriceInclVat = computed(() => {
+    const totalExclVat = this.invoiceLines().reduce((sum, line) => {
+      const lineTotal = (line.quantity * line.salesPrice) - line.discount;
+      return sum + lineTotal;
+    }, 0);
+    const totalInclVat = totalExclVat * (1 + this.VAT_RATE);
+    return this.formatTotal(totalInclVat);
+  });
+
+  // Handle send invoice action
+  handleSendInvoice() {
+    // Prevent multiple clicks while sending
+    if (this.isSendingInvoice()) return;
+    
+    this.isSendingInvoice.set(true);
+    
+    // Simulate API call with 2 second delay
+    setTimeout(() => {
+      this.isSendingInvoice.set(false);
+      this.invoiceSent.set(true);
+      
+      // Format current date in readable format
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+      this.invoiceSentDate.set(formattedDate);
+    }, 2000);
+  }
+
+  // Methods to add different types of rows
+  onMaterialSelected(materialName: string) {
+    const pricing = this.materialPricing[materialName] || { costPrice: 0, salesPrice: 0 };
+    const calculatedMargin = this.calculateMargin(pricing.costPrice, pricing.salesPrice);
+    const newRow: InvoiceLine = {
+      id: Math.random().toString(36).substr(2, 9),
+      name: materialName,
+      details: '',
+      costPrice: pricing.costPrice,
+      quantity: 1,
+      margin: calculatedMargin,
+      discount: 0,
+      salesPrice: pricing.salesPrice,
+      total: this.formatTotal(pricing.salesPrice),
+      iconName: 'remixMenuAddLine',
+    };
+    this.invoiceLines.update(rows => [...rows, newRow]);
+  }
+
+  addTimeRow() {
+    const newRow: InvoiceLine = {
+      id: Math.random().toString(36).substr(2, 9),
+      name: '',
+      details: '',
+      costPrice: 0,
+      quantity: 1,
+      margin: 0,
+      discount: 0,
+      salesPrice: 0,
+      total: '0,00 DKK',
+      iconName: 'remixTimeLine',
+      date: '',
+    };
+    this.invoiceLines.update(rows => [...rows, newRow]);
+  }
+
+  // Handle cell edits and recalculate related fields
+  onCellEdited(event: { row: InvoiceLine; rowIndex: number; column: string; value: any }) {
+    const { rowIndex, column, value } = event;
+    
+    this.invoiceLines.update(rows => {
+      const updatedRows = [...rows];
+      const row = { ...updatedRows[rowIndex] };
+      
+      // Update the edited field
+      (row as any)[column] = value;
+      
+      // Recalculate related fields based on what was edited
+      if (column === 'costPrice') {
+        // When cost price changes, recalculate margin (keeping sales price constant)
+        row.margin = this.calculateMargin(row.costPrice, row.salesPrice);
+      } else if (column === 'salesPrice') {
+        // When sales price changes, recalculate margin (keeping cost price constant)
+        row.margin = this.calculateMargin(row.costPrice, row.salesPrice);
+      } else if (column === 'margin') {
+        // When margin changes, recalculate sales price (keeping cost price constant)
+        row.salesPrice = this.calculateSalesPrice(row.costPrice, row.margin);
+      }
+      
+      // Always recalculate total (quantity * sales price - discount)
+      const subtotal = row.quantity * row.salesPrice;
+      const total = subtotal - row.discount;
+      row.total = this.formatTotal(total);
+      
+      updatedRows[rowIndex] = row;
+      return updatedRows;
+    });
+  }
 
   // Invoice lines data
   invoiceLines = signal<InvoiceLine[]>([
@@ -344,12 +554,12 @@ export class InvoiceDetailsComponent {
         rowIndex: info.row.index,
         value: info.getValue(),
         placeholder: '0.00',
-        format: { preset: 'currency' },
+        format: { preset: 'currency', thousandsSeparator: '.', decimalSeparator: ',' },
         suffix: 'DKK'
       }),
       meta: {
         sizing: {
-          minWidth: 'sm',
+          minWidth: '160px',
         },
         align: 'right',
       } as DsEditableTableColumnMeta,
@@ -380,12 +590,12 @@ export class InvoiceDetailsComponent {
         rowIndex: info.row.index,
         value: info.getValue(),
         placeholder: '0.00',
-        format: { preset: 'currency' },
+        format: { preset: 'currency', thousandsSeparator: '.', decimalSeparator: ',' },
         suffix: 'DKK'
       }),
       meta: {
         sizing: {
-          minWidth: 'sm',
+          minWidth: '160px',
         },
         align: 'right',
       } as DsEditableTableColumnMeta,
@@ -398,12 +608,12 @@ export class InvoiceDetailsComponent {
         rowIndex: info.row.index,
         value: info.getValue(),
         placeholder: '0.00',
-        format: { preset: 'currency' },
+        format: { preset: 'currency', thousandsSeparator: '.', decimalSeparator: ',' },
         suffix: 'DKK'
       }),
       meta: {
         sizing: {
-          minWidth: 'sm',
+          minWidth: '160px',
         },
         align: 'right',
       } as DsEditableTableColumnMeta,
@@ -431,7 +641,7 @@ export class InvoiceDetailsComponent {
         { id: 'inbox', label: 'Inbox', icon: 'remixMailLine', badgeText: '2' },
         { id: 'inquiries', label: 'Inquiries', icon: 'remixQuestionAnswerLine', badgeText: '2' },
         { id: 'tasks', label: 'Tasks', icon: 'remixTaskLine' },
-        { id: 'invoices', label: 'Invoices', icon: 'remixFileList3Line' },
+        { id: 'invoices', label: 'Billable tasks', icon: 'remixFileList3Line' },
         { id: 'surveys', label: 'Surveys', icon: 'remixSurveyLine' },
       ],
     },

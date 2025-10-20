@@ -26,22 +26,18 @@
   "redirects": [
     {
       "source": "/storybook",
-      "destination": "/storybook/",
+      "destination": "/storybook/index.html",
       "permanent": false
     }
   ],
   "rewrites": [
     {
-      "source": "/storybook/(.*)",
-      "destination": "/storybook/$1"
-    },
-    {
-      "source": "/storybook.html",
-      "destination": "/storybook/index.html"
-    },
-    {
       "source": "/app-shell-preview",
       "destination": "/app-shell-preview.html"
+    },
+    {
+      "source": "/((?!storybook|app-shell-preview|public|Brockmann|Assets|Dummy-avatars|favicon.ico|propbinder-white.svg|.*\\.js|.*\\.css).*)",
+      "destination": "/index.html"
     }
   ]
 }

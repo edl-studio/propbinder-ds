@@ -301,47 +301,29 @@ export interface DsEditableTableColumnMeta {
           </table>
         </div>
 
-        <!-- Add Row Buttons -->
+        <!-- Add Row Button -->
         @if (allowAddRow() && data().length > 0) {
           <div class="ds-editable-table__footer">
-            <div class="ds-editable-table__footer-buttons">
-              <ds-button 
-                variant="ghost" 
-                size="sm"
-                leadingIcon="remixMenuAddLine"
-                (clicked)="onAddRow()">
-                Add material
-              </ds-button>
-              <ds-button 
-                variant="ghost" 
-                size="sm"
-                leadingIcon="remixTimeLine"
-                (clicked)="onAddRow()">
-                Add time
-              </ds-button>
-            </div>
+            <ds-button 
+              variant="ghost" 
+              size="sm"
+              leadingIcon="remixAddLine"
+              (clicked)="onAddRow()">
+              {{ addRowButtonText() }}
+            </ds-button>
           </div>
         }
         
-        <!-- Empty State with Add Buttons -->
+        <!-- Empty State with Add Button -->
         @if (allowAddRow() && data().length === 0) {
           <div class="ds-editable-table__footer ds-editable-table__footer--centered">
-            <div class="ds-editable-table__footer-buttons">
-              <ds-button 
-                variant="ghost" 
-                size="sm"
-                leadingIcon="remixMenuAddLine"
-                (clicked)="onAddRow()">
-                Add material
-              </ds-button>
-              <ds-button 
-                variant="ghost" 
-                size="sm"
-                leadingIcon="remixTimeLine"
-                (clicked)="onAddRow()">
-                Add time
-              </ds-button>
-            </div>
+            <ds-button 
+              variant="ghost" 
+              size="sm"
+              leadingIcon="remixAddLine"
+              (clicked)="onAddRow()">
+              {{ addRowButtonText() }}
+            </ds-button>
           </div>
         }
       </div>

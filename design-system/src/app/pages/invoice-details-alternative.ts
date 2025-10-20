@@ -8,6 +8,7 @@ import { editableTextCell, editableNumberCell, editableDatepickerCell } from '..
 import { DsTileComponent } from '../components/ui/tile/ds-tile';
 import { DsTileSectionComponent } from '../components/ui/tile/ds-tile-section';
 import { TileHeaderComponent } from '../components/ui/tile/tile-header';
+import { DsButtonComponent } from '../components/ui/button/ds-button';
 
 // Invoice line interface
 interface InvoiceLine {
@@ -37,13 +38,14 @@ interface InvoiceLine {
     DsTileComponent,
     DsTileSectionComponent,
     TileHeaderComponent,
+    DsButtonComponent,
   ],
   template: `
     <ds-app-layout
       [sidebarGroups]="sidebarGroups"
       [isSidebarCollapsed]="isSidebarCollapsed()"
       [activeItemId]="activeItemId()"
-      [pageTitle]="'Invoices'"
+      [pageTitle]="'Billable tasks'"
       [iconName]="'remixFileList3Line'"
       [showFirstAction]="true"
       [showSecondAction]="true"
@@ -52,7 +54,7 @@ interface InvoiceLine {
       [userInitials]="'JD'"
       [showBreadcrumbs]="true"
       [breadcrumbItems]="[
-        { label: 'Invoices', path: '/invoices', isLast: false },
+        { label: 'Billable tasks', path: '/invoices', isLast: false },
         { label: 'INV-2024-001', path: '', isLast: true }
       ]"
       (collapsedChange)="isSidebarCollapsed.set($event)"
@@ -168,13 +170,32 @@ interface InvoiceLine {
               </ds-tile-section>
               
               <ds-tile-section [padding]="false">
-                <ds-editable-table 
-                  [(data)]="invoiceLines" 
-                  [columns]="invoiceColumns()"
-                  [reorderable]="true"
-                  [allowAddRow]="true"
-                  [allowDeleteRow]="true">
-                </ds-editable-table>
+              <ds-editable-table 
+                [(data)]="invoiceLines" 
+                [columns]="invoiceColumns()"
+                [reorderable]="true"
+                [allowAddRow]="false"
+                [allowDeleteRow]="true">
+              </ds-editable-table>
+              </ds-tile-section>
+              
+              <ds-tile-section>
+                <div style="display: flex; gap: 8px;">
+                  <ds-button 
+                    variant="ghost" 
+                    size="sm"
+                    leadingIcon="remixMenuAddLine"
+                    (clicked)="addMaterialRow()">
+                    Add material
+                  </ds-button>
+                  <ds-button 
+                    variant="ghost" 
+                    size="sm"
+                    leadingIcon="remixTimeLine"
+                    (clicked)="addTimeRow()">
+                    Add time
+                  </ds-button>
+                </div>
               </ds-tile-section>
               
               <ds-tile-section>
@@ -224,6 +245,40 @@ export class InvoiceDetailsAlternativeComponent {
   // Reactive state
   isSidebarCollapsed = signal(false);
   activeItemId = signal('invoices');
+
+  // Methods to add different types of rows
+  addMaterialRow() {
+    const newRow: InvoiceLine = {
+      id: Math.random().toString(36).substr(2, 9),
+      name: '',
+      details: '',
+      costPrice: 0,
+      quantity: 1,
+      margin: 0,
+      discount: 0,
+      salesPrice: 0,
+      total: '0,00 DKK',
+      iconName: 'remixMenuAddLine',
+    };
+    this.invoiceLines.update(rows => [...rows, newRow]);
+  }
+
+  addTimeRow() {
+    const newRow: InvoiceLine = {
+      id: Math.random().toString(36).substr(2, 9),
+      name: '',
+      details: '',
+      costPrice: 0,
+      quantity: 1,
+      margin: 0,
+      discount: 0,
+      salesPrice: 0,
+      total: '0,00 DKK',
+      iconName: 'remixTimeLine',
+      date: '',
+    };
+    this.invoiceLines.update(rows => [...rows, newRow]);
+  }
 
   // Invoice lines data
   invoiceLines = signal<InvoiceLine[]>([
@@ -384,7 +439,7 @@ export class InvoiceDetailsAlternativeComponent {
         rowIndex: info.row.index,
         value: info.getValue(),
         placeholder: '0.00',
-        format: { preset: 'currency' },
+        format: { preset: 'currency', thousandsSeparator: '.', decimalSeparator: ',' },
         suffix: 'DKK'
       }),
       meta: {
@@ -420,7 +475,7 @@ export class InvoiceDetailsAlternativeComponent {
         rowIndex: info.row.index,
         value: info.getValue(),
         placeholder: '0.00',
-        format: { preset: 'currency' },
+        format: { preset: 'currency', thousandsSeparator: '.', decimalSeparator: ',' },
         suffix: 'DKK'
       }),
       meta: {
@@ -438,7 +493,7 @@ export class InvoiceDetailsAlternativeComponent {
         rowIndex: info.row.index,
         value: info.getValue(),
         placeholder: '0.00',
-        format: { preset: 'currency' },
+        format: { preset: 'currency', thousandsSeparator: '.', decimalSeparator: ',' },
         suffix: 'DKK'
       }),
       meta: {
@@ -471,7 +526,7 @@ export class InvoiceDetailsAlternativeComponent {
         { id: 'inbox', label: 'Inbox', icon: 'remixMailLine', badgeText: '2' },
         { id: 'inquiries', label: 'Inquiries', icon: 'remixQuestionAnswerLine', badgeText: '2' },
         { id: 'tasks', label: 'Tasks', icon: 'remixTaskLine' },
-        { id: 'invoices', label: 'Invoices', icon: 'remixFileList3Line' },
+        { id: 'invoices', label: 'Billable tasks', icon: 'remixFileList3Line' },
         { id: 'surveys', label: 'Surveys', icon: 'remixSurveyLine' },
       ],
     },

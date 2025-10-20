@@ -1,6 +1,8 @@
 .ds-input {
   @apply tw-relative tw-inline-flex tw-w-full;
   max-width: 480px;
+  outline: none;
+  cursor: text;
   
   /* Base styles */
   @apply tw-h-8;
@@ -18,6 +20,10 @@
   
   /* Box sizing to match select */
   box-sizing: border-box;
+  
+  /* Prevent layout shifts */
+  min-height: 32px;
+  max-height: 32px;
 }
 
 .ds-input:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
@@ -38,14 +44,14 @@
 .ds-input--disabled {
   background-color: var(--color-background-disabled);
   border-color: var(--border-color-default);
-  cursor: not-allowed;
+  cursor: not-allowed !important;
   opacity: 0.6;
 }
 
 .ds-input--readonly {
   background-color: var(--color-background-container);
   border-color: var(--border-color-default);
-  cursor: default;
+  cursor: pointer !important;
 }
 
 /* Variant styles */
@@ -112,6 +118,10 @@
 /* Ghost variant */
 .ds-input--ghost {
   border-color: transparent;
+  max-width: none; /* Allow ghost inputs to fill container without 480px constraint */
+  display: flex; /* Use flex instead of inline-flex to prevent layout shift on focus */
+  min-height: 32px;
+  max-height: 32px;
 }
 
 .ds-input--ghost:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
@@ -192,10 +202,25 @@
 /* Input field */
 .ds-input__field {
   @apply tw-flex-1 tw-bg-transparent tw-border-0 tw-outline-none;
-  @apply tw-leading-none tw-placeholder-opacity-60;
+  @apply tw-placeholder-opacity-60;
   
   font-family: inherit;
   color: var(--text-color-default-primary);
+  line-height: 1 !important;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-basis: 0%;
+}
+
+.ds-input__field:focus {
+  outline: none;
+}
+
+.ds-input__field:focus-visible {
+  outline: none;
 }
 
 .ds-input__field::placeholder {
@@ -213,7 +238,24 @@
 }
 
 .ds-input__field:read-only {
-  cursor: default;
+  cursor: pointer;
+}
+
+/* Hide number input spinners */
+.ds-input__field[type='number']::-webkit-inner-spin-button,
+.ds-input__field[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.ds-input__field[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Right text alignment for financial numbers */
+.ds-input__field--align-right {
+  text-align: right;
 }
 
 /* Error state text color */
@@ -260,6 +302,49 @@
   right: 8px;
 }
 
+/* Prefix and suffix styles */
+.ds-input__prefix,
+.ds-input__suffix {
+  @apply tw-flex-shrink-0 tw-pointer-events-none;
+  color: var(--text-color-default-tertiary);
+  user-select: none;
+  white-space: nowrap;
+  transform: translateY(1px);
+}
+
+.ds-input__prefix {
+  padding-right: 4px;
+}
+
+.ds-input__suffix {
+  padding-left: 4px;
+}
+
+/* Inline suffix - positioned dynamically next to text */
+.ds-input__suffix--inline {
+  position: absolute;
+  padding-left: 0;
+  pointer-events: none;
+  transition: left 0.1s ease-out;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+/* Hide suffix when input is empty */
+.ds-input__suffix--inline:empty {
+  display: none;
+}
+
+/* Disabled state for prefix/suffix */
+.ds-input--disabled .ds-input__prefix,
+.ds-input--disabled .ds-input__suffix {
+  color: var(--text-color-disabled);
+  opacity: 0.6;
+}
+
 /* Clear button */
 .ds-input__clear {
   @apply tw-absolute tw-p-0 tw-bg-transparent tw-border-0;
@@ -290,6 +375,11 @@
 
 .ds-input--with-trailing-icon .ds-input__field {
   padding-right: 20px;
+}
+
+/* Right-aligned field with suffix - reduce right padding for closer positioning */
+.ds-input--with-trailing-icon .ds-input__field--align-right {
+  padding-right: 0px;
 }
 
 /* Autofill styles */

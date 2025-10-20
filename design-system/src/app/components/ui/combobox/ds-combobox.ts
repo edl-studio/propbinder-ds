@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, effect, viewChild, ElementRef, ViewChild, HostListener, contentChildren } from '@angular/core';
+import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ElementRef, ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { DsIconComponent } from '../icon/ds-icon';
@@ -35,17 +35,16 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
         (click)="toggleDropdown()"
         class="ds-combobox__trigger-wrapper"
       >
-        @if (hasCustomTrigger()) {
+        <div #customTriggerSlot [style.display]="hasCustomTrigger() ? 'contents' : 'none'">
           <ng-content></ng-content>
-        } @else {
-          <div style="pointer-events: none; width: 100%;">
-            <ds-select 
-              [options]="selectOptions()"
-              [placeholder]="selectPlaceholder()"
-              [(ngModel)]="displayValue"
-            />
-          </div>
-        }
+        </div>
+        <div [style.display]="hasCustomTrigger() ? 'none' : 'block'" style="pointer-events: none; width: 100%;">
+          <ds-select 
+            [options]="selectOptions()"
+            [placeholder]="selectPlaceholder()"
+            [(ngModel)]="displayValue"
+          />
+        </div>
       </div>
     </div>
 
@@ -95,7 +94,7 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
     </ng-template>
   `,
 })
-export class DsComboboxComponent implements ControlValueAccessor {
+export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -125,18 +124,39 @@ export class DsComboboxComponent implements ControlValueAccessor {
   displayValue = '';
   private disabledFromCva = signal<boolean>(false);
   private isOpenSig = signal<boolean>(false);
-  private customTriggerContent = contentChildren('*', { descendants: true });
+  private hasCustomTriggerSig = signal<boolean>(false);
 
   // View children
   @ViewChild('trigger', { read: ElementRef }) triggerElement!: ElementRef<HTMLElement>;
+  @ViewChild('customTriggerSlot', { read: ElementRef }) customTriggerSlot!: ElementRef<HTMLElement>;
   @ViewChild('searchInput') searchInput!: DsInputComponent;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngAfterViewInit() {
+    // Check for custom trigger content after view initialization
+    this.updateCustomTriggerDetection();
+  }
+
+  private updateCustomTriggerDetection() {
+    if (this.customTriggerSlot?.nativeElement) {
+      const slot = this.customTriggerSlot.nativeElement;
+      const hasContent = slot.childNodes.length > 0 && 
+             Array.from(slot.childNodes).some(node => 
+               node.nodeType === Node.ELEMENT_NODE || 
+               (node.nodeType === Node.TEXT_NODE && node.textContent?.trim())
+             );
+      this.hasCustomTriggerSig.set(hasContent);
+      this.cdr.detectChanges();
+    }
+  }
 
   // Computed values
   value = computed(() => this.valueSig());
   effectiveDisabled = computed(() => this.disabled() || this.disabledFromCva());
   isOpen = computed(() => this.isOpenSig());
   iconSize = computed(() => '16px');
-  hasCustomTrigger = computed(() => this.customTriggerContent().length > 0);
+  hasCustomTrigger = computed(() => this.hasCustomTriggerSig());
   
   selectOptions = computed(() => {
     return this.options().map((option, index) => ({

@@ -14,7 +14,7 @@ import {
 } from '@ng-icons/remixicon';
 
 const meta: Meta<DsDatepickerComponent> = {
-  title: 'Components/Datepicker',
+  title: 'Primitives/Datepicker',
   component: DsDatepickerComponent,
   tags: ['autodocs'],
   decorators: [

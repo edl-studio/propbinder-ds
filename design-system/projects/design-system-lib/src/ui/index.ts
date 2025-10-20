@@ -16,6 +16,7 @@ export { DsTooltipComponent } from './tooltip/ds-tooltip';
 export { DsAvatarComponent } from './avatar/ds-avatar';
 export { DsBadgeComponent } from './badge/ds-badge';
 export { DsShapeIndicatorComponent } from './shape-indicator/ds-shape-indicator';
+export { DsInlineMessageComponent } from './inline-message/ds-inline-message';
 export { DsLinkComponent } from './link/ds-link';
 export { DsTopbarComponent } from './topbar/ds-topbar';
 export { DsHeaderDetailsComponent } from './header-details/ds-header-details';
@@ -47,6 +48,7 @@ export type { CheckboxVariant, CheckboxSize } from './checkbox/ds-checkbox';
 export type { AvatarType, AvatarSize } from './avatar/ds-avatar';
 export type { BadgeVariant, BadgeContentType } from './badge/ds-badge';
 export type { ShapeVariant, ShapeColorVariant } from './shape-indicator/ds-shape-indicator';
+export type { InlineMessageVariant } from './inline-message/ds-inline-message';
 export type { DataItemLayout, DataItemValueType } from './data-item/ds-data-item';
 export type { SelectVariant, DsSelectOption } from './select/ds-select';
 export type { 

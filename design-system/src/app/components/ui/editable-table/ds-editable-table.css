@@ -7,7 +7,7 @@
 }
 
 .ds-editable-table__container {
-  @apply tw-w-full tw-overflow-hidden;
+  @apply tw-w-full tw-overflow-visible;
 }
 
 /* ========================================================================

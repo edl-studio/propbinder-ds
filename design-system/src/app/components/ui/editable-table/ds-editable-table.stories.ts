@@ -359,7 +359,7 @@ const taskColumns: ColumnDef<Task>[] = [
 ];
 
 const meta: Meta<DsEditableTableComponent> = {
-  title: 'Components/Editable Table',
+  title: 'Primitives/Editable Table',
   component: DsEditableTableComponent,
   decorators: [
     applicationConfig({

@@ -1,0 +1,117 @@
+/* Host element styling */
+:host {
+  display: block;
+}
+
+/* Base inline message styles */
+.inline-message {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+  border: 1px solid;
+}
+
+/* Content wrapper (icon + title + description) */
+.inline-message__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Header row (icon + title) */
+.inline-message__header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Actions wrapper */
+.inline-message__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Icon */
+.inline-message__icon {
+  flex-shrink: 0;
+}
+
+/* Title styling */
+.inline-message__title {
+  font-size: var(--font-size-sm); /* 0.875rem / 14px */
+  font-weight: 500;
+  line-height: 1.4;
+  transform: translateY(0.25px);
+}
+
+/* Description styling */
+.inline-message__description {
+  font-size: var(--font-size-sm); /* 0.875rem / 14px */
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-color-default-primary);
+}
+
+/* Variant styles */
+
+/* Success variant */
+.inline-message--success {
+  background-color: var(--color-success-weak);
+  border-color: var(--color-success-weak-hover);
+}
+
+.inline-message--success .inline-message__icon {
+  color: var(--color-success-strong);
+}
+
+.inline-message--success .inline-message__title {
+  color: var(--color-success-strong);
+}
+
+/* Error variant */
+.inline-message--error {
+  background-color: var(--color-destructive-weak);
+  border-color: var(--color-destructive-weak-hover);
+}
+
+.inline-message--error .inline-message__icon {
+  color: var(--color-destructive-strong);
+}
+
+.inline-message--error .inline-message__title {
+  color: var(--color-destructive-strong);
+}
+
+/* Warning variant */
+.inline-message--warning {
+  background-color: var(--color-warning-weak);
+  border-color: var(--color-warning-weak-hover);
+}
+
+.inline-message--warning .inline-message__icon {
+  color: var(--color-warning-strong);
+}
+
+.inline-message--warning .inline-message__title {
+  color: var(--color-warning-strong);
+}
+
+/* Information variant */
+.inline-message--information {
+  background-color: var(--color-blue-weak);
+  border-color: var(--color-blue-weak-hover);
+}
+
+.inline-message--information .inline-message__icon {
+  color: var(--color-blue-strong);
+}
+
+.inline-message--information .inline-message__title {
+  color: var(--color-blue-strong);
+}
+

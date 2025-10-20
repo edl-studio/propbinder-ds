@@ -114,7 +114,7 @@ export interface DsDataTableColumnMeta {
     <div class="ds-data-table">
       <!-- Column Visibility Panel -->
       @if (showColumnVisibility() && columnPanelOpen()) {
-      <div class="ds-data-table__column-panel elevation-tile tw-rounded-lg">
+      <div class="ds-data-table__column-panel">
         <div class="ds-data-table__column-panel-header">
           <span class="label-xs-semibold">Toggle Columns</span>
           <button
@@ -143,7 +143,7 @@ export interface DsDataTableColumnMeta {
       }
 
       <!-- Table Container -->
-      <div class="ds-data-table__container elevation-tile tw-rounded-lg">
+      <div class="ds-data-table__container">
         <!-- Search and Actions Bar -->
         @if (searchable() || showColumnVisibility()) {
         <div class="ds-data-table__header">

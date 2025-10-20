@@ -138,9 +138,25 @@ async function main() {
     const publicDestDir = path.join(deployDir, 'public');
     copyRecursive(publicDir, publicDestDir);
     
-    // Also copy public assets to root level for main app access
-    copyRecursive(publicDir, deployDir);
-    console.log('✅ Public assets copied to both /public and root level');
+    // Copy public assets to root level (excluding HTML files to avoid overwriting)
+    const entries = fs.readdirSync(publicDir, { withFileTypes: true });
+    for (const entry of entries) {
+      const srcPath = path.join(publicDir, entry.name);
+      const destPath = path.join(deployDir, entry.name);
+      
+      // Skip HTML files to avoid overwriting index.html and other important files
+      if (entry.isFile() && entry.name.endsWith('.html')) {
+        console.log(`  ⏭️  Skipping ${entry.name} to preserve existing file`);
+        continue;
+      }
+      
+      if (entry.isDirectory()) {
+        copyRecursive(srcPath, destPath);
+      } else {
+        fs.copyFileSync(srcPath, destPath);
+      }
+    }
+    console.log('✅ Public assets copied to both /public and root level (HTML files excluded from root)');
   }
 
   // Copy source files that might be referenced
@@ -180,11 +196,15 @@ async function main() {
 
   // Create _redirects file for better SPA routing
   console.log('🔄 Creating redirects configuration...');
-  const redirectsContent = `# App shell routes
+  const redirectsContent = `# Storybook routes - serve storybook files directly
+/storybook /storybook/index.html 200
+/storybook/* /storybook/:splat 200
+
+# App shell routes
 /app-shell-preview /app-shell-preview.html 200
 
 # Angular app routes (fallback to index.html for SPA routing)
-# Note: Storybook routes are handled by vercel.json to avoid conflicts
+# This catch-all must be last
 /* /index.html 200`;
 
   fs.writeFileSync(path.join(deployDir, '_redirects'), redirectsContent);
