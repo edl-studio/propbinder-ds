@@ -4,8 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/f
 import { DsIconComponent } from '../icon/ds-icon';
 import { DsInputComponent } from '../input/ds-input';
 import { DsSelectComponent, DsSelectOption } from '../select/ds-select';
-import { OverlayModule, ConnectedPosition } from '@angular/cdk/overlay';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, ConnectedPosition, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
 
@@ -18,8 +17,8 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
     DsIconComponent,
     DsInputComponent,
     DsSelectComponent,
-    OverlayModule,
     CdkOverlayOrigin,
+    CdkConnectedOverlay,
   ],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['ds-combobox.css'],
