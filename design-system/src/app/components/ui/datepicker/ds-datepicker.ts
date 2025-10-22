@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ViewChild, ElementRef, HostListener, inject } from '@angular/core';
+import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ViewChild, ElementRef, HostListener, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
@@ -12,8 +12,13 @@ import {
   NgpDatePickerCellRender,
   NgpDatePickerDateButton,
 } from 'ng-primitives/date-picker';
-import { OverlayModule, ConnectedPosition, Overlay, ScrollStrategy } from '@angular/cdk/overlay';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import {
+  ConnectedPosition,
+  Overlay,
+  ScrollStrategy,
+  CdkOverlayOrigin,
+  CdkConnectedOverlay,
+} from '@angular/cdk/overlay';
 import { DsIconComponent } from '../icon/ds-icon';
 
 export type DatePickerVariant = 'default' | 'error' | 'warning' | 'success';
@@ -64,8 +69,8 @@ export type DatePickerVariant = 'default' | 'error' | 'warning' | 'success';
     NgpDatePickerCellRender,
     NgpDatePickerDateButton,
     DsIconComponent,
-    OverlayModule,
     CdkOverlayOrigin,
+    CdkConnectedOverlay,
   ],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-datepicker.css'],
@@ -89,7 +94,7 @@ export type DatePickerVariant = 'default' | 'error' | 'warning' | 'success';
 
     <ng-template
       cdkConnectedOverlay
-      [cdkConnectedOverlayOrigin]="triggerElement"
+      [cdkConnectedOverlayOrigin]="triggerOriginDirective"
       [cdkConnectedOverlayOpen]="isOpen()"
       [cdkConnectedOverlayHasBackdrop]="true"
       [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
@@ -101,55 +106,63 @@ export type DatePickerVariant = 'default' | 'error' | 'warning' | 'success';
       (backdropClick)="closeDatepicker()"
       (detach)="closeDatepicker()"
     >
-      <div [class]="calendarClasses()" ngpDatePicker [ngpDatePickerFirstDayOfWeek]="1" [(ngpDatePickerDate)]="internalValue" (ngpDatePickerDateChange)="handleDateChange($event)" [(ngpDatePickerFocusedDate)]="focusedDate" (ngpDatePickerFocusedDateChange)="handleFocusedDateChange($event)">
-        <div class="ds-datepicker__header">
-          <button 
-            ngpDatePickerPreviousMonth 
-            type="button"
-            class="ds-datepicker__nav-button"
-            [disabled]="effectiveDisabled()"
-            [attr.aria-label]="'Previous month'">
-            <ds-icon name="remixArrowLeftSLine" size="16px" />
-          </button>
+      <div class="ds-datepicker__calendar-wrapper">
+        <div [class]="calendarClasses()" 
+             ngpDatePicker 
+             [ngpDatePickerFirstDayOfWeek]="1" 
+             [(ngpDatePickerDate)]="internalValue" 
+             (ngpDatePickerDateChange)="handleDateChange($event)" 
+             [(ngpDatePickerFocusedDate)]="focusedDate" 
+             (ngpDatePickerFocusedDateChange)="handleFocusedDateChange($event)">
+          <div class="ds-datepicker__header">
+            <button 
+              ngpDatePickerPreviousMonth 
+              type="button"
+              class="ds-datepicker__nav-button"
+              [disabled]="effectiveDisabled()"
+              [attr.aria-label]="'Previous month'">
+              <ds-icon name="remixArrowLeftSLine" size="16px" />
+            </button>
+            
+            <h2 ngpDatePickerLabel class="ds-datepicker__label label-sm-semibold">
+              {{ label() }}
+            </h2>
+            
+            <button 
+              ngpDatePickerNextMonth 
+              type="button"
+              class="ds-datepicker__nav-button"
+              [disabled]="effectiveDisabled()"
+              [attr.aria-label]="'Next month'">
+              <ds-icon name="remixArrowRightSLine" size="16px" />
+            </button>
+          </div>
           
-          <h2 ngpDatePickerLabel class="ds-datepicker__label label-sm-semibold">
-            {{ label() }}
-          </h2>
-          
-          <button 
-            ngpDatePickerNextMonth 
-            type="button"
-            class="ds-datepicker__nav-button"
-            [disabled]="effectiveDisabled()"
-            [attr.aria-label]="'Next month'">
-            <ds-icon name="remixArrowRightSLine" size="16px" />
-          </button>
+          <table ngpDatePickerGrid class="ds-datepicker__grid">
+            <thead>
+              <tr>
+                @for (day of weekDays(); track day.full) {
+                  <th scope="col" [attr.abbr]="day.full" class="ds-datepicker__weekday body-xs-medium">
+                    {{ day.short }}
+                  </th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngpDatePickerRowRender>
+                <td *ngpDatePickerCellRender="let date" ngpDatePickerCell>
+                  <button 
+                    ngpDatePickerDateButton 
+                    type="button"
+                    class="ds-datepicker__date-button body-sm-regular"
+                    [disabled]="effectiveDisabled() || isDateDisabledFn(date)">
+                    {{ date.getDate() }}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        
-        <table ngpDatePickerGrid class="ds-datepicker__grid">
-          <thead>
-            <tr>
-              @for (day of weekDays(); track day.full) {
-                <th scope="col" [attr.abbr]="day.full" class="ds-datepicker__weekday body-xs-medium">
-                  {{ day.short }}
-                </th>
-              }
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngpDatePickerRowRender>
-              <td *ngpDatePickerCellRender="let date" ngpDatePickerCell>
-                <button 
-                  ngpDatePickerDateButton 
-                  type="button"
-                  class="ds-datepicker__date-button body-sm-regular"
-                  [disabled]="effectiveDisabled() || isDateDisabledFn(date)">
-                  {{ date.getDate() }}
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </ng-template>
   `,
@@ -165,7 +178,7 @@ export class DsDatepickerComponent implements ControlValueAccessor {
     const isInsideCalendar = target.closest('.ds-datepicker__calendar');
     
     if (!isInsideDatepicker && !isInsideCalendar && this.isOpen()) {
-      this.closeDatepicker();
+      this.closeDatepicker(); // deferred internally
     }
   }
 
@@ -199,6 +212,15 @@ export class DsDatepickerComponent implements ControlValueAccessor {
   // Overlay service and scroll strategy
   private overlay = inject(Overlay);
   scrollStrategy: ScrollStrategy = this.overlay.scrollStrategies.reposition();
+
+  // Change detection deferral: do state writes in the next microtask to avoid NG0100
+  constructor(private cdr: ChangeDetectorRef) {}
+  private defer(fn: () => void) {
+    queueMicrotask(() => {
+      fn();
+      this.cdr.markForCheck();
+    });
+  }
   
   // Overlay configuration
   overlayPositions: ConnectedPosition[] = [
@@ -283,20 +305,20 @@ export class DsDatepickerComponent implements ControlValueAccessor {
     if (this.effectiveDisabled()) return;
     
     const newState = !this.isOpenSig();
-    this.isOpenSig.set(newState);
-    
-    if (newState) {
-      this.opened.emit();
-    } else {
-      this.closed.emit();
-    }
+    // defer state write to the next microtask
+    this.defer(() => {
+      this.isOpenSig.set(newState);
+      newState ? this.opened.emit() : this.closed.emit();
+    });
   }
 
   closeDatepicker() {
-    if (this.isOpenSig()) {
+    if (!this.isOpenSig()) return;
+    // defer state write to the next microtask
+    this.defer(() => {
       this.isOpenSig.set(false);
       this.closed.emit();
-    }
+    });
   }
 
   handleDateChange(date: Date | null) {
@@ -311,7 +333,7 @@ export class DsDatepickerComponent implements ControlValueAccessor {
       this.focusedDateSig.set(date);
     }
     
-    // Close the datepicker after selection
+    // Close the datepicker after selection (deferred)
     this.closeDatepicker();
   }
 
@@ -366,4 +388,3 @@ export class DsDatepickerComponent implements ControlValueAccessor {
     this.disabledFromCva.set(isDisabled);
   }
 }
-
