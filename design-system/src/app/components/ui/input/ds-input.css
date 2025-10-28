@@ -258,6 +258,10 @@
   text-align: right;
 }
 
+.ds-input__field--align-center {
+  text-align: center;
+}
+
 /* Error state text color */
 .ds-input--error .ds-input__field {
   color: var(--color-destructive-strong);

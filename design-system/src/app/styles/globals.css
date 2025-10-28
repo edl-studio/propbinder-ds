@@ -711,14 +711,75 @@ body {
   }
 }
 
-/* Drawer Component Styles */
-.ds-drawer-overlay {
+/* Base Overlay Styles - Shared by all modal-like components */
+.ds-overlay {
   @apply tw-fixed tw-inset-0 tw-bg-black/50 tw-z-50;
   animation: fadeIn 150ms ease-out;
 }
 
-.ds-drawer-overlay[data-exit] {
+.ds-overlay[data-exit] {
   animation: fadeOut 150ms ease-in;
+}
+
+/* Override Angular CDK inline styles that center the dialog */
+.cdk-global-overlay-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+}
+
+/* Dialog-specific: top-aligned positioning with responsive margins */
+.ds-dialog-overlay {
+  @apply tw-flex tw-justify-center;
+  align-items: flex-start !important;
+  overflow-y: auto;
+  --dialog-top-margin: 48px; /* xs breakpoint default */
+}
+
+/* Responsive top margins for dialog positioning 
+ * Note: Media query breakpoints match --breakpoint-* variables
+ * CSS variables cannot be used in media queries, so values are hardcoded but kept in sync
+ */
+@media (min-width: 576px) { /* --breakpoint-sm */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 64px;
+  }
+}
+
+@media (min-width: 768px) { /* --breakpoint-md */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 96px;
+  }
+}
+
+@media (min-width: 992px) { /* --breakpoint-lg */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 128px;
+  }
+}
+
+@media (min-width: 1440px) { /* --breakpoint-xl */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 192px;
+  }
+}
+
+@media (min-width: 1768px) { /* --breakpoint-2xl */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 224px;
+  }
+}
+
+@media (min-width: 1920px) { /* --breakpoint-3xl */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 256px;
+  }
+}
+
+/* Drawer-specific: no additional positioning (drawer itself is positioned) */
+.ds-drawer-overlay {
+  /* Intentionally minimal - only needs base overlay styles from .ds-overlay */
+  /* The drawer component handles its own positioning (left/right edge) */
 }
 
 @keyframes fadeIn {

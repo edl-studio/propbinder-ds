@@ -1,7 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DsInputComponent } from '../../input/ds-input';
+import { DsInputComponent, type NumberFormatConfig } from '../../input/ds-input';
 import { BaseEditableCellComponent, type EditableCellComponentData } from './base-editable-cell.component';
 
 export interface EditableTextCellData extends EditableCellComponentData {
@@ -19,6 +19,8 @@ export interface EditableTextCellData extends EditableCellComponentData {
   prefix?: string;
   /** Text suffix to show at the end of the input */
   suffix?: string;
+  /** Text alignment (automatically set from column meta.align) */
+  align?: 'left' | 'right' | 'center';
 }
 
 /**
@@ -40,7 +42,10 @@ export interface EditableTextCellData extends EditableCellComponentData {
       [trailingIcon]="cellData().trailingIcon"
       [prefix]="cellData().prefix"
       [suffix]="cellData().suffix"
+      [format]="getFormatForAlignment()"
       (ngModelChange)="valueChanged.emit($event)"
+      (blurred)="onBlur()"
+      (keydown.enter)="onEnter()"
     />
   `,
   styles: [`
@@ -53,5 +58,26 @@ export interface EditableTextCellData extends EditableCellComponentData {
 export class EditableTextCellComponent extends BaseEditableCellComponent {
   /** Computed cell data with proper typing */
   cellData = computed(() => this.data() as EditableTextCellData);
+  
+  /**
+   * Get format config for alignment
+   */
+  getFormatForAlignment(): NumberFormatConfig | undefined {
+    return this.cellData().align ? { align: this.cellData().align } as NumberFormatConfig : undefined;
+  }
+  
+  /**
+   * Handle blur event - emit committed value
+   */
+  onBlur() {
+    this.valueCommitted.emit(this.cellData().value);
+  }
+  
+  /**
+   * Handle Enter key - emit committed value
+   */
+  onEnter() {
+    this.valueCommitted.emit(this.cellData().value);
+  }
 }
 

@@ -635,7 +635,7 @@ import { NgpDialogTrigger, NgpDialogOverlay, NgpDialog, NgpDialogManager } from 
 
     <!-- Task Summary Drawer -->
     <ng-template #taskSummaryDrawer let-close="close">
-      <div ngpDialogOverlay class="ds-drawer-overlay">
+      <div ngpDialogOverlay class="ds-overlay ds-drawer-overlay">
         <ds-drawer ngpDialog position="right">
           <div slot="header" class="tw-flex tw-items-center tw-gap-3">
             <h2 class="tw-text-xl tw-font-semibold tw-text-default-primary">Task Summary</h2>

@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "DrawerStoryProps",
-            "id": "interface-DrawerStoryProps-02c38f544101185555142992d8614cd50fa3431bc2e8e18f01746dfc8910810df48cbe172948edef1f9eac6da3de39a5911339632fded632420e00781310f5b1",
+            "id": "interface-DrawerStoryProps-fe5906450b0308ab91a2c3fe6d36f401993fb6ac52397311544760ff96c59c5e13a21d51f49f6ab062afba7556f061e48b99eda871904f363bf07a85d1bcb6ea",
             "file": "src/app/components/ui/drawer/ds-drawer.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';\nimport { DsDrawerComponent } from './ds-drawer';\nimport { DsButtonComponent } from '../button/ds-button';\nimport { NgpDialogTrigger, NgpDialogOverlay, NgpDialog } from 'ng-primitives/dialog';\n\ninterface DrawerStoryProps {\n  position: 'left' | 'right';\n}\n\nconst meta: Meta<DrawerStoryProps> = {\n  title: 'Primitives/Drawer',\n  component: DsDrawerComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [DsDrawerComponent, DsButtonComponent, NgpDialogTrigger, NgpDialogOverlay, NgpDialog],\n    }),\n  ],\n  argTypes: {\n    position: {\n      control: 'select',\n      options: ['left', 'right'],\n      description: 'Position of the drawer',\n      defaultValue: 'right'\n    }\n  }\n};\n\nexport default meta;\ntype Story = StoryObj<DrawerStoryProps>;\n\nconst Template: Story['render'] = (args) => ({\n  props: args,\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"drawer\" variant=\"primary\">Open Drawer</ds-button>\n      <p>This is the main page content. When you open the drawer, it should overlay this content with a semi-transparent background.</p>\n    </div>\n\n    <ng-template #drawer let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-drawer-overlay\">\n        <ds-drawer ngpDialog [position]=\"position\">\n          <h2 slot=\"header\" class=\"tw-text-xl tw-font-semibold\">Drawer Title</h2>\n          <div slot=\"content\">\n            <p class=\"tw-text-neutral-700 tw-mb-4\">This is the main content of the drawer.</p>\n            <p class=\"tw-text-neutral-600 tw-mb-4\">You can put any content here including forms, lists, or other components.</p>\n            <div class=\"tw-p-4 tw-bg-gray-50 tw-rounded-lg\">\n              <h3 class=\"tw-font-medium tw-mb-2\">Example Content</h3>\n              <p class=\"tw-text-sm tw-text-gray-600\">This drawer should slide in from the {{ position }} side of the screen.</p>\n            </div>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" (click)=\"close()\">Cancel</ds-button>\n            <ds-button variant=\"primary\" (click)=\"close()\">Save Changes</ds-button>\n          </div>\n        </ds-drawer>\n      </div>\n    </ng-template>\n  `\n});\n\nexport const RightDrawer: Story = {\n  args: {\n    position: 'right'\n  },\n  render: Template\n};\n\nexport const LeftDrawer: Story = {\n  args: {\n    position: 'left'\n  },\n  render: Template\n};",
+            "sourceCode": "import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';\nimport { DsDrawerComponent } from './ds-drawer';\nimport { DsButtonComponent } from '../button/ds-button';\nimport { NgpDialogTrigger, NgpDialogOverlay, NgpDialog } from 'ng-primitives/dialog';\n\ninterface DrawerStoryProps {\n  position: 'left' | 'right';\n}\n\nconst meta: Meta<DrawerStoryProps> = {\n  title: 'Primitives/Drawer',\n  component: DsDrawerComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [DsDrawerComponent, DsButtonComponent, NgpDialogTrigger, NgpDialogOverlay, NgpDialog],\n    }),\n  ],\n  argTypes: {\n    position: {\n      control: 'select',\n      options: ['left', 'right'],\n      description: 'Position of the drawer',\n      defaultValue: 'right'\n    }\n  }\n};\n\nexport default meta;\ntype Story = StoryObj<DrawerStoryProps>;\n\nconst Template: Story['render'] = (args) => ({\n  props: args,\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"drawer\" variant=\"primary\">Open Drawer</ds-button>\n      <p>This is the main page content. When you open the drawer, it should overlay this content with a semi-transparent background.</p>\n    </div>\n\n    <ng-template #drawer let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-overlay ds-drawer-overlay\">\n        <ds-drawer ngpDialog [position]=\"position\">\n          <h2 slot=\"header\" class=\"tw-text-xl tw-font-semibold\">Drawer Title</h2>\n          <div slot=\"content\">\n            <p class=\"tw-text-neutral-700 tw-mb-4\">This is the main content of the drawer.</p>\n            <p class=\"tw-text-neutral-600 tw-mb-4\">You can put any content here including forms, lists, or other components.</p>\n            <div class=\"tw-p-4 tw-bg-gray-50 tw-rounded-lg\">\n              <h3 class=\"tw-font-medium tw-mb-2\">Example Content</h3>\n              <p class=\"tw-text-sm tw-text-gray-600\">This drawer should slide in from the {{ position }} side of the screen.</p>\n            </div>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" (click)=\"close()\">Cancel</ds-button>\n            <ds-button variant=\"primary\" (click)=\"close()\">Save Changes</ds-button>\n          </div>\n        </ds-drawer>\n      </div>\n    </ng-template>\n  `\n});\n\nexport const RightDrawer: Story = {\n  args: {\n    position: 'right'\n  },\n  render: Template\n};\n\nexport const LeftDrawer: Story = {\n  args: {\n    position: 'left'\n  },\n  render: Template\n};",
             "properties": [
                 {
                     "name": "position",
@@ -813,7 +813,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button variant=\"ai-primary\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" />\n          <span>Generate suggestions</span>\n        </ds-button>\n        <ds-button variant=\"ai-ghost\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" />\n          <span>Generate suggestions</span>\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button variant=\"ai-primary\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" />\n          <span>Generate suggestions</span>\n        </ds-button>\n        <ds-button variant=\"ai-ghost\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" />\n          <span>Generate suggestions</span>\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "AlertDialog",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: AlertDialogTemplate\n}"
+            },
+            {
+                "name": "AlertDialogTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "() => ({\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"dialog\" variant=\"primary\">Open Alert Dialog</ds-button>\n      <p>This dialog shows a warning message about session expiration.</p>\n    </div>\n\n    <ng-template #dialog let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-overlay ds-dialog-overlay\">\n        <ds-dialog ngpDialog>\n          <h2 slot=\"header\" class=\"heading-xl tw-text-red-600\">Warning</h2>\n          <div slot=\"content\">\n            <p class=\"tw-text-neutral-700 tw-mb-4\">Your session is about to expire in 5 minutes.</p>\n            <p class=\"tw-text-neutral-600\">Would you like to extend it?</p>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" (click)=\"close()\">Logout</ds-button>\n            <ds-button variant=\"primary\" (click)=\"close()\">Extend Session</ds-button>\n          </div>\n        </ds-dialog>\n      </div>\n    </ng-template>\n  `\n})"
             },
             {
                 "name": "AllColors",
@@ -934,6 +954,26 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: () => ({\n    props: {\n      value: signal('tab1'),\n    },\n    template: `\n      <ds-tabs [(value)]=\"value\">\n        <ds-tab value=\"tab1\" label=\"First Tab\">\n          <p>Content for first tab</p>\n        </ds-tab>\n        <ds-tab value=\"tab2\" label=\"Second Tab\">\n          <p>Content for second tab</p>\n        </ds-tab>\n        <ds-tab value=\"tab3\" label=\"Third Tab\">\n          <p>Content for third tab</p>\n        </ds-tab>\n      </ds-tabs>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "BasicDialog",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: BasicDialogTemplate\n}"
+            },
+            {
+                "name": "BasicDialogTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "() => ({\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"dialog\" variant=\"primary\">Open Dialog</ds-button>\n      <p>This is the main page content. When you open the dialog, it should overlay this content with a semi-transparent background.</p>\n    </div>\n\n    <ng-template #dialog let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-overlay ds-dialog-overlay\">\n        <ds-dialog ngpDialog>\n          <h2 slot=\"header\" class=\"heading-xl\">Confirmation</h2>\n          <div slot=\"content\">\n            <p class=\"tw-text-neutral-700 tw-mb-4\">Are you sure you want to perform this action? This cannot be undone.</p>\n            <p class=\"tw-text-neutral-600\">Click confirm to proceed or cancel to go back.</p>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" (click)=\"close()\">Cancel</ds-button>\n            <ds-button variant=\"primary\" (click)=\"close()\">Confirm</ds-button>\n          </div>\n        </ds-dialog>\n      </div>\n    </ng-template>\n  `\n})"
             },
             {
                 "name": "basicMenuItems",
@@ -1173,7 +1213,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'md',\n    disabled: false,\n    loading: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<ds-button [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [loading]=\"loading\">Default Button</ds-button>`,\n  }),\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'md',\n    disabled: false,\n    loading: false,\n  },\n  render: (args) => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    props: args,\n    template: `<ds-button [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [loading]=\"loading\">Default Button</ds-button>`,\n  }),\n}"
             },
             {
                 "name": "Default",
@@ -1546,6 +1586,26 @@
                 "defaultValue": "{\n  args: {\n    options: [\n      { id: '1', label: 'Active', value: 'active' },\n      { id: '2', label: 'Inactive', value: 'inactive' },\n      { id: '3', label: 'Pending', value: 'pending' },\n      { id: '4', label: 'Archived', value: 'archived' },\n    ],\n    multiple: true,\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <ds-listbox [options]=\"options\" [multiple]=\"multiple\" [disabled]=\"disabled\">\n        <ds-button variant=\"ghost\" leadingIcon=\"remixFilterLine\">Filter Status</ds-button>\n      </ds-listbox>\n    `,\n  }),\n}"
             },
             {
+                "name": "FormDialog",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: FormDialogTemplate\n}"
+            },
+            {
+                "name": "FormDialogTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "() => ({\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"dialog\" variant=\"primary\">Open Form Dialog</ds-button>\n      <p>This dialog contains a form for editing user profile information.</p>\n    </div>\n\n    <ng-template #dialog let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-overlay ds-dialog-overlay\">\n        <ds-dialog ngpDialog>\n          <h2 slot=\"header\" class=\"heading-xl\">Edit Profile</h2>\n          <div slot=\"content\">\n            <form (submit)=\"$event.preventDefault(); close()\">\n              <div class=\"tw-mb-4\">\n                <label for=\"name\" class=\"tw-block tw-mb-2 tw-font-medium\">Name</label>\n                <ds-input id=\"name\" type=\"text\" placeholder=\"Enter your name\" />\n              </div>\n              <div class=\"tw-mb-4\">\n                <label for=\"email\" class=\"tw-block tw-mb-2 tw-font-medium\">Email</label>\n                <ds-input id=\"email\" type=\"email\" placeholder=\"Enter your email\" />\n              </div>\n            </form>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" type=\"button\" (click)=\"close()\">Cancel</ds-button>\n            <ds-button variant=\"primary\" type=\"submit\" (click)=\"close()\">Save Changes</ds-button>\n          </div>\n        </ds-dialog>\n      </div>\n    </ng-template>\n  `\n})"
+            },
+            {
                 "name": "Ghost",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1683,7 +1743,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixStarLine\" \n          ariaLabel=\"Favorite\"\n          variant=\"primary\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixSettingsLine\" \n          ariaLabel=\"Settings\"\n          variant=\"secondary\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixMoreLine\" \n          ariaLabel=\"More options\"\n          variant=\"ghost\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixDeleteBinLine\" \n          ariaLabel=\"Delete\"\n          variant=\"destructive\"\n        ></ds-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixStarLine\" \n          ariaLabel=\"Favorite\"\n          variant=\"primary\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixSettingsLine\" \n          ariaLabel=\"Settings\"\n          variant=\"secondary\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixMoreLine\" \n          ariaLabel=\"More options\"\n          variant=\"ghost\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixDeleteBinLine\" \n          ariaLabel=\"Delete\"\n          variant=\"destructive\"\n        ></ds-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "IconOnly",
@@ -1923,7 +1983,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'md',\n    leadingIcon: 'remixThumbUpLine',\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      clickCount: 0,\n      onClick: function(event: MouseEvent) {\n        this['clickCount']++;\n        console.log('Button clicked!', event);\n      }\n    },\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1rem; align-items: center;\">\n        <ds-button \n          [variant]=\"variant\"\n          [size]=\"size\"\n          [leadingIcon]=\"leadingIcon\"\n          (clicked)=\"onClick($event)\"\n        >\n          Like ({{clickCount}})\n        </ds-button>\n        <p style=\"font-size: 0.875rem; color: var(--color-gray-600);\">\n          Click count: {{clickCount}}\n        </p>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    props: {\n      clickCount: 0,\n      onClick: function(this: { clickCount: number }) {\n        this.clickCount++;\n      }\n    },\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1rem; align-items: center;\">\n        <ds-button \n          variant=\"primary\"\n          leadingIcon=\"remixThumbUpLine\"\n          (clicked)=\"onClick()\"\n        >\n          Like ({{clickCount}})\n        </ds-button>\n        <p style=\"font-size: 0.875rem; color: var(--color-gray-600);\">\n          Click count: {{clickCount}}\n        </p>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "Interactive",
@@ -2093,7 +2153,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button [loading]=\"true\" variant=\"primary\">\n          Saving...\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"ghost\"\n          leadingIcon=\"remixUploadLine\"\n        >\n          Uploading...\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"secondary\"\n        >\n          Processing\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"destructive\"\n        >\n          Deleting...\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button [loading]=\"true\" variant=\"primary\">\n          Saving...\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"ghost\"\n          leadingIcon=\"remixUploadLine\"\n        >\n          Uploading...\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"secondary\"\n        >\n          Processing\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"destructive\"\n        >\n          Deleting...\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "LongContent",
@@ -2203,7 +2263,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<DsButtonComponent>",
-                "defaultValue": "{\n  title: 'Primitives/Button',\n  component: DsButtonComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['primary', 'secondary', 'ghost', 'destructive', 'ai-primary', 'ai-ghost'],\n      description: 'The visual style variant of the button',\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['sm', 'md', 'lg'],\n      description: 'The size of the button',\n    },\n    disabled: {\n      control: { type: 'boolean' },\n      description: 'Whether the button is disabled',\n    },\n    loading: {\n      control: { type: 'boolean' },\n      description: 'Whether the button is in loading state',\n    },\n    pressed: {\n      control: { type: 'boolean' },\n      description: 'Whether the button appears pressed (for toggle buttons)',\n    },\n    expanded: {\n      control: { type: 'boolean' },\n      description: 'Whether the button is expanded (for dropdown buttons)',\n    },\n    leadingIcon: {\n      control: { type: 'text' },\n      description: 'Icon to display before the button text',\n    },\n    trailingIcon: {\n      control: { type: 'text' },\n      description: 'Icon to display after the button text',\n    },\n    ariaLabel: {\n      control: { type: 'text' },\n      description: 'Accessibility label for the button',\n    },\n    iconOnly: {\n      control: { type: 'boolean' },\n      description: 'Whether the button displays only an icon without text',\n    },\n  },\n}"
+                "defaultValue": "{\n  title: 'Primitives/Button',\n  component: DsButtonComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'secondary', 'ghost', 'destructive', 'ai-primary', 'ai-ghost'],\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n    },\n    disabled: { control: 'boolean' },\n    loading: { control: 'boolean' },\n    pressed: { control: 'boolean' },\n    expanded: { control: 'boolean' },\n    leadingIcon: { control: 'text' },\n    trailingIcon: { control: 'text' },\n    ariaLabel: { control: 'text' },\n    iconOnly: { control: 'boolean' },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -2264,6 +2324,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<DsDatepickerComponent>",
                 "defaultValue": "{\n  title: 'Primitives/Datepicker',\n  component: DsDatepickerComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideIcons({\n          remixArrowLeftSLine,\n          remixArrowRightSLine,\n          remixCloseLine,\n          remixCalendarLine,\n        }),\n      ],\n    }),\n    moduleMetadata({\n      imports: [\n        DsDatepickerComponent, \n        ReactiveFormsModule,\n        FormsModule,\n        DsFormFieldComponent, \n        DsButtonComponent,\n        DsInputComponent,\n      ],\n    }),\n  ],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'error', 'warning', 'success'],\n      description: 'Visual variant of the datepicker calendar',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the datepicker is disabled',\n    },\n    disableFutureDates: {\n      control: 'boolean',\n      description: 'When true, disables all dates after today',\n    },\n    isDateDisabled: {\n      control: false,\n      description: 'Advanced: Custom function to determine if a specific date should be disabled. Return true to disable the date.',\n      table: {\n        type: { summary: '(date: Date) => boolean' },\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<DsDialogComponent>",
+                "defaultValue": "{\n  title: 'Primitives/Dialog',\n  component: DsDialogComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [DsDialogComponent, DsButtonComponent, DsInputComponent, NgpDialogTrigger, NgpDialogOverlay, NgpDialog],\n    }),\n  ],\n}"
             },
             {
                 "name": "meta",
@@ -2963,7 +3033,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;\">\n        <ds-button size=\"sm\">Small</ds-button>\n        <ds-button size=\"md\">Medium</ds-button>\n        <ds-button size=\"lg\">Large</ds-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;\">\n        <ds-button size=\"sm\">Small</ds-button>\n        <ds-button size=\"md\">Medium</ds-button>\n        <ds-button size=\"lg\">Large</ds-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "Sizes",
@@ -3053,7 +3123,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button>Normal</ds-button>\n        <ds-button [disabled]=\"true\">Disabled</ds-button>\n        <ds-button [loading]=\"true\">Loading</ds-button>\n        <ds-button [pressed]=\"true\" variant=\"ghost\">Pressed</ds-button>\n        <ds-button \n          [expanded]=\"true\" \n          trailingIcon=\"remixArrowDownLine\"\n          variant=\"secondary\"\n        >\n          Expanded\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button>Normal</ds-button>\n        <ds-button [disabled]=\"true\">Disabled</ds-button>\n        <ds-button [loading]=\"true\">Loading</ds-button>\n        <ds-button [pressed]=\"true\" variant=\"ghost\">Pressed</ds-button>\n        <ds-button \n          [expanded]=\"true\" \n          trailingIcon=\"remixArrowDownLine\"\n          variant=\"secondary\"\n        >\n          Expanded\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "States",
@@ -3183,7 +3253,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "(args) => ({\n  props: args,\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"drawer\" variant=\"primary\">Open Drawer</ds-button>\n      <p>This is the main page content. When you open the drawer, it should overlay this content with a semi-transparent background.</p>\n    </div>\n\n    <ng-template #drawer let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-drawer-overlay\">\n        <ds-drawer ngpDialog [position]=\"position\">\n          <h2 slot=\"header\" class=\"tw-text-xl tw-font-semibold\">Drawer Title</h2>\n          <div slot=\"content\">\n            <p class=\"tw-text-neutral-700 tw-mb-4\">This is the main content of the drawer.</p>\n            <p class=\"tw-text-neutral-600 tw-mb-4\">You can put any content here including forms, lists, or other components.</p>\n            <div class=\"tw-p-4 tw-bg-gray-50 tw-rounded-lg\">\n              <h3 class=\"tw-font-medium tw-mb-2\">Example Content</h3>\n              <p class=\"tw-text-sm tw-text-gray-600\">This drawer should slide in from the {{ position }} side of the screen.</p>\n            </div>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" (click)=\"close()\">Cancel</ds-button>\n            <ds-button variant=\"primary\" (click)=\"close()\">Save Changes</ds-button>\n          </div>\n        </ds-drawer>\n      </div>\n    </ng-template>\n  `\n})"
+                "defaultValue": "(args) => ({\n  props: args,\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"drawer\" variant=\"primary\">Open Drawer</ds-button>\n      <p>This is the main page content. When you open the drawer, it should overlay this content with a semi-transparent background.</p>\n    </div>\n\n    <ng-template #drawer let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-overlay ds-drawer-overlay\">\n        <ds-drawer ngpDialog [position]=\"position\">\n          <h2 slot=\"header\" class=\"tw-text-xl tw-font-semibold\">Drawer Title</h2>\n          <div slot=\"content\">\n            <p class=\"tw-text-neutral-700 tw-mb-4\">This is the main content of the drawer.</p>\n            <p class=\"tw-text-neutral-600 tw-mb-4\">You can put any content here including forms, lists, or other components.</p>\n            <div class=\"tw-p-4 tw-bg-gray-50 tw-rounded-lg\">\n              <h3 class=\"tw-font-medium tw-mb-2\">Example Content</h3>\n              <p class=\"tw-text-sm tw-text-gray-600\">This drawer should slide in from the {{ position }} side of the screen.</p>\n            </div>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" (click)=\"close()\">Cancel</ds-button>\n            <ds-button variant=\"primary\" (click)=\"close()\">Save Changes</ds-button>\n          </div>\n        </ds-drawer>\n      </div>\n    </ng-template>\n  `\n})"
             },
             {
                 "name": "TextBlue",
@@ -3403,7 +3473,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button variant=\"primary\">Primary</ds-button>\n        <ds-button variant=\"secondary\">Secondary</ds-button>\n        <ds-button variant=\"ghost\">Ghost</ds-button>\n        <ds-button variant=\"destructive\">Destructive</ds-button>\n        <ds-button variant=\"ai-primary\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" [color]=\"'var(--ai-gradient-color-1)'\" />\n          <span>AI Primary</span>\n        </ds-button>\n        <ds-button variant=\"ai-ghost\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" [color]=\"'var(--ai-gradient-color-1)'\" />\n          <span>AI Ghost</span>\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button variant=\"primary\">Primary</ds-button>\n        <ds-button variant=\"secondary\">Secondary</ds-button>\n        <ds-button variant=\"ghost\">Ghost</ds-button>\n        <ds-button variant=\"destructive\">Destructive</ds-button>\n        <ds-button variant=\"ai-primary\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" [color]=\"'var(--ai-gradient-color-1)'\" />\n          <span>AI Primary</span>\n        </ds-button>\n        <ds-button variant=\"ai-ghost\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" [color]=\"'var(--ai-gradient-color-1)'\" />\n          <span>AI Ghost</span>\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "Variants",
@@ -3813,7 +3883,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button leadingIcon=\"remixHomeLine\">\n          Home\n        </ds-button>\n        <ds-button trailingIcon=\"remixArrowRightLine\">\n          Continue\n        </ds-button>\n        <ds-button \n          leadingIcon=\"remixUserLine\"\n          variant=\"secondary\"\n        >\n          Profile\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button leadingIcon=\"remixHomeLine\">\n          Home\n        </ds-button>\n        <ds-button trailingIcon=\"remixArrowRightLine\">\n          Continue\n        </ds-button>\n        <ds-button \n          leadingIcon=\"remixUserLine\"\n          variant=\"secondary\"\n        >\n          Profile\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "WithIcons",
@@ -4124,6 +4194,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<DsDatepickerComponent>",
                 "file": "src/app/components/ui/datepicker/ds-datepicker.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<DsDialogComponent>",
+                "file": "src/app/components/ui/dialog/dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -4623,7 +4704,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button variant=\"ai-primary\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" />\n          <span>Generate suggestions</span>\n        </ds-button>\n        <ds-button variant=\"ai-ghost\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" />\n          <span>Generate suggestions</span>\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button variant=\"ai-primary\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" />\n          <span>Generate suggestions</span>\n        </ds-button>\n        <ds-button variant=\"ai-ghost\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" />\n          <span>Generate suggestions</span>\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "Default",
@@ -4633,7 +4714,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'md',\n    disabled: false,\n    loading: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<ds-button [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [loading]=\"loading\">Default Button</ds-button>`,\n  }),\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'md',\n    disabled: false,\n    loading: false,\n  },\n  render: (args) => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    props: args,\n    template: `<ds-button [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [loading]=\"loading\">Default Button</ds-button>`,\n  }),\n}"
                 },
                 {
                     "name": "IconButtonVariants",
@@ -4643,7 +4724,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixStarLine\" \n          ariaLabel=\"Favorite\"\n          variant=\"primary\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixSettingsLine\" \n          ariaLabel=\"Settings\"\n          variant=\"secondary\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixMoreLine\" \n          ariaLabel=\"More options\"\n          variant=\"ghost\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixDeleteBinLine\" \n          ariaLabel=\"Delete\"\n          variant=\"destructive\"\n        ></ds-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixStarLine\" \n          ariaLabel=\"Favorite\"\n          variant=\"primary\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixSettingsLine\" \n          ariaLabel=\"Settings\"\n          variant=\"secondary\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixMoreLine\" \n          ariaLabel=\"More options\"\n          variant=\"ghost\"\n        ></ds-button>\n        <ds-button \n          [iconOnly]=\"true\" \n          leadingIcon=\"remixDeleteBinLine\" \n          ariaLabel=\"Delete\"\n          variant=\"destructive\"\n        ></ds-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "Interactive",
@@ -4653,7 +4734,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'md',\n    leadingIcon: 'remixThumbUpLine',\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      clickCount: 0,\n      onClick: function(event: MouseEvent) {\n        this['clickCount']++;\n        console.log('Button clicked!', event);\n      }\n    },\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1rem; align-items: center;\">\n        <ds-button \n          [variant]=\"variant\"\n          [size]=\"size\"\n          [leadingIcon]=\"leadingIcon\"\n          (clicked)=\"onClick($event)\"\n        >\n          Like ({{clickCount}})\n        </ds-button>\n        <p style=\"font-size: 0.875rem; color: var(--color-gray-600);\">\n          Click count: {{clickCount}}\n        </p>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    props: {\n      clickCount: 0,\n      onClick: function(this: { clickCount: number }) {\n        this.clickCount++;\n      }\n    },\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1rem; align-items: center;\">\n        <ds-button \n          variant=\"primary\"\n          leadingIcon=\"remixThumbUpLine\"\n          (clicked)=\"onClick()\"\n        >\n          Like ({{clickCount}})\n        </ds-button>\n        <p style=\"font-size: 0.875rem; color: var(--color-gray-600);\">\n          Click count: {{clickCount}}\n        </p>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "LoadingStates",
@@ -4663,7 +4744,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button [loading]=\"true\" variant=\"primary\">\n          Saving...\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"ghost\"\n          leadingIcon=\"remixUploadLine\"\n        >\n          Uploading...\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"secondary\"\n        >\n          Processing\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"destructive\"\n        >\n          Deleting...\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button [loading]=\"true\" variant=\"primary\">\n          Saving...\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"ghost\"\n          leadingIcon=\"remixUploadLine\"\n        >\n          Uploading...\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"secondary\"\n        >\n          Processing\n        </ds-button>\n        <ds-button \n          [loading]=\"true\" \n          variant=\"destructive\"\n        >\n          Deleting...\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "meta",
@@ -4673,7 +4754,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<DsButtonComponent>",
-                    "defaultValue": "{\n  title: 'Primitives/Button',\n  component: DsButtonComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['primary', 'secondary', 'ghost', 'destructive', 'ai-primary', 'ai-ghost'],\n      description: 'The visual style variant of the button',\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['sm', 'md', 'lg'],\n      description: 'The size of the button',\n    },\n    disabled: {\n      control: { type: 'boolean' },\n      description: 'Whether the button is disabled',\n    },\n    loading: {\n      control: { type: 'boolean' },\n      description: 'Whether the button is in loading state',\n    },\n    pressed: {\n      control: { type: 'boolean' },\n      description: 'Whether the button appears pressed (for toggle buttons)',\n    },\n    expanded: {\n      control: { type: 'boolean' },\n      description: 'Whether the button is expanded (for dropdown buttons)',\n    },\n    leadingIcon: {\n      control: { type: 'text' },\n      description: 'Icon to display before the button text',\n    },\n    trailingIcon: {\n      control: { type: 'text' },\n      description: 'Icon to display after the button text',\n    },\n    ariaLabel: {\n      control: { type: 'text' },\n      description: 'Accessibility label for the button',\n    },\n    iconOnly: {\n      control: { type: 'boolean' },\n      description: 'Whether the button displays only an icon without text',\n    },\n  },\n}"
+                    "defaultValue": "{\n  title: 'Primitives/Button',\n  component: DsButtonComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'secondary', 'ghost', 'destructive', 'ai-primary', 'ai-ghost'],\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n    },\n    disabled: { control: 'boolean' },\n    loading: { control: 'boolean' },\n    pressed: { control: 'boolean' },\n    expanded: { control: 'boolean' },\n    leadingIcon: { control: 'text' },\n    trailingIcon: { control: 'text' },\n    ariaLabel: { control: 'text' },\n    iconOnly: { control: 'boolean' },\n  },\n}"
                 },
                 {
                     "name": "Sizes",
@@ -4683,7 +4764,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;\">\n        <ds-button size=\"sm\">Small</ds-button>\n        <ds-button size=\"md\">Medium</ds-button>\n        <ds-button size=\"lg\">Large</ds-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;\">\n        <ds-button size=\"sm\">Small</ds-button>\n        <ds-button size=\"md\">Medium</ds-button>\n        <ds-button size=\"lg\">Large</ds-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "States",
@@ -4693,7 +4774,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button>Normal</ds-button>\n        <ds-button [disabled]=\"true\">Disabled</ds-button>\n        <ds-button [loading]=\"true\">Loading</ds-button>\n        <ds-button [pressed]=\"true\" variant=\"ghost\">Pressed</ds-button>\n        <ds-button \n          [expanded]=\"true\" \n          trailingIcon=\"remixArrowDownLine\"\n          variant=\"secondary\"\n        >\n          Expanded\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button>Normal</ds-button>\n        <ds-button [disabled]=\"true\">Disabled</ds-button>\n        <ds-button [loading]=\"true\">Loading</ds-button>\n        <ds-button [pressed]=\"true\" variant=\"ghost\">Pressed</ds-button>\n        <ds-button \n          [expanded]=\"true\" \n          trailingIcon=\"remixArrowDownLine\"\n          variant=\"secondary\"\n        >\n          Expanded\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "Variants",
@@ -4703,7 +4784,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button variant=\"primary\">Primary</ds-button>\n        <ds-button variant=\"secondary\">Secondary</ds-button>\n        <ds-button variant=\"ghost\">Ghost</ds-button>\n        <ds-button variant=\"destructive\">Destructive</ds-button>\n        <ds-button variant=\"ai-primary\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" [color]=\"'var(--ai-gradient-color-1)'\" />\n          <span>AI Primary</span>\n        </ds-button>\n        <ds-button variant=\"ai-ghost\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" [color]=\"'var(--ai-gradient-color-1)'\" />\n          <span>AI Ghost</span>\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button variant=\"primary\">Primary</ds-button>\n        <ds-button variant=\"secondary\">Secondary</ds-button>\n        <ds-button variant=\"ghost\">Ghost</ds-button>\n        <ds-button variant=\"destructive\">Destructive</ds-button>\n        <ds-button variant=\"ai-primary\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" [color]=\"'var(--ai-gradient-color-1)'\" />\n          <span>AI Primary</span>\n        </ds-button>\n        <ds-button variant=\"ai-ghost\" class=\"depth-xs\">\n          <ds-icon slot=\"leading\" name=\"remixSparkling2Fill\" [color]=\"'var(--ai-gradient-color-1)'\" />\n          <span>AI Ghost</span>\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "WithIcons",
@@ -4713,7 +4794,79 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button leadingIcon=\"remixHomeLine\">\n          Home\n        </ds-button>\n        <ds-button trailingIcon=\"remixArrowRightLine\">\n          Continue\n        </ds-button>\n        <ds-button \n          leadingIcon=\"remixUserLine\"\n          variant=\"secondary\"\n        >\n          Profile\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [DsButtonComponent, DsIconComponent],\n    },\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <ds-button leadingIcon=\"remixHomeLine\">\n          Home\n        </ds-button>\n        <ds-button trailingIcon=\"remixArrowRightLine\">\n          Continue\n        </ds-button>\n        <ds-button \n          leadingIcon=\"remixUserLine\"\n          variant=\"secondary\"\n        >\n          Profile\n        </ds-button>\n      </div>\n    `,\n  }),\n}"
+                }
+            ],
+            "src/app/components/ui/dialog/dialog.stories.ts": [
+                {
+                    "name": "AlertDialog",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: AlertDialogTemplate\n}"
+                },
+                {
+                    "name": "AlertDialogTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "() => ({\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"dialog\" variant=\"primary\">Open Alert Dialog</ds-button>\n      <p>This dialog shows a warning message about session expiration.</p>\n    </div>\n\n    <ng-template #dialog let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-overlay ds-dialog-overlay\">\n        <ds-dialog ngpDialog>\n          <h2 slot=\"header\" class=\"heading-xl tw-text-red-600\">Warning</h2>\n          <div slot=\"content\">\n            <p class=\"tw-text-neutral-700 tw-mb-4\">Your session is about to expire in 5 minutes.</p>\n            <p class=\"tw-text-neutral-600\">Would you like to extend it?</p>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" (click)=\"close()\">Logout</ds-button>\n            <ds-button variant=\"primary\" (click)=\"close()\">Extend Session</ds-button>\n          </div>\n        </ds-dialog>\n      </div>\n    </ng-template>\n  `\n})"
+                },
+                {
+                    "name": "BasicDialog",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: BasicDialogTemplate\n}"
+                },
+                {
+                    "name": "BasicDialogTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "() => ({\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"dialog\" variant=\"primary\">Open Dialog</ds-button>\n      <p>This is the main page content. When you open the dialog, it should overlay this content with a semi-transparent background.</p>\n    </div>\n\n    <ng-template #dialog let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-overlay ds-dialog-overlay\">\n        <ds-dialog ngpDialog>\n          <h2 slot=\"header\" class=\"heading-xl\">Confirmation</h2>\n          <div slot=\"content\">\n            <p class=\"tw-text-neutral-700 tw-mb-4\">Are you sure you want to perform this action? This cannot be undone.</p>\n            <p class=\"tw-text-neutral-600\">Click confirm to proceed or cancel to go back.</p>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" (click)=\"close()\">Cancel</ds-button>\n            <ds-button variant=\"primary\" (click)=\"close()\">Confirm</ds-button>\n          </div>\n        </ds-dialog>\n      </div>\n    </ng-template>\n  `\n})"
+                },
+                {
+                    "name": "FormDialog",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: FormDialogTemplate\n}"
+                },
+                {
+                    "name": "FormDialogTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "() => ({\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"dialog\" variant=\"primary\">Open Form Dialog</ds-button>\n      <p>This dialog contains a form for editing user profile information.</p>\n    </div>\n\n    <ng-template #dialog let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-overlay ds-dialog-overlay\">\n        <ds-dialog ngpDialog>\n          <h2 slot=\"header\" class=\"heading-xl\">Edit Profile</h2>\n          <div slot=\"content\">\n            <form (submit)=\"$event.preventDefault(); close()\">\n              <div class=\"tw-mb-4\">\n                <label for=\"name\" class=\"tw-block tw-mb-2 tw-font-medium\">Name</label>\n                <ds-input id=\"name\" type=\"text\" placeholder=\"Enter your name\" />\n              </div>\n              <div class=\"tw-mb-4\">\n                <label for=\"email\" class=\"tw-block tw-mb-2 tw-font-medium\">Email</label>\n                <ds-input id=\"email\" type=\"email\" placeholder=\"Enter your email\" />\n              </div>\n            </form>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" type=\"button\" (click)=\"close()\">Cancel</ds-button>\n            <ds-button variant=\"primary\" type=\"submit\" (click)=\"close()\">Save Changes</ds-button>\n          </div>\n        </ds-dialog>\n      </div>\n    </ng-template>\n  `\n})"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/ui/dialog/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<DsDialogComponent>",
+                    "defaultValue": "{\n  title: 'Primitives/Dialog',\n  component: DsDialogComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [DsDialogComponent, DsButtonComponent, DsInputComponent, NgpDialogTrigger, NgpDialogOverlay, NgpDialog],\n    }),\n  ],\n}"
                 }
             ],
             "src/app/components/ui/spinner/ds-spinner.stories.ts": [
@@ -7677,7 +7830,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "(args) => ({\n  props: args,\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"drawer\" variant=\"primary\">Open Drawer</ds-button>\n      <p>This is the main page content. When you open the drawer, it should overlay this content with a semi-transparent background.</p>\n    </div>\n\n    <ng-template #drawer let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-drawer-overlay\">\n        <ds-drawer ngpDialog [position]=\"position\">\n          <h2 slot=\"header\" class=\"tw-text-xl tw-font-semibold\">Drawer Title</h2>\n          <div slot=\"content\">\n            <p class=\"tw-text-neutral-700 tw-mb-4\">This is the main content of the drawer.</p>\n            <p class=\"tw-text-neutral-600 tw-mb-4\">You can put any content here including forms, lists, or other components.</p>\n            <div class=\"tw-p-4 tw-bg-gray-50 tw-rounded-lg\">\n              <h3 class=\"tw-font-medium tw-mb-2\">Example Content</h3>\n              <p class=\"tw-text-sm tw-text-gray-600\">This drawer should slide in from the {{ position }} side of the screen.</p>\n            </div>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" (click)=\"close()\">Cancel</ds-button>\n            <ds-button variant=\"primary\" (click)=\"close()\">Save Changes</ds-button>\n          </div>\n        </ds-drawer>\n      </div>\n    </ng-template>\n  `\n})"
+                    "defaultValue": "(args) => ({\n  props: args,\n  template: `\n    <div style=\"padding: 20px;\">\n      <ds-button [ngpDialogTrigger]=\"drawer\" variant=\"primary\">Open Drawer</ds-button>\n      <p>This is the main page content. When you open the drawer, it should overlay this content with a semi-transparent background.</p>\n    </div>\n\n    <ng-template #drawer let-close=\"close\">\n      <div ngpDialogOverlay class=\"ds-overlay ds-drawer-overlay\">\n        <ds-drawer ngpDialog [position]=\"position\">\n          <h2 slot=\"header\" class=\"tw-text-xl tw-font-semibold\">Drawer Title</h2>\n          <div slot=\"content\">\n            <p class=\"tw-text-neutral-700 tw-mb-4\">This is the main content of the drawer.</p>\n            <p class=\"tw-text-neutral-600 tw-mb-4\">You can put any content here including forms, lists, or other components.</p>\n            <div class=\"tw-p-4 tw-bg-gray-50 tw-rounded-lg\">\n              <h3 class=\"tw-font-medium tw-mb-2\">Example Content</h3>\n              <p class=\"tw-text-sm tw-text-gray-600\">This drawer should slide in from the {{ position }} side of the screen.</p>\n            </div>\n          </div>\n          <div slot=\"footer\">\n            <ds-button variant=\"ghost\" (click)=\"close()\">Cancel</ds-button>\n            <ds-button variant=\"primary\" (click)=\"close()\">Save Changes</ds-button>\n          </div>\n        </ds-drawer>\n      </div>\n    </ng-template>\n  `\n})"
                 }
             ],
             "src/app/components/ui/accordion/ds-accordion.stories.ts": [
@@ -7865,6 +8018,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<DsDatepickerComponent>",
                     "file": "src/app/components/ui/datepicker/ds-datepicker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "src/app/components/ui/dialog/dialog.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<DsDialogComponent>",
+                    "file": "src/app/components/ui/dialog/dialog.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -9689,6 +9855,86 @@
             },
             {
                 "filePath": "src/app/components/ui/datepicker/ds-datepicker.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/dialog/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AlertDialog",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/dialog/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AlertDialogTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/dialog/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "BasicDialog",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/dialog/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "BasicDialogTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/dialog/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "FormDialog",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/dialog/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "FormDialogTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/dialog/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ui/dialog/dialog.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",

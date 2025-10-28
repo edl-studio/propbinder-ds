@@ -1,7 +1,7 @@
-import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { signal } from '@angular/core';
 import { DsEditableTableComponent, type DsEditableTableColumnMeta } from './ds-editable-table';
-import { editableTextCell, editableNumberCell, editableSelectCell } from './editable-cell-helpers';
+import { editableTextCell, editableNumberCell, editableSelectCell, actionsCell } from './editable-cell-helpers';
 import { provideIcons } from '@ng-icons/core';
 import { 
   remixAddLine,
@@ -10,8 +10,15 @@ import {
   remixInboxLine,
   remixArrowUpLine,
   remixArrowDownLine,
+  remixSettings3Line,
 } from '@ng-icons/remixicon';
 import type { ColumnDef } from '@tanstack/angular-table';
+import { DsConfirmationDialogComponent } from '../dialog/ds-confirmation-dialog';
+import { DsDialogComponent } from '../dialog/ds-dialog';
+import { DsButtonComponent } from '../button/ds-button';
+import { NgpDialogTrigger, NgpDialogOverlay, NgpDialog } from 'ng-primitives/dialog';
+import { DsTileComponent } from '../tile/ds-tile';
+import { DsTileSectionComponent } from '../tile/ds-tile-section';
 
 // Sample data types
 interface InvoiceLine {
@@ -371,6 +378,7 @@ const meta: Meta<DsEditableTableComponent> = {
           remixInboxLine,
           remixArrowUpLine,
           remixArrowDownLine,
+          remixSettings3Line,
         }),
       ],
     }),
@@ -711,6 +719,427 @@ export const ReadOnlyMode: Story = {
     docs: {
       description: {
         story: 'Table with all editing features disabled. Cells are still editable (use readonly on cell data to fully disable editing).',
+      },
+    },
+  },
+};
+
+// Sample data for materials
+interface Material {
+  id: string;
+  name: string;
+  costPrice: number;
+  salesPrice: number;
+  lastUpdated: string;
+}
+
+const sampleMaterials: Material[] = [
+  { id: '001', name: 'Administration fee', costPrice: 800, salesPrice: 1000, lastUpdated: 'Oct 24, 24' },
+  { id: '002', name: 'Property sale fee', costPrice: 200, salesPrice: 400, lastUpdated: 'Sep 2, 25' },
+  { id: '003', name: 'Broker correspondence', costPrice: 50, salesPrice: 100, lastUpdated: 'Aug 24, 25' },
+  { id: '004', name: 'Miscellaneous', costPrice: 50, salesPrice: 100, lastUpdated: 'Jul 15, 25' },
+];
+
+// Column definitions with multiple actions
+const materialsColumnsWithActions: ColumnDef<Material>[] = [
+  {
+    accessorKey: 'id',
+    header: 'ID +',
+    cell: (info) => info.getValue(),
+    meta: {
+      sizing: {
+        maxWidth: 'xs',
+      }
+    } as DsEditableTableColumnMeta,
+  },
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    cell: (info) => editableTextCell({
+      row: info.row.original,
+      rowIndex: info.row.index,
+      value: info.getValue(),
+      placeholder: 'Enter name...'
+    }),
+    meta: {
+      sizing: {
+        minWidth: 'md',
+      }
+    } as DsEditableTableColumnMeta,
+  },
+  {
+    accessorKey: 'costPrice',
+    header: 'Cost price',
+    cell: (info) => editableNumberCell({
+      row: info.row.original,
+      rowIndex: info.row.index,
+      value: info.getValue(),
+      min: 0,
+      step: 0.01,
+    }),
+    meta: {
+      sizing: {
+        maxWidth: 'sm',
+      },
+      align: 'right',
+    } as DsEditableTableColumnMeta,
+  },
+  {
+    accessorKey: 'salesPrice',
+    header: 'Sales price',
+    cell: (info) => editableNumberCell({
+      row: info.row.original,
+      rowIndex: info.row.index,
+      value: info.getValue(),
+      min: 0,
+      step: 0.01,
+    }),
+    meta: {
+      sizing: {
+        maxWidth: 'sm',
+      },
+      align: 'right',
+    } as DsEditableTableColumnMeta,
+  },
+  {
+    accessorKey: 'lastUpdated',
+    header: 'Last updated',
+    cell: (info) => info.getValue(),
+    meta: {
+      sizing: {
+        maxWidth: 'sm',
+      }
+    } as DsEditableTableColumnMeta,
+  },
+  {
+    id: 'actions',
+    header: '',
+    cell: (info) => actionsCell(info.row.index, info.row.original, [
+      { 
+        icon: 'remixSettings3Line', 
+        ariaLabel: 'Manage material', 
+        action: 'manage' 
+      },
+      { 
+        icon: 'remixDeleteBinLine', 
+        ariaLabel: 'Delete material', 
+        action: 'delete' 
+      }
+    ]),
+    meta: {
+      sizing: {
+        width: '100px',
+      }
+    } as DsEditableTableColumnMeta,
+  }
+];
+
+// Property pricing columns for the manage dialog
+const propertyPricingColumns: ColumnDef<any>[] = [
+  {
+    accessorKey: 'property',
+    header: 'Property',
+    cell: (info) => info.getValue(),
+    meta: {
+      sizing: {
+        minWidth: 'md',
+      }
+    } as DsEditableTableColumnMeta,
+  },
+  {
+    accessorKey: 'customer',
+    header: 'Customer',
+    cell: (info) => info.getValue(),
+    meta: {
+      sizing: {
+        minWidth: 'sm',
+      }
+    } as DsEditableTableColumnMeta,
+  },
+  {
+    accessorKey: 'costPrice',
+    header: 'Cost price',
+    cell: (info) => editableNumberCell({
+      row: info.row.original,
+      rowIndex: info.row.index,
+      value: info.getValue(),
+      min: 0,
+      step: 0.01,
+      suffix: 'DKK'
+    }),
+    meta: {
+      sizing: {
+        maxWidth: 'sm',
+      },
+      align: 'right',
+    } as DsEditableTableColumnMeta,
+  },
+  {
+    accessorKey: 'salesPrice',
+    header: 'Sales price',
+    cell: (info) => editableNumberCell({
+      row: info.row.original,
+      rowIndex: info.row.index,
+      value: info.getValue(),
+      min: 0,
+      step: 0.01,
+      suffix: 'DKK'
+    }),
+    meta: {
+      sizing: {
+        maxWidth: 'sm',
+      },
+      align: 'right',
+    } as DsEditableTableColumnMeta,
+  }
+];
+
+export const MultipleActions: Story = {
+  render: (args) => ({
+    props: {
+      ...args,
+      materialsData: signal([...sampleMaterials]),
+      selectedMaterial: signal<Material | null>(null),
+      materialToDelete: signal<{ material: Material; index: number } | null>(null),
+      propertyPricing: signal([
+        { property: 'Fælledgården Hub', customer: 'Fjordlys', costPrice: 800, salesPrice: 1000 },
+        { property: 'Holmene Brygge', customer: 'Fjordlys', costPrice: 800, salesPrice: 1000 },
+        { property: 'Industrien Hus', customer: 'StandlBolig', costPrice: 800, salesPrice: 1000 },
+      ]),
+      propertyPricingColumns: propertyPricingColumns,
+      newRowTemplate: {
+        id: '',
+        name: '',
+        costPrice: 0,
+        salesPrice: 0,
+        lastUpdated: new Date().toLocaleDateString()
+      },
+      onCellEdited: (event: any) => {
+        console.log('Cell edited:', event);
+      },
+      onRowAdded: (row: any) => {
+        console.log('Row added:', row);
+      },
+      onActionClicked: function(event: any) {
+        console.log('Action clicked:', event);
+        if (event.action === 'manage') {
+          this['selectedMaterial'].set(event.row);
+          // Open dialog programmatically
+          setTimeout(() => {
+            const trigger = document.querySelector('[data-manage-trigger]') as HTMLElement;
+            if (trigger) trigger.click();
+          }, 0);
+        } else if (event.action === 'delete') {
+          this['materialToDelete'].set({ material: event.row, index: event.rowIndex });
+          // Open delete confirmation dialog
+          setTimeout(() => {
+            const trigger = document.querySelector('[data-delete-trigger]') as HTMLElement;
+            if (trigger) trigger.click();
+          }, 0);
+        }
+      },
+      handleDelete: function() {
+        const toDelete = this['materialToDelete']();
+        if (toDelete) {
+          this['materialsData'].update((data: any[]) => 
+            data.filter((_, idx) => idx !== toDelete.index)
+          );
+          console.log('Deleted material:', toDelete.material.name);
+          this['materialToDelete'].set(null);
+        }
+      },
+    },
+    template: `
+      <div>
+        <h3 style="margin-bottom: 16px; font-size: 18px; font-weight: 600;">Materials Settings</h3>
+        <p style="margin-bottom: 24px; color: #666;">
+          Table with multiple action buttons. Click "Manage" to configure property-specific pricing, or "Delete" to remove a material.
+        </p>
+        <ds-editable-table
+          [(data)]="materialsData"
+          [columns]="columns"
+          [reorderable]="false"
+          [allowAddRow]="true"
+          [allowDeleteRow]="false"
+          [addRowButtonText]="'Add material'"
+          [newRowTemplate]="newRowTemplate"
+          (cellEdited)="onCellEdited($event)"
+          (rowAdded)="onRowAdded($event)"
+          (actionClicked)="onActionClicked($event)"
+        />
+
+        <!-- Hidden trigger for manage dialog -->
+        <button 
+          [ngpDialogTrigger]="manageDialog" 
+          data-manage-trigger
+          style="display: none;">
+        </button>
+
+        <!-- Hidden trigger for delete confirmation -->
+        <button 
+          [ngpDialogTrigger]="deleteDialog" 
+          data-delete-trigger
+          style="display: none;">
+        </button>
+
+        <!-- Manage Property Pricing Dialog -->
+        <ng-template #manageDialog let-close="close">
+          <div ngpDialogOverlay class="ds-overlay ds-dialog-overlay">
+            <ds-dialog ngpDialog [size]="'xl'">
+              <h2 slot="header" class="heading-xl">
+                {{ selectedMaterial()?.name || 'Material' }} - Property-specific pricing
+              </h2>
+              <div slot="content">
+                <ds-tile orientation="vertical">
+                  <ds-tile-section [padding]="false">
+                    <ds-editable-table
+                      [(data)]="propertyPricing"
+                      [columns]="propertyPricingColumns"
+                      [reorderable]="false"
+                      [allowAddRow]="false"
+                      [allowDeleteRow]="false"
+                    />
+                  </ds-tile-section>
+                </ds-tile>
+              </div>
+              <div slot="footer">
+                <ds-button variant="ghost" (clicked)="close()">Cancel</ds-button>
+                <ds-button variant="primary" (clicked)="close()">Save changes</ds-button>
+              </div>
+            </ds-dialog>
+          </div>
+        </ng-template>
+
+        <!-- Delete Confirmation Dialog -->
+        <ng-template #deleteDialog let-close="close">
+          <div ngpDialogOverlay class="ds-overlay ds-dialog-overlay">
+            <ds-confirmation-dialog
+              ngpDialog
+              [title]="'Delete ' + (materialToDelete()?.material.name || 'material') + '?'"
+              [message]="'This action cannot be undone. Are you sure you want to delete this material?'"
+              [confirmLabel]="'Delete'"
+              [confirmVariant]="'destructive'"
+              [cancelLabel]="'Cancel'"
+              (confirm)="handleDelete(); close()"
+              (cancel)="close()">
+            </ds-confirmation-dialog>
+          </div>
+        </ng-template>
+      </div>
+    `,
+  }),
+  decorators: [
+    moduleMetadata({
+      imports: [
+        DsConfirmationDialogComponent,
+        DsDialogComponent,
+        DsButtonComponent,
+        DsTileComponent,
+        DsTileSectionComponent,
+        NgpDialogTrigger,
+        NgpDialogOverlay,
+        NgpDialog,
+      ],
+    }),
+  ],
+  args: {
+    columns: materialsColumnsWithActions,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Materials table with multiple action buttons demonstrating dialogs integration. Click "Manage" (settings icon) to open a dialog with property-specific pricing table. Click "Delete" to show a confirmation dialog. **Note:** Price columns use `meta.align: "right"` which automatically aligns the header, cell content, and input text to the right.',
+      },
+    },
+  },
+};
+
+/**
+ * Story demonstrating the commit-on-blur/Enter feature for API optimization
+ */
+export const CommitOnBlurDemo: Story = {
+  render: (args) => ({
+    props: {
+      ...args,
+      materialsData: signal([...sampleMaterials]),
+      apiCallCount: signal(0),
+      lastCommit: signal<string>(''),
+      newRowTemplate: {
+        id: '',
+        name: '',
+        costPrice: 0,
+        salesPrice: 0,
+        lastUpdated: new Date().toLocaleDateString()
+      },
+      onCellEdited: (event: any) => {
+        console.log('💡 Cell edited (fires on every keystroke):', event);
+      },
+      onCellCommitted: function(event: any) {
+        const callNum = this['apiCallCount']() + 1;
+        this['apiCallCount'].set(callNum);
+        const timestamp = new Date().toLocaleTimeString();
+        this['lastCommit'].set(`#${callNum} - ${event.column}: "${event.value}" at ${timestamp}`);
+        console.log('🚀 API call would happen here! Cell committed:', event);
+      },
+      onRowAdded: (row: any) => {
+        console.log('Row added:', row);
+      },
+    },
+    template: `
+      <div>
+        <h3 style="margin-bottom: 16px; font-size: 18px; font-weight: 600;">Commit on Blur/Enter Demo</h3>
+        <p style="margin-bottom: 16px; color: #666;">
+          This demonstrates the <strong>(cellCommitted)</strong> event which fires only when editing is complete (on blur or Enter key).
+          <br>Use this instead of <strong>(cellEdited)</strong> to optimize API calls.
+        </p>
+        <div style="margin-bottom: 24px; padding: 16px; background: #f5f5f5; border-radius: 8px; font-family: monospace;">
+          <div style="margin-bottom: 8px;">
+            <strong>API Calls:</strong> <span style="color: #0066cc; font-size: 20px; font-weight: bold;">{{ apiCallCount() }}</span>
+          </div>
+          <div style="color: #666; font-size: 13px;">
+            <strong>Last commit:</strong> {{ lastCommit() || 'None yet - edit a cell!' }}
+          </div>
+        </div>
+        <ds-editable-table
+          [(data)]="materialsData"
+          [columns]="columns"
+          [reorderable]="false"
+          [allowAddRow]="true"
+          [allowDeleteRow]="false"
+          [addRowButtonText]="'Add material'"
+          [newRowTemplate]="newRowTemplate"
+          (cellEdited)="onCellEdited($event)"
+          (cellCommitted)="onCellCommitted($event)"
+          (rowAdded)="onRowAdded($event)"
+        />
+      </div>
+    `,
+  }),
+  args: {
+    columns: materialsColumnsWithActions,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Commit on Blur/Enter
+
+This story demonstrates the new \`(cellCommitted)\` event which fires only when the user finishes editing:
+- **On blur**: When the input loses focus
+- **On Enter key**: When the user presses Enter
+
+**Use case**: Instead of making an API call on every keystroke with \`(cellEdited)\`, use \`(cellCommitted)\` to only make the API call when editing is complete.
+
+\`\`\`typescript
+<ds-editable-table
+  [(data)]="data"
+  [columns]="columns"
+  (cellCommitted)="updateAPI($event)"  // 👈 Only fires on blur/Enter!
+/>
+\`\`\`
+
+**Try it**: Edit a cell value, then either press Enter or click outside the cell. Watch the API call counter increase only when you commit the change!
+        `,
       },
     },
   },

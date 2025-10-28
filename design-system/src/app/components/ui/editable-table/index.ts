@@ -15,7 +15,8 @@ export {
   type EditableNumberCellData,
   type EditableSelectCellData,
   type EditableDatepickerCellData,
-  type ActionCellData
+  type ActionCellData,
+  type ActionButton
 } from './cells';
 
 // Cell helpers
@@ -26,6 +27,7 @@ export {
   editableDatepickerCell,
   dragHandleCell,
   actionCell,
+  actionsCell,
   isEditableComponentCell,
   type EditableComponentCell
 } from './editable-cell-helpers';

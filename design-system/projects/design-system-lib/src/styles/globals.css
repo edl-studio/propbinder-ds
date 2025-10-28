@@ -711,14 +711,25 @@ body {
   }
 }
 
-/* Drawer Component Styles */
-.ds-drawer-overlay {
+/* Base Overlay Styles - Shared by all modal-like components */
+.ds-overlay {
   @apply tw-fixed tw-inset-0 tw-bg-black/50 tw-z-50;
   animation: fadeIn 150ms ease-out;
 }
 
-.ds-drawer-overlay[data-exit] {
+.ds-overlay[data-exit] {
   animation: fadeOut 150ms ease-in;
+}
+
+/* Dialog-specific: centered positioning */
+.ds-dialog-overlay {
+  @apply tw-flex tw-items-center tw-justify-center;
+}
+
+/* Drawer-specific: no additional positioning (drawer itself is positioned) */
+.ds-drawer-overlay {
+  /* Intentionally minimal - only needs base overlay styles from .ds-overlay */
+  /* The drawer component handles its own positioning (left/right edge) */
 }
 
 @keyframes fadeIn {

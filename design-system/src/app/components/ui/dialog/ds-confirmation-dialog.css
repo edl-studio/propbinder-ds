@@ -1,0 +1,25 @@
+/* Import base dialog styles */
+@import './ds-dialog.css';
+
+/* Confirmation dialog customizations */
+
+/* Ensure animations work properly - target the inner .ds-dialog div within the host */
+:host([data-exit]) .ds-dialog {
+  animation: slideOutToTop 150ms ease-in !important;
+}
+
+/* Remove borders from header and footer */
+.ds-confirmation-dialog .ds-dialog__header {
+  @apply tw-border-b-0;
+}
+
+.ds-confirmation-dialog .ds-dialog__footer {
+  @apply tw-border-t-0 tw-flex tw-gap-1 tw-justify-end;
+}
+
+/* Remove vertical padding from content */
+.ds-confirmation-dialog .ds-dialog__content {
+  @apply tw-py-0;
+}
+
+

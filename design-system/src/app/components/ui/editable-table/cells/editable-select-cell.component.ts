@@ -11,6 +11,8 @@ export interface EditableSelectCellData extends EditableCellComponentData {
   placeholder?: string;
   /** Whether the field is disabled */
   disabled?: boolean;
+  /** Text alignment (automatically set from column meta.align) */
+  align?: 'left' | 'right' | 'center';
 }
 
 /**
@@ -28,7 +30,7 @@ export interface EditableSelectCellData extends EditableCellComponentData {
       [disabled]="cellData().disabled || false"
       [ghost]="true"
       [ngModel]="cellData().value"
-      (ngModelChange)="valueChanged.emit($event)"
+      (ngModelChange)="onValueChange($event)"
     />
   `,
   styles: [`
@@ -41,5 +43,14 @@ export interface EditableSelectCellData extends EditableCellComponentData {
 export class EditableSelectCellComponent extends BaseEditableCellComponent {
   /** Computed cell data with proper typing */
   cellData = computed(() => this.data() as EditableSelectCellData);
+  
+  /**
+   * Handle value change - emit both valueChanged and valueCommitted
+   * For selects, every change is a committed change since it's a discrete action
+   */
+  onValueChange(value: any) {
+    this.valueChanged.emit(value);
+    this.valueCommitted.emit(value);
+  }
 }
 
