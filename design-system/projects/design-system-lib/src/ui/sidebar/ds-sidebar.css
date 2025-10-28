@@ -32,6 +32,14 @@
   min-height: 0; /* allow flex item to shrink */
   transition: gap var(--transition-duration-slow, .3s) var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
   transition-delay: 0s; /* No delay when expanding */
+  
+  /* Hide scrollbar while keeping scroll functionality */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.sidebar__content::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
 }
 
 .sidebar__content > * {

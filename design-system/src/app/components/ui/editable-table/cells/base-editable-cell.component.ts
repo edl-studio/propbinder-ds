@@ -26,7 +26,10 @@ export abstract class BaseEditableCellComponent<T = any> {
   /** Cell data input */
   data = input.required<EditableCellComponentData<T>>();
   
-  /** Emitted when the cell value changes */
+  /** Emitted when the cell value changes (on every keystroke) */
   valueChanged = output<any>();
+  
+  /** Emitted when the value is committed (on blur or Enter key press) */
+  valueCommitted = output<any>();
 }
 

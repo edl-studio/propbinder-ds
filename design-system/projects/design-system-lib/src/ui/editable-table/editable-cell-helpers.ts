@@ -4,7 +4,8 @@ import type {
   EditableNumberCellData,
   EditableSelectCellData,
   EditableDatepickerCellData,
-  ActionCellData
+  ActionCellData,
+  ActionButton
 } from './cells';
 import type { DsSelectOption } from '../select/ds-select';
 
@@ -152,7 +153,8 @@ export function dragHandleCell(): EditableComponentCell {
 }
 
 /**
- * Helper function to create an action cell
+ * Helper function to create an action cell with single delete button (backwards compatible)
+ * @deprecated Use actionsCell() for multiple actions
  */
 export function actionCell(rowIndex: number, deleteDisabled: boolean = false): EditableComponentCell {
   return {
@@ -162,6 +164,33 @@ export function actionCell(rowIndex: number, deleteDisabled: boolean = false): E
       rowIndex, 
       value: null,
       deleteDisabled 
+    } as ActionCellData & EditableCellComponentData
+  };
+}
+
+/**
+ * Helper function to create an action cell with multiple buttons
+ * 
+ * @example
+ * ```typescript
+ * {
+ *   id: 'actions',
+ *   header: '',
+ *   cell: (info) => actionsCell(info.row.index, info.row.original, [
+ *     { icon: 'remixSettings3Line', ariaLabel: 'Manage', action: 'manage' },
+ *     { icon: 'remixDeleteBinLine', ariaLabel: 'Delete', action: 'delete' }
+ *   ])
+ * }
+ * ```
+ */
+export function actionsCell(rowIndex: number, row: any, actions: ActionButton[]): EditableComponentCell {
+  return {
+    component: 'action',
+    data: { 
+      row, 
+      rowIndex, 
+      value: null,
+      actions 
     } as ActionCellData & EditableCellComponentData
   };
 }

@@ -10,7 +10,7 @@ import { Component, input } from '@angular/core';
  * <button [ngpDialogTrigger]="drawer" ngpButton>Open Drawer</button>
  * 
  * <ng-template #drawer let-close="close">
- *   <div ngpDialogOverlay class="ds-drawer-overlay">
+ *   <div ngpDialogOverlay class="ds-overlay ds-drawer-overlay">
  *     <ds-drawer ngpDialog [position]="'right'">
  *       <h2 slot="header">Drawer Title</h2>
  *       <div slot="content">Main content</div>

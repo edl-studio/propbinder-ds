@@ -13,7 +13,7 @@ import { DsTooltipComponent } from '../../tooltip/ds-tooltip';
   standalone: true,
   imports: [CommonModule, DsIconButtonComponent, CdkDragHandle, DsTooltipComponent],
   template: `
-    <ds-tooltip text="Drag to move" placement="right">
+    <ds-tooltip text="Drag to move" placement="top">
       <div class="tw-flex tw-items-center tw-justify-center tw-cursor-move" cdkDragHandle>
         <ds-icon-button 
           icon="remixDraggable" 

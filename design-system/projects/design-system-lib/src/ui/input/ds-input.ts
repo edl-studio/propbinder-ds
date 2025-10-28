@@ -23,7 +23,7 @@ export interface NumberFormatConfig {
   decimalSeparator?: string;
   
   /** Text alignment in the input (overrides preset) */
-  align?: 'left' | 'right';
+  align?: 'left' | 'right' | 'center';
   
   /** Enable live formatting while typing (overrides preset) */
   liveFormat?: boolean;
@@ -214,6 +214,8 @@ export class DsInputComponent implements ControlValueAccessor {
     const format = this.effectiveFormat();
     if (format?.align === 'right') {
       classes.push('ds-input__field--align-right');
+    } else if (format?.align === 'center') {
+      classes.push('ds-input__field--align-center');
     }
     return classes.join(' ');
   });

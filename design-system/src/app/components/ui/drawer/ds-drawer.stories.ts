@@ -38,7 +38,7 @@ const Template: Story['render'] = (args) => ({
     </div>
 
     <ng-template #drawer let-close="close">
-      <div ngpDialogOverlay class="ds-drawer-overlay">
+      <div ngpDialogOverlay class="ds-overlay ds-drawer-overlay">
         <ds-drawer ngpDialog [position]="position">
           <h2 slot="header" class="tw-text-xl tw-font-semibold">Drawer Title</h2>
           <div slot="content">
