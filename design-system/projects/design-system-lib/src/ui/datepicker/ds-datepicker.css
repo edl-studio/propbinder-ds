@@ -1,0 +1,231 @@
+.ds-datepicker {
+  @apply tw-inline-block;
+  position: relative;
+}
+
+.ds-datepicker__trigger-wrapper {
+  @apply tw-inline-block;
+  cursor: pointer;
+}
+
+.ds-datepicker__calendar {
+  @apply tw-inline-flex tw-flex-col tw-w-full;
+  @apply tw-rounded-lg tw-border tw-border-solid;
+  max-width: 320px;
+  background-color: var(--color-background-neutral-primary);
+  border-color: var(--border-color-default);
+  padding: 16px;
+  box-sizing: border-box;
+  box-shadow: var(--box-shadow-lg);
+}
+
+/* Header */
+.ds-datepicker__header {
+  @apply tw-flex tw-items-center tw-justify-between tw-mb-4;
+}
+
+.ds-datepicker__label {
+  @apply tw-flex-1 tw-text-center;
+  color: var(--text-color-default-primary);
+  margin: 0;
+}
+
+.ds-datepicker__nav-button {
+  @apply tw-inline-flex tw-items-center tw-justify-center;
+  @apply tw-w-8 tw-h-8;
+  @apply tw-rounded-md tw-border-0;
+  @apply tw-transition-all tw-duration-200 tw-ease-in-out;
+  @apply tw-cursor-pointer;
+  
+  background-color: transparent;
+  color: var(--text-color-default-secondary);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.ds-datepicker__nav-button:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary-hover);
+  color: var(--text-color-default-primary);
+}
+
+.ds-datepicker__nav-button:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-datepicker__nav-button[data-press]:not(:disabled) {
+  background-color: var(--color-background-neutral-secondary);
+}
+
+.ds-datepicker__nav-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Grid */
+.ds-datepicker__grid {
+  @apply tw-w-full;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+
+.ds-datepicker__grid thead {
+  margin-bottom: 8px;
+}
+
+.ds-datepicker__weekday {
+  @apply tw-text-center;
+  @apply tw-h-8 tw-w-8;
+  color: var(--text-color-default-tertiary);
+  font-weight: 500;
+  padding: 0;
+}
+
+/* Date buttons */
+.ds-datepicker__date-button {
+  @apply tw-inline-flex tw-items-center tw-justify-center;
+  @apply tw-w-8 tw-h-8;
+  @apply tw-rounded-md tw-border-0;
+  @apply tw-transition-all tw-duration-200 tw-ease-in-out;
+  @apply tw-cursor-pointer;
+  
+  background-color: transparent;
+  color: var(--text-color-default-primary);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.ds-datepicker__date-button:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-datepicker__date-button:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-datepicker__date-button[data-press]:not(:disabled) {
+  background-color: var(--color-background-neutral-secondary);
+}
+
+.ds-datepicker__date-button[data-selected] {
+  background-color: var(--color-brand-base);
+  color: white;
+}
+
+.ds-datepicker__date-button[data-selected]:hover:not(:disabled) {
+  background-color: var(--color-brand-base-hover);
+}
+
+.ds-datepicker__date-button[data-today]:not([data-selected]) {
+  color: var(--color-brand-base);
+  background-color: transparent;
+}
+
+.ds-datepicker__date-button[data-today]:not([data-selected]):hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary-hover);
+  color: var(--color-brand-base);
+}
+
+.ds-datepicker__date-button[data-outside-month] {
+  color: var(--text-color-default-tertiary);
+  opacity: 0.4;
+}
+
+.ds-datepicker__date-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Disabled state */
+.ds-datepicker__calendar--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.ds-datepicker__calendar--disabled .ds-datepicker__date-button,
+.ds-datepicker__calendar--disabled .ds-datepicker__nav-button {
+  cursor: not-allowed;
+}
+
+/* Variants */
+.ds-datepicker__calendar--error .ds-datepicker__date-button[data-selected] {
+  background-color: var(--color-destructive-base);
+  color: white;
+}
+
+.ds-datepicker__calendar--error .ds-datepicker__date-button[data-selected]:hover:not(:disabled) {
+  background-color: var(--color-destructive-base-hover);
+}
+
+.ds-datepicker__calendar--error .ds-datepicker__date-button[data-today]:not([data-selected]) {
+  color: var(--color-destructive-base);
+}
+
+.ds-datepicker__calendar--error .ds-datepicker__date-button[data-today]:not([data-selected]):hover:not(:disabled) {
+  color: var(--color-destructive-base);
+}
+
+.ds-datepicker__calendar--warning .ds-datepicker__date-button[data-selected] {
+  background-color: var(--color-warning-base);
+  color: white;
+}
+
+.ds-datepicker__calendar--warning .ds-datepicker__date-button[data-selected]:hover:not(:disabled) {
+  background-color: var(--color-warning-base-hover);
+}
+
+.ds-datepicker__calendar--warning .ds-datepicker__date-button[data-today]:not([data-selected]) {
+  color: var(--color-warning-base);
+}
+
+.ds-datepicker__calendar--warning .ds-datepicker__date-button[data-today]:not([data-selected]):hover:not(:disabled) {
+  color: var(--color-warning-base);
+}
+
+.ds-datepicker__calendar--success .ds-datepicker__date-button[data-selected] {
+  background-color: var(--color-success-base);
+  color: white;
+}
+
+.ds-datepicker__calendar--success .ds-datepicker__date-button[data-selected]:hover:not(:disabled) {
+  background-color: var(--color-success-base-hover);
+}
+
+.ds-datepicker__calendar--success .ds-datepicker__date-button[data-today]:not([data-selected]) {
+  color: var(--color-success-base);
+}
+
+.ds-datepicker__calendar--success .ds-datepicker__date-button[data-today]:not([data-selected]):hover:not(:disabled) {
+  color: var(--color-success-base);
+}
+
+/* Animation */
+.ds-datepicker__nav-button,
+.ds-datepicker__date-button {
+  transition-timing-function: var(--ease-out-quart);
+}
+
+/* Range styles (for future date range support) */
+.ds-datepicker__date-button[data-range-start] {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ds-datepicker__date-button[data-range-end] {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ds-datepicker__date-button[data-range-between] {
+  background-color: var(--color-brand-subtle);
+  color: var(--text-color-default-primary);
+  border-radius: 0;
+}
+
+.ds-datepicker__date-button[data-range-between]:hover:not(:disabled) {
+  background-color: var(--color-brand-subtle-hover);
+}
+

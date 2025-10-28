@@ -22,7 +22,7 @@ import { DsListItemComponent } from '../list-item/ds-list-item';
 @Component({
   selector: 'ds-list',
   standalone: true,
-  imports: [CommonModule, DsListItemComponent],
+  imports: [CommonModule],
   template: `
     <div class="ds-list">
       <ng-content></ng-content>

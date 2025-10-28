@@ -63,6 +63,13 @@
   flex-shrink: 0;
 }
 
+/* Inline message should take full width */
+.header-details__details-row ::ng-deep ds-inline-message {
+  width: 100%;
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+
 /* Ensure text truncation in data items */
 .header-details__details-row ::ng-deep ds-data-item .data-item__value-text {
   white-space: nowrap;

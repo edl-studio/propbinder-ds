@@ -82,7 +82,7 @@
   --color-brand-strong-hover: #121418;
 
   /* Outline Colors for focus states */
-  --outline-color-default: #C6CBFF;
+  --outline-color-default: var(--color-brand-weak);
 
   /* Success Colors */
   --color-success-base: #158452;
@@ -112,7 +112,7 @@
   --color-blue-base: #1e5aff;
   --color-blue-base-hover: #1e5aff;
   --color-blue-weak: #e0e9ff;
-  --color-blue-weak-hover: #e0e9ff;
+  --color-blue-weak-hover: #c7d2fe;
   --color-blue-strong: #0036cc;
   --color-blue-strong-hover: #0036cc;
 
@@ -198,7 +198,7 @@
 
 /* Global Styles */
 body {
-  background-color: var(--color-background-neutral-secondary);
+  background-color: var(--color-background-neutral-primary);
   color: var(--text-color-default-primary);
   font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
 }
@@ -721,9 +721,59 @@ body {
   animation: fadeOut 150ms ease-in;
 }
 
-/* Dialog-specific: centered positioning */
+/* Override Angular CDK inline styles that center the dialog */
+.cdk-global-overlay-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+}
+
+/* Dialog-specific: top-aligned positioning with responsive margins */
 .ds-dialog-overlay {
-  @apply tw-flex tw-items-center tw-justify-center;
+  @apply tw-flex tw-justify-center;
+  align-items: flex-start !important;
+  overflow-y: auto;
+  --dialog-top-margin: 48px; /* xs breakpoint default */
+}
+
+/* Responsive top margins for dialog positioning 
+ * Note: Media query breakpoints match --breakpoint-* variables
+ * CSS variables cannot be used in media queries, so values are hardcoded but kept in sync
+ */
+@media (min-width: 576px) { /* --breakpoint-sm */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 64px;
+  }
+}
+
+@media (min-width: 768px) { /* --breakpoint-md */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 96px;
+  }
+}
+
+@media (min-width: 992px) { /* --breakpoint-lg */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 128px;
+  }
+}
+
+@media (min-width: 1440px) { /* --breakpoint-xl */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 192px;
+  }
+}
+
+@media (min-width: 1768px) { /* --breakpoint-2xl */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 224px;
+  }
+}
+
+@media (min-width: 1920px) { /* --breakpoint-3xl */
+  .ds-dialog-overlay {
+    --dialog-top-margin: 256px;
+  }
 }
 
 /* Drawer-specific: no additional positioning (drawer itself is positioned) */

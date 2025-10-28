@@ -1,0 +1,93 @@
+.ds-menu {
+  @apply tw-relative tw-inline-flex;
+}
+
+/* Trigger Wrapper */
+.ds-menu__trigger-wrapper {
+  @apply tw-inline-flex;
+}
+
+/* Dropdown */
+.ds-menu__dropdown {
+  @apply tw-bg-white tw-rounded-md tw-border tw-border-solid;
+  
+  border-color: var(--border-color-default);
+  background-color: var(--color-background-neutral-primary);
+  min-width: 160px;
+  max-width: 280px;
+  padding: 4px;
+  box-sizing: border-box;
+  animation: menuDropdownIn 150ms var(--ease-out-quart);
+  box-shadow: var(--box-shadow-lg);
+}
+
+.ds-menu__items {
+  /* No padding - allows separators to go edge-to-edge */
+}
+
+/* Menu Item */
+.ds-menu__item {
+  @apply tw-relative tw-flex tw-items-center tw-gap-2 tw-w-full;
+  @apply tw-h-8 tw-px-3;
+  @apply tw-cursor-pointer tw-select-none;
+  @apply tw-transition-colors tw-duration-150;
+  
+  color: var(--text-color-default-primary);
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  text-align: left;
+}
+
+.ds-menu__item:hover:not([disabled]):not([data-disabled]),
+.ds-menu__item[data-hover]:not([disabled]):not([data-disabled]),
+.ds-menu__item[data-press]:not([disabled]):not([data-disabled]) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-menu__item[data-focus-visible] {
+  outline: 2px solid var(--color-brand-base);
+  outline-offset: 2px;
+}
+
+.ds-menu__item[data-disabled],
+.ds-menu__item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--text-color-disabled);
+}
+
+.ds-menu__item--destructive {
+  color: var(--color-destructive-base);
+}
+
+.ds-menu__item--destructive:hover:not([disabled]):not([data-disabled]),
+.ds-menu__item--destructive[data-hover]:not([disabled]):not([data-disabled]),
+.ds-menu__item--destructive[data-press]:not([disabled]):not([data-disabled]) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-menu__item-icon {
+  color: inherit;
+  flex-shrink: 0;
+}
+
+/* Separator */
+.ds-menu__separator {
+  height: 1px;
+  margin: 4px -4px;
+  background-color: var(--border-color-default);
+}
+
+/* Animation */
+@keyframes menuDropdownIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+

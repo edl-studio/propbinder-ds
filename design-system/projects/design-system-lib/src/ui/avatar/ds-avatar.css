@@ -1,3 +1,8 @@
+/* Host element styling to prevent stretching in flex containers */
+:host {
+  display: inline-flex;
+}
+
 /* Avatar Base Styles */
 .avatar {
   display: inline-flex;
@@ -99,9 +104,7 @@
   font-weight: 500;
   color: var(--text-color-default-primary);
   line-height: 1;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
   font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
 }
 
@@ -129,8 +132,7 @@
 .avatar__image {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: inherit;
 }
 

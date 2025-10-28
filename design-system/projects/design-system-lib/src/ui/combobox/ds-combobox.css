@@ -1,0 +1,106 @@
+.ds-combobox {
+  @apply tw-inline-block;
+}
+
+.ds-combobox--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Trigger wrapper */
+.ds-combobox__trigger-wrapper {
+  @apply tw-inline-block;
+  cursor: pointer;
+}
+
+/* Dropdown styles */
+.ds-combobox__dropdown {
+  background-color: var(--color-background-neutral-primary);
+  border: 1px solid var(--border-color-default);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  margin-top: 4px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 1001;
+}
+
+/* Search section */
+.ds-combobox__search {
+  padding: 8px;
+  border-bottom: 1px solid var(--border-color-default);
+}
+
+/* Options section */
+.ds-combobox__options {
+  padding: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+/* Option styles */
+.ds-combobox__option {
+  @apply tw-relative tw-flex tw-items-center tw-w-full;
+  @apply tw-cursor-pointer tw-select-none;
+  @apply tw-transition-colors tw-duration-150;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--text-color-default-primary);
+  font-size: 14px;
+  line-height: 20px;
+  min-height: 36px;
+  gap: 8px;
+  padding-right: calc(12px + 16px + 8px); /* Reserve space for checkmark: padding + icon + gap */
+  white-space: nowrap;
+}
+
+.ds-combobox__option:hover:not([data-disabled]) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-combobox__option[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--text-color-disabled);
+}
+
+/* Checkmark icon */
+.ds-combobox__checkmark {
+  position: absolute;
+  right: 12px;
+  color: var(--color-brand-base);
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+/* Empty state */
+.ds-combobox__empty {
+  @apply tw-flex tw-items-center tw-justify-center;
+  padding: 8px;
+  color: var(--text-color-default-tertiary);
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes combobox-show {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes combobox-hide {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+}

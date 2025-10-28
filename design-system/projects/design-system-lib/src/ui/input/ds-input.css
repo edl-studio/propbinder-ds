@@ -1,26 +1,14 @@
 .ds-input {
-  position: relative;
-  display: inline-flex;
-  width: 100%;
+  @apply tw-relative tw-inline-flex tw-w-full;
   max-width: 480px;
+  outline: none;
+  cursor: text;
   
   /* Base styles */
-  
-  height: 2rem;
-  
-  padding-left: 0.5rem;
-  
-  padding-right: 0.5rem;
-  
-  border-radius: 0.375rem;
-  
-  transition-property: all;
-  
-  transition-duration: 200ms;
-  
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  
-  align-items: center;
+  @apply tw-h-8;
+  @apply tw-px-2;
+  @apply tw-rounded-md tw-border tw-transition-all tw-duration-200 tw-ease-in-out;
+  @apply tw-items-center;
   
   /* Ensure border is rendered inside Shadow DOM */
   border-style: solid;
@@ -32,30 +20,38 @@
   
   /* Box sizing to match select */
   box-sizing: border-box;
+  
+  /* Prevent layout shifts */
+  min-height: 32px;
+  max-height: 32px;
 }
 
-.ds-input:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
-  background-color: var(--color-background-neutral-primary);
-  border-color: var(--color-brand-base);
+.ds-input:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary-hover);
 }
 
 .ds-input:focus-within {
-  box-shadow: 0 0 0 3px var(--color-brand-weak);
-  outline: none;
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
   border-color: var(--color-brand-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary);
 }
 
 .ds-input--disabled {
   background-color: var(--color-background-disabled);
   border-color: var(--border-color-default);
-  cursor: not-allowed;
+  cursor: not-allowed !important;
   opacity: 0.6;
 }
 
 .ds-input--readonly {
   background-color: var(--color-background-container);
   border-color: var(--border-color-default);
-  cursor: default;
+  cursor: pointer !important;
 }
 
 /* Variant styles */
@@ -64,13 +60,19 @@
   border-color: var(--color-destructive-base);
 }
 
-.ds-input--error:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
-  border-color: var(--color-destructive-strong);
+.ds-input--error:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary-hover);
 }
 
 .ds-input--error:focus-within {
-  box-shadow: 0 0 0 3px var(--color-destructive-weak);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
   border-color: var(--color-destructive-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--error:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary);
 }
 
 .ds-input--warning {
@@ -78,13 +80,19 @@
   border-color: var(--color-warning-base);
 }
 
-.ds-input--warning:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
-  border-color: var(--color-warning-strong);
+.ds-input--warning:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary-hover);
 }
 
 .ds-input--warning:focus-within {
-  box-shadow: 0 0 0 3px var(--color-warning-weak);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
   border-color: var(--color-warning-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--warning:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary);
 }
 
 .ds-input--success {
@@ -92,39 +100,127 @@
   border-color: var(--color-success-base);
 }
 
-.ds-input--success:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
-  border-color: var(--color-success-strong);
+.ds-input--success:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary-hover);
 }
 
 .ds-input--success:focus-within {
-  box-shadow: 0 0 0 3px var(--color-success-weak);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--success:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly):not(.ds-input--ghost) {
+  background-color: var(--color-background-neutral-primary);
+}
+
+/* Ghost variant */
+.ds-input--ghost {
+  border-color: transparent;
+  max-width: none; /* Allow ghost inputs to fill container without 480px constraint */
+  display: flex; /* Use flex instead of inline-flex to prevent layout shift on focus */
+  min-height: 32px;
+  max-height: 32px;
+}
+
+.ds-input--ghost:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--border-color-default);
+}
+
+.ds-input--ghost:focus-within {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-brand-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--ghost:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-brand-base);
+}
+
+/* Ghost variant with error */
+.ds-input--ghost.ds-input--error {
+  border-color: transparent;
+}
+
+.ds-input--ghost.ds-input--error:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-destructive-base);
+}
+
+.ds-input--ghost.ds-input--error:focus-within {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-destructive-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--ghost.ds-input--error:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-destructive-base);
+}
+
+/* Ghost variant with warning */
+.ds-input--ghost.ds-input--warning {
+  border-color: transparent;
+}
+
+.ds-input--ghost.ds-input--warning:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-warning-base);
+}
+
+.ds-input--ghost.ds-input--warning:focus-within {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-warning-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--ghost.ds-input--warning:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-warning-base);
+}
+
+/* Ghost variant with success */
+.ds-input--ghost.ds-input--success {
+  border-color: transparent;
+}
+
+.ds-input--ghost.ds-input--success:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+  border-color: var(--color-success-base);
+}
+
+.ds-input--ghost.ds-input--success:focus-within {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+  transition: outline 0s, border-color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.ds-input--ghost.ds-input--success:focus-within:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
   border-color: var(--color-success-base);
 }
 
 /* Input field */
 .ds-input__field {
-  flex: 1 1 0%;
-  border-width: 0px;
-  background-color: transparent;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  line-height: 1;
-}
-.ds-input__field::-moz-placeholder {
-  --tw-placeholder-opacity: 0.6;
-}
-.ds-input__field::placeholder {
-  --tw-placeholder-opacity: 0.6;
-}
-.ds-input__field {
+  @apply tw-flex-1 tw-bg-transparent tw-border-0 tw-outline-none;
+  @apply tw-placeholder-opacity-60;
   
   font-family: inherit;
   color: var(--text-color-default-primary);
+  line-height: 1 !important;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-basis: 0%;
 }
 
-.ds-input__field::-moz-placeholder {
-  color: var(--text-color-default-tertiary);
-  opacity: 0.6;
+.ds-input__field:focus {
+  outline: none;
+}
+
+.ds-input__field:focus-visible {
+  outline: none;
 }
 
 .ds-input__field::placeholder {
@@ -137,30 +233,38 @@
   cursor: not-allowed;
 }
 
-.ds-input__field:disabled::-moz-placeholder {
-  color: var(--text-color-disabled);
-}
-
 .ds-input__field:disabled::placeholder {
   color: var(--text-color-disabled);
 }
 
-.ds-input__field:-moz-read-only {
-  cursor: default;
+.ds-input__field:read-only {
+  cursor: pointer;
 }
 
-.ds-input__field:read-only {
-  cursor: default;
+/* Hide number input spinners */
+.ds-input__field[type='number']::-webkit-inner-spin-button,
+.ds-input__field[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.ds-input__field[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Right text alignment for financial numbers */
+.ds-input__field--align-right {
+  text-align: right;
+}
+
+.ds-input__field--align-center {
+  text-align: center;
 }
 
 /* Error state text color */
 .ds-input--error .ds-input__field {
   color: var(--color-destructive-strong);
-}
-
-.ds-input--error .ds-input__field::-moz-placeholder {
-  color: var(--color-destructive-base);
-  opacity: 0.7;
 }
 
 .ds-input--error .ds-input__field::placeholder {
@@ -173,11 +277,6 @@
   color: var(--color-warning-strong);
 }
 
-.ds-input--warning .ds-input__field::-moz-placeholder {
-  color: var(--color-warning-base);
-  opacity: 0.7;
-}
-
 .ds-input--warning .ds-input__field::placeholder {
   color: var(--color-warning-base);
   opacity: 0.7;
@@ -188,11 +287,6 @@
   color: var(--color-success-strong);
 }
 
-.ds-input--success .ds-input__field::-moz-placeholder {
-  color: var(--color-success-base);
-  opacity: 0.7;
-}
-
 .ds-input--success .ds-input__field::placeholder {
   color: var(--color-success-base);
   opacity: 0.7;
@@ -200,8 +294,7 @@
 
 /* Icon styles */
 .ds-input__icon {
-  pointer-events: none;
-  position: absolute;
+  @apply tw-absolute tw-pointer-events-none;
   color: var(--text-color-default-tertiary);
 }
 
@@ -213,22 +306,55 @@
   right: 8px;
 }
 
-/* Clear button */
-.ds-input__clear {
+/* Prefix and suffix styles */
+.ds-input__prefix,
+.ds-input__suffix {
+  @apply tw-flex-shrink-0 tw-pointer-events-none;
+  color: var(--text-color-default-tertiary);
+  user-select: none;
+  white-space: nowrap;
+  transform: translateY(1px);
+}
+
+.ds-input__prefix {
+  padding-right: 4px;
+}
+
+.ds-input__suffix {
+  padding-left: 4px;
+}
+
+/* Inline suffix - positioned dynamically next to text */
+.ds-input__suffix--inline {
   position: absolute;
-  border-width: 0px;
-  background-color: transparent;
-  padding: 0px;
-  cursor: pointer;
-  border-radius: 0.125rem;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-duration: 200ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  padding-left: 0;
+  pointer-events: none;
+  transition: left 0.1s ease-out;
+  top: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  line-height: 1;
+}
+
+/* Hide suffix when input is empty */
+.ds-input__suffix--inline:empty {
+  display: none;
+}
+
+/* Disabled state for prefix/suffix */
+.ds-input--disabled .ds-input__prefix,
+.ds-input--disabled .ds-input__suffix {
+  color: var(--text-color-disabled);
+  opacity: 0.6;
+}
+
+/* Clear button */
+.ds-input__clear {
+  @apply tw-absolute tw-p-0 tw-bg-transparent tw-border-0;
+  @apply tw-cursor-pointer tw-rounded-sm tw-outline-none;
+  @apply tw-transition-colors tw-duration-200 tw-ease-in-out;
+  @apply tw-flex tw-items-center tw-justify-center;
   right: 8px;
   width: 18px;
   height: 18px;
@@ -242,9 +368,8 @@
 }
 
 .ds-input__clear:focus-visible {
-  outline-width: 2px;
-  outline-offset: 1px;
-  outline-color: var(--color-brand-base);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
 }
 
 /* Icon spacing */
@@ -254,6 +379,11 @@
 
 .ds-input--with-trailing-icon .ds-input__field {
   padding-right: 20px;
+}
+
+/* Right-aligned field with suffix - reduce right padding for closer positioning */
+.ds-input--with-trailing-icon .ds-input__field--align-right {
+  padding-right: 0px;
 }
 
 /* Autofill styles */
