@@ -47,10 +47,14 @@ export class EditableSelectCellComponent extends BaseEditableCellComponent {
   /**
    * Handle value change - emit both valueChanged and valueCommitted
    * For selects, every change is a committed change since it's a discrete action
+   * Only emit if the value actually changed
    */
   onValueChange(value: any) {
-    this.valueChanged.emit(value);
-    this.valueCommitted.emit(value);
+    // Only emit if value actually changed
+    if (this.cellData().value !== value) {
+      this.valueChanged.emit(value);
+      this.valueCommitted.emit(value);
+    }
   }
 }
 

@@ -62,6 +62,10 @@ export class EditableNumberCellComponent extends BaseEditableCellComponent {
   /** Computed cell data with proper typing */
   cellData = computed(() => this.data() as EditableNumberCellData);
   
+  /** Track the original value when editing starts to detect actual changes */
+  private originalValue: number | null = null;
+  private isEditing = false;
+  
   /**
    * Get effective format by merging cell format with alignment
    */
@@ -87,6 +91,12 @@ export class EditableNumberCellComponent extends BaseEditableCellComponent {
   }
   
   onValueChange(val: string) {
+    // Track that we've started editing and capture the original value
+    if (!this.isEditing) {
+      this.originalValue = this.cellData().value;
+      this.isEditing = true;
+    }
+    
     // When format is used, val is already the raw unformatted value
     // Otherwise, it's the direct input value
     const num = parseFloat(val);
@@ -94,17 +104,31 @@ export class EditableNumberCellComponent extends BaseEditableCellComponent {
   }
   
   /**
-   * Handle blur event - emit committed value
+   * Handle blur event - emit committed value only if it actually changed
    */
   onBlur() {
-    this.valueCommitted.emit(this.cellData().value);
+    // Only emit if value actually changed during this edit session
+    if (this.isEditing && this.originalValue !== this.cellData().value) {
+      this.valueCommitted.emit(this.cellData().value);
+    }
+    
+    // Reset tracking
+    this.isEditing = false;
+    this.originalValue = null;
   }
   
   /**
-   * Handle Enter key - emit committed value
+   * Handle Enter key - emit committed value only if it actually changed
    */
   onEnter() {
-    this.valueCommitted.emit(this.cellData().value);
+    // Only emit if value actually changed during this edit session
+    if (this.isEditing && this.originalValue !== this.cellData().value) {
+      this.valueCommitted.emit(this.cellData().value);
+    }
+    
+    // Reset tracking
+    this.isEditing = false;
+    this.originalValue = null;
   }
 }
 

@@ -432,7 +432,7 @@ export class DsEditableTableComponent<T = any> {
   });
 
   // Create TanStack table instance
-  table = createAngularTable<T>(() => ({
+  public table: any = createAngularTable<T>(() => ({
     data: this.data(),
     columns: this.enhancedColumns(),
     state: {
