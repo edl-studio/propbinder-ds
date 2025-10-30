@@ -1,6 +1,9 @@
 /* Overlay styles - to be used on the ngpDialogOverlay */
 .ds-drawer-overlay {
-  @apply tw-fixed tw-inset-0 tw-bg-black/50 tw-z-50;
+  position: fixed;
+  inset: 0px;
+  z-index: 50;
+  background-color: rgb(0 0 0 / 0.5);
   animation: fadeIn 150ms ease-out;
 }
 
@@ -10,11 +13,22 @@
 
 /* Drawer styles - applied to the ds-drawer component */
 .ds-drawer {
-  @apply tw-bg-white tw-shadow-xl tw-w-[480px] tw-flex tw-flex-col tw-h-full tw-fixed tw-inset-y-0;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  height: 100%;
+  width: 480px;
+  flex-direction: column;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .ds-drawer--right {
-  @apply tw-right-0;
+  right: 0px;
   animation: slideInRight 250ms ease-out;
 }
 
@@ -23,7 +37,7 @@
 }
 
 .ds-drawer--left {
-  @apply tw-left-0;
+  left: 0px;
   animation: slideInLeft 250ms ease-out;
 }
 
@@ -32,15 +46,28 @@
 }
 
 .ds-drawer__header {
-  @apply tw-p-6 tw-border-b tw-border-neutral-100 tw-flex-shrink-0;
+  flex-shrink: 0;
+  border-bottom-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(245 245 245 / var(--tw-border-opacity, 1));
+  padding: 1.5rem;
 }
 
 .ds-drawer__content {
-  @apply tw-flex-1 tw-overflow-y-auto tw-p-6;
+  flex: 1 1 0%;
+  overflow-y: auto;
+  padding: 1.5rem;
 }
 
 .ds-drawer__footer {
-  @apply tw-p-6 tw-border-t tw-border-neutral-100 tw-flex tw-gap-3 tw-justify-end tw-flex-shrink-0;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  border-top-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(245 245 245 / var(--tw-border-opacity, 1));
+  padding: 1.5rem;
 }
 
 @keyframes fadeIn {
