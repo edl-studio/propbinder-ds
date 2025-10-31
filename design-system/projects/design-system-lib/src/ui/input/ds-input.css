@@ -1,14 +1,28 @@
 .ds-input {
-  @apply tw-relative tw-inline-flex tw-w-full;
+  position: relative;
+  display: inline-flex;
+  width: 100%;
   max-width: 480px;
   outline: none;
   cursor: text;
   
   /* Base styles */
-  @apply tw-h-8;
-  @apply tw-px-2;
-  @apply tw-rounded-md tw-border tw-transition-all tw-duration-200 tw-ease-in-out;
-  @apply tw-items-center;
+  
+  height: 2rem;
+  
+  padding-left: 0.5rem;
+  
+  padding-right: 0.5rem;
+  
+  border-radius: 0.375rem;
+  
+  transition-property: all;
+  
+  transition-duration: 200ms;
+  
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  align-items: center;
   
   /* Ensure border is rendered inside Shadow DOM */
   border-style: solid;
@@ -201,8 +215,21 @@
 
 /* Input field */
 .ds-input__field {
-  @apply tw-flex-1 tw-bg-transparent tw-border-0 tw-outline-none;
-  @apply tw-placeholder-opacity-60;
+  flex: 1 1 0%;
+  border-width: 0px;
+  background-color: transparent;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.ds-input__field::-moz-placeholder {
+  --tw-placeholder-opacity: 0.6;
+}
+.ds-input__field::placeholder {
+  --tw-placeholder-opacity: 0.6;
+}
+.ds-input__field {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   
   font-family: inherit;
   color: var(--text-color-default-primary);
@@ -223,6 +250,11 @@
   outline: none;
 }
 
+.ds-input__field::-moz-placeholder {
+  color: var(--text-color-default-tertiary);
+  opacity: 0.6;
+}
+
 .ds-input__field::placeholder {
   color: var(--text-color-default-tertiary);
   opacity: 0.6;
@@ -233,8 +265,16 @@
   cursor: not-allowed;
 }
 
+.ds-input__field:disabled::-moz-placeholder {
+  color: var(--text-color-disabled);
+}
+
 .ds-input__field:disabled::placeholder {
   color: var(--text-color-disabled);
+}
+
+.ds-input__field:-moz-read-only {
+  cursor: pointer;
 }
 
 .ds-input__field:read-only {
@@ -250,7 +290,8 @@
 
 .ds-input__field[type='number'] {
   -moz-appearance: textfield;
-  appearance: textfield;
+  -webkit-appearance: textfield;
+          appearance: textfield;
 }
 
 /* Right text alignment for financial numbers */
@@ -267,6 +308,11 @@
   color: var(--color-destructive-strong);
 }
 
+.ds-input--error .ds-input__field::-moz-placeholder {
+  color: var(--color-destructive-base);
+  opacity: 0.7;
+}
+
 .ds-input--error .ds-input__field::placeholder {
   color: var(--color-destructive-base);
   opacity: 0.7;
@@ -275,6 +321,11 @@
 /* Warning state text color */
 .ds-input--warning .ds-input__field {
   color: var(--color-warning-strong);
+}
+
+.ds-input--warning .ds-input__field::-moz-placeholder {
+  color: var(--color-warning-base);
+  opacity: 0.7;
 }
 
 .ds-input--warning .ds-input__field::placeholder {
@@ -287,6 +338,11 @@
   color: var(--color-success-strong);
 }
 
+.ds-input--success .ds-input__field::-moz-placeholder {
+  color: var(--color-success-base);
+  opacity: 0.7;
+}
+
 .ds-input--success .ds-input__field::placeholder {
   color: var(--color-success-base);
   opacity: 0.7;
@@ -294,7 +350,8 @@
 
 /* Icon styles */
 .ds-input__icon {
-  @apply tw-absolute tw-pointer-events-none;
+  pointer-events: none;
+  position: absolute;
   color: var(--text-color-default-tertiary);
 }
 
@@ -309,9 +366,12 @@
 /* Prefix and suffix styles */
 .ds-input__prefix,
 .ds-input__suffix {
-  @apply tw-flex-shrink-0 tw-pointer-events-none;
+  pointer-events: none;
+  flex-shrink: 0;
   color: var(--text-color-default-tertiary);
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   white-space: nowrap;
   transform: translateY(1px);
 }
@@ -351,10 +411,20 @@
 
 /* Clear button */
 .ds-input__clear {
-  @apply tw-absolute tw-p-0 tw-bg-transparent tw-border-0;
-  @apply tw-cursor-pointer tw-rounded-sm tw-outline-none;
-  @apply tw-transition-colors tw-duration-200 tw-ease-in-out;
-  @apply tw-flex tw-items-center tw-justify-center;
+  position: absolute;
+  border-width: 0px;
+  background-color: transparent;
+  padding: 0px;
+  cursor: pointer;
+  border-radius: 0.125rem;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   right: 8px;
   width: 18px;
   height: 18px;

@@ -218,7 +218,9 @@
 /* Label styles */
 .checkbox__label {
   cursor: pointer;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   color: var(--text-color-default-primary);
   
   &.checkbox__label--disabled {

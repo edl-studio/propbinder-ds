@@ -1,5 +1,7 @@
 .ds-select {
-  @apply tw-relative tw-inline-flex tw-w-full;
+  position: relative;
+  display: inline-flex;
+  width: 100%;
   max-width: 480px;
   outline: none;
 }
@@ -9,10 +11,20 @@
 }
 
 .ds-select__trigger {
-  @apply tw-relative tw-inline-flex tw-items-center tw-justify-between tw-w-full;
-  @apply tw-h-8 tw-px-2;
-  @apply tw-rounded-md tw-border tw-transition-all tw-duration-200 tw-ease-in-out;
-  @apply tw-outline-none;
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  height: 2rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 0.375rem;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   
   /* Ensure border is rendered inside Shadow DOM */
   border-style: solid;
@@ -280,8 +292,14 @@
 
 /* Dropdown */
 .ds-select__dropdown {
-  @apply tw-absolute tw-z-50 tw-mt-1;
-  @apply tw-bg-white tw-rounded-md tw-border tw-border-solid;
+  position: absolute;
+  z-index: 50;
+  margin-top: 0.25rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  border-style: solid;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
   
   border-color: var(--border-color-default);
   background-color: var(--color-background-neutral-primary);
@@ -292,8 +310,8 @@
 }
 
 .ds-select__options {
-  @apply tw-max-h-60 tw-overflow-auto;
-  
+  max-height: 15rem;
+  overflow: auto;
 }
 
 .ds-select__group {
@@ -306,10 +324,21 @@
 }
 
 .ds-select__option {
-  @apply tw-relative tw-inline-flex tw-items-center tw-justify-between tw-w-full;
-  @apply tw-h-8 tw-px-2;
-  @apply tw-cursor-pointer tw-select-none;
-  @apply tw-transition-colors tw-duration-200 tw-ease-in-out;
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  height: 2rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   
   color: var(--text-color-default-primary);
   border-radius: 6px;
@@ -346,8 +375,13 @@
 }
 
 .ds-select__group-label {
-  @apply tw-relative tw-inline-flex tw-items-center tw-w-full;
-  @apply tw-h-6 tw-px-2;
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  height: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   color: var(--text-color-default-tertiary);
 }
 
@@ -363,12 +397,12 @@
 
 /* Icon */
 .ds-select__icon {
-  @apply tw-pointer-events-none;
+  pointer-events: none;
   color: var(--text-color-default-tertiary);
 }
 
 .ds-select__icon--trailing {
-  @apply tw-ml-2;
+  margin-left: 0.5rem;
 }
 
 /* Animation classes */

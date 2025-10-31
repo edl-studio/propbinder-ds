@@ -313,7 +313,7 @@
   color: var(--text-color-default-tertiary);
   user-select: none;
   white-space: nowrap;
-  transform: translateY(1px);
+  transform: translateY(0.5px);
 }
 
 .ds-input__prefix {
@@ -322,24 +322,6 @@
 
 .ds-input__suffix {
   padding-left: 4px;
-}
-
-/* Inline suffix - positioned dynamically next to text */
-.ds-input__suffix--inline {
-  position: absolute;
-  padding-left: 0;
-  pointer-events: none;
-  transition: left 0.1s ease-out;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  line-height: 1;
-}
-
-/* Hide suffix when input is empty */
-.ds-input__suffix--inline:empty {
-  display: none;
 }
 
 /* Disabled state for prefix/suffix */
@@ -384,6 +366,11 @@
 /* Right-aligned field with suffix - reduce right padding for closer positioning */
 .ds-input--with-trailing-icon .ds-input__field--align-right {
   padding-right: 0px;
+}
+
+/* Left-aligned field with suffix - reduce right padding since suffix is in flex layout */
+.ds-input--with-trailing-icon .ds-input__field--align-left {
+  padding-right: 4px;
 }
 
 /* Autofill styles */

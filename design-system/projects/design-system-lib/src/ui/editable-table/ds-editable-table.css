@@ -3,11 +3,12 @@
    ======================================================================== */
 
 .ds-editable-table {
-  @apply tw-w-full;
+  width: 100%;
 }
 
 .ds-editable-table__container {
-  @apply tw-w-full tw-overflow-visible;
+  width: 100%;
+  overflow: visible;
 }
 
 /* ========================================================================
@@ -15,7 +16,8 @@
    ======================================================================== */
 
 .ds-editable-table__scroll {
-  @apply tw-w-full tw-overflow-x-auto;
+  width: 100%;
+  overflow-x: auto;
 }
 
 /* ========================================================================
@@ -23,7 +25,8 @@
    ======================================================================== */
 
 .ds-editable-table__table {
-  @apply tw-w-full tw-border-collapse;
+  width: 100%;
+  border-collapse: collapse;
   border-spacing: 0;
 }
 
@@ -77,8 +80,18 @@
   min-height: 32px;
 }
 
+/* Align cell content based on parent td alignment */
+.ds-editable-table__td--align-right .ds-editable-table__cell-content {
+  justify-content: flex-end;
+}
+
+.ds-editable-table__td--align-center .ds-editable-table__cell-content {
+  justify-content: center;
+}
+
 .ds-editable-table__th--truncate {
-  @apply tw-overflow-hidden tw-text-ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ds-editable-table__th--align-right {
@@ -133,16 +146,19 @@
    ======================================================================== */
 
 .ds-editable-table__tbody {
-  @apply tw-bg-white;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
 /* Drag and drop placeholder */
 .ds-editable-table__tbody.cdk-drop-list-dragging .ds-editable-table__tr--body:not(.cdk-drag-placeholder) {
-  @apply tw-transition-transform tw-duration-200;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
 }
 
 .ds-editable-table__tr--body.cdk-drag-placeholder {
-  @apply tw-opacity-0;
+  opacity: 0;
 }
 
 /* ========================================================================
@@ -150,7 +166,9 @@
    ======================================================================== */
 
 .ds-editable-table__tr {
-  @apply tw-transition-colors tw-duration-150;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 .ds-editable-table__tr--body:hover {
@@ -170,7 +188,9 @@
 
 /* Draggable row styles */
 .ds-editable-table__tr--draggable.cdk-drag-animating {
-  @apply tw-transition-transform tw-duration-200;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
 }
 
 /* ========================================================================
@@ -209,7 +229,8 @@
 
 /* Empty state cell */
 .ds-editable-table__td--empty {
-  @apply tw-py-12;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 /* ========================================================================
@@ -217,7 +238,7 @@
    ======================================================================== */
 
 .ds-editable-table__drag-preview {
-  @apply tw-rounded-lg;
+  border-radius: 0.5rem;
   background-color: var(--color-background-neutral-primary);
   border: 1px solid var(--border-color-default);
   box-shadow: var(--box-shadow-lg);
@@ -226,11 +247,13 @@
 }
 
 .ds-editable-table__drag-preview-content {
-  @apply tw-flex tw-gap-4 tw-p-4;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .ds-editable-table__drag-preview-cell {
-  @apply tw-text-default-primary;
+  color: var(--text-color-default-primary);
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -241,8 +264,12 @@
    ======================================================================== */
 
 .ds-editable-table__empty {
-  @apply tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-3;
-  @apply tw-text-default-secondary;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--text-color-default-secondary);
 }
 
 /* ========================================================================
@@ -250,19 +277,25 @@
    ======================================================================== */
 
 .ds-editable-table__footer {
-  @apply tw-px-4 tw-py-3;
-  @apply tw-border-t;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-top-width: 1px;
   border-color: var(--border-color-default);
   background-color: var(--color-background-container);
 }
 
 .ds-editable-table__footer--centered {
-  @apply tw-flex tw-items-center tw-justify-center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Add buttons container */
 .ds-editable-table__footer-buttons {
-  @apply tw-flex tw-gap-2;
+  display: flex;
+  gap: 0.5rem;
 }
 
 /* Auto-width buttons */
@@ -296,6 +329,7 @@
 
 /* Drop list receiving class */
 .ds-editable-table__tbody.cdk-drop-list-receiving {
-  @apply tw-bg-blue-50;
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 246 255 / var(--tw-bg-opacity, 1));
 }
 

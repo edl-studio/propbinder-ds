@@ -365,10 +365,18 @@
 .ds-select__icon {
   @apply tw-pointer-events-none;
   color: var(--text-color-default-tertiary);
+  opacity: 0;
+  /* No transition for instant appearance on hover */
 }
 
 .ds-select__icon--trailing {
   @apply tw-ml-2;
+}
+
+/* Show icon on hover or when dropdown is open */
+.ds-select:hover .ds-select__icon,
+.ds-select__trigger[data-expanded] .ds-select__icon {
+  opacity: 1;
 }
 
 /* Animation classes */

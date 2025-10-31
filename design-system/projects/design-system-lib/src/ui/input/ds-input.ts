@@ -59,7 +59,7 @@ export interface NumberFormatConfig {
         [required]="required()"
         [value]="value()"
         [class]="'body-sm-regular ' + inputClasses()"
-        [attr.inputmode]="effectiveFormat() ? 'decimal' : null"
+        [attr.inputmode]="hasNumberFormatting() ? 'decimal' : null"
         [attr.aria-label]="ariaLabel()"
          [attr.aria-describedby]="ariaDescribedBy()"
          [attr.aria-labelledby]="ariaLabelledBy()"
@@ -106,6 +106,8 @@ export class DsInputComponent implements ControlValueAccessor {
   prefix = input<string>();
   suffix = input<string>();
   format = input<NumberFormatConfig>();
+  /** Text alignment - separate from number formatting to avoid inputmode issues */
+  align = input<'left' | 'right' | 'center'>();
   ariaLabel = input<string>();
   ariaDescribedBy = input<string>();
   ariaLabelledBy = input<string>();
@@ -211,10 +213,11 @@ export class DsInputComponent implements ControlValueAccessor {
 
   inputClasses = computed(() => {
     const classes = ['ds-input__field'];
-    const format = this.effectiveFormat();
-    if (format?.align === 'right') {
+    // Prioritize standalone align input, fallback to format config
+    const alignment = this.align() || this.effectiveFormat()?.align;
+    if (alignment === 'right') {
       classes.push('ds-input__field--align-right');
-    } else if (format?.align === 'center') {
+    } else if (alignment === 'center') {
       classes.push('ds-input__field--align-center');
     }
     return classes.join(' ');
@@ -226,8 +229,19 @@ export class DsInputComponent implements ControlValueAccessor {
    * Check if the input is right-aligned
    */
   isRightAligned(): boolean {
-    const format = this.effectiveFormat();
-    return format?.align === 'right';
+    // Prioritize standalone align input, fallback to format config
+    const alignment = this.align() || this.effectiveFormat()?.align;
+    return alignment === 'right';
+  }
+
+  /**
+   * Check if the input has actual number formatting (not just alignment)
+   */
+  hasNumberFormatting(): boolean {
+    const formatConfig = this.format();
+    if (!formatConfig) return false;
+    // Only return true if there's actual number formatting config (not just alignment)
+    return !!(formatConfig.preset || formatConfig.decimals !== undefined || formatConfig.thousandsSeparator || formatConfig.decimalSeparator);
   }
 
   // Native event handlers

@@ -16,7 +16,9 @@
   text-decoration: none;
   
   /* Transition for smooth hover effects */
+  transition: color 0.15s ease, -webkit-text-decoration 0.15s ease;
   transition: color 0.15s ease, text-decoration 0.15s ease;
+  transition: color 0.15s ease, text-decoration 0.15s ease, -webkit-text-decoration 0.15s ease;
   
   /* Focus styles */
   outline: none;

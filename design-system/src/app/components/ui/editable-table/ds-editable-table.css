@@ -77,6 +77,15 @@
   min-height: 32px;
 }
 
+/* Align cell content based on parent td alignment */
+.ds-editable-table__td--align-right .ds-editable-table__cell-content {
+  justify-content: flex-end;
+}
+
+.ds-editable-table__td--align-center .ds-editable-table__cell-content {
+  justify-content: center;
+}
+
 .ds-editable-table__th--truncate {
   @apply tw-overflow-hidden tw-text-ellipsis;
 }
@@ -150,7 +159,7 @@
    ======================================================================== */
 
 .ds-editable-table__tr {
-  @apply tw-transition-colors tw-duration-150;
+  /* No transition for instant hover feedback */
 }
 
 .ds-editable-table__tr--body:hover {
@@ -166,6 +175,11 @@
 .ds-editable-table__tr--body:hover ::ng-deep .ds-select--ghost .ds-select__trigger:not(:focus-within) {
   border-color: var(--border-color-default) !important;
   background-color: var(--color-background-neutral-primary) !important;
+}
+
+/* Show select chevron on row hover */
+.ds-editable-table__tr--body:hover ::ng-deep .ds-select__icon {
+  opacity: 1 !important;
 }
 
 /* Draggable row styles */

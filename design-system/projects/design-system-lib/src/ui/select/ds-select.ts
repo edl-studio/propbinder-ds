@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ViewChild, effect } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor } from '@angular/forms';
@@ -112,6 +112,23 @@ export class DsSelectComponent<T = unknown> implements ControlValueAccessor {
   valueSig = signal<T | undefined>(undefined);
   private disabledFromCva = signal<boolean>(false);
   private isOpenSig = signal<boolean>(false);
+  private onChange: ((val: T | undefined) => void) | null = null;
+  private onTouched: (() => void) | null = null;
+
+  constructor() {
+    // Watch for value changes and emit valueChange output
+    effect(() => {
+      const value = this.valueSig();
+      // Emit the output event
+      if (value !== undefined) {
+        this.valueChange.emit(value);
+      }
+      // Call the CVA onChange callback
+      if (this.onChange) {
+        this.onChange(value);
+      }
+    });
+  }
 
   isOpen = computed(() => this.isOpenSig());
 
@@ -189,11 +206,11 @@ export class DsSelectComponent<T = unknown> implements ControlValueAccessor {
   }
 
   registerOnChange(fn: (val: T | undefined) => void): void {
-    // The provideValueAccessor handles this automatically with the two-way binding
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: () => void): void {
-    // The provideValueAccessor handles this automatically
+    this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {

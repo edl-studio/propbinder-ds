@@ -156,14 +156,15 @@ export function dragHandleCell(): EditableComponentCell {
  * Helper function to create an action cell with single delete button (backwards compatible)
  * @deprecated Use actionsCell() for multiple actions
  */
-export function actionCell(rowIndex: number, deleteDisabled: boolean = false): EditableComponentCell {
+export function actionCell(rowIndex: number, deleteDisabled: boolean = false, deleteTooltip?: string): EditableComponentCell {
   return {
     component: 'action',
     data: { 
       row: {}, 
       rowIndex, 
       value: null,
-      deleteDisabled 
+      deleteDisabled,
+      deleteTooltip
     } as ActionCellData & EditableCellComponentData
   };
 }

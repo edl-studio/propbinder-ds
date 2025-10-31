@@ -218,10 +218,11 @@ export interface DsEditableTableColumnMeta {
                               <editable-datepicker-cell 
                                 [data]="cellContent.data" 
                                 (valueChanged)="onCellEdit(row.index, cell.column.id, $event)"
+                                (valueCommitted)="onCellCommit(row.index, cell.column.id, $event)"
                               />
                             }
                             @case ('drag-handle') {
-                              <drag-handle-cell />
+                              <drag-handle-cell [tooltipText]="dragHandleTooltip()" />
                             }
                             @case ('action') {
                               <action-cell 
@@ -362,6 +363,12 @@ export class DsEditableTableComponent<T = any> {
   
   /** Text for add row button */
   addRowButtonText = input<string>('Add line');
+  
+  /** Tooltip text for drag handle (supports translations) */
+  dragHandleTooltip = input<string>('Drag to reorder');
+  
+  /** Tooltip text for delete button (supports translations) */
+  deleteRowTooltip = input<string>('Delete row');
 
   // Outputs
   /** Emitted when a row is added */
@@ -421,7 +428,8 @@ export class DsEditableTableComponent<T = any> {
             row: info.row.original, 
             rowIndex: info.row.index, 
             value: null,
-            deleteDisabled: false 
+            deleteDisabled: false,
+            deleteTooltip: this.deleteRowTooltip()
           } 
         }),
         enableSorting: false,

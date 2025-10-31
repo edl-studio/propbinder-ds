@@ -12,6 +12,10 @@ export interface EditableDatepickerCellData extends EditableCellComponentData {
   disabled?: boolean;
   /** Icon to show in the input */
   leadingIcon?: string;
+  /** Locale to use for date formatting (e.g., 'en-US', 'de-DE', 'fr-FR'). Defaults to browser locale. */
+  locale?: string;
+  /** Date format options for Intl.DateTimeFormat. Defaults to { year: '2-digit', month: 'short', day: 'numeric' } */
+  dateFormat?: Intl.DateTimeFormatOptions;
 }
 
 /**
@@ -25,7 +29,7 @@ export interface EditableDatepickerCellData extends EditableCellComponentData {
   template: `
     <ds-datepicker
       [ngModel]="cellData().value"
-      (ngModelChange)="valueChanged.emit($event)"
+      (ngModelChange)="onDateChange($event)"
     >
       <ds-input
         [ngModel]="formattedDate()"
@@ -59,7 +63,7 @@ export class EditableDatepickerCellComponent extends BaseEditableCellComponent {
   /** Computed cell data with proper typing */
   cellData = computed(() => this.data() as EditableDatepickerCellData);
   
-  /** Format date as "Mon DD, YY" */
+  /** Format date using browser's locale formatting or custom format */
   formattedDate = computed(() => {
     const value = this.cellData().value;
     if (!value) return '';
@@ -77,13 +81,25 @@ export class EditableDatepickerCellComponent extends BaseEditableCellComponent {
       return value.toString();
     }
     
-    // Format as "Mon DD, YY"
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = months[date.getMonth()];
-    const day = date.getDate();
-    const year = date.getFullYear().toString().slice(-2);
+    // Use custom format options or default to short format
+    const formatOptions = this.cellData().dateFormat || {
+      year: '2-digit',
+      month: 'short',
+      day: 'numeric'
+    };
     
-    return `${month} ${day}, ${year}`;
+    const locale = this.cellData().locale || navigator.language; // Use browser language if not specified
+    
+    return date.toLocaleDateString(locale, formatOptions);
   });
+
+  /**
+   * Handle date change - emit both valueChanged and valueCommitted
+   * Since datepicker closes after selection, treat it as a committed change
+   */
+  onDateChange(value: any) {
+    this.valueChanged.emit(value);
+    this.valueCommitted.emit(value);
+  }
 }
 

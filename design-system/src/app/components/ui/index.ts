@@ -6,6 +6,7 @@
 
 // Component exports
 export { DsButtonComponent } from './button/ds-button';
+export { DsIconButtonComponent } from './button/ds-icon-button';
 export { DsIconComponent } from './icon/ds-icon';
 export { DsInputComponent } from './input/ds-input';
 export { DsTextareaComponent } from './textarea/ds-textarea';
@@ -26,11 +27,18 @@ export { DsMetadataItemComponent } from './metadata-item/ds-metadata-item';
 export { DsListItemComponent } from './list-item/ds-list-item';
 export { DsListComponent } from './list/ds-list';
 export { type TopbarBreadcrumbItem } from './topbar/ds-topbar-breadcrumb';
+export { DsAccordion } from './accordion/ds-accordion';
+export { DsAccordionItem } from './accordion/ds-accordion-item';
+export { DsComboboxComponent } from './combobox/ds-combobox';
+export { DsListboxComponent } from './listbox/ds-listbox';
+export { DsMenuComponent } from './menu/ds-menu';
 
 export { DsSelectComponent } from './select/ds-select';
 export { DsDatepickerComponent } from './datepicker/ds-datepicker';
 export { DsAppLayoutComponent } from './app-layout/ds-app-layout';
 export { DsDrawerComponent } from './drawer/ds-drawer';
+export { DsDialogComponent } from './dialog/ds-dialog';
+export { DsConfirmationDialogComponent } from './dialog/ds-confirmation-dialog';
 export { DsDataTableComponent } from './data-table/ds-data-table';
 export { 
   DsDataTableEditableCell,

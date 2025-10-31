@@ -1,5 +1,5 @@
 .ds-combobox {
-  @apply tw-inline-block;
+  display: inline-block;
 }
 
 .ds-combobox--disabled {
@@ -9,7 +9,7 @@
 
 /* Trigger wrapper */
 .ds-combobox__trigger-wrapper {
-  @apply tw-inline-block;
+  display: inline-block;
   cursor: pointer;
 }
 
@@ -40,9 +40,17 @@
 
 /* Option styles */
 .ds-combobox__option {
-  @apply tw-relative tw-flex tw-items-center tw-w-full;
-  @apply tw-cursor-pointer tw-select-none;
-  @apply tw-transition-colors tw-duration-150;
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
   padding: 8px 12px;
   border-radius: 6px;
   color: var(--text-color-default-primary);
@@ -76,7 +84,9 @@
 
 /* Empty state */
 .ds-combobox__empty {
-  @apply tw-flex tw-items-center tw-justify-center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px;
   color: var(--text-color-default-tertiary);
   font-size: 14px;

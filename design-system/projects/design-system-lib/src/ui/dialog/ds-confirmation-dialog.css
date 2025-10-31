@@ -9,17 +9,21 @@
 }
 
 /* Remove borders from header and footer */
-.ds-confirmation-dialog .ds-dialog__header {
-  @apply tw-border-b-0;
+.ds-confirmation-dialog .ds-dialog__header{
+  border-bottom-width: 0px;
 }
 
-.ds-confirmation-dialog .ds-dialog__footer {
-  @apply tw-border-t-0 tw-flex tw-gap-1 tw-justify-end;
+.ds-confirmation-dialog .ds-dialog__footer{
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  border-top-width: 0px;
 }
 
 /* Remove vertical padding from content */
-.ds-confirmation-dialog .ds-dialog__content {
-  @apply tw-py-0;
+.ds-confirmation-dialog .ds-dialog__content{
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 

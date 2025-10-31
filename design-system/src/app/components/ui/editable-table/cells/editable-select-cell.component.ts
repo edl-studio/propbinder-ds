@@ -30,7 +30,7 @@ export interface EditableSelectCellData extends EditableCellComponentData {
       [disabled]="cellData().disabled || false"
       [ghost]="true"
       [ngModel]="cellData().value"
-      (ngModelChange)="onValueChange($event)"
+      (valueChange)="onValueChange($event)"
     />
   `,
   styles: [`

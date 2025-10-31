@@ -1,7 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DsInputComponent, type NumberFormatConfig } from '../../input/ds-input';
+import { DsInputComponent } from '../../input/ds-input';
 import { BaseEditableCellComponent, type EditableCellComponentData } from './base-editable-cell.component';
 
 export interface EditableTextCellData extends EditableCellComponentData {
@@ -42,7 +42,7 @@ export interface EditableTextCellData extends EditableCellComponentData {
       [trailingIcon]="cellData().trailingIcon"
       [prefix]="cellData().prefix"
       [suffix]="cellData().suffix"
-      [format]="getFormatForAlignment()"
+      [align]="cellData().align"
       (ngModelChange)="onValueChange($event)"
       (blurred)="onBlur()"
       (keydown.enter)="onEnter()"
@@ -62,13 +62,6 @@ export class EditableTextCellComponent extends BaseEditableCellComponent {
   /** Track the original value when editing starts to detect actual changes */
   private originalValue: string | null = null;
   private isEditing = false;
-  
-  /**
-   * Get format config for alignment
-   */
-  getFormatForAlignment(): NumberFormatConfig | undefined {
-    return this.cellData().align ? { align: this.cellData().align } as NumberFormatConfig : undefined;
-  }
   
   /**
    * Handle value changes - track that editing has started

@@ -445,16 +445,16 @@ export const InvoiceLinesReorderable: Story = {
         total: 0
       },
       onCellEdited: (event: any) => {
-        console.log('Cell edited:', event);
+        // Cell edited event
       },
       onRowAdded: (row: any) => {
-        console.log('Row added:', row);
+        // Row added event
       },
       onRowDeleted: (event: any) => {
-        console.log('Row deleted:', event);
+        // Row deleted event
       },
       onRowReordered: (event: any) => {
-        console.log('Row reordered:', event);
+        // Row reordered event
       },
     },
     template: `
@@ -500,16 +500,16 @@ export const ProductsSortable: Story = {
         stock: 0
       },
       onCellEdited: (event: any) => {
-        console.log('Cell edited:', event);
+        // Cell edited event
       },
       onRowAdded: (row: any) => {
-        console.log('Row added:', row);
+        // Row added event
       },
       onRowDeleted: (event: any) => {
-        console.log('Row deleted:', event);
+        // Row deleted event
       },
       onSortingChanged: (sorting: any) => {
-        console.log('Sorting changed:', sorting);
+        // Sorting changed event
       },
     },
     template: `
@@ -554,16 +554,16 @@ export const TasksWithSelects: Story = {
         dueDate: ''
       },
       onCellEdited: (event: any) => {
-        console.log('Cell edited:', event);
+        // Cell edited event
       },
       onRowAdded: (row: any) => {
-        console.log('Row added:', row);
+        // Row added event
       },
       onRowDeleted: (event: any) => {
-        console.log('Row deleted:', event);
+        // Row deleted event
       },
       onRowReordered: (event: any) => {
-        console.log('Row reordered:', event);
+        // Row reordered event
       },
     },
     template: `
@@ -609,7 +609,7 @@ export const EmptyState: Story = {
         total: 0
       },
       onRowAdded: (row: any) => {
-        console.log('First row added:', row);
+        // First row added event
       },
     },
     template: `
@@ -915,13 +915,13 @@ export const MultipleActions: Story = {
         lastUpdated: new Date().toLocaleDateString()
       },
       onCellEdited: (event: any) => {
-        console.log('Cell edited:', event);
+        // Cell edited event
       },
       onRowAdded: (row: any) => {
-        console.log('Row added:', row);
+        // Row added event
       },
       onActionClicked: function(event: any) {
-        console.log('Action clicked:', event);
+        // Action clicked event
         if (event.action === 'manage') {
           this['selectedMaterial'].set(event.row);
           // Open dialog programmatically
@@ -944,7 +944,7 @@ export const MultipleActions: Story = {
           this['materialsData'].update((data: any[]) => 
             data.filter((_, idx) => idx !== toDelete.index)
           );
-          console.log('Deleted material:', toDelete.material.name);
+          // Material deleted
           this['materialToDelete'].set(null);
         }
       },
@@ -1072,17 +1072,17 @@ export const CommitOnBlurDemo: Story = {
         lastUpdated: new Date().toLocaleDateString()
       },
       onCellEdited: (event: any) => {
-        console.log('💡 Cell edited (fires on every keystroke):', event);
+        // Cell edited (fires on every keystroke)
       },
       onCellCommitted: function(event: any) {
         const callNum = this['apiCallCount']() + 1;
         this['apiCallCount'].set(callNum);
         const timestamp = new Date().toLocaleTimeString();
         this['lastCommit'].set(`#${callNum} - ${event.column}: "${event.value}" at ${timestamp}`);
-        console.log('🚀 API call would happen here! Cell committed:', event);
+        // Cell committed - API call would happen here
       },
       onRowAdded: (row: any) => {
-        console.log('Row added:', row);
+        // Row added event
       },
     },
     template: `

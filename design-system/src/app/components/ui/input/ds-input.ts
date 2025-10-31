@@ -59,7 +59,7 @@ export interface NumberFormatConfig {
         [required]="required()"
         [value]="value()"
         [class]="'body-sm-regular ' + inputClasses()"
-        [attr.inputmode]="effectiveFormat() ? 'decimal' : null"
+        [attr.inputmode]="hasNumberFormatting() ? 'decimal' : null"
         [attr.aria-label]="ariaLabel()"
          [attr.aria-describedby]="ariaDescribedBy()"
          [attr.aria-labelledby]="ariaLabelledBy()"
@@ -71,10 +71,7 @@ export interface NumberFormatConfig {
       />
 
       @if (suffix() && value()) {
-        <span 
-          class="ds-input__suffix body-sm-regular" 
-          [class.ds-input__suffix--inline]="!isRightAligned()"
-          [style.left.px]="!isRightAligned() ? suffixPosition() : null">
+        <span class="ds-input__suffix body-sm-regular">
           {{ suffix() }}
         </span>
       }
@@ -106,6 +103,8 @@ export class DsInputComponent implements ControlValueAccessor {
   prefix = input<string>();
   suffix = input<string>();
   format = input<NumberFormatConfig>();
+  /** Text alignment - separate from number formatting to avoid inputmode issues */
+  align = input<'left' | 'right' | 'center'>();
   ariaLabel = input<string>();
   ariaDescribedBy = input<string>();
   ariaLabelledBy = input<string>();
@@ -120,14 +119,12 @@ export class DsInputComponent implements ControlValueAccessor {
   private rawValueSig = signal<string>(''); // Unformatted value for number formatting
   private focusedSig = signal<boolean>(false);
   private disabledFromCva = signal<boolean>(false);
-  private suffixPositionSig = signal<number>(0);
 
   // View children
   inputElement = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
   value = computed(() => this.valueSig());
   effectiveDisabled = computed(() => this.disabled() || this.disabledFromCva());
-  suffixPosition = computed(() => this.suffixPositionSig());
   
   // Computed format configuration (merges preset with custom overrides)
   effectiveFormat = computed(() => {
@@ -190,15 +187,6 @@ export class DsInputComponent implements ControlValueAccessor {
     }
   };
 
-  constructor() {
-    // Update suffix position when value or suffix changes (only for non-RTL fields)
-    effect(() => {
-      if (this.suffix() && this.inputElement() && !this.isRightAligned()) {
-        this.updateSuffixPosition();
-      }
-    });
-  }
-
   containerClasses = computed(() => {
     const classes = ['ds-input', `ds-input--${this.variant()}`];
     if (this.effectiveDisabled()) classes.push('ds-input--disabled');
@@ -211,11 +199,14 @@ export class DsInputComponent implements ControlValueAccessor {
 
   inputClasses = computed(() => {
     const classes = ['ds-input__field'];
-    const format = this.effectiveFormat();
-    if (format?.align === 'right') {
+    // Prioritize standalone align input, fallback to format config
+    const alignment = this.align() || this.effectiveFormat()?.align;
+    if (alignment === 'right') {
       classes.push('ds-input__field--align-right');
-    } else if (format?.align === 'center') {
+    } else if (alignment === 'center') {
       classes.push('ds-input__field--align-center');
+    } else if (alignment === 'left') {
+      classes.push('ds-input__field--align-left');
     }
     return classes.join(' ');
   });
@@ -226,8 +217,19 @@ export class DsInputComponent implements ControlValueAccessor {
    * Check if the input is right-aligned
    */
   isRightAligned(): boolean {
-    const format = this.effectiveFormat();
-    return format?.align === 'right';
+    // Prioritize standalone align input, fallback to format config
+    const alignment = this.align() || this.effectiveFormat()?.align;
+    return alignment === 'right';
+  }
+
+  /**
+   * Check if the input has actual number formatting (not just alignment)
+   */
+  hasNumberFormatting(): boolean {
+    const formatConfig = this.format();
+    if (!formatConfig) return false;
+    // Only return true if there's actual number formatting config (not just alignment)
+    return !!(formatConfig.preset || formatConfig.decimals !== undefined || formatConfig.thousandsSeparator || formatConfig.decimalSeparator);
   }
 
   // Native event handlers
@@ -265,11 +267,6 @@ export class DsInputComponent implements ControlValueAccessor {
       this.valueSig.set(inputValue);
       this.onChangeFn(inputValue);
       this.valueChange.emit(inputValue);
-    }
-    
-    // Update suffix position if inline suffix is present (only for non-RTL fields)
-    if (this.suffix() && !this.isRightAligned()) {
-      this.updateSuffixPosition();
     }
   }
 
@@ -416,51 +413,6 @@ export class DsInputComponent implements ControlValueAccessor {
   }
 
   /**
-   * Calculate and update the position of the inline suffix based on text width
-   */
-  private updateSuffixPosition() {
-    const inputEl = this.inputElement()?.nativeElement;
-    if (!inputEl) return;
-
-    const text = this.value() || '';
-    if (!text) {
-      this.suffixPositionSig.set(0);
-      return;
-    }
-
-    // Create a temporary element to measure text width
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    if (!context) return;
-
-    // Get computed styles from the input element
-    const styles = window.getComputedStyle(inputEl);
-    context.font = `${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
-
-    // Measure the text width
-    const textWidth = context.measureText(text).width;
-
-    // Calculate position: container padding + prefix width + text width + small gap
-    let leftPosition = 8; // Base padding
-
-    // Add leading icon width if present
-    if (this.leadingIcon()) {
-      leftPosition += 20; // icon space
-    }
-
-    // Add prefix width if present
-    if (this.prefix()) {
-      const prefixWidth = context.measureText(this.prefix()!).width;
-      leftPosition += prefixWidth + 4; // prefix + padding-right
-    }
-
-    // Add text width and a small gap
-    leftPosition += textWidth + 4;
-
-    this.suffixPositionSig.set(leftPosition);
-  }
-
-  /**
    * Format a number string according to the format configuration
    */
   private formatNumber(value: string, format: Required<Omit<NumberFormatConfig, 'preset'>>, isFinal: boolean): string {
@@ -558,11 +510,6 @@ export class DsInputComponent implements ControlValueAccessor {
       }, 0);
     } else {
       this.valueSig.set(value ?? '');
-    }
-    
-    // Update suffix position after a microtask to ensure DOM is ready (only for non-RTL fields)
-    if (this.suffix() && value && !this.isRightAligned()) {
-      setTimeout(() => this.updateSuffixPosition(), 0);
     }
   }
   registerOnChange(fn: (val: string) => void): void {
