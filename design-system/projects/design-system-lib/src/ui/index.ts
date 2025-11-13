@@ -10,6 +10,7 @@ export { DsIconComponent } from './icon/ds-icon';
 export { DsInputComponent } from './input/ds-input';
 export { DsTextareaComponent } from './textarea/ds-textarea';
 export { DsCheckboxComponent } from './checkbox/ds-checkbox';
+export { DsComboboxComponent } from './combobox/ds-combobox';
 export { DsFormFieldComponent } from './form-field/ds-form-field';
 export { DsLabelComponent } from './label/ds-label';
 export { DsTooltipComponent } from './tooltip/ds-tooltip';
@@ -65,25 +66,31 @@ export {
   EditableTextCellComponent,
   EditableNumberCellComponent,
   EditableSelectCellComponent,
+  EditableDatepickerCellComponent,
   type EditableTextCellData,
   type EditableNumberCellData,
+  type EditableDatepickerCellData,
   type EditableSelectCellData
 } from './editable-table/cells';
 export {
   editableTextCell,
   editableNumberCell,
+  editableDatepickerCell,
   editableSelectCell,
   type EditableComponentCell
 } from './editable-table/editable-cell-helpers';
 export { DsTileComponent } from './tile/ds-tile';
 export { DsTileSectionComponent } from './tile/ds-tile-section';
 export { TileHeaderComponent } from './tile/tile-header';
+export { DsDialogComponent } from './dialog/ds-dialog';
+export { DsConfirmationDialogComponent } from './dialog/ds-confirmation-dialog';
 
 // Type exports
 export type { ButtonVariant, ButtonSize } from './button/ds-button';
 export type { InputVariant, InputType } from './input/ds-input';
 export type { TextareaVariant, TextareaSize } from './textarea/ds-textarea';
 export type { CheckboxVariant, CheckboxSize } from './checkbox/ds-checkbox';
+export type { ComboboxVariant } from './combobox/ds-combobox';
 export type { AvatarType, AvatarSize } from './avatar/ds-avatar';
 export type { BadgeVariant, BadgeContentType } from './badge/ds-badge';
 export type { ShapeVariant, ShapeColorVariant } from './shape-indicator/ds-shape-indicator';
