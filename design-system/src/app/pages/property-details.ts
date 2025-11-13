@@ -59,7 +59,7 @@ interface Product {
 }
 
 @Component({
-  selector: 'property-details-example',
+  selector: 'property-details',
   standalone: true,
   imports: [
     CommonModule,
@@ -1494,7 +1494,7 @@ interface Product {
     }
   `]
 })
-export class PropertyDetailsExampleComponent {
+export class PropertyDetailsComponent {
   // Dialog manager for programmatic control
   private dialogManager = inject(NgpDialogManager);
   
