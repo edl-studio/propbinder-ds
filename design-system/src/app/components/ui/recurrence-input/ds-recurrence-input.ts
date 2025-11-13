@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DsInputComponent } from '../input/ds-input';
 import { NgpDialogTrigger, NgpDialogOverlay, NgpDialog } from 'ng-primitives/dialog';
-import { DsDialogComponent } from '../../dialog/ds-dialog';
+import { DsDialogComponent } from '../dialog/ds-dialog';
 import { DsRecurrencePickerComponent } from '../recurrence-picker/ds-recurrence-picker';
 import { DsButtonComponent } from '../button/ds-button';
 
