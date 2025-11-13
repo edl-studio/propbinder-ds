@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { DsBadgeComponent } from '../../badge/ds-badge';
-import { DsIconComponent } from '../../icon/ds-icon';
-import { DsComboboxComponent } from '../../combobox/ds-combobox';
+import { DsBadgeComponent } from '../badge/ds-badge';
+import { DsIconComponent } from '../icon/ds-icon';
+import { DsComboboxComponent } from '../combobox/ds-combobox';
 
 export interface BadgeOption {
   id: string;

@@ -32,7 +32,7 @@ import { DsSwitchComponent } from '../components/ui/switch/ds-switch';
 import { DsRecurrenceInputComponent, type RecurrenceConfig } from '../components/ui/recurrence-input/ds-recurrence-input';
 import { DsListItemComponent } from '../components/ui/list-item/ds-list-item';
 import { DsMetadataItemComponent } from '../components/ui/metadata-item/ds-metadata-item';
-import { DsDataTableComponent, type DataTableColumn, type DsDataTableColumnMeta } from '../components/ui/data-table/ds-data-table';
+import { DsDataTableComponent, type DataTableColumn, type DsDataTableColumnMeta, actionsCell } from '../components/ui/data-table/ds-data-table';
 import { DsTooltipComponent } from '../components/ui/tooltip/ds-tooltip';
 import { DsMenuComponent, type DsMenuItem } from '../components/ui/menu/ds-menu';
 import { DsConfirmationDialogComponent } from '../components/ui/dialog/ds-confirmation-dialog';

@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, input, output, computed, signal, forwardR
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgpSwitch, NgpSwitchThumb } from 'ng-primitives/switch';
-import { DsLabelComponent } from '../../label/ds-label';
+import { DsLabelComponent } from '../label/ds-label';
 
 export type SwitchVariant = 'default' | 'error' | 'warning' | 'success';
 export type SwitchSize = 'sm' | 'md' | 'lg';

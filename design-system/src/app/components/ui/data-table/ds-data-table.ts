@@ -52,6 +52,20 @@ export interface DsDataTableColumnMeta {
 }
 
 /**
+ * Helper function to create an actions cell
+ */
+export function actionsCell<T>(config: {
+  row: T;
+  onEdit?: (row: T) => void;
+  onDelete?: (row: T) => void;
+}) {
+  return {
+    component: 'actions',
+    data: config,
+  };
+}
+
+/**
  * A powerful data table component built on TanStack Table with sorting, filtering,
  * searching, pagination, and inline editing capabilities.
  *

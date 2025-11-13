@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, effect, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DsInputComponent } from '../../input/ds-input';
+import { DsInputComponent } from '../input/ds-input';
 
 /**
  * A specialized time input component that wraps ds-input with time-specific functionality.

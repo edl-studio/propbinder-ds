@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DsDatepickerComponent } from '../../datepicker/ds-datepicker';
-import { DsInputComponent } from '../../input/ds-input';
+import { DsDatepickerComponent } from '../datepicker/ds-datepicker';
+import { DsInputComponent } from '../input/ds-input';
 
 /**
  * A specialized date selector component that wraps ds-datepicker with a styled input trigger.

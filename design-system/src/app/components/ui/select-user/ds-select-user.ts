@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { DsAvatarComponent } from '../../avatar/ds-avatar';
-import { DsIconComponent } from '../../icon/ds-icon';
-import { DsComboboxComponent } from '../../combobox/ds-combobox';
+import { DsAvatarComponent } from '../avatar/ds-avatar';
+import { DsIconComponent } from '../icon/ds-icon';
+import { DsComboboxComponent } from '../combobox/ds-combobox';
 
 export interface UserOption {
   id: string;
