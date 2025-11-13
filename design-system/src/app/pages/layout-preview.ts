@@ -1,10 +1,10 @@
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DsAppLayoutComponent } from '../components/ui/web/app-layout/ds-app-layout';
-import { DsTopbarComponent } from '../components/ui/web/topbar/ds-topbar';
-import { DsIconComponent } from '../components/ui/global/icon/ds-icon';
-import { DsAvatarComponent } from '../components/ui/global/avatar/ds-avatar';
-import { DsButtonComponent } from '../components/ui/global/button/ds-button';
+import { DsAppLayoutComponent } from '../components/ui/app-layout/ds-app-layout';
+import { DsTopbarComponent } from '../components/ui/topbar/ds-topbar';
+import { DsIconComponent } from '../components/ui/icon/ds-icon';
+import { DsAvatarComponent } from '../components/ui/avatar/ds-avatar';
+import { DsButtonComponent } from '../components/ui/button/ds-button';
 
 @Component({
   selector: 'layout-preview',
