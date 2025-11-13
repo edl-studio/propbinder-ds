@@ -1,0 +1,10 @@
+/* Date Select Component
+ * A wrapper around ds-datepicker with styled input trigger
+ */
+
+:host {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+}
+

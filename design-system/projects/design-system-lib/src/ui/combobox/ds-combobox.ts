@@ -1,10 +1,10 @@
-import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ElementRef, ViewChild, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ElementRef, ViewChild, HostListener, AfterViewInit, ChangeDetectorRef, TemplateRef, contentChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { DsIconComponent } from '../icon/ds-icon';
 import { DsInputComponent } from '../input/ds-input';
 import { DsSelectComponent, DsSelectOption } from '../select/ds-select';
-import { OverlayModule, ConnectedPosition } from '@angular/cdk/overlay';
+import { OverlayModule, ConnectedPosition, Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
@@ -53,6 +53,7 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
       [cdkConnectedOverlayOrigin]="triggerOrigin"
       [cdkConnectedOverlayOpen]="isOpen()"
       [cdkConnectedOverlayPositions]="overlayPositions"
+      [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
       (backdropClick)="closeDropdown()"
       (detach)="closeDropdown()"
     >
@@ -61,6 +62,13 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
         [style.min-width.px]="triggerWidth"
         [style.width]="width()"
       >
+        @if (headerTemplate(); as template) {
+          <div class="ds-combobox__header">
+            <ng-container *ngTemplateOutlet="template" />
+          </div>
+        }
+        
+        @if (showSearch()) {
         <div class="ds-combobox__search">
             <ds-input
             #searchInput
@@ -71,6 +79,7 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
             [ghost]="true"
           />
         </div>
+        }
 
         <div class="ds-combobox__options" role="listbox">
           @for (option of filteredOptions(); track option) {
@@ -81,7 +90,16 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
               [attr.data-selected]="isOptionSelected(option) ? '' : null"
               (click)="handleOptionClick(option)"
             >
-              <span class="body-sm-regular">{{ option }}</span>
+              @if (optionTemplate(); as template) {
+                <ng-container 
+                  *ngTemplateOutlet="template; context: {
+                    $implicit: option,
+                    selected: isOptionSelected(option)
+                  }"
+                />
+              } @else {
+                <span class="body-sm-regular">{{ getOptionLabel(option) }}</span>
+              }
               @if (isOptionSelected(option)) {
                 <ds-icon name="remixCheckLine" [size]="iconSize()" class="ds-combobox__checkmark" />
               }
@@ -90,6 +108,12 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
             <div class="ds-combobox__empty">No options found</div>
           }
         </div>
+        
+        @if (footerTemplate(); as template) {
+          <div class="ds-combobox__footer">
+            <ng-container *ngTemplateOutlet="template" />
+          </div>
+        }
       </div>
     </ng-template>
   `,
@@ -109,17 +133,24 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
   // Inputs
   placeholder = input<string>('Search...');
   selectPlaceholder = input<string>('Select an option');
-  options = input<string[]>([]);
+  options = input<any[]>([]);
   disabled = input<boolean>(false);
   width = input<string>('auto');
+  showSearch = input<boolean>(true);
+  optionLabelFn = input<(option: any) => string>((opt) => String(opt));
+  
+  // Content projection for custom option rendering
+  optionTemplate = contentChild<TemplateRef<any>>('optionTemplate');
+  headerTemplate = contentChild<TemplateRef<any>>('headerTemplate');
+  footerTemplate = contentChild<TemplateRef<any>>('footerTemplate');
 
   // Outputs
-  valueChange = output<string>();
+  valueChange = output<any>();
   opened = output<void>();
   closed = output<void>();
 
   // Internal state
-  private valueSig = signal<string>('');
+  private valueSig = signal<any>('');
   filterValue = signal<string>('');
   displayValue = '';
   private disabledFromCva = signal<boolean>(false);
@@ -131,7 +162,32 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
   @ViewChild('customTriggerSlot', { read: ElementRef }) customTriggerSlot!: ElementRef<HTMLElement>;
   @ViewChild('searchInput') searchInput!: DsInputComponent;
 
+  // Overlay service and scroll strategy
+  private overlay = inject(Overlay);
+  scrollStrategy: ScrollStrategy = this.overlay.scrollStrategies.reposition();
+  private scrollableContainer: HTMLElement | null = null;
+  private containerScrollHandler: (() => void) | null = null;
+
   constructor(private cdr: ChangeDetectorRef) {}
+
+  private findScrollableContainer(element: HTMLElement): HTMLElement | null {
+    let current: HTMLElement | null = element.parentElement;
+    while (current) {
+      const style = window.getComputedStyle(current);
+      const overflowY = style.overflowY;
+      const overflow = style.overflow;
+      
+      // Check if element is scrollable
+      if (
+        (overflowY === 'auto' || overflowY === 'scroll' || overflow === 'auto' || overflow === 'scroll') &&
+        current.scrollHeight > current.clientHeight
+      ) {
+        return current;
+      }
+      current = current.parentElement;
+    }
+    return null;
+  }
 
   ngAfterViewInit() {
     // Check for custom trigger content after view initialization
@@ -161,17 +217,18 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
   selectOptions = computed(() => {
     return this.options().map((option, index) => ({
       id: `option-${index}`,
-      label: option,
+      label: this.getOptionLabel(option),
       value: option
-    } as DsSelectOption<string>));
+    } as DsSelectOption<any>));
   });
 
   // Filter options based on input value
   filteredOptions = computed(() => {
     const filter = this.filterValue().toLowerCase();
-    return this.options().filter(option => 
-      option.toLowerCase().includes(filter)
-    );
+    return this.options().filter(option => {
+      const label = this.getOptionLabel(option);
+      return label.toLowerCase().includes(filter);
+    });
   });
 
   // Overlay configuration
@@ -214,13 +271,15 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
     this.isOpenSig.set(newState);
     if (newState) {
       this.opened.emit();
-      // Focus search input when opening
+      // Focus search input when opening (only if search is enabled)
+      if (this.showSearch()) {
       setTimeout(() => {
         const inputEl = this.searchInput?.inputElement()?.nativeElement;
         if (inputEl) {
           inputEl.focus();
         }
       });
+      }
     } else {
       this.closed.emit();
     }
@@ -239,32 +298,37 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
     this.filterValue.set(value);
   }
 
-  handleOptionClick(option: string) {
+  handleOptionClick(option: any) {
     if (this.effectiveDisabled()) return;
     
+    const label = this.getOptionLabel(option);
     this.valueSig.set(option);
-    this.displayValue = option;
+    this.displayValue = label;
     this.onChangeFn(option);
     this.valueChange.emit(option);
     this.onTouchedFn();
     this.closeDropdown();
   }
 
-  isOptionSelected(option: string): boolean {
+  isOptionSelected(option: any): boolean {
     return this.valueSig() === option;
   }
 
-  // ControlValueAccessor implementation
-  private onChangeFn: (val: string) => void = () => {};
-  private onTouchedFn: () => void = () => {};
-
-  writeValue(value: string): void {
-    this.valueSig.set(value ?? '');
-    this.displayValue = value ?? '';
-    this.filterValue.set(value ?? '');
+  getOptionLabel(option: any): string {
+    return this.optionLabelFn()(option);
   }
 
-  registerOnChange(fn: (val: string) => void): void {
+  // ControlValueAccessor implementation
+  private onChangeFn: (val: any) => void = () => {};
+  private onTouchedFn: () => void = () => {};
+
+  writeValue(value: any): void {
+    this.valueSig.set(value ?? '');
+    this.displayValue = value ? this.getOptionLabel(value) : '';
+    this.filterValue.set(value ? this.getOptionLabel(value) : '');
+  }
+
+  registerOnChange(fn: (val: any) => void): void {
     this.onChangeFn = fn;
   }
 

@@ -1,5 +1,6 @@
 .ds-combobox {
-  display: inline-block;
+  display: block;
+  width: 100%;
 }
 
 .ds-combobox--disabled {
@@ -9,7 +10,8 @@
 
 /* Trigger wrapper */
 .ds-combobox__trigger-wrapper {
-  display: inline-block;
+  display: block;
+  width: 100%;
   cursor: pointer;
 }
 
@@ -21,21 +23,42 @@
   box-shadow: var(--shadow-lg);
   margin-top: 4px;
   max-height: 320px;
-  overflow-y: auto;
+  overflow: hidden; /* Changed from overflow-y: auto */
   z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header section */
+.ds-combobox__header {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-color-default);
+  background-color: var(--color-background-neutral-secondary);
+  flex-shrink: 0; /* Don't shrink */
 }
 
 /* Search section */
 .ds-combobox__search {
-  padding: 8px;
+  padding: 4px;
   border-bottom: 1px solid var(--border-color-default);
+  flex-shrink: 0; /* Don't shrink */
 }
 
 /* Options section */
 .ds-combobox__options {
   padding: 4px;
   max-height: 240px;
-  overflow-y: auto;
+  overflow-y: auto; /* Only this section scrolls */
+  flex: 1 1 auto; /* Allow to grow/shrink */
+  min-height: 0; /* Important for flex scrolling */
+}
+
+/* Footer section */
+.ds-combobox__footer {
+  padding: 4px;
+  border-top: 1px solid var(--border-color-default);
+  background-color: var(--color-background-neutral-primary);
+  flex-shrink: 0; /* Don't shrink */
 }
 
 /* Option styles */
@@ -57,9 +80,21 @@
   font-size: 14px;
   line-height: 20px;
   min-height: 36px;
-  gap: 8px;
+  gap: 12px; /* Increased gap for better spacing with avatars/badges */
   padding-right: calc(12px + 16px + 8px); /* Reserve space for checkmark: padding + icon + gap */
-  white-space: nowrap;
+}
+
+/* Option content container - allows for flexible layouts */
+.ds-combobox__option > * {
+  flex-shrink: 0;
+}
+
+/* Text content within options should grow and wrap */
+.ds-combobox__option > span,
+.ds-combobox__option > div {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ds-combobox__option:hover:not([data-disabled]) {

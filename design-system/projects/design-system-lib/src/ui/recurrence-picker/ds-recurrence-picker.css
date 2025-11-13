@@ -1,0 +1,105 @@
+.ds-recurrence-picker {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  min-width: 400px;
+  max-width: 500px;
+  overflow: hidden;
+}
+
+.ds-recurrence-picker__header {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color-default);
+}
+
+.ds-recurrence-picker__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color-default-primary);
+  margin: 0;
+}
+
+.ds-recurrence-picker__content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ds-recurrence-picker__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ds-recurrence-picker__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color-default-primary);
+}
+
+.ds-recurrence-picker__field-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.ds-recurrence-picker__interval-input {
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.ds-recurrence-picker__frequency-select {
+  flex: 1;
+}
+
+.ds-recurrence-picker__end-type-select {
+  flex: 1;
+  max-width: 150px;
+}
+
+.ds-recurrence-picker__end-date-select {
+  flex: 1;
+}
+
+.ds-recurrence-picker__end-count-input {
+  flex: 1;
+  max-width: 150px;
+}
+
+.ds-recurrence-picker__summary {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background-color: var(--color-brand-weak, #EEF0FF);
+  border-radius: 6px;
+  align-items: flex-start;
+}
+
+.ds-recurrence-picker__summary-icon {
+  color: var(--color-brand-base);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ds-recurrence-picker__summary-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ds-recurrence-picker__summary-line {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-color-default-primary);
+}
+
+.ds-recurrence-picker__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 16px;
+  border-top: 1px solid var(--border-color-default);
+}
+

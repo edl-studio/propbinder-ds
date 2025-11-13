@@ -9,11 +9,11 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DsInputComponent } from '../input/ds-input';
-import { DsButtonComponent } from '../button/ds-button';
-import { DsIconComponent } from '../icon/ds-icon';
-import { DsAvatarComponent } from '../avatar/ds-avatar';
-import { DsSelectComponent, type DsSelectOption } from '../select/ds-select';
+import { DsInputComponent } from '../../global/input/ds-input';
+import { DsButtonComponent } from '../../global/button/ds-button';
+import { DsIconComponent } from '../../global/icon/ds-icon';
+import { DsAvatarComponent } from '../../global/avatar/ds-avatar';
+import { DsSelectComponent, type DsSelectOption } from '../../global/select/ds-select';
 import {
   type ColumnDef,
   type ColumnFiltersState,

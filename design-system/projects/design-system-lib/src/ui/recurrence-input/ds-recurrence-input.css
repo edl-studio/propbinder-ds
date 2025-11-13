@@ -1,0 +1,19 @@
+.ds-recurrence-input {
+  position: relative;
+  width: 100%;
+}
+
+.ds-recurrence-input__trigger-wrapper {
+  width: 100%;
+  cursor: pointer;
+}
+
+.ds-recurrence-input--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ds-recurrence-input--disabled .ds-recurrence-input__trigger-wrapper {
+  cursor: not-allowed;
+}
+
