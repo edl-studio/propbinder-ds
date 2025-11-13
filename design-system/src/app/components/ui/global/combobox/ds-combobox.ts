@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, TemplateRef, contentChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { DsIconComponent } from '../icon/ds-icon';
-import { DsInputComponent } from '../input/ds-input';
-import { DsSelectComponent, DsSelectOption } from '../select/ds-select';
+import { DsIconComponent } from '../../icon/ds-icon';
+import { DsInputComponent } from '../../input/ds-input';
+import { DsSelectComponent, DsSelectOption } from '../../select/ds-select';
 import { 
   NgpCombobox,
   NgpComboboxButton,
