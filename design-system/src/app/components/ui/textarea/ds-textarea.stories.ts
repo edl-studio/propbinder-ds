@@ -9,11 +9,11 @@ const meta: Meta<DsTextareaComponent> = {
   tags: ['autodocs'],
   argTypes: {
     variant: { control: { type: 'select' }, options: ['default', 'error', 'warning', 'success'] },
-    size: { control: { type: 'select' }, options: ['sm', 'md', 'lg'] },
     placeholder: { control: 'text' },
     disabled: { control: 'boolean' },
     readonly: { control: 'boolean' },
     required: { control: 'boolean' },
+    ghost: { control: 'boolean' },
     rows: { control: { type: 'number', min: 1, max: 20 } },
     cols: { control: { type: 'number', min: 10, max: 100 } },
     maxlength: { control: { type: 'number', min: 1, max: 1000 } },
@@ -24,11 +24,11 @@ const meta: Meta<DsTextareaComponent> = {
   },
   args: {
     variant: 'default',
-    size: 'md',
     placeholder: 'Enter your message...',
     disabled: false,
     readonly: false,
     required: false,
+    ghost: false,
     rows: 4,
   },
 };
@@ -43,18 +43,6 @@ export const WithPlaceholder: Story = {
     placeholder: 'Write your thoughts here...',
     rows: 6 
   },
-};
-
-export const Sizes: Story = {
-  render: () => ({
-    template: `
-      <div style="display: grid; gap: 16px; width: 400px;">
-        <ds-textarea size="sm" placeholder="Small textarea" rows="3"></ds-textarea>
-        <ds-textarea size="md" placeholder="Medium textarea" rows="4"></ds-textarea>
-        <ds-textarea size="lg" placeholder="Large textarea" rows="5"></ds-textarea>
-      </div>
-    `,
-  }),
 };
 
 export const Variants: Story = {
@@ -96,8 +84,18 @@ export const LargeTextarea: Story = {
   args: {
     placeholder: 'This is a large textarea for longer content...',
     rows: 8,
-    size: 'lg',
   },
+};
+
+export const GhostVariant: Story = {
+  render: () => ({
+    template: `
+      <div style="display: grid; gap: 16px; width: 400px;">
+        <ds-textarea [ghost]="true" placeholder="Ghost textarea - minimal styling" rows="3"></ds-textarea>
+        <ds-textarea [ghost]="true" variant="error" placeholder="Ghost with error" rows="3"></ds-textarea>
+      </div>
+    `,
+  }),
 };
 
 export const WithFormField: Story = {

@@ -11,7 +11,6 @@
   position: relative;
   overflow: hidden;
   background-color: var(--color-background-neutral-secondary);
-  border: 1px solid var(--border-color-default);
   flex-shrink: 0;
   transition: all var(--transition-duration-normal) var(--ease-smooth);
 }
@@ -20,6 +19,39 @@
 .avatar--icon {
   background-color: var(--color-brand-base);
   border: none;
+}
+
+/* Initials Avatar Color Variants */
+.avatar--initials.avatar--light-brown {
+  background-color: #E5D3C2;
+}
+
+.avatar--initials.avatar--rose {
+  background-color: #E8C6C7;
+}
+
+.avatar--initials.avatar--pink {
+  background-color: #ECAACF;
+}
+
+.avatar--initials.avatar--purple {
+  background-color: #C0BDEF;
+}
+
+.avatar--initials.avatar--blue {
+  background-color: #A6C4FC;
+}
+
+.avatar--initials.avatar--light-blue {
+  background-color: #8CDBFA;
+}
+
+.avatar--initials.avatar--turquoise {
+  background-color: #9BF0EA;
+}
+
+.avatar--initials.avatar--light-green {
+  background-color: #A2FAB3;
 }
 
 /* Depth classes for icon avatars - replicated from globals.css to work with view encapsulation */

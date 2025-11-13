@@ -62,6 +62,7 @@ export interface UserOption {
       [placeholder]="'Search users...'"
       [selectPlaceholder]="placeholder()"
       [disabled]="effectiveDisabled()"
+      [usePortal]="usePortal()"
       [(ngModel)]="selectedUserObj"
       (ngModelChange)="onUserChange($event)"
     >
@@ -111,6 +112,7 @@ export class DsSelectUserComponent implements ControlValueAccessor {
   variant = input<'default' | 'error' | 'warning' | 'success'>('default');
   disabled = input<boolean>(false);
   ghost = input<boolean>(false);
+  usePortal = input<boolean>(true); // Control portal behavior for drawer contexts
 
   // Outputs
   valueChange = output<string | null>();

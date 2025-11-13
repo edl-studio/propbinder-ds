@@ -1,11 +1,17 @@
-import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ElementRef, ViewChild, HostListener, AfterViewInit, ChangeDetectorRef, TemplateRef, contentChild, inject } from '@angular/core';
+import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, TemplateRef, contentChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { DsIconComponent } from '../icon/ds-icon';
 import { DsInputComponent } from '../input/ds-input';
 import { DsSelectComponent, DsSelectOption } from '../select/ds-select';
-import { OverlayModule, ConnectedPosition, Overlay, ScrollStrategy } from '@angular/cdk/overlay';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { 
+  NgpCombobox,
+  NgpComboboxButton,
+  NgpComboboxDropdown,
+  NgpComboboxInput,
+  NgpComboboxOption, 
+  NgpComboboxPortal 
+} from 'ng-primitives/combobox';
 
 export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
 
@@ -18,22 +24,30 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
     DsIconComponent,
     DsInputComponent,
     DsSelectComponent,
-    OverlayModule,
-    CdkOverlayOrigin,
+    NgpCombobox,
+    NgpComboboxButton,
+    NgpComboboxDropdown,
+    NgpComboboxInput,
+    NgpComboboxOption,
+    NgpComboboxPortal,
   ],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['ds-combobox.css'],
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DsComboboxComponent), multi: true }],
   template: `
-    <div [class]="containerClasses()">
+    <div 
+      [class]="containerClasses()"
+      [(ngpComboboxValue)]="valueSig"
+      (ngpComboboxValueChange)="handleValueChange($event)"
+      (ngpComboboxOpenChange)="handleOpenChange($event)"
+      [ngpComboboxDisabled]="effectiveDisabled()"
+      ngpCombobox
+    >
       <div 
         #trigger
-        cdkOverlayOrigin
-        #triggerOrigin="cdkOverlayOrigin"
-        [attr.aria-expanded]="isOpen()"
-        [attr.aria-haspopup]="'listbox'"
-        (click)="toggleDropdown()"
         class="ds-combobox__trigger-wrapper"
+        ngpComboboxButton
+        (click)="onTriggerClick()"
       >
         <div #customTriggerSlot [style.display]="hasCustomTrigger() ? 'contents' : 'none'">
           <ng-content></ng-content>
@@ -46,22 +60,39 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
           />
         </div>
       </div>
-    </div>
 
-    <ng-template
-      cdkConnectedOverlay
-      [cdkConnectedOverlayOrigin]="triggerOrigin"
-      [cdkConnectedOverlayOpen]="isOpen()"
-      [cdkConnectedOverlayPositions]="overlayPositions"
-      [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
-      (backdropClick)="closeDropdown()"
-      (detach)="closeDropdown()"
-    >
+      <!-- Dropdown with portal (for normal use) -->
+      @if (usePortal()) {
       <div 
+        *ngpComboboxPortal
+        ngpComboboxDropdown
         class="ds-combobox__dropdown"
         [style.min-width.px]="triggerWidth"
         [style.width]="width()"
       >
+        <ng-container *ngTemplateOutlet="dropdownContent"></ng-container>
+      </div>
+      }
+
+      <!-- Dropdown without portal (for use inside dialogs/drawers) -->
+      @if (!usePortal() && isOpen()) {
+      <!-- Backdrop for closing on outside click -->
+      <div 
+        class="ds-combobox__backdrop" 
+        (click)="closeDropdown()"
+      ></div>
+      <div 
+        ngpComboboxDropdown
+        [class]="dropdownClasses()"
+        [style.min-width.px]="triggerWidth"
+        [style.width]="width()"
+      >
+        <ng-container *ngTemplateOutlet="dropdownContent"></ng-container>
+      </div>
+      }
+
+      <!-- Dropdown content template (shared by both portal and inline) -->
+      <ng-template #dropdownContent>
         @if (headerTemplate(); as template) {
           <div class="ds-combobox__header">
             <ng-container *ngTemplateOutlet="template" />
@@ -73,7 +104,7 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
             <ds-input
             #searchInput
             [ngModel]="filterValue()"
-            (ngModelChange)="filterValue.set($event)"
+            (ngModelChange)="handleFilterChange($event)"
             [placeholder]="placeholder()"
             [leadingIcon]="'remixSearchLine'"
             [ghost]="true"
@@ -85,10 +116,8 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
           @for (option of filteredOptions(); track option) {
             <div 
               class="ds-combobox__option" 
-              role="option"
-              [attr.aria-selected]="isOptionSelected(option)"
-              [attr.data-selected]="isOptionSelected(option) ? '' : null"
-              (click)="handleOptionClick(option)"
+              [ngpComboboxOptionValue]="option"
+              ngpComboboxOption
             >
               @if (optionTemplate(); as template) {
                 <ng-container 
@@ -114,22 +143,11 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
             <ng-container *ngTemplateOutlet="template" />
           </div>
         }
-      </div>
-    </ng-template>
+      </ng-template>
+    </div>
   `,
 })
 export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit {
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const isInsideCombobox = target.closest('.ds-combobox');
-    const isInsideDropdown = target.closest('.ds-combobox__dropdown');
-    
-    if (!isInsideCombobox && !isInsideDropdown && this.isOpen()) {
-      this.closeDropdown();
-    }
-  }
-
   // Inputs
   placeholder = input<string>('Search...');
   selectPlaceholder = input<string>('Select an option');
@@ -138,6 +156,8 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
   width = input<string>('auto');
   showSearch = input<boolean>(true);
   optionLabelFn = input<(option: any) => string>((opt) => String(opt));
+  usePortal = input<boolean>(true); // Control whether to use portal or inline rendering
+  align = input<'left' | 'right'>('left'); // Control dropdown alignment for inline rendering
   
   // Content projection for custom option rendering
   optionTemplate = contentChild<TemplateRef<any>>('optionTemplate');
@@ -150,7 +170,7 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
   closed = output<void>();
 
   // Internal state
-  private valueSig = signal<any>('');
+  valueSig = signal<any>(undefined);
   filterValue = signal<string>('');
   displayValue = '';
   private disabledFromCva = signal<boolean>(false);
@@ -162,32 +182,9 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
   @ViewChild('customTriggerSlot', { read: ElementRef }) customTriggerSlot!: ElementRef<HTMLElement>;
   @ViewChild('searchInput') searchInput!: DsInputComponent;
 
-  // Overlay service and scroll strategy
-  private overlay = inject(Overlay);
-  scrollStrategy: ScrollStrategy = this.overlay.scrollStrategies.reposition();
-  private scrollableContainer: HTMLElement | null = null;
-  private containerScrollHandler: (() => void) | null = null;
+  triggerWidth = 0;
 
   constructor(private cdr: ChangeDetectorRef) {}
-
-  private findScrollableContainer(element: HTMLElement): HTMLElement | null {
-    let current: HTMLElement | null = element.parentElement;
-    while (current) {
-      const style = window.getComputedStyle(current);
-      const overflowY = style.overflowY;
-      const overflow = style.overflow;
-      
-      // Check if element is scrollable
-      if (
-        (overflowY === 'auto' || overflowY === 'scroll' || overflow === 'auto' || overflow === 'scroll') &&
-        current.scrollHeight > current.clientHeight
-      ) {
-        return current;
-      }
-      current = current.parentElement;
-    }
-    return null;
-  }
 
   ngAfterViewInit() {
     // Check for custom trigger content after view initialization
@@ -231,26 +228,6 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
     });
   });
 
-  // Overlay configuration
-  triggerWidth = 0;
-  
-  overlayPositions: ConnectedPosition[] = [
-    {
-      originX: 'start',
-      originY: 'bottom',
-      overlayX: 'start',
-      overlayY: 'top',
-      offsetY: 4,
-    },
-    {
-      originX: 'start',
-      originY: 'top',
-      overlayX: 'start',
-      overlayY: 'bottom',
-      offsetY: -4,
-    },
-  ];
-
   containerClasses = computed(() => {
     const classes = ['ds-combobox'];
     if (this.isOpen()) classes.push('ds-combobox--open');
@@ -258,56 +235,81 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
     return classes.join(' ');
   });
 
+  dropdownClasses = computed(() => {
+    const classes = ['ds-combobox__dropdown', 'ds-combobox__dropdown--inline'];
+    if (this.align() === 'right') classes.push('ds-combobox__dropdown--right');
+    return classes.join(' ');
+  });
+
   // Event handlers
-  toggleDropdown() {
+  onTriggerClick() {
     if (this.effectiveDisabled()) return;
     
-    const newState = !this.isOpenSig();
-    
-    if (newState && this.triggerElement) {
+    if (this.triggerElement) {
       this.triggerWidth = this.triggerElement.nativeElement.offsetWidth;
-    }
-    
-    this.isOpenSig.set(newState);
-    if (newState) {
-      this.opened.emit();
-      // Focus search input when opening (only if search is enabled)
-      if (this.showSearch()) {
-      setTimeout(() => {
-        const inputEl = this.searchInput?.inputElement()?.nativeElement;
-        if (inputEl) {
-          inputEl.focus();
-        }
-      });
-      }
-    } else {
-      this.closed.emit();
     }
   }
 
-  closeDropdown() {
-    if (this.isOpenSig()) {
-      this.isOpenSig.set(false);
+  handleOpenChange(open: boolean) {
+    this.isOpenSig.set(open);
+    
+    if (open) {
+      this.opened.emit();
+      // Clear filter when opening so search starts empty
+      this.filterValue.set('');
+      // Focus search input when opening (only if search is enabled)
+      if (this.showSearch()) {
+        // Try multiple times with different delays to ensure focus works
+        this.attemptFocusSearchInput();
+      }
+    } else {
       this.closed.emit();
       // Reset filter when closing
       this.filterValue.set('');
     }
   }
 
+  private attemptFocusSearchInput() {
+    const attempts = [0, 10, 50, 100, 200];
+    
+    attempts.forEach(delay => {
+      setTimeout(() => {
+        const inputEl = this.searchInput?.inputElement()?.nativeElement;
+        if (inputEl && document.activeElement !== inputEl) {
+          inputEl.focus({ preventScroll: false });
+          inputEl.click(); // Also try clicking
+        }
+      }, delay);
+    });
+  }
+
   handleFilterChange(value: string) {
     this.filterValue.set(value);
   }
 
-  handleOptionClick(option: any) {
+  handleValueChange(option: any) {
     if (this.effectiveDisabled()) return;
     
-    const label = this.getOptionLabel(option);
+    const label = option ? this.getOptionLabel(option) : '';
     this.valueSig.set(option);
     this.displayValue = label;
     this.onChangeFn(option);
     this.valueChange.emit(option);
     this.onTouchedFn();
+    
+    // Close the dropdown after selection
     this.closeDropdown();
+  }
+
+  // Public method to programmatically close the dropdown
+  closeDropdown() {
+    this.isOpenSig.set(false);
+  }
+
+  // Public method to programmatically toggle the dropdown
+  toggleDropdown() {
+    if (this.effectiveDisabled()) return;
+    this.isOpenSig.set(!this.isOpenSig());
   }
 
   isOptionSelected(option: any): boolean {
@@ -323,7 +325,7 @@ export class DsComboboxComponent implements ControlValueAccessor, AfterViewInit 
   private onTouchedFn: () => void = () => {};
 
   writeValue(value: any): void {
-    this.valueSig.set(value ?? '');
+    this.valueSig.set(value ?? undefined);
     this.displayValue = value ? this.getOptionLabel(value) : '';
     this.filterValue.set(value ? this.getOptionLabel(value) : '');
   }

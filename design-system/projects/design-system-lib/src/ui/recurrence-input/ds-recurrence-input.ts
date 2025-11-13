@@ -1,10 +1,11 @@
-import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, ViewEncapsulation, input, output, computed, signal, forwardRef, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DsInputComponent } from '../input/ds-input';
-import { OverlayModule, ConnectedPosition } from '@angular/cdk/overlay';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { NgpDialogTrigger, NgpDialogOverlay, NgpDialog } from 'ng-primitives/dialog';
+import { DsDialogComponent } from '../dialog/ds-dialog';
 import { DsRecurrencePickerComponent } from '../recurrence-picker/ds-recurrence-picker';
+import { DsButtonComponent } from '../button/ds-button';
 
 export interface RecurrenceConfig {
   frequency: 'daily' | 'weekly' | 'monthly' | 'yearly';
@@ -13,6 +14,9 @@ export interface RecurrenceConfig {
   endDate?: Date;
   endCount?: number;
   startDate: Date;
+  daysOfWeek?: number[]; // 0-6 where 0=Monday, 6=Sunday (only for weekly)
+  yearlyMonth?: number; // 0-11 where 0=January, 11=December (only for yearly)
+  monthlyDay?: number; // 1-31 day of month (only for monthly/yearly)
 }
 
 @Component({
@@ -22,9 +26,12 @@ export interface RecurrenceConfig {
     CommonModule,
     FormsModule,
     DsInputComponent,
-    OverlayModule,
-    CdkOverlayOrigin,
+    NgpDialogTrigger,
+    NgpDialogOverlay,
+    NgpDialog,
+    DsDialogComponent,
     DsRecurrencePickerComponent,
+    DsButtonComponent,
   ],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-recurrence-input.css'],
@@ -34,13 +41,9 @@ export interface RecurrenceConfig {
   template: `
     <div [class]="containerClasses()">
       <div 
-        #trigger
-        cdkOverlayOrigin
-        #triggerOrigin="cdkOverlayOrigin"
-        [attr.aria-expanded]="isOpen()"
-        [attr.aria-haspopup]="'dialog'"
+        [ngpDialogTrigger]="recurrenceDialog"
         class="ds-recurrence-input__trigger-wrapper"
-        (click)="openPicker()"
+        (click)="onDialogOpen()"
       >
         <ds-input
           [ngModel]="displayValue()"
@@ -49,27 +52,37 @@ export interface RecurrenceConfig {
           [variant]="variant()"
           [disabled]="effectiveDisabled()"
           [readonly]="true"
-          [trailingIcon]="'remixRefreshLine'"
+          [leadingIcon]="'remixRefreshLine'"
+          [trailingIcon]="'remixArrowDownSLine'"
+          [class.ds-recurrence-input__input--open]="isDialogOpen()"
+          [class.ds-recurrence-input__input--empty]="isEmpty()"
         />
       </div>
     </div>
 
-    <ng-template
-      cdkConnectedOverlay
-      [cdkConnectedOverlayOrigin]="triggerOrigin"
-      [cdkConnectedOverlayOpen]="isOpen()"
-      [cdkConnectedOverlayHasBackdrop]="true"
-      [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
-      [cdkConnectedOverlayPositions]="overlayPositions"
-      (backdropClick)="closePicker()"
-      (detach)="closePicker()"
-    >
-      <ds-recurrence-picker
-        [config]="recurrenceConfig()"
-        [startDate]="startDate()"
-        (save)="handleSave($event)"
-        (cancel)="closePicker()"
-      />
+    <ng-template #recurrenceDialog let-close="close">
+      <div ngpDialogOverlay class="ds-overlay ds-dialog-overlay">
+        <ds-dialog 
+          ngpDialog 
+          [size]="'md'"
+          [title]="'Recurrence'"
+          (close)="onDialogClose(close)"
+          class="ds-recurrence-dialog">
+          <div slot="content">
+            <ds-recurrence-picker
+              #picker
+              [config]="recurrenceConfig()"
+              [startDate]="startDate()"
+              (save)="handleSave($event, close)"
+              (cancel)="onDialogClose(close)"
+            />
+          </div>
+          <div slot="footer">
+            <ds-button variant="ghost" (clicked)="onDialogClose(close)">Cancel</ds-button>
+            <ds-button variant="primary" (clicked)="handleSave(picker.getCurrentConfig(), close)">Save</ds-button>
+          </div>
+        </ds-dialog>
+      </div>
     </ng-template>
   `,
 })
@@ -79,7 +92,7 @@ export class DsRecurrenceInputComponent implements ControlValueAccessor {
   variant = input<'default' | 'error' | 'warning' | 'success'>('default');
   disabled = input<boolean>(false);
   ghost = input<boolean>(false);
-  startDate = input<Date>(new Date());
+  startDate = input<Date | null>(null);
 
   // Outputs
   valueChange = output<RecurrenceConfig | null>();
@@ -87,17 +100,18 @@ export class DsRecurrenceInputComponent implements ControlValueAccessor {
   // Internal state
   private recurrenceConfigSig = signal<RecurrenceConfig | null>(null);
   private disabledFromCva = signal<boolean>(false);
-  private isOpenSig = signal<boolean>(false);
+  private isDialogOpenSig = signal<boolean>(false);
   private onTouched: () => void = () => {};
   private onChange: (value: RecurrenceConfig | null) => void = () => {};
 
   // View children
-  @ViewChild('trigger', { read: ElementRef }) triggerElement!: ElementRef<HTMLElement>;
+  @ViewChild('recurrenceDialog') recurrenceDialog!: TemplateRef<any>;
 
   // Computed properties
   effectiveDisabled = computed(() => this.disabled() || this.disabledFromCva());
-  isOpen = computed(() => this.isOpenSig());
   recurrenceConfig = computed(() => this.recurrenceConfigSig());
+  isDialogOpen = computed(() => this.isDialogOpenSig());
+  isEmpty = computed(() => !this.recurrenceConfig());
 
   displayValue = computed(() => {
     const config = this.recurrenceConfig();
@@ -111,52 +125,21 @@ export class DsRecurrenceInputComponent implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  // Overlay configuration
-  overlayPositions: ConnectedPosition[] = [
-    {
-      originX: 'start',
-      originY: 'bottom',
-      overlayX: 'start',
-      overlayY: 'top',
-      offsetY: 4,
-    },
-    {
-      originX: 'start',
-      originY: 'top',
-      overlayX: 'start',
-      overlayY: 'bottom',
-      offsetY: -4,
-    },
-  ];
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const isInsideComponent = target.closest('.ds-recurrence-input');
-    const isInsidePicker = target.closest('.ds-recurrence-picker');
-    
-    if (!isInsideComponent && !isInsidePicker && this.isOpen()) {
-      this.closePicker();
-    }
-  }
-
   // Event handlers
-  openPicker() {
-    if (this.effectiveDisabled()) return;
-    this.isOpenSig.set(true);
-  }
-
-  closePicker() {
-    if (this.isOpenSig()) {
-      this.isOpenSig.set(false);
-    }
-  }
-
-  handleSave(config: RecurrenceConfig) {
+  handleSave(config: RecurrenceConfig, close: () => void) {
     this.recurrenceConfigSig.set(config);
     this.onChange(config);
     this.valueChange.emit(config);
-    this.closePicker();
+    this.onDialogClose(close);
+  }
+
+  onDialogOpen(): void {
+    this.isDialogOpenSig.set(true);
+  }
+
+  onDialogClose(close: () => void): void {
+    this.isDialogOpenSig.set(false);
+    close();
   }
 
   formatRecurrence(config: RecurrenceConfig): string {
@@ -171,10 +154,21 @@ export class DsRecurrenceInputComponent implements ControlValueAccessor {
     const freqLabel = frequencyLabels[config.frequency] + plural;
     let text = `Occurs every ${config.interval} ${freqLabel}`;
     
-    // For weekly, add the day of week
+    // For weekly, add the selected days
     if (config.frequency === 'weekly') {
-      const dayName = config.startDate.toLocaleDateString('en-US', { weekday: 'long' });
-      text += ` on ${dayName}`;
+      if (config.daysOfWeek && config.daysOfWeek.length > 0) {
+        const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const selectedDayNames = config.daysOfWeek.map(dayIndex => dayNames[dayIndex]);
+        if (selectedDayNames.length === 1) {
+          text += ` on ${selectedDayNames[0]}`;
+        } else if (selectedDayNames.length > 1) {
+          text += ` on ${selectedDayNames.join(', ')}`;
+        }
+      } else {
+        // Fallback to start date day if no days selected
+        const dayName = config.startDate.toLocaleDateString('en-US', { weekday: 'long' });
+        text += ` on ${dayName}`;
+      }
     }
     
     // Add end condition

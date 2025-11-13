@@ -70,69 +70,51 @@ export interface TaskLocationData {
   ],
   template: `
     <div [class]="containerClasses()">
-      @if (created()) {
-        <!-- Created state: Show icon, text, and ID badge -->
-        <button 
-          type="button"
-          class="task-location-select__created"
-          [disabled]="disabled()"
-          (click)="openDropdown()"
-        >
-          <div class="task-location-select__content">
-            @if (selectedLocation()?.type && selectedLocation()?.type !== 'none') {
+      <div class="tw-flex tw-items-center">
+        @if (created() && !isEditing()) {
+          <!-- Created state: Show icon, text, and ID badge -->
+          <button 
+            type="button"
+            class="task-location-select__created"
+            [disabled]="disabled()"
+            (click)="openDropdown()"
+          >
+            <div class="task-location-select__content">
+              @if (selectedLocation()?.type && selectedLocation()?.type !== 'none') {
+                <ds-icon 
+                  [name]="getIconForType(selectedLocation()!.type)"
+                  size="16px"
+                  color="secondary"
+                  class="task-location-select__icon"
+                />
+              }
+              
+              <span class="task-location-select__text">
+                {{ displayText() }}
+              </span>
+              
               <ds-icon 
-                [name]="getIconForType(selectedLocation()!.type)"
-                size="16px"
-                color="secondary"
-                class="task-location-select__icon"
+                name="remixArrowDownSLine" 
+                size="16px" 
+                class="task-location-select__dropdown-icon"
               />
-            }
-            
-            <span class="task-location-select__text">
-              {{ displayText() }}
-            </span>
-            
-            <ds-icon 
-              name="remixArrowDownSLine" 
-              size="16px" 
-              class="task-location-select__dropdown-icon"
-            />
-          </div>
-          
-          @if (selectedLocation()?.id && selectedLocation()?.type !== 'none') {
-            <ds-tooltip [text]="showCopiedFeedback() ? 'Copied!' : 'Copy ID'" placement="top">
-              <div 
-                slot="trigger"
-                class="task-location-select__id-badge"
-                (click)="copyIdToClipboard($event)"
-              >
-                @if (showCopiedFeedback()) {
-                  <span class="task-location-select__id-text">Copied</span>
-                } @else {
-                  <ds-icon 
-                    name="remixHashtag" 
-                    size="16px" 
-                    color="secondary"
-                    class="task-location-select__hash-icon"
-                  />
-                  <span class="task-location-select__id-text">{{ getDisplayId() }}</span>
-                }
-              </div>
-            </ds-tooltip>
-          }
-        </button>
-      } @else {
-        <!-- Creation state with drill-down combobox -->
-        <ds-combobox
-          [options]="currentOptions()"
-          [optionLabelFn]="getOptionLabel"
-          [placeholder]="currentPlaceholder()"
-          [selectPlaceholder]="displayText()"
-          [disabled]="disabled()"
-          [ngModel]="currentlySelectedOption()"
-          (opened)="handleDropdownOpen()"
-          (closed)="handleDropdownClose()"
-        >
+            </div>
+          </button>
+        } @else {
+          <!-- Creation state with drill-down combobox -->
+          <ds-combobox
+            [options]="currentOptions()"
+            [optionLabelFn]="getOptionLabel"
+            [placeholder]="currentPlaceholder()"
+            [selectPlaceholder]="displayText()"
+            [disabled]="disabled()"
+            [usePortal]="usePortal()"
+            [width]="'256px'"
+            [ngModel]="currentlySelectedOption()"
+            (opened)="handleDropdownOpen()"
+            (closed)="handleDropdownClose()"
+            class="tw-flex-1"
+          >
           <!-- Custom trigger button -->
           <button
             type="button"
@@ -228,6 +210,30 @@ export interface TaskLocationData {
           </ng-template>
         </ds-combobox>
       }
+      
+      <!-- ID badge - always visible in created mode when there's an ID -->
+      @if (created() && selectedLocation()?.id && selectedLocation()?.type !== 'none') {
+        <ds-tooltip [text]="showCopiedFeedback() ? 'Copied!' : 'Copy ID'" placement="top">
+          <div 
+            slot="trigger"
+            class="task-location-select__id-badge"
+            (click)="copyIdToClipboard($event)"
+          >
+            @if (showCopiedFeedback()) {
+              <span class="task-location-select__id-text">Copied</span>
+            } @else {
+              <ds-icon 
+                name="remixHashtag" 
+                size="16px" 
+                color="secondary"
+                class="task-location-select__hash-icon"
+              />
+              <span class="task-location-select__id-text">{{ getDisplayId() }}</span>
+            }
+          </div>
+        </ds-tooltip>
+      }
+      </div>
     </div>
   `
 })
@@ -239,6 +245,7 @@ export class DsTaskLocationSelectComponent implements ControlValueAccessor {
   ghost = input<boolean>(false);
   created = input<boolean>(false);
   locationData = input<TaskLocationData>({ properties: [], leases: [], inquiries: [] });
+  usePortal = input<boolean>(true); // Control portal behavior for drawer contexts
 
   // Outputs
   valueChange = output<TaskLocation | null>();
@@ -252,6 +259,7 @@ export class DsTaskLocationSelectComponent implements ControlValueAccessor {
   private disabledFromCva = signal<boolean>(false);
   showCopiedFeedback = signal<boolean>(false);
   private copyTimeoutId: number | null = null;
+  protected isEditing = signal<boolean>(false); // Track if user is editing in created mode
 
   // Navigation state for drill-down
   navigationState = signal<{
@@ -643,6 +651,9 @@ export class DsTaskLocationSelectComponent implements ControlValueAccessor {
     const state = this.navigationState();
     const existingLocation = this.selectedValue();
     
+    // Reset editing mode when dropdown closes
+    this.isEditing.set(false);
+    
     // If we already have a saved location, don't overwrite it
     // (user just reopened and closed without making a new selection)
     if (existingLocation) {
@@ -691,8 +702,18 @@ export class DsTaskLocationSelectComponent implements ControlValueAccessor {
   }
 
   openDropdown(): void {
-    // For created state - would open the combobox if we add that functionality
-    // For now, just a placeholder
+    if (this.created()) {
+      // Switch to editing mode so the combobox is rendered
+      this.isEditing.set(true);
+      // Wait for the combobox to be rendered, then open it
+      setTimeout(() => {
+        if (this.combobox) {
+          this.combobox.toggleDropdown();
+        }
+      }, 0);
+    } else if (this.combobox) {
+      this.combobox.toggleDropdown();
+    }
   }
 
   async copyIdToClipboard(event: Event): Promise<void> {

@@ -15,7 +15,7 @@
 /* Drawer styles - applied to the ds-drawer component */
 .ds-drawer {
   display: flex;
-  width: 480px;
+  width: 640px;
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
@@ -115,6 +115,10 @@
     .ds-tabs__list-wrapper {
       --tw-bg-opacity: 1;
       background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+    }
+    .ds-tabs__list-wrapper {
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
     .ds-tabs__list-wrapper {
       position: sticky;

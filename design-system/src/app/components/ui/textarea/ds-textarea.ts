@@ -4,7 +4,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgpTextarea } from 'ng-primitives/textarea';
 
 export type TextareaVariant = 'default' | 'error' | 'warning' | 'success';
-export type TextareaSize = 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'ds-textarea',
@@ -25,7 +24,7 @@ export type TextareaSize = 'sm' | 'md' | 'lg';
         [cols]="cols()"
         [attr.maxlength]="maxlength()"
         [attr.minlength]="minlength()"
-        [class]="textareaClasses()"
+        [class]="'body-sm-regular ' + textareaClasses()"
         [attr.aria-label]="ariaLabel()"
         [attr.aria-describedby]="ariaDescribedBy()"
         [attr.aria-labelledby]="ariaLabelledBy()"
@@ -40,7 +39,6 @@ export type TextareaSize = 'sm' | 'md' | 'lg';
 export class DsTextareaComponent implements ControlValueAccessor {
   // Inputs
   variant = input<TextareaVariant>('default');
-  size = input<TextareaSize>('md');
   placeholder = input<string>('');
   disabled = input<boolean>(false);
   readonly = input<boolean>(false);
@@ -68,7 +66,7 @@ export class DsTextareaComponent implements ControlValueAccessor {
   effectiveDisabled = computed(() => this.disabled() || this.disabledFromCva());
 
   containerClasses = computed(() => {
-    const classes = ['textarea-container', `textarea-container--${this.size()}`, `textarea-container--${this.variant()}`];
+    const classes = ['textarea-container', `textarea-container--${this.variant()}`];
     if (this.effectiveDisabled()) classes.push('textarea-container--disabled');
     if (this.readonly()) classes.push('textarea-container--readonly');
     if (this.focusedSig()) classes.push('textarea-container--focused');
@@ -76,7 +74,7 @@ export class DsTextareaComponent implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  textareaClasses = computed(() => ['textarea', `textarea--${this.size()}`, `textarea--${this.variant()}`].join(' '));
+  textareaClasses = computed(() => ['textarea', `textarea--${this.variant()}`].join(' '));
 
   // Native event handlers
   handleInput(event: Event) {

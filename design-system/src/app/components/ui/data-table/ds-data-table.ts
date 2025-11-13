@@ -12,8 +12,11 @@ import { FormsModule } from '@angular/forms';
 import { DsInputComponent } from '../input/ds-input';
 import { DsButtonComponent } from '../button/ds-button';
 import { DsIconComponent } from '../icon/ds-icon';
+import { DsIconButtonComponent } from '../button/ds-icon-button';
 import { DsAvatarComponent } from '../avatar/ds-avatar';
+import { DsBadgeComponent } from '../badge/ds-badge';
 import { DsSelectComponent, type DsSelectOption } from '../select/ds-select';
+import { SafeHtmlPipe } from './safe-html.pipe';
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -119,8 +122,11 @@ export function actionsCell<T>(config: {
     DsInputComponent,
     DsButtonComponent,
     DsIconComponent,
+    DsIconButtonComponent,
+    DsBadgeComponent,
     DsAvatarComponent,
     DsSelectComponent,
+    SafeHtmlPipe,
   ],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-data-table.css'],
@@ -281,7 +287,42 @@ export function actionsCell<T>(config: {
                       let cellContent
                     "
                   >
-                    <div [innerHTML]="cellContent"></div>
+                    @if (isComponentCell(cellContent)) {
+                      <!-- Component-based cell rendering -->
+                      @switch (cellContent.component) {
+                        @case ('actions') {
+                          <div style="display: flex; gap: 8px; align-items: center;">
+                            @if (cellContent.data.onEdit) {
+                              <ds-icon-button 
+                                icon="remixEditLine" 
+                                variant="ghost"
+                                size="sm"
+                                [ariaLabel]="'Edit'"
+                                (clicked)="cellContent.data.onEdit(cellContent.data.row)"
+                              />
+                            }
+                            @if (cellContent.data.onDelete) {
+                              <ds-icon-button 
+                                icon="remixDeleteBinLine" 
+                                variant="ghost"
+                                size="sm"
+                                [ariaLabel]="'Delete'"
+                                (clicked)="cellContent.data.onDelete(cellContent.data.row)"
+                              />
+                            }
+                          </div>
+                        }
+                        @case ('badge') {
+                          <ds-badge 
+                            [variant]="cellContent.data.variant"
+                            [content]="cellContent.data.label"
+                          />
+                        }
+                      }
+                    } @else {
+                      <!-- HTML string cell rendering -->
+                      <div [innerHTML]="cellContent | safeHtml"></div>
+                    }
                   </ng-container>
                 </td>
                 }
@@ -695,5 +736,12 @@ export class DsDataTableComponent<T = any> {
 
     // Default to true if maxWidth is set (and not 'none')
     return !!sizing.maxWidth && sizing.maxWidth !== 'none';
+  }
+
+  /**
+   * Check if cell content is a component cell object (vs HTML string)
+   */
+  isComponentCell(content: any): boolean {
+    return content && typeof content === 'object' && 'component' in content && 'data' in content;
   }
 }

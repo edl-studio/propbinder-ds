@@ -61,6 +61,7 @@ export interface BadgeOption {
       [showSearch]="false"
       [selectPlaceholder]="placeholder()"
       [disabled]="effectiveDisabled()"
+      [usePortal]="usePortal()"
       [(ngModel)]="selectedBadgeObj"
       (ngModelChange)="onBadgeChange($event)"
     >
@@ -108,6 +109,7 @@ export class DsSelectBadgeComponent implements ControlValueAccessor {
   variant = input<'default' | 'error' | 'warning' | 'success'>('default');
   disabled = input<boolean>(false);
   ghost = input<boolean>(false);
+  usePortal = input<boolean>(true); // Control portal behavior for drawer contexts
 
   // Outputs
   valueChange = output<string | null>();

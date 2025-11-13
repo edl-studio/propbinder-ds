@@ -7,7 +7,7 @@
   /* Base styles */
   @apply tw-h-8;
   @apply tw-px-2;
-  @apply tw-rounded-md tw-border tw-transition-all tw-duration-200 tw-ease-in-out;
+  @apply tw-rounded-md tw-border;
   @apply tw-items-center;
   
   /* Ensure border is rendered inside Shadow DOM */
@@ -124,7 +124,7 @@
   max-height: 32px;
 }
 
-.ds-input--ghost:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+.ds-input--ghost:hover:not(.ds-input--disabled) {
   border-color: var(--border-color-default);
 }
 
@@ -144,7 +144,7 @@
   border-color: transparent;
 }
 
-.ds-input--ghost.ds-input--error:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+.ds-input--ghost.ds-input--error:hover:not(.ds-input--disabled) {
   border-color: var(--color-destructive-base);
 }
 
@@ -164,7 +164,7 @@
   border-color: transparent;
 }
 
-.ds-input--ghost.ds-input--warning:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+.ds-input--ghost.ds-input--warning:hover:not(.ds-input--disabled) {
   border-color: var(--color-warning-base);
 }
 
@@ -184,7 +184,7 @@
   border-color: transparent;
 }
 
-.ds-input--ghost.ds-input--success:hover:not(.ds-input--disabled):not(.ds-input--readonly) {
+.ds-input--ghost.ds-input--success:hover:not(.ds-input--disabled) {
   border-color: var(--color-success-base);
 }
 
@@ -304,6 +304,16 @@
 
 .ds-input__icon--trailing {
   right: 8px;
+}
+
+/* Ghost variant - hide trailing icon by default, show on hover */
+.ds-input--ghost .ds-input__icon--trailing {
+  opacity: 0;
+}
+
+.ds-input--ghost:hover:not(.ds-input--disabled) .ds-input__icon--trailing,
+.ds-input--ghost:focus-within .ds-input__icon--trailing {
+  opacity: 1;
 }
 
 /* Prefix and suffix styles */

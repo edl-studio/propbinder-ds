@@ -22,6 +22,11 @@ interface TabState {
     [ngpTabPanel]:not([data-active]) {
       display: none;
     }
+    /* Wrapper for tab list with white background and padding */
+    .ds-tabs__list-wrapper {
+      background-color: white;
+    }
+    
     [ngpTabList] {
       position: relative;
     }
@@ -47,29 +52,13 @@ interface TabState {
       background-color: var(--color-background-neutral-secondary);
     }
    
-    /* Base styles for both indicators */
-    .hover-indicator,
+    /* Base styles for active indicator */
     .active-indicator {
       position: absolute;
       bottom: -2px;
       height: 2px;
       border-radius: 999px;
       pointer-events: none;
-    }
-
-    /* Hover indicator specific styles */
-    .hover-indicator {
-      opacity: 0;
-      background-color: var(--text-color-default-tertiary);
-      transition: opacity 0.1s ease;
-    }
-
-    [ngpTabButton][data-hover]:not([data-active]) ~ .hover-indicator {
-      opacity: 1;
-    }
-
-    /* Active indicator specific styles */
-    .active-indicator {
       transition: transform 0.35s ease, width 0.35s ease;
       transform-origin: left;
       background-color: var(--color-brand-base);
@@ -180,7 +169,15 @@ interface TabState {
   `,
   template: `
     <div ngpTabset>
-      <div #tabList ngpTabList class="tw-flex tw-gap-4 tw-py-2.5 tw-relative">
+      <!-- Wrapper for tab list with white background and padding -->
+      <div 
+        class="ds-tabs__list-wrapper"
+        [style.padding-left]="paddingX()"
+        [style.padding-right]="paddingX()">
+        <div 
+          #tabList 
+          ngpTabList 
+          class="tw-flex tw-gap-4 tw-py-2.5 tw-relative">
         <!-- Edge-to-edge divider -->
         <div class="edge-to-edge-divider tabs-divider"></div>
         @for (tab of visibleTabs(); track tab.value()) {
@@ -189,8 +186,6 @@ interface TabState {
             ngpTabButton 
             [ngpTabButtonValue]="tab.value()"
             (click)="handleClick($event)"
-            (mouseenter)="updateHoverIndicator($event)"
-            (mouseleave)="hideHoverIndicator()"
           >
             <span class="tab-label tw-py-1.5 tw-px-2 tw-rounded-lg ui-sm-regular tw-flex tw-items-center">
               {{ tab.label() }}
@@ -236,8 +231,8 @@ interface TabState {
           </div>
         }
 
-        <div #hoverIndicator class="hover-indicator"></div>
         <div #indicator class="active-indicator"></div>
+        </div>
       </div>
 
       @for (tab of tabs(); track tab.value()) {
@@ -245,6 +240,8 @@ interface TabState {
           ngpTabPanel 
           [ngpTabPanelValue]="tab.value()" 
           class="tw-py-4"
+          [style.padding-left]="paddingX() !== '0' ? paddingX() : null"
+          [style.padding-right]="paddingX() !== '0' ? paddingX() : null"
         >
           <ng-container [ngTemplateOutlet]="tab.content()" />
         </div>
@@ -263,7 +260,6 @@ export class DsTabs implements AfterViewInit, OnDestroy {
   readonly tabs = contentChildren(DsTab);
 
   @ViewChild('indicator') indicator?: ElementRef<HTMLElement>;
-  @ViewChild('hoverIndicator') hoverIndicator?: ElementRef<HTMLElement>;
   @ViewChild('tabList') tabList?: ElementRef<HTMLElement>;
   @ViewChild('measureContainer') measureContainer?: ElementRef<HTMLElement>;
   @ViewChildren('tabButton') tabButtons!: QueryList<ElementRef<HTMLElement>>;
@@ -328,11 +324,19 @@ export class DsTabs implements AfterViewInit, OnDestroy {
   }
 
   private setupMutationObserver() {
-    this.mutationObserver = new MutationObserver(() => {
+    this.mutationObserver = new MutationObserver((mutations) => {
+      // Only update if we actually have mutations related to data-active
+      const hasActiveChange = mutations.some(mutation => 
+        mutation.type === 'attributes' && 
+        mutation.attributeName === 'data-active'
+      );
+      
+      if (hasActiveChange) {
       // Update indicator when data-active attributes change
       requestAnimationFrame(() => {
         this.updateActiveIndicator();
       });
+      }
     });
 
     if (this.tabList?.nativeElement) {
@@ -348,6 +352,12 @@ export class DsTabs implements AfterViewInit, OnDestroy {
     if (!this.measureContainer?.nativeElement || !this.tabList?.nativeElement) return;
 
     const containerWidth = this.tabList.nativeElement.offsetWidth;
+    
+    // Guard: Don't measure if the container has no width (not visible yet or during animation)
+    if (containerWidth === 0) {
+      return;
+    }
+    
     const measureContainer = this.measureContainer.nativeElement;
     const allTabs = this.tabs();
     const tabWidths: number[] = [];
@@ -402,28 +412,12 @@ export class DsTabs implements AfterViewInit, OnDestroy {
   handleClick(event: MouseEvent) {
     const button = event.currentTarget as HTMLElement;
     this.updateIndicator(button);
-    this.hideHoverIndicator();
   }
 
   updateIndicator(button: HTMLElement) {
     if (this.indicator?.nativeElement) {
       this.indicator.nativeElement.style.width = `${button.offsetWidth}px`;
       this.indicator.nativeElement.style.transform = `translateX(${button.offsetLeft}px)`;
-    }
-  }
-
-  updateHoverIndicator(event: MouseEvent) {
-    const button = event.currentTarget as HTMLElement;
-    if (this.hoverIndicator?.nativeElement) {
-      this.hoverIndicator.nativeElement.style.width = `${button.offsetWidth}px`;
-      this.hoverIndicator.nativeElement.style.transform = `translateX(${button.offsetLeft}px)`;
-      this.hoverIndicator.nativeElement.style.opacity = '1';
-    }
-  }
-
-  hideHoverIndicator() {
-    if (this.hoverIndicator?.nativeElement) {
-      this.hoverIndicator.nativeElement.style.opacity = '0';
     }
   }
 

@@ -1,4 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { DsButtonComponent } from '../button/ds-button';
+import { DsIconComponent } from '../icon/ds-icon';
 
 /**
  * A dialog component that appears in the center of the screen.
@@ -11,8 +13,11 @@ import { Component, input } from '@angular/core';
  * 
  * <ng-template #dialog let-close="close">
  *   <div ngpDialogOverlay class="ds-overlay ds-dialog-overlay">
- *     <ds-dialog ngpDialog [size]="'md'">
- *       <h2 slot="header">Dialog Title</h2>
+ *     <ds-dialog 
+ *       ngpDialog 
+ *       [size]="'md'"
+ *       [title]="'Dialog Title'"
+ *       (close)="close()">
  *       <div slot="content">Main content</div>
  *       <div slot="footer">
  *         <ds-button variant="ghost" (click)="close()">Cancel</ds-button>
@@ -26,7 +31,7 @@ import { Component, input } from '@angular/core';
 @Component({
   selector: 'ds-dialog',
   standalone: true,
-  imports: [],
+  imports: [DsButtonComponent, DsIconComponent],
   styleUrls: ['./ds-dialog.css'],
   template: `
     <div 
@@ -38,9 +43,18 @@ import { Component, input } from '@angular/core';
       role="dialog"
       aria-modal="true"
     >
+      @if (title()) {
       <div class="ds-dialog__header">
-        <ng-content select="[slot=header]"></ng-content>
+          <h2 class="ds-dialog__title heading-xl">{{ title() }}</h2>
+          <ds-button 
+            variant="ghost" 
+            [iconOnly]="true"
+            ariaLabel="Close dialog"
+            (clicked)="close.emit()">
+            <ds-icon slot="leading" name="remixCloseLine" size="18px" />
+          </ds-button>
       </div>
+      }
 
       <div class="ds-dialog__content">
         <ng-content select="[slot=content]"></ng-content>
@@ -55,4 +69,10 @@ import { Component, input } from '@angular/core';
 export class DsDialogComponent {
   /** Size variant of the dialog */
   size = input<'sm' | 'md' | 'lg' | 'xl'>('md');
+  
+  /** Title text displayed in the header */
+  title = input<string>();
+  
+  /** Emitted when the close button is clicked */
+  close = output<void>();
 }

@@ -8,13 +8,18 @@ import { CommonModule } from '@angular/common';
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="list-item">
+      <!-- Avatar slot -->
+      <div class="list-item__avatar">
+        <ng-content select="[slot=avatar]"></ng-content>
+      </div>
+      
       <!-- Main content container -->
       <div class="list-item__content">
         <!-- Title and metadata section -->
         <div class="list-item__content-section">
           <!-- Title -->
           <div class="list-item__title">
-            <p class="body-base-regular">{{ title() }}</p>
+            <p class="body-sm-regular">{{ title() }}</p>
           </div>
           
           <!-- Metadata row -->

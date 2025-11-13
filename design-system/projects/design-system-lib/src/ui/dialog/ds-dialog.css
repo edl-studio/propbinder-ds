@@ -60,10 +60,20 @@
 }
 
 .ds-dialog__header {
+  display: flex;
   flex-shrink: 0;
-  border-bottom-width: 1px;
-  border-color: var(--border-color-default);
-  padding: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.ds-dialog__title {
+  margin: 0px;
+  flex: 1 1 0%;
 }
 
 .ds-dialog__content {

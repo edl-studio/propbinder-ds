@@ -50,6 +50,8 @@ import { DsInputComponent } from '../input/ds-input';
       [disabled]="effectiveDisabled()"
       [disableFutureDates]="disableFutureDates()"
       [isDateDisabled]="isDateDisabled()"
+      (opened)="onDatepickerOpened()"
+      (closed)="onDatepickerClosed()"
     >
       <ds-input
         [ngModel]="formattedDate()"
@@ -57,8 +59,11 @@ import { DsInputComponent } from '../input/ds-input';
         [ghost]="ghost()"
         [variant]="variant()"
         [disabled]="effectiveDisabled()"
-        [trailingIcon]="'remixCalendarLine'"
+        [leadingIcon]="'remixCalendarLine'"
+        [trailingIcon]="'remixArrowDownSLine'"
         [readonly]="true"
+        [class.ds-select-date__input--open]="isDatepickerOpen()"
+        [class.ds-select-date__input--empty]="isEmpty()"
       />
     </ds-datepicker>
   `,
@@ -79,11 +84,14 @@ export class DsSelectDateComponent implements ControlValueAccessor {
   // Internal state
   selectedDate = signal<Date | null>(null);
   private disabledFromCva = signal<boolean>(false);
+  private isDatepickerOpenSig = signal<boolean>(false);
   private onTouched: () => void = () => {};
   private onChange: (value: Date | null) => void = () => {};
 
   // Computed properties
   effectiveDisabled = computed(() => this.disabled() || this.disabledFromCva());
+  isDatepickerOpen = computed(() => this.isDatepickerOpenSig());
+  isEmpty = computed(() => !this.selectedDate());
 
   formattedDate = computed(() => {
     const date = this.selectedDate();
@@ -104,6 +112,14 @@ export class DsSelectDateComponent implements ControlValueAccessor {
     this.selectedDate.set(date);
     this.onChange(date);
     this.valueChange.emit(date);
+  }
+
+  onDatepickerOpened(): void {
+    this.isDatepickerOpenSig.set(true);
+  }
+
+  onDatepickerClosed(): void {
+    this.isDatepickerOpenSig.set(false);
   }
 
   // ControlValueAccessor implementation

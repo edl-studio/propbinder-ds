@@ -8,3 +8,19 @@
   max-width: 480px;
 }
 
+/* Set icon opacity to 0.6 when field is empty (to match placeholder) */
+:host ::ng-deep ds-input.ds-select-date__input--empty .ds-input__icon--leading,
+:host ::ng-deep ds-input.ds-select-date__input--empty .ds-input__icon--trailing {
+  opacity: 0.6;
+}
+
+/* Ensure calendar icon (leading) is always visible, even in ghost mode when empty */
+:host ::ng-deep ds-input.ds-select-date__input--empty.ds-input--ghost .ds-input__icon--leading {
+  opacity: 0.6 !important;
+}
+
+/* Rotate chevron icon when datepicker is open */
+:host ::ng-deep ds-input.ds-select-date__input--open .ds-input__icon--trailing {
+  transform: rotate(180deg);
+}
+
