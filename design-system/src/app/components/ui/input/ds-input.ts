@@ -5,7 +5,7 @@ import { NgpInput } from 'ng-primitives/input';
 import { DsIconComponent } from '../icon/ds-icon';
 
 export type InputVariant = 'default' | 'error' | 'warning' | 'success';
-export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search' | 'time';
 
 export type NumberFormatPreset = 'currency' | 'percentage' | 'decimal' | 'integer';
 

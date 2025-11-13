@@ -1,0 +1,12 @@
+.ds-drawer-header-created {
+  @apply tw-flex tw-justify-between tw-items-center tw-w-full tw-gap-4;
+}
+
+.ds-drawer-header-created__actions-left {
+  @apply tw-flex tw-gap-2 tw-items-center tw-flex-1;
+}
+
+.ds-drawer-header-created__actions-right {
+  @apply tw-flex tw-gap-2 tw-items-center tw-flex-shrink-0;
+}
+

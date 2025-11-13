@@ -1,0 +1,334 @@
+.task-location-select {
+  display: inline-flex;
+  width: auto;
+}
+
+/* Button styles */
+.task-location-select__trigger,
+.task-location-select__created {
+  border-width: 0px;
+  background-color: transparent;
+  padding: 0px;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  border-radius: 0.375rem 0 0 0.375rem !important; /* Ensure button itself has no rounding */
+}
+
+.task-location-select__trigger {
+  height: 2rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  border-color: var(--border-color-default);
+  background-color: var(--color-background-neutral-primary);
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: auto;
+}
+
+.task-location-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.task-location-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-brand-base);
+}
+
+.task-location-select__trigger:disabled {
+  background-color: var(--color-background-neutral-tertiary);
+  border-color: transparent;
+  color: var(--text-color-default-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Variant styles */
+.task-location-select__trigger--error {
+  border-color: var(--color-destructive-base);
+}
+
+.task-location-select__trigger--error:hover:not(:disabled) {
+  border-color: var(--color-destructive-base);
+}
+
+.task-location-select__trigger--error:focus-visible {
+  border-color: var(--color-destructive-base);
+  outline-color: var(--color-destructive-base);
+}
+
+.task-location-select__trigger--warning {
+  border-color: var(--color-warning-base);
+}
+
+.task-location-select__trigger--success {
+  border-color: var(--color-success-base);
+}
+
+/* Created state styling */
+.task-location-select__content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  padding-right: 0.75rem;
+  border-width: 1px;
+  border-color: var(--border-color-default);
+  background-color: var(--color-background-neutral-primary);
+  height: 32px;
+  flex: 0 1 auto;
+  transition: all 0.2s ease-in-out;
+  padding-left: 0.5rem;
+  border-radius: 0.375rem 0 0 0.375rem !important; /* 6px left, 0 right - force square right corners */
+  overflow: hidden; /* Clip any child elements that might overflow */
+}
+
+.task-location-select__created:hover:not(:disabled) .task-location-select__content {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+/* Focus state only on content area, not ID badge */
+.task-location-select__created:focus-visible .task-location-select__content {
+  border-color: var(--color-brand-base);
+  box-shadow: 0 0 0 2px var(--outline-color-default);
+  position: relative;
+  z-index: 1;
+  border-radius: 0.375rem 0 0 0.375rem !important; /* Force square right corners even on focus */
+}
+
+.task-location-select__created:disabled .task-location-select__content {
+  background-color: var(--color-background-neutral-tertiary);
+  border-color: transparent;
+  color: var(--text-color-default-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.task-location-select__icon {
+  flex-shrink: 0;
+}
+
+.task-location-select__text,
+.task-location-select__value {
+  font-size: var(--font-size-sm);
+  color: var(--text-color-default-primary);
+  white-space: nowrap;
+  flex: 0 1 auto;
+}
+
+.task-location-select__placeholder {
+  font-size: var(--font-size-sm);
+  color: var(--text-color-default-tertiary);
+  white-space: nowrap;
+  flex: 0 1 auto;
+}
+
+.task-location-select__dropdown-icon {
+  flex-shrink: 0;
+  color: var(--text-color-default-secondary);
+}
+
+.task-location-select__id-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  border-width: 1px;
+  border-left-width: 0px;
+  border-color: var(--border-color-default);
+  background-color: var(--color-background-neutral-secondary);
+  min-width: 64px;
+  height: 32px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 0 0.375rem 0.375rem 0 !important; /* 0 left, 6px right - force square left corners */
+  overflow: hidden; /* Clip any child elements that might overflow */
+}
+
+.task-location-select__id-badge:hover {
+  background-color: var(--color-background-neutral-tertiary);
+}
+
+.task-location-select__hash-icon {
+  flex-shrink: 0;
+}
+
+.task-location-select__id-text {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--text-color-default-secondary);
+}
+
+/* Disabled state */
+.task-location-select--disabled .task-location-select__trigger,
+.task-location-select--disabled .task-location-select__created {
+  cursor: not-allowed;
+}
+
+/* Ghost mode adjustments */
+.task-location-select--ghost .task-location-select__content {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.task-location-select--ghost .task-location-select__created:hover .task-location-select__content {
+  background-color: transparent;
+}
+
+.task-location-select--ghost .task-location-select__id-badge {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/* Breadcrumb navigation styles */
+.task-location-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+}
+
+.task-location-breadcrumb__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  border-width: 0px;
+  background-color: transparent;
+  color: var(--text-color-default-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  outline: none;
+}
+
+.task-location-breadcrumb__back:hover {
+  background-color: var(--color-background-neutral-primary-hover);
+  color: var(--text-color-default-primary);
+}
+
+.task-location-breadcrumb__back:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 1px;
+}
+
+.task-location-breadcrumb__path {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex: 1;
+  overflow: hidden;
+}
+
+.task-location-breadcrumb__item {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-color-default-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task-location-breadcrumb__separator {
+  flex-shrink: 0;
+  color: var(--text-color-default-tertiary);
+}
+
+/* Option styling in dropdown */
+.task-location-drill-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.task-location-option__icon {
+  flex-shrink: 0;
+  color: var(--text-color-default-secondary);
+}
+
+.task-location-option__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex: 1;
+  overflow: hidden;
+}
+
+.task-location-option__content > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-location-option__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-color-default-tertiary);
+}
+
+.task-location-option__secondary {
+  color: var(--text-color-default-tertiary);
+}
+
+/* Footer navigation */
+.task-location-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.task-location-footer__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-width: 0px;
+  background-color: transparent;
+  font-size: 14px;
+  color: var(--text-color-default-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  outline: none;
+  border-radius: 6px;
+}
+
+.task-location-footer__item:hover {
+  background-color: var(--color-background-neutral-primary-hover);
+  color: var(--text-color-default-primary);
+}
+
+.task-location-footer__item:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 1px;
+}
+
+.task-location-footer__item > span {
+  flex: 1;
+  text-align: left;
+}
+
+.task-location-footer__arrow {
+  flex-shrink: 0;
+  color: var(--text-color-default-tertiary);
+}

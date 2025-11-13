@@ -1,0 +1,35 @@
+.ds-drawer-header-created {
+
+    display: flex;
+
+    width: 100%;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 1rem
+}
+
+.ds-drawer-header-created__actions-left {
+
+    display: flex;
+
+    flex: 1 1 0%;
+
+    align-items: center;
+
+    gap: 0.5rem
+}
+
+.ds-drawer-header-created__actions-right {
+
+    display: flex;
+
+    flex-shrink: 0;
+
+    align-items: center;
+
+    gap: 0.5rem
+}
+

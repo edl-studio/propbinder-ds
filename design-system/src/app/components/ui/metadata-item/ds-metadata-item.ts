@@ -16,7 +16,8 @@ import { DsTooltipComponent } from '../tooltip/ds-tooltip';
     >
       <div class="metadata-item">
       <ds-icon 
-        [name]="icon()" 
+        *ngIf="icon()"
+        [name]="icon()!" 
         size="12px" 
         color="tertiary" 
         class="metadata-item__icon"
@@ -30,7 +31,8 @@ import { DsTooltipComponent } from '../tooltip/ds-tooltip';
       class="metadata-item"
     >
       <ds-icon 
-        [name]="icon()" 
+        *ngIf="icon()"
+        [name]="icon()!" 
         size="12px" 
         color="tertiary" 
         class="metadata-item__icon"
@@ -41,9 +43,9 @@ import { DsTooltipComponent } from '../tooltip/ds-tooltip';
 })
 export class DsMetadataItemComponent {
   // Required inputs
-  icon = input.required<string>();
   value = input.required<string>();
   
   // Optional inputs
+  icon = input<string>();
   tooltip = input<string>();
 }

@@ -1,0 +1,181 @@
+/* Select Trigger Base Styles
+ * Shared by all select components (ds-select, ds-select-user, ds-select-badge)
+ * Ensures consistent look and behavior across all select inputs
+ */
+
+/* Base trigger styles - shared by all selects */
+.select-trigger-base {
+  @apply tw-relative tw-inline-flex tw-items-center tw-justify-between tw-w-full;
+  @apply tw-h-8 tw-px-2;
+  @apply tw-rounded-md tw-border;
+  @apply tw-outline-none;
+  @apply tw-gap-2;
+  
+  /* Ensure border is rendered */
+  border-style: solid;
+  border-width: 1px;
+  
+  /* Base colors */
+  background-color: var(--color-background-neutral-primary);
+  border-color: var(--border-color-default);
+  color: var(--text-color-default-primary);
+  
+  /* Box sizing */
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* Hover state */
+.select-trigger-base:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+/* Focus state */
+.select-trigger-base:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-brand-base);
+}
+
+/* Open/Active state (when dropdown is open) */
+:host[data-open] .select-trigger-base,
+.ds-combobox[data-open] .select-trigger-base {
+  border-color: var(--color-brand-base);
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+}
+
+/* Rotate icon when open */
+:host[data-open] .select-trigger-base__icon,
+.ds-combobox[data-open] .select-trigger-base__icon {
+  transform: rotate(180deg);
+}
+
+/* Disabled state */
+.select-trigger-base:disabled {
+  background-color: var(--color-background-neutral-tertiary);
+  border-color: transparent;
+  color: var(--text-color-default-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Ghost variant - transparent until interaction */
+.select-trigger-base--ghost {
+  border-color: transparent;
+}
+
+.select-trigger-base--ghost:hover:not(:disabled) {
+  border-color: var(--border-color-default);
+  background-color: var(--color-background-neutral-primary); /* Keep same background */
+}
+
+.select-trigger-base--ghost:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-brand-base);
+}
+
+/* Variant: Error */
+.select-trigger-base--error {
+  border-color: var(--color-destructive-base);
+}
+
+.select-trigger-base--error:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-destructive-base);
+}
+
+.select-trigger-base--ghost.select-trigger-base--error {
+  border-color: transparent;
+}
+
+.select-trigger-base--ghost.select-trigger-base--error:hover:not(:disabled) {
+  border-color: var(--color-destructive-base);
+  background-color: var(--color-background-neutral-primary);
+}
+
+/* Variant: Warning */
+.select-trigger-base--warning {
+  border-color: var(--color-warning-base);
+}
+
+.select-trigger-base--warning:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-warning-base);
+}
+
+.select-trigger-base--ghost.select-trigger-base--warning {
+  border-color: transparent;
+}
+
+.select-trigger-base--ghost.select-trigger-base--warning:hover:not(:disabled) {
+  border-color: var(--color-warning-base);
+  background-color: var(--color-background-neutral-primary);
+}
+
+/* Variant: Success */
+.select-trigger-base--success {
+  border-color: var(--color-success-base);
+}
+
+.select-trigger-base--success:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-success-base);
+}
+
+.select-trigger-base--ghost.select-trigger-base--success {
+  border-color: transparent;
+}
+
+.select-trigger-base--ghost.select-trigger-base--success:hover:not(:disabled) {
+  border-color: var(--color-success-base);
+  background-color: var(--color-background-neutral-primary);
+}
+
+/* Common elements */
+.select-trigger-base__placeholder {
+  flex: 1;
+  text-align: left;
+  color: var(--text-color-default-tertiary);
+  opacity: 0.6;
+}
+
+.select-trigger-base__value {
+  flex: 1;
+  text-align: left;
+  color: var(--text-color-default-primary);
+}
+
+.select-trigger-base__icon {
+  flex-shrink: 0;
+  color: var(--text-color-default-tertiary);
+  pointer-events: none;
+}
+
+.select-trigger-base__icon--open {
+  transform: rotate(180deg);
+}
+
+/* Ghost variant - hide icon by default, show on hover */
+.select-trigger-base--ghost .select-trigger-base__icon {
+  opacity: 0;
+}
+
+.select-trigger-base--ghost:hover:not(:disabled) .select-trigger-base__icon,
+.select-trigger-base--ghost:focus-visible .select-trigger-base__icon,
+.select-trigger-base--ghost[data-expanded]:not(:disabled) .select-trigger-base__icon {
+  opacity: 1;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .select-trigger-base,
+  .select-trigger-base__icon {
+    transition: none;
+  }
+}
+
