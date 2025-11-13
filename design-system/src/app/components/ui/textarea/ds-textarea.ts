@@ -45,6 +45,7 @@ export class DsTextareaComponent implements ControlValueAccessor {
   disabled = input<boolean>(false);
   readonly = input<boolean>(false);
   required = input<boolean>(false);
+  ghost = input<boolean>(false);
   rows = input<number>(4);
   cols = input<number>();
   maxlength = input<number>();
@@ -71,6 +72,7 @@ export class DsTextareaComponent implements ControlValueAccessor {
     if (this.effectiveDisabled()) classes.push('textarea-container--disabled');
     if (this.readonly()) classes.push('textarea-container--readonly');
     if (this.focusedSig()) classes.push('textarea-container--focused');
+    if (this.ghost()) classes.push('textarea-container--ghost');
     return classes.join(' ');
   });
 

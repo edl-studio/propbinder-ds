@@ -116,6 +116,8 @@ export class DsMenuComponent {
   }
   // Inputs
   items = input.required<DsMenuItem[]>();
+  usePortal = input<boolean>(true); // Control portal behavior for drawer contexts
+  align = input<'start' | 'end'>('start'); // Control menu alignment (start = left, end = right)
 
   // Outputs
   itemClicked = output<DsMenuItem>();

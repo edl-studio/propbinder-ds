@@ -259,6 +259,7 @@ export class DsTabs implements AfterViewInit, OnDestroy {
   private readonly elementRef = inject(ElementRef);
   
   readonly value = model<string>();
+  readonly paddingX = input<string>('0');
   readonly tabs = contentChildren(DsTab);
 
   @ViewChild('indicator') indicator?: ElementRef<HTMLElement>;
