@@ -1,0 +1,16 @@
+.ds-drawer-header-default {
+  @apply tw-flex tw-justify-between tw-items-center tw-w-full tw-gap-4;
+}
+
+.ds-drawer-header-default__left {
+  @apply tw-flex tw-items-center tw-gap-3 tw-flex-1 tw-min-w-0;
+}
+
+.ds-drawer-header-default__title {
+  @apply tw-text-default-primary tw-flex-shrink-0;
+}
+
+.ds-drawer-header-default__right {
+  @apply tw-flex tw-gap-2 tw-items-center tw-flex-shrink-0;
+}
+

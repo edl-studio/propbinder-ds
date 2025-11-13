@@ -1,0 +1,177 @@
+.ds-combobox {
+  @apply tw-block tw-w-full;
+  position: relative; /* Needed for inline dropdown positioning */
+}
+
+.ds-combobox--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Trigger wrapper */
+.ds-combobox__trigger-wrapper {
+  @apply tw-block tw-w-full;
+  cursor: pointer;
+}
+
+/* Dropdown styles */
+.ds-combobox__dropdown {
+  position: absolute;
+  background-color: var(--color-background-neutral-primary);
+  border: 1px solid var(--border-color-default);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow-lg);
+  margin-top: 4px;
+  max-height: 320px;
+  overflow: hidden;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  /* Position coordinates are handled by Angular Primitives portal */
+}
+
+/* Inline dropdown (non-portaled, used in dialogs/drawers) */
+.ds-combobox__dropdown--inline {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+/* Right-aligned dropdown */
+.ds-combobox__dropdown--right {
+  left: auto;
+  right: 0;
+}
+
+/* Backdrop for inline dropdown (to handle outside clicks) */
+.ds-combobox__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: transparent;
+}
+
+/* Header section */
+.ds-combobox__header {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-color-default);
+  background-color: var(--color-background-neutral-secondary);
+  flex-shrink: 0; /* Don't shrink */
+}
+
+/* Search section */
+.ds-combobox__search {
+  padding: 4px;
+  border-bottom: 1px solid var(--border-color-default);
+  flex-shrink: 0; /* Don't shrink */
+  pointer-events: auto !important; /* Ensure search can receive events */
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure the input inside search is focusable */
+.ds-combobox__search ds-input,
+.ds-combobox__search ds-input *,
+.ds-combobox__search input {
+  pointer-events: auto !important;
+}
+
+/* Options section */
+.ds-combobox__options {
+  padding: 4px;
+  max-height: 240px;
+  overflow-y: auto; /* Only this section scrolls */
+  flex: 1 1 auto; /* Allow to grow/shrink */
+  min-height: 0; /* Important for flex scrolling */
+}
+
+/* Footer section */
+.ds-combobox__footer {
+  padding: 4px;
+  border-top: 1px solid var(--border-color-default);
+  background-color: var(--color-background-neutral-primary);
+  flex-shrink: 0; /* Don't shrink */
+}
+
+/* Option styles */
+.ds-combobox__option {
+  @apply tw-relative tw-flex tw-items-center tw-w-full;
+  @apply tw-cursor-pointer tw-select-none;
+  @apply tw-transition-colors tw-duration-150;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--text-color-default-primary);
+  font-size: 14px;
+  line-height: 20px;
+  min-height: 36px;
+  gap: 12px; /* Increased gap for better spacing with avatars/badges */
+  padding-right: calc(12px + 16px + 8px); /* Reserve space for checkmark: padding + icon + gap */
+}
+
+/* Option content container - allows for flexible layouts */
+.ds-combobox__option > * {
+  flex-shrink: 0;
+}
+
+/* Text content within options should grow and wrap */
+.ds-combobox__option > span,
+.ds-combobox__option > div {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-combobox__option:hover:not([data-disabled]) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.ds-combobox__option[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--text-color-disabled);
+}
+
+/* Checkmark icon */
+.ds-combobox__checkmark {
+  position: absolute;
+  right: 12px;
+  color: var(--color-brand-base);
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+/* Empty state */
+.ds-combobox__empty {
+  @apply tw-flex tw-items-center tw-justify-center;
+  padding: 8px;
+  color: var(--text-color-default-tertiary);
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes combobox-show {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes combobox-hide {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+}

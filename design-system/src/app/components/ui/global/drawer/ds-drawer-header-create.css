@@ -1,0 +1,12 @@
+.ds-drawer-header-create {
+  @apply tw-flex tw-justify-between tw-items-center tw-w-full tw-gap-4;
+}
+
+.ds-drawer-header-create__title {
+  @apply tw-text-default-primary tw-flex-shrink-0;
+}
+
+.ds-drawer-header-create__actions {
+  @apply tw-flex tw-gap-2 tw-items-center tw-flex-shrink-0;
+}
+
