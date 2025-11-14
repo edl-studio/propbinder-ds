@@ -33,7 +33,13 @@ export { DsAccordionItem } from './accordion/ds-accordion-item';
 export { DsComboboxComponent } from './combobox/ds-combobox';
 export { DsListboxComponent } from './listbox/ds-listbox';
 export { DsMenuComponent } from './menu/ds-menu';
-
+export { DsTaskLocationSelectComponent } from './task-location-select/ds-task-location-select';
+export { DsPropertySuggestionsComponent } from './property-suggestions/ds-property-suggestions.component';
+export { DsRecurrenceInputComponent } from './recurrence-input/ds-recurrence-input';
+export { DsInputTimeComponent } from './input-time/ds-input-time';
+export { DsSelectBadgeComponent } from './select-badge/ds-select-badge';
+export { DsSelectDateComponent } from './select-date/ds-select-date';
+export { DsSelectUserComponent } from './select-user/ds-select-user';
 export { DsSelectComponent } from './select/ds-select';
 export { DsDatepickerComponent } from './datepicker/ds-datepicker';
 export { DsAppLayoutComponent } from './app-layout/ds-app-layout';
@@ -77,13 +83,16 @@ export {
   EditableTextCellComponent,
   EditableNumberCellComponent,
   EditableSelectCellComponent,
+  EditableDatepickerCellComponent,
   type EditableTextCellData,
   type EditableNumberCellData,
+  type EditableDatepickerCellData,
   type EditableSelectCellData
 } from './editable-table/cells';
 export {
   editableTextCell,
   editableNumberCell,
+  editableDatepickerCell,
   editableSelectCell,
   type EditableComponentCell
 } from './editable-table/editable-cell-helpers';
@@ -98,6 +107,7 @@ export type { ButtonVariant, ButtonSize } from './button/ds-button';
 export type { InputVariant, InputType } from './input/ds-input';
 export type { TextareaVariant } from './textarea/ds-textarea';
 export type { CheckboxVariant, CheckboxSize } from './checkbox/ds-checkbox';
+export type { ComboboxVariant } from './combobox/ds-combobox';
 export type { AvatarType, AvatarSize } from './avatar/ds-avatar';
 export type { BadgeVariant, BadgeContentType } from './badge/ds-badge';
 export type { ShapeVariant, ShapeColorVariant } from './shape-indicator/ds-shape-indicator';

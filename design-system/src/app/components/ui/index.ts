@@ -33,7 +33,13 @@ export { DsAccordionItem } from './accordion/ds-accordion-item';
 export { DsComboboxComponent } from './combobox/ds-combobox';
 export { DsListboxComponent } from './listbox/ds-listbox';
 export { DsMenuComponent } from './menu/ds-menu';
-
+export { DsTaskLocationSelectComponent } from './task-location-select/ds-task-location-select';
+export { DsPropertySuggestionsComponent } from './property-suggestions/ds-property-suggestions.component';
+export { DsRecurrenceInputComponent } from './recurrence-input/ds-recurrence-input';
+export { DsInputTimeComponent } from './input-time/ds-input-time';
+export { DsSelectBadgeComponent } from './select-badge/ds-select-badge';
+export { DsSelectDateComponent } from './select-date/ds-select-date';
+export { DsSelectUserComponent } from './select-user/ds-select-user';
 export { DsSelectComponent } from './select/ds-select';
 export { DsDatepickerComponent } from './datepicker/ds-datepicker';
 export { DsAppLayoutComponent } from './app-layout/ds-app-layout';
