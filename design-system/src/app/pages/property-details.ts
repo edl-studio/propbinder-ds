@@ -11,9 +11,7 @@ import { DsPropertySuggestionsComponent } from '../components/ui/property-sugges
 import { DsDrawerComponent } from '../components/ui/drawer/ds-drawer';
 import { DsDrawerHeaderCreateComponent } from '../components/ui/drawer/ds-drawer-header-create';
 import { DsDrawerHeaderCreatedComponent } from '../components/ui/drawer/ds-drawer-header-created';
-import { DsDrawerHeaderDefaultComponent } from '../components/ui/drawer/ds-drawer-header-default';
 import { DsButtonComponent } from '../components/ui/button/ds-button';
-import { DsBadgeComponent } from '../components/ui/badge/ds-badge';
 import { DsInputComponent } from '../components/ui/input/ds-input';
 import { DsTextareaComponent } from '../components/ui/textarea/ds-textarea';
 import { DsAvatarComponent } from '../components/ui/avatar/ds-avatar';
@@ -36,7 +34,7 @@ import { DsDataTableComponent, type DataTableColumn, type DsDataTableColumnMeta,
 import { DsTooltipComponent } from '../components/ui/tooltip/ds-tooltip';
 import { DsMenuComponent, type DsMenuItem } from '../components/ui/menu/ds-menu';
 import { DsConfirmationDialogComponent } from '../components/ui/dialog/ds-confirmation-dialog';
-import { NgpDialogTrigger, NgpDialogOverlay, NgpDialog, NgpDialogManager } from 'ng-primitives/dialog';
+import { NgpDialogOverlay, NgpDialog, NgpDialogManager } from 'ng-primitives/dialog';
 import { NgpFocusTrap } from 'ng-primitives/focus-trap';
 
 // Invoice line interface
@@ -73,9 +71,7 @@ interface Product {
     DsDrawerComponent,
     DsDrawerHeaderCreateComponent,
     DsDrawerHeaderCreatedComponent,
-    DsDrawerHeaderDefaultComponent,
     DsButtonComponent,
-    DsBadgeComponent,
     DsInputComponent,
     DsTextareaComponent,
     DsAvatarComponent,
@@ -100,7 +96,6 @@ interface Product {
     DsConfirmationDialogComponent,
     NgpDialogOverlay,
     NgpDialog,
-    NgpDialogTrigger,
     NgpFocusTrap
   ],
   template: `

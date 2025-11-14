@@ -4,12 +4,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/f
 import { DsIconComponent } from '../icon/ds-icon';
 import { DsInputComponent } from '../input/ds-input';
 import { DsSelectComponent, DsSelectOption } from '../select/ds-select';
-import { CdkConnectedOverlay, ConnectedPosition, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { 
   NgpCombobox,
   NgpComboboxButton,
   NgpComboboxDropdown,
-  NgpComboboxInput,
   NgpComboboxOption, 
   NgpComboboxPortal 
 } from 'ng-primitives/combobox';
@@ -25,12 +23,9 @@ export type ComboboxVariant = 'default' | 'error' | 'warning' | 'success';
     DsIconComponent,
     DsInputComponent,
     DsSelectComponent,
-    CdkOverlayOrigin,
-    CdkConnectedOverlay,
     NgpCombobox,
     NgpComboboxButton,
     NgpComboboxDropdown,
-    NgpComboboxInput,
     NgpComboboxOption,
     NgpComboboxPortal,
   ],
