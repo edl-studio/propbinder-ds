@@ -27,6 +27,8 @@ export interface ActionCellData {
   actions?: ActionButton[];
   /** @deprecated Use actions array instead - Whether the delete button is disabled */
   deleteDisabled?: boolean;
+  /** Tooltip text for delete button (legacy single-button mode, supports translations) */
+  deleteTooltip?: string;
 }
 
 /**
@@ -76,6 +78,7 @@ export interface ActionCellData {
             size="sm"
             [disabled]="action.disabled || false"
             [ariaLabel]="action.ariaLabel"
+            [tooltip]="action.ariaLabel"
             (clicked)="actionClicked.emit({ action: action.action, rowIndex: data().rowIndex, row: data().row })"
           />
         }
@@ -86,7 +89,8 @@ export interface ActionCellData {
           variant="ghost"
           size="sm"
           [disabled]="data().deleteDisabled || false"
-          ariaLabel="Delete row"
+          [ariaLabel]="data().deleteTooltip || 'Delete row'"
+          [tooltip]="data().deleteTooltip || 'Delete row'"
           (clicked)="deleteClicked.emit(data().rowIndex)"
         />
       }

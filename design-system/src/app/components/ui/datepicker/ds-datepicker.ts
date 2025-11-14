@@ -177,6 +177,8 @@ export class DsDatepickerComponent implements ControlValueAccessor {
   ariaDescribedBy = input<string>();
   disableFutureDates = input<boolean>(false);
   isDateDisabled = input<((date: Date) => boolean) | undefined>();
+  /** Locale to use for date formatting (e.g., 'en-US', 'de-DE', 'fr-FR'). Defaults to browser locale. */
+  locale = input<string | undefined>(undefined);
 
   // Outputs
   dateChange = output<Date | null>();
@@ -221,11 +223,18 @@ export class DsDatepickerComponent implements ControlValueAccessor {
   // Label computed from focused date (which tracks the currently displayed month)
   label = computed(() => {
     const date = this.focusedDateSig();
+    const locale = this.locale() || navigator.language;
     if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
       const today = new Date();
-      return `${today.toLocaleString('default', { month: 'long' })} ${today.getFullYear()}`;
+      const monthName = today.toLocaleString(locale, { month: 'long' });
+      // Capitalize first letter
+      const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+      return `${capitalizedMonth} ${today.getFullYear()}`;
     }
-    return `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
+    const monthName = date.toLocaleString(locale, { month: 'long' });
+    // Capitalize first letter
+    const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+    return `${capitalizedMonth} ${date.getFullYear()}`;
   });
 
   // Combined date disabled logic
@@ -256,16 +265,28 @@ export class DsDatepickerComponent implements ControlValueAccessor {
     };
   });
   
-  // Week days starting with Monday (always)
-  weekDays = computed(() => [
-    { short: 'M', full: 'Monday' },
-    { short: 'T', full: 'Tuesday' },
-    { short: 'W', full: 'Wednesday' },
-    { short: 'T', full: 'Thursday' },
-    { short: 'F', full: 'Friday' },
-    { short: 'S', full: 'Saturday' },
-    { short: 'S', full: 'Sunday' },
-  ]);
+  // Week days starting with Monday (generated dynamically based on locale)
+  weekDays = computed(() => {
+    const locale = this.locale() || navigator.language;
+    const weekDays: { short: string; full: string }[] = [];
+    
+    // Generate weekday names starting with Monday (ISO 8601 standard)
+    // Create dates for a week that starts with Monday
+    // Using Jan 1, 2024 as reference (Monday)
+    const baseDate = new Date(2024, 0, 1); // Jan 1, 2024 is a Monday
+    
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(baseDate);
+      date.setDate(baseDate.getDate() + i);
+      
+      const full = date.toLocaleDateString(locale, { weekday: 'long' });
+      const short = date.toLocaleDateString(locale, { weekday: 'narrow' });
+      
+      weekDays.push({ short, full });
+    }
+    
+    return weekDays;
+  });
 
   containerClasses = computed(() => {
     const classes = ['ds-datepicker'];

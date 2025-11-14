@@ -52,7 +52,11 @@
 }
 
 .ds-dialog__header {
-  @apply tw-p-6 tw-border-b tw-border-default tw-flex-shrink-0;
+  @apply tw-pt-4 tw-pr-4 tw-pb-4 tw-pl-6 tw-flex-shrink-0 tw-flex tw-items-center tw-justify-between tw-gap-4;
+}
+
+.ds-dialog__title {
+  @apply tw-flex-1 tw-m-0;
 }
 
 .ds-dialog__content {

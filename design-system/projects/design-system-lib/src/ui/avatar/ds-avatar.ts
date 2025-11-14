@@ -7,6 +7,7 @@ export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 @Component({
   selector: 'ds-avatar',
+  standalone: true,
   imports: [CommonModule, DsIconComponent],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-avatar.css'],
@@ -42,7 +43,7 @@ export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   `,
 })
 export class DsAvatarComponent {
-  // Input signals
+  // Signal inputs
   type = input<AvatarType>('initials');
   size = input<AvatarSize>('md');
   
@@ -71,6 +72,11 @@ export class DsAvatarComponent {
     if (this.type() === 'icon') {
       const depthClass = this.getDepthClass();
       classes.push(depthClass);
+    }
+    
+    // Add color variant for initials avatars
+    if (this.type() === 'initials') {
+      classes.push(`avatar--${this.colorVariant()}`);
     }
     
     return classes.join(' ');
@@ -104,6 +110,34 @@ export class DsAvatarComponent {
       xl: '32px'
     };
     return sizeMap[this.size()];
+  });
+  
+  // Get color variant based on initials
+  colorVariant = computed(() => {
+    const initialsValue = this.initials();
+    if (!initialsValue) return 'light-brown';
+    
+    // Color variants that match the design system
+    const colorVariants = [
+      'light-brown',
+      'rose',
+      'pink',
+      'purple',
+      'blue',
+      'light-blue',
+      'turquoise',
+      'light-green'
+    ];
+    
+    // Calculate a hash from the initials
+    let hash = 0;
+    for (let i = 0; i < initialsValue.length; i++) {
+      hash = initialsValue.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    
+    // Use the hash to select a color variant
+    const index = Math.abs(hash) % colorVariants.length;
+    return colorVariants[index];
   });
   
   // Get depth class based on avatar size for icon avatars

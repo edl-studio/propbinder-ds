@@ -1,5 +1,7 @@
 .ds-combobox {
-  display: inline-block;
+  display: block;
+  width: 100%;
+  position: relative; /* Needed for inline dropdown positioning */
 }
 
 .ds-combobox--disabled {
@@ -9,33 +11,92 @@
 
 /* Trigger wrapper */
 .ds-combobox__trigger-wrapper {
-  display: inline-block;
+  display: block;
+  width: 100%;
   cursor: pointer;
 }
 
 /* Dropdown styles */
 .ds-combobox__dropdown {
+  position: absolute;
   background-color: var(--color-background-neutral-primary);
   border: 1px solid var(--border-color-default);
   border-radius: 8px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--box-shadow-lg);
   margin-top: 4px;
   max-height: 320px;
-  overflow-y: auto;
+  overflow: hidden;
   z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  /* Position coordinates are handled by Angular Primitives portal */
+}
+
+/* Inline dropdown (non-portaled, used in dialogs/drawers) */
+.ds-combobox__dropdown--inline {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+/* Right-aligned dropdown */
+.ds-combobox__dropdown--right {
+  left: auto;
+  right: 0;
+}
+
+/* Backdrop for inline dropdown (to handle outside clicks) */
+.ds-combobox__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: transparent;
+}
+
+/* Header section */
+.ds-combobox__header {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-color-default);
+  background-color: var(--color-background-neutral-secondary);
+  flex-shrink: 0; /* Don't shrink */
 }
 
 /* Search section */
 .ds-combobox__search {
-  padding: 8px;
+  padding: 4px;
   border-bottom: 1px solid var(--border-color-default);
+  flex-shrink: 0; /* Don't shrink */
+  pointer-events: auto !important; /* Ensure search can receive events */
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure the input inside search is focusable */
+.ds-combobox__search ds-input,
+.ds-combobox__search ds-input *,
+.ds-combobox__search input {
+  pointer-events: auto !important;
 }
 
 /* Options section */
 .ds-combobox__options {
   padding: 4px;
   max-height: 240px;
-  overflow-y: auto;
+  overflow-y: auto; /* Only this section scrolls */
+  flex: 1 1 auto; /* Allow to grow/shrink */
+  min-height: 0; /* Important for flex scrolling */
+}
+
+/* Footer section */
+.ds-combobox__footer {
+  padding: 4px;
+  border-top: 1px solid var(--border-color-default);
+  background-color: var(--color-background-neutral-primary);
+  flex-shrink: 0; /* Don't shrink */
 }
 
 /* Option styles */
@@ -57,9 +118,21 @@
   font-size: 14px;
   line-height: 20px;
   min-height: 36px;
-  gap: 8px;
+  gap: 12px; /* Increased gap for better spacing with avatars/badges */
   padding-right: calc(12px + 16px + 8px); /* Reserve space for checkmark: padding + icon + gap */
-  white-space: nowrap;
+}
+
+/* Option content container - allows for flexible layouts */
+.ds-combobox__option > * {
+  flex-shrink: 0;
+}
+
+/* Text content within options should grow and wrap */
+.ds-combobox__option > span,
+.ds-combobox__option > div {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ds-combobox__option:hover:not([data-disabled]) {

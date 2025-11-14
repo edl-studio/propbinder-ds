@@ -1,0 +1,40 @@
+.ds-recurrence-input {
+  position: relative;
+  width: 100%;
+}
+
+.ds-recurrence-input__trigger-wrapper {
+  width: 100%;
+  cursor: pointer;
+}
+
+.ds-recurrence-input--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ds-recurrence-input--disabled .ds-recurrence-input__trigger-wrapper {
+  cursor: not-allowed;
+}
+
+/* Set icon opacity to 0.6 when field is empty (to match placeholder) */
+:host ::ng-deep ds-input.ds-recurrence-input__input--empty .ds-input__icon--leading,
+:host ::ng-deep ds-input.ds-recurrence-input__input--empty .ds-input__icon--trailing {
+  opacity: 0.6;
+}
+
+/* Ensure refresh icon (leading) is always visible, even in ghost mode when empty */
+:host ::ng-deep ds-input.ds-recurrence-input__input--empty.ds-input--ghost .ds-input__icon--leading {
+  opacity: 0.6 !important;
+}
+
+/* Rotate chevron icon when dialog is open */
+:host ::ng-deep ds-input.ds-recurrence-input__input--open .ds-input__icon--trailing {
+  transform: rotate(180deg);
+}
+
+/* Override dialog content padding for recurrence dialog */
+::ng-deep ds-dialog.ds-recurrence-dialog .ds-dialog__content {
+  padding-top: 0 !important;
+}
+

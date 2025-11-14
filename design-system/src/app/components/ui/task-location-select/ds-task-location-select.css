@@ -1,0 +1,293 @@
+.task-location-select {
+  display: inline-flex;
+  width: auto;
+}
+
+/* Button styles */
+.task-location-select__trigger,
+.task-location-select__created {
+  @apply tw-border-0 tw-bg-transparent tw-p-0;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  border-radius: 0.375rem 0 0 0.375rem !important; /* Ensure button itself has no rounding */
+}
+
+.task-location-select__trigger {
+  @apply tw-h-8 tw-px-3;
+  @apply tw-rounded-md tw-border tw-border-default;
+  background-color: var(--color-background-neutral-primary);
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: auto;
+}
+
+.task-location-select__trigger:hover:not(:disabled) {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+.task-location-select__trigger:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 0;
+  border-color: var(--color-brand-base);
+}
+
+.task-location-select__trigger:disabled {
+  background-color: var(--color-background-neutral-tertiary);
+  border-color: transparent;
+  color: var(--text-color-default-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Variant styles */
+.task-location-select__trigger--error {
+  border-color: var(--color-destructive-base);
+}
+
+.task-location-select__trigger--error:hover:not(:disabled) {
+  border-color: var(--color-destructive-base);
+}
+
+.task-location-select__trigger--error:focus-visible {
+  border-color: var(--color-destructive-base);
+  outline-color: var(--color-destructive-base);
+}
+
+.task-location-select__trigger--warning {
+  border-color: var(--color-warning-base);
+}
+
+.task-location-select__trigger--success {
+  border-color: var(--color-success-base);
+}
+
+/* Created state styling */
+.task-location-select__content {
+  @apply tw-flex tw-items-center tw-gap-2;
+  @apply tw-pr-3 tw-py-1.5;
+  @apply tw-border tw-border-default;
+  background-color: var(--color-background-neutral-primary);
+  height: 32px;
+  flex: 0 1 auto;
+  transition: all 0.2s ease-in-out;
+  padding-left: 0.5rem;
+  border-radius: 0.375rem 0 0 0.375rem !important; /* 6px left, 0 right - force square right corners */
+  overflow: hidden; /* Clip any child elements that might overflow */
+}
+
+.task-location-select__created:hover:not(:disabled) .task-location-select__content {
+  background-color: var(--color-background-neutral-primary-hover);
+}
+
+/* Focus state only on content area, not ID badge */
+.task-location-select__created:focus-visible .task-location-select__content {
+  border-color: var(--color-brand-base);
+  box-shadow: 0 0 0 2px var(--outline-color-default);
+  position: relative;
+  z-index: 1;
+  border-radius: 0.375rem 0 0 0.375rem !important; /* Force square right corners even on focus */
+}
+
+.task-location-select__created:disabled .task-location-select__content {
+  background-color: var(--color-background-neutral-tertiary);
+  border-color: transparent;
+  color: var(--text-color-default-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.task-location-select__icon {
+  @apply tw-flex-shrink-0;
+}
+
+.task-location-select__text,
+.task-location-select__value {
+  @apply tw-text-sm;
+  color: var(--text-color-default-primary);
+  white-space: nowrap;
+  flex: 0 1 auto;
+}
+
+.task-location-select__placeholder {
+  @apply tw-text-sm;
+  color: var(--text-color-default-tertiary);
+  white-space: nowrap;
+  flex: 0 1 auto;
+}
+
+.task-location-select__dropdown-icon {
+  @apply tw-flex-shrink-0;
+  color: var(--text-color-default-secondary);
+}
+
+.task-location-select__id-badge {
+  @apply tw-flex tw-items-center tw-justify-center tw-gap-1;
+  @apply tw-flex-shrink-0;
+  @apply tw-px-3 tw-py-1.5;
+  @apply tw-border tw-border-l-0 tw-border-default;
+  background-color: var(--color-background-neutral-secondary);
+  min-width: 64px;
+  height: 32px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 0 0.375rem 0.375rem 0 !important; /* 0 left, 6px right - force square left corners */
+  overflow: hidden; /* Clip any child elements that might overflow */
+}
+
+.task-location-select__id-badge:hover {
+  background-color: var(--color-background-neutral-tertiary);
+}
+
+.task-location-select__hash-icon {
+  @apply tw-flex-shrink-0;
+}
+
+.task-location-select__id-text {
+  @apply tw-text-sm;
+  font-weight: 400;
+  color: var(--text-color-default-secondary);
+}
+
+/* Disabled state */
+.task-location-select--disabled .task-location-select__trigger,
+.task-location-select--disabled .task-location-select__created {
+  cursor: not-allowed;
+}
+
+/* Ghost mode adjustments */
+.task-location-select--ghost .task-location-select__content {
+  @apply tw-border-transparent tw-bg-transparent;
+}
+
+.task-location-select--ghost .task-location-select__created:hover .task-location-select__content {
+  @apply tw-bg-transparent;
+}
+
+.task-location-select--ghost .task-location-select__id-badge {
+  background-color: transparent;
+  @apply tw-border-transparent;
+}
+
+/* Breadcrumb navigation styles */
+.task-location-breadcrumb {
+  @apply tw-flex tw-items-center tw-gap-2;
+  padding: 0;
+}
+
+.task-location-breadcrumb__back {
+  @apply tw-flex tw-items-center tw-justify-center;
+  @apply tw-p-1 tw-rounded;
+  @apply tw-border-0 tw-bg-transparent;
+  color: var(--text-color-default-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  outline: none;
+}
+
+.task-location-breadcrumb__back:hover {
+  background-color: var(--color-background-neutral-primary-hover);
+  color: var(--text-color-default-primary);
+}
+
+.task-location-breadcrumb__back:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 1px;
+}
+
+.task-location-breadcrumb__path {
+  @apply tw-flex tw-items-center tw-gap-1.5;
+  flex: 1;
+  overflow: hidden;
+}
+
+.task-location-breadcrumb__item {
+  @apply tw-text-sm;
+  font-weight: 500;
+  color: var(--text-color-default-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task-location-breadcrumb__separator {
+  @apply tw-flex-shrink-0;
+  color: var(--text-color-default-tertiary);
+}
+
+/* Option styling in dropdown */
+.task-location-drill-option {
+  @apply tw-flex tw-items-center tw-gap-3;
+  width: 100%;
+  cursor: pointer;
+}
+
+.task-location-option__icon {
+  @apply tw-flex-shrink-0;
+  color: var(--text-color-default-secondary);
+}
+
+.task-location-option__content {
+  @apply tw-flex tw-flex-col tw-gap-0.5;
+  flex: 1;
+  overflow: hidden;
+}
+
+.task-location-option__content > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-location-option__breadcrumb {
+  @apply tw-flex tw-items-center tw-gap-1;
+  color: var(--text-color-default-tertiary);
+}
+
+.task-location-option__secondary {
+  color: var(--text-color-default-tertiary);
+}
+
+/* Footer navigation */
+.task-location-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.task-location-footer__item {
+  @apply tw-flex tw-items-center tw-gap-2;
+  @apply tw-w-full tw-px-3 tw-py-2;
+  @apply tw-border-0 tw-bg-transparent;
+  font-size: 14px;
+  color: var(--text-color-default-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  outline: none;
+  border-radius: 6px;
+}
+
+.task-location-footer__item:hover {
+  background-color: var(--color-background-neutral-primary-hover);
+  color: var(--text-color-default-primary);
+}
+
+.task-location-footer__item:focus-visible {
+  outline: 2px solid var(--outline-color-default);
+  outline-offset: 1px;
+}
+
+.task-location-footer__item > span {
+  flex: 1;
+  text-align: left;
+}
+
+.task-location-footer__arrow {
+  @apply tw-flex-shrink-0;
+  color: var(--text-color-default-tertiary);
+}
