@@ -16,6 +16,7 @@ import {
   remixEditLine,
   remixDeleteBinLine,
   remixLoader4Line,
+  remixSettings3Line,
 } from '@ng-icons/remixicon';
 import type { ColumnDef } from '@tanstack/angular-table';
 import { signal } from '@angular/core';
@@ -280,6 +281,7 @@ const meta: Meta<DsDataTableComponent> = {
           remixEditLine,
           remixDeleteBinLine,
           remixLoader4Line,
+          remixSettings3Line,
         }),
       ],
     }),
@@ -612,6 +614,155 @@ export const WithColumnManagement: Story = {
 - **Auto-Close**: Single selection closes the dropdown, multi-selection keeps it open
 
 Click the column icon button in the toolbar to manage which columns are visible. The dropdown uses the same portal and trigger pattern as ds-menu for consistency.`,
+      },
+    },
+  },
+};
+
+// Materials data type for multi-action example
+interface Material {
+  id: string;
+  name: string;
+  costPrice: number;
+  salesPrice: number;
+  lastUpdated: string;
+}
+
+const sampleMaterials: Material[] = [
+  { id: '001', name: 'Administration fee', costPrice: 800, salesPrice: 1000, lastUpdated: 'Oct 24, 24' },
+  { id: '002', name: 'Property sale fee', costPrice: 200, salesPrice: 400, lastUpdated: 'Sep 2, 25' },
+  { id: '003', name: 'Broker correspondence', costPrice: 50, salesPrice: 100, lastUpdated: 'Aug 24, 25' },
+  { id: '004', name: 'Miscellaneous', costPrice: 50, salesPrice: 100, lastUpdated: 'Jul 15, 25' },
+  { id: '005', name: 'Copying', costPrice: 50, salesPrice: 100, lastUpdated: 'Jun 10, 25' },
+];
+
+// Columns with multiple actions (Manage + Delete)
+const materialsColumnsWithActions: ColumnDef<Material>[] = [
+  {
+    accessorKey: 'id',
+    header: 'ID +',
+    meta: {
+      sizing: {
+        maxWidth: 'xs',
+      }
+    } as DsDataTableColumnMeta,
+  },
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    meta: {
+      sizing: {
+        minWidth: 'md',
+      }
+    } as DsDataTableColumnMeta,
+  },
+  {
+    accessorKey: 'costPrice',
+    header: 'Cost price',
+    meta: {
+      sizing: {
+        maxWidth: 'sm',
+      }
+    } as DsDataTableColumnMeta,
+    cell: (info) => {
+      const price = info.getValue() as number;
+      return `<span style="font-weight: 500;">${price.toFixed(2)} DKK</span>`;
+    },
+  },
+  {
+    accessorKey: 'salesPrice',
+    header: 'Sales price',
+    meta: {
+      sizing: {
+        maxWidth: 'sm',
+      }
+    } as DsDataTableColumnMeta,
+    cell: (info) => {
+      const price = info.getValue() as number;
+      return `<span style="font-weight: 600; color: var(--text-color-default-primary);">${price.toFixed(2)} DKK</span>`;
+    },
+  },
+  {
+    accessorKey: 'lastUpdated',
+    header: 'Last updated',
+    meta: {
+      sizing: {
+        maxWidth: 'sm',
+      }
+    } as DsDataTableColumnMeta,
+  },
+  {
+    id: 'actions',
+    header: '',
+    enableSorting: false,
+    enableHiding: false,
+    meta: {
+      sizing: {
+        width: '100px',
+      }
+    } as DsDataTableColumnMeta,
+    cell: (info) => {
+      const row = info.row.original;
+      return `
+        <div style="display: flex; gap: 4px; align-items: center; justify-content: flex-end;">
+          <button 
+            class="action-btn manage-btn"
+            data-action="manage"
+            data-row-id="${row.id}"
+            style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 8px; border: none; background: transparent; cursor: pointer; border-radius: 4px; color: var(--text-color-default-secondary); transition: all 0.2s;"
+            onmouseover="this.style.background='var(--color-background-neutral-secondary-hover)'; this.style.color='var(--text-color-default-primary)';"
+            onmouseout="this.style.background='transparent'; this.style.color='var(--text-color-default-secondary)';"
+            onclick="alert('Managing material: ${row.name}\\n\\nThis would open a dialog with property-specific pricing.')"
+            title="Manage">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M12 1v6m0 6v6m-9-9h6m6 0h6"></path>
+              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path>
+            </svg>
+          </button>
+          <button 
+            class="action-btn delete-btn"
+            data-action="delete"
+            data-row-id="${row.id}"
+            style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 8px; border: none; background: transparent; cursor: pointer; border-radius: 4px; color: var(--text-color-default-secondary); transition: all 0.2s;"
+            onmouseover="this.style.background='#fee2e2'; this.style.color='#ef4444';"
+            onmouseout="this.style.background='transparent'; this.style.color='var(--text-color-default-secondary)';"
+            onclick="alert('Delete material: ${row.name}')"
+            title="Delete">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      `;
+    },
+  },
+];
+
+export const MultipleActions: Story = {
+  args: {
+    data: sampleMaterials,
+    columns: materialsColumnsWithActions,
+    searchable: true,
+    searchPlaceholder: 'Search materials...',
+    paginated: true,
+    pageSize: 10,
+    showColumnVisibility: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `Materials table with multiple action buttons (Manage + Delete) in the data table. 
+        
+**Key Features:**
+- **4px gap** between action buttons for proper spacing
+- **Manage button** opens property-specific pricing dialogs
+- **Delete button** removes the material
+- **Icon-only buttons** with hover states for clean UI
+- **Inline HTML approach** for non-editable tables
+
+This example shows how to add multiple actions to a read-only data table using inline HTML. For editable tables with component-based cells, use the \`actionsCell()\` helper from the editable table component.`,
       },
     },
   },

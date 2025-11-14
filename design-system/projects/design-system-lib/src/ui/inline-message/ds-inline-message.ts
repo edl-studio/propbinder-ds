@@ -43,11 +43,13 @@ export type InlineMessageVariant = 'success' | 'error' | 'warning' | 'informatio
     <div [class]="messageClasses()">
       <div class="inline-message__content">
         <div class="inline-message__header">
-          <ds-icon 
-            [name]="iconName()" 
-            [size]="iconSize()"
-            class="inline-message__icon"
-          />
+          @if (showIcon()) {
+            <ds-icon 
+              [name]="iconName()" 
+              [size]="iconSize()"
+              class="inline-message__icon"
+            />
+          }
           <div class="inline-message__title">
             {{ title() }}
           </div>
@@ -89,6 +91,11 @@ export class DsInlineMessageComponent {
    * @default '16px'
    */
   iconSize = input<string>('16px');
+
+  /** Whether to show the icon
+   * @default true
+   */
+  showIcon = input<boolean>(true);
 
   // Computed icon name based on variant or custom icon
   iconName = computed(() => {

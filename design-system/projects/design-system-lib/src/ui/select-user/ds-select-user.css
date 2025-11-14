@@ -1,0 +1,33 @@
+/* User Select Component
+ * A specialized user selector with avatar display
+ * Built on top of ds-combobox for consistent behavior
+ * Trigger styles from shared base for consistency
+ */
+
+@import '../_select-trigger-base.css';
+
+:host {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+}
+
+/* Avatar in trigger */
+.user-select__avatar {
+  flex-shrink: 0;
+}
+
+/* Option content in dropdown */
+.user-select__option-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.user-select__option-content > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -579,7 +579,7 @@ export class InvoiceDetailsComponent {
         sizing: {
           minWidth: 'xs',
         },
-        align: 'right',
+        align: 'left',
       } as DsEditableTableColumnMeta,
     },
     {

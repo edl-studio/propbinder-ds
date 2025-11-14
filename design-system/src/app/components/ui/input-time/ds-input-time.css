@@ -1,0 +1,117 @@
+/* Time Input Component
+ * A specialized time input wrapper around ds-input
+ */
+
+:host {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+}
+
+.ds-input-time-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Ensure time input uses colon separator (not dots) */
+:host ::ng-deep ds-input input[type="time"] {
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+}
+
+/* Hide the native placeholder completely */
+:host ::ng-deep ds-input input[type="time"]::placeholder {
+  color: transparent !important;
+  opacity: 0 !important;
+}
+
+/* Custom placeholder overlay */
+.ds-input-time__placeholder {
+  position: absolute;
+  left: 32px; /* Account for icon width (16px) + padding (8px) + gap (8px) */
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-color-default-tertiary);
+  opacity: 0.6;
+  font-size: 14px;
+  line-height: 1;
+  font-family: inherit;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* Hide native HTML5 time picker button (calendar/clock icon on the right) */
+:host ::ng-deep ds-input input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+}
+
+:host ::ng-deep ds-input input[type="time"]::-webkit-inner-spin-button,
+:host ::ng-deep ds-input input[type="time"]::-webkit-outer-spin-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+/* Firefox - hide native time picker */
+:host ::ng-deep ds-input input[type="time"] {
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+
+/* Edge/IE */
+:host ::ng-deep ds-input input[type="time"]::-ms-clear,
+:host ::ng-deep ds-input input[type="time"]::-ms-reveal {
+  display: none !important;
+}
+
+/* Set icon and placeholder opacity to 0.6 when field is empty */
+:host ::ng-deep ds-input.ds-input-time--empty .ds-input__icon--leading,
+:host ::ng-deep ds-input.ds-input-time--empty .ds-input__icon--leading ds-icon {
+  opacity: 0.6 !important;
+}
+
+/* Set placeholder text opacity to 0.6 when field is empty */
+:host ::ng-deep ds-input.ds-input-time--empty .ds-input__field::placeholder,
+:host ::ng-deep ds-input.ds-input-time--empty input[type="time"]::placeholder {
+  opacity: 0.6 !important;
+  color: var(--text-color-default-tertiary) !important;
+}
+
+/* Also target placeholder-shown state for the input field */
+:host ::ng-deep ds-input.ds-input-time--empty .ds-input__field:placeholder-shown::placeholder,
+:host ::ng-deep ds-input.ds-input-time--empty input[type="time"]:placeholder-shown::placeholder {
+  opacity: 0.6 !important;
+  color: var(--text-color-default-tertiary) !important;
+}
+
+/* Reset icon opacity to 1 when field has value */
+:host ::ng-deep ds-input:not(.ds-input-time--empty) .ds-input__icon--leading,
+:host ::ng-deep ds-input:not(.ds-input-time--empty) .ds-input__icon--leading ds-icon {
+  opacity: 1 !important;
+}
+
+/* Ensure clock icon is always visible, even in ghost mode when empty */
+:host ::ng-deep ds-input.ds-input-time--empty.ds-input--ghost .ds-input__icon--leading,
+:host ::ng-deep ds-input.ds-input-time--empty.ds-input--ghost .ds-input__icon--leading ds-icon {
+  opacity: 0.6 !important;
+}
+
+/* Reset icon opacity to 1 in ghost mode when field has value */
+:host ::ng-deep ds-input.ds-input--ghost:not(.ds-input-time--empty) .ds-input__icon--leading,
+:host ::ng-deep ds-input.ds-input--ghost:not(.ds-input-time--empty) .ds-input__icon--leading ds-icon {
+  opacity: 1 !important;
+}
+
+/* Additional specificity to ensure opacity updates with transition */
+:host ::ng-deep .ds-input__icon--leading,
+:host ::ng-deep .ds-input__icon--leading ds-icon {
+  transition: opacity 0.2s ease-in-out;
+}
+

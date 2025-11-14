@@ -4,5 +4,5 @@ export { EditableNumberCellComponent, type EditableNumberCellData } from './edit
 export { EditableSelectCellComponent, type EditableSelectCellData } from './editable-select-cell.component';
 export { EditableDatepickerCellComponent, type EditableDatepickerCellData } from './editable-datepicker-cell.component';
 export { DragHandleCellComponent } from './drag-handle-cell.component';
-export { ActionCellComponent, type ActionCellData } from './action-cell.component';
+export { ActionCellComponent, type ActionCellData, type ActionButton } from './action-cell.component';
 

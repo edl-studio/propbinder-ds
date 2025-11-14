@@ -1,0 +1,126 @@
+/* Base dialog - NO width constraints, just common styles */
+.ds-dialog {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  animation: slideInFromBottom 200ms ease-out;
+  margin-top: var(--dialog-top-margin);
+  margin-bottom: var(--dialog-top-margin); /* Bottom margin for scrolling */
+}
+
+/* Small: Quick confirmations (400x400) */
+.ds-dialog--sm {
+  width: min(400px, calc(100vw - 48px));
+  max-height: min(400px, calc(100vh - 128px)); /* 64px margin top+bottom */
+}
+
+/* Medium (default): Standard forms (480x600) */
+.ds-dialog--md {
+  width: min(480px, calc(100vw - 48px));
+  max-height: min(600px, calc(100vh - 128px));
+}
+
+/* Large: Complex forms (600x700) */
+.ds-dialog--lg {
+  width: min(600px, calc(100vw - 48px));
+  max-height: min(700px, calc(100vh - 128px));
+}
+
+/* Extra Large: Data tables (768x800) */
+.ds-dialog--xl {
+  width: min(768px, calc(100vw - 48px));
+  max-height: min(800px, calc(100vh - 128px));
+}
+
+/* Mobile: more conservative margins */
+@media (max-width: 575px) {
+  .ds-dialog--sm,
+  .ds-dialog--md,
+  .ds-dialog--lg,
+  .ds-dialog--xl {
+    width: calc(100vw - 32px);  /* 16px margin each side */
+    max-height: calc(100vh - 64px); /* 32px margin top+bottom */
+  }
+}
+
+/* Exit animation - applied when ngpDialog adds data-exit to host */
+.ds-dialog[data-exit] {
+  animation: slideOutToTop 150ms ease-in;
+}
+
+/* Also handle when data-exit is on the host component */
+:host([data-exit]) .ds-dialog {
+  animation: slideOutToTop 150ms ease-in !important;
+}
+
+.ds-dialog__header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.ds-dialog__title {
+  margin: 0px;
+  flex: 1 1 0%;
+}
+
+.ds-dialog__content {
+  flex: 1 1 0%;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+/* Forms inside content should have 8px gap between elements */
+::ng-deep [slot="content"] form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ds-dialog__footer {
+  flex-shrink: 0;
+  border-top-width: 1px;
+  border-color: var(--border-color-default);
+  padding: 1.5rem;
+}
+
+/* Target the slotted footer content */
+::ng-deep [slot="footer"] {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutToTop {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-32px);
+  }
+}

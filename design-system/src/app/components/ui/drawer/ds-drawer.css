@@ -1,6 +1,7 @@
 /* Overlay styles - to be used on the ngpDialogOverlay */
 .ds-drawer-overlay {
   @apply tw-fixed tw-inset-0 tw-bg-black/50 tw-z-50;
+  padding: 8px;
   animation: fadeIn 150ms ease-out;
 }
 
@@ -10,11 +11,22 @@
 
 /* Drawer styles - applied to the ds-drawer component */
 .ds-drawer {
-  @apply tw-bg-white tw-shadow-xl tw-w-[480px] tw-flex tw-flex-col tw-h-full tw-fixed tw-inset-y-0;
+  @apply tw-shadow-xl tw-w-[640px] tw-flex tw-flex-col tw-overflow-y-auto tw-overflow-x-hidden;
+  position: fixed;
+  top: 8px;
+  bottom: 8px;
+  height: calc(100% - 16px);
+  background-color: var(--color-background-neutral-secondary);
+  border-radius: 12px;
+  
+  /* Shared content area variables */
+  --drawer-content-bg: var(--color-background-neutral-secondary);
+  --drawer-content-padding: 1rem; /* 16px */
+  --drawer-content-gap: 0.5rem; /* 8px */
 }
 
 .ds-drawer--right {
-  @apply tw-right-0;
+  right: 8px;
   animation: slideInRight 250ms ease-out;
 }
 
@@ -23,7 +35,7 @@
 }
 
 .ds-drawer--left {
-  @apply tw-left-0;
+  left: 8px;
   animation: slideInLeft 250ms ease-out;
 }
 
@@ -32,15 +44,85 @@
 }
 
 .ds-drawer__header {
-  @apply tw-p-6 tw-border-b tw-border-neutral-100 tw-flex-shrink-0;
+  @apply tw-bg-white tw-p-4 tw-border-b tw-border-default;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
+/* Primary content: white bg, border-bottom, padding */
+.ds-drawer__primary-content {
+  @apply tw-bg-white tw-border-b tw-border-default tw-flex-shrink-0;
+  
+  &:empty {
+    display: none;
+  }
+  
+  &:not(:empty) {
+    @apply tw-p-4; /* 16px padding */
+  }
+}
+
+/* Secondary content: padding, gap (background inherited from drawer) */
+.ds-drawer__secondary-content {
+  @apply tw-flex-shrink-0;
+  padding: var(--drawer-content-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--drawer-content-gap);
+  
+  &:empty {
+    display: none;
+  }
+}
+
+/* Tabs container: transparent bg, border-bottom, edge-to-edge */
+.ds-drawer__tabs {
+  @apply tw-border-b tw-border-default;
+  
+  &:empty {
+    display: none;
+  }
+  
+  /* Tab panels inside drawer tabs use shared content styling */
+  > ds-tabs {
+    display: flex;
+    flex-direction: column;
+    
+    /* Tab list wrapper - ensure white background in drawer context */
+    .ds-tabs__list-wrapper {
+      @apply tw-bg-white tw-px-4;
+      position: sticky;
+      top: 0;
+      z-index: 9;
+    }
+    
+    /* Tab panels - edge-to-edge, then add content padding */
+    [ngpTabPanel] {
+      background-color: transparent; /* Transparent background */
+      /* Padding can be overridden by inline styles from paddingX input */
+      padding-top: var(--drawer-content-padding);
+      padding-bottom: var(--drawer-content-padding);
+      padding-left: var(--drawer-content-padding);
+      padding-right: var(--drawer-content-padding);
+      gap: var(--drawer-content-gap); /* Gap between sections (consistent with secondary-content) */
+    }
+    
+    /* Only apply flex layout to active tab panels */
+    [ngpTabPanel][data-active] {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+/* Backward compatible: simple content slot */
 .ds-drawer__content {
   @apply tw-flex-1 tw-overflow-y-auto tw-p-6;
-}
-
-.ds-drawer__footer {
-  @apply tw-p-6 tw-border-t tw-border-neutral-100 tw-flex tw-gap-3 tw-justify-end tw-flex-shrink-0;
+  
+  &:empty {
+    display: none;
+  }
 }
 
 @keyframes fadeIn {

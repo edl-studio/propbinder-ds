@@ -195,41 +195,46 @@ export interface DsEditableTableColumnMeta {
                           @switch (cellContent.component) {
                             @case ('editable-text') {
                               <editable-text-cell 
-                                [data]="cellContent.data" 
+                                [data]="mergeCellDataWithAlignment(cellContent.data, cell.column)"
                                 (valueChanged)="onCellEdit(row.index, cell.column.id, $event)"
+                                (valueCommitted)="onCellCommit(row.index, cell.column.id, $event)"
                               />
                             }
                             @case ('editable-number') {
                               <editable-number-cell 
-                                [data]="cellContent.data" 
+                                [data]="mergeCellDataWithAlignment(cellContent.data, cell.column)"
                                 (valueChanged)="onCellEdit(row.index, cell.column.id, $event)"
+                                (valueCommitted)="onCellCommit(row.index, cell.column.id, $event)"
                               />
                             }
                             @case ('editable-select') {
                               <editable-select-cell 
-                                [data]="cellContent.data" 
+                                [data]="mergeCellDataWithAlignment(cellContent.data, cell.column)"
                                 (valueChanged)="onCellEdit(row.index, cell.column.id, $event)"
+                                (valueCommitted)="onCellCommit(row.index, cell.column.id, $event)"
                               />
                             }
                             @case ('editable-datepicker') {
                               <editable-datepicker-cell 
                                 [data]="cellContent.data" 
                                 (valueChanged)="onCellEdit(row.index, cell.column.id, $event)"
+                                (valueCommitted)="onCellCommit(row.index, cell.column.id, $event)"
                               />
                             }
                             @case ('drag-handle') {
-                              <drag-handle-cell />
+                              <drag-handle-cell [tooltipText]="dragHandleTooltip()" />
                             }
                             @case ('action') {
                               <action-cell 
                                 [data]="cellContent.data" 
+                                (actionClicked)="onActionClicked($event)"
                                 (deleteClicked)="onDeleteRow($event)"
                               />
                             }
                           }
                         } @else {
                           <!-- HTML string cell rendering -->
-                          <div [innerHTML]="cellContent"></div>
+                          <div class="ds-editable-table__cell-content" [innerHTML]="cellContent"></div>
                         }
                       </ng-container>
                     </td>
@@ -275,7 +280,7 @@ export interface DsEditableTableColumnMeta {
                                   }
                                 }
                               } @else {
-                                <div [innerHTML]="cellContent"></div>
+                                <div class="ds-editable-table__cell-content" [innerHTML]="cellContent"></div>
                               }
                               </ng-container>
                             </td>
@@ -358,6 +363,12 @@ export class DsEditableTableComponent<T = any> {
   
   /** Text for add row button */
   addRowButtonText = input<string>('Add line');
+  
+  /** Tooltip text for drag handle (supports translations) */
+  dragHandleTooltip = input<string>('Drag to reorder');
+  
+  /** Tooltip text for delete button (supports translations) */
+  deleteRowTooltip = input<string>('Delete row');
 
   // Outputs
   /** Emitted when a row is added */
@@ -371,6 +382,12 @@ export class DsEditableTableComponent<T = any> {
   
   /** Emitted when a cell value changes */
   cellEdited = output<{ row: T; rowIndex: number; column: string; value: any }>();
+  
+  /** Emitted when a cell value is committed (on blur or Enter) */
+  cellCommitted = output<{ row: T; rowIndex: number; column: string; value: any }>();
+  
+  /** Emitted when an action button is clicked */
+  actionClicked = output<{ action: string; rowIndex: number; row?: T }>();
   
   /** Emitted when sorting changes (only when reorderable is false) */
   sortingChanged = output<SortingState>();
@@ -411,7 +428,8 @@ export class DsEditableTableComponent<T = any> {
             row: info.row.original, 
             rowIndex: info.row.index, 
             value: null,
-            deleteDisabled: false 
+            deleteDisabled: false,
+            deleteTooltip: this.deleteRowTooltip()
           } 
         }),
         enableSorting: false,
@@ -453,6 +471,14 @@ export class DsEditableTableComponent<T = any> {
     this.rowDeleted.emit({ row, index });
   }
 
+  onActionClicked(event: { action: string; rowIndex: number; row?: any }) {
+    this.actionClicked.emit({
+      action: event.action,
+      rowIndex: event.rowIndex,
+      row: event.row || this.data()[event.rowIndex]
+    });
+  }
+
   onRowDrop(event: CdkDragDrop<T[]>) {
     if (!this.reorderable()) return;
     
@@ -477,6 +503,19 @@ export class DsEditableTableComponent<T = any> {
     });
     
     this.cellEdited.emit({ 
+      row: this.data()[rowIndex], 
+      rowIndex,
+      column: accessorKey, 
+      value 
+    });
+  }
+  
+  onCellCommit(rowIndex: number, column: string, value: any) {
+    // Get the accessor key from the column
+    const col = this.columns().find(c => c.id === column || (c as any).accessorKey === column);
+    const accessorKey = col ? ((col as any).accessorKey || col.id) : column;
+    
+    this.cellCommitted.emit({ 
       row: this.data()[rowIndex], 
       rowIndex,
       column: accessorKey, 
@@ -576,6 +615,14 @@ export class DsEditableTableComponent<T = any> {
    */
   isEditableComponentCell(content: any): boolean {
     return content && typeof content === 'object' && 'component' in content && 'data' in content;
+  }
+
+  /**
+   * Merge cell data with column alignment
+   */
+  mergeCellDataWithAlignment(cellData: any, column: any): any {
+    const align = this.getColumnAlign(column);
+    return align ? { ...cellData, align } : cellData;
   }
 }
 
