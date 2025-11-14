@@ -93,8 +93,13 @@ export {
 export { DsTileComponent } from './tile/ds-tile';
 export { DsTileSectionComponent } from './tile/ds-tile-section';
 export { TileHeaderComponent } from './tile/tile-header';
+<<<<<<< HEAD
 export { DsTabs } from './tabs/ds-tabs';
 export { DsTab } from './tabs/ds-tab';
+=======
+export { DsDialogComponent } from './dialog/ds-dialog';
+export { DsConfirmationDialogComponent } from './dialog/ds-confirmation-dialog';
+>>>>>>> 85ad2b4a9a73a81d2f0ae82d1813e27b633adbb0
 
 // Type exports
 export type { ButtonVariant, ButtonSize } from './button/ds-button';

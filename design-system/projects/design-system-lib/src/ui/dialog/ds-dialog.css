@@ -1,14 +1,6 @@
 /* Base dialog - NO width constraints, just common styles */
 .ds-dialog {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  border-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  @apply tw-bg-white tw-shadow-xl tw-rounded-lg tw-w-full tw-flex tw-flex-col;
   animation: slideInFromBottom 200ms ease-out;
   margin-top: var(--dialog-top-margin);
   margin-bottom: var(--dialog-top-margin); /* Bottom margin for scrolling */
@@ -60,47 +52,29 @@
 }
 
 .ds-dialog__header {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-top: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 1.5rem;
+  @apply tw-pt-4 tw-pr-4 tw-pb-4 tw-pl-6 tw-flex-shrink-0 tw-flex tw-items-center tw-justify-between tw-gap-4;
 }
 
 .ds-dialog__title {
-  margin: 0px;
-  flex: 1 1 0%;
+  @apply tw-flex-1 tw-m-0;
 }
 
 .ds-dialog__content {
-  flex: 1 1 0%;
-  overflow-y: auto;
-  padding: 1.5rem;
+  @apply tw-flex-1 tw-overflow-y-auto tw-p-6;
 }
 
 /* Forms inside content should have 8px gap between elements */
 ::ng-deep [slot="content"] form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  @apply tw-flex tw-flex-col tw-gap-2;
 }
 
 .ds-dialog__footer {
-  flex-shrink: 0;
-  border-top-width: 1px;
-  border-color: var(--border-color-default);
-  padding: 1.5rem;
+  @apply tw-p-6 tw-border-t tw-border-default tw-flex-shrink-0;
 }
 
 /* Target the slotted footer content */
 ::ng-deep [slot="footer"] {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.25rem;
+  @apply tw-flex tw-gap-1 tw-justify-end;
 }
 
 @keyframes slideInFromBottom {
