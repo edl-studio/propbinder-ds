@@ -1,0 +1,371 @@
+/* ============================================
+   HOST
+   ============================================ */
+
+:host {
+  display: block;
+  height: 100vh;
+  height: 100dvh; /* Use dynamic viewport height instead of small viewport height */
+}
+
+/* ============================================
+   ION-TABS BASE
+   ============================================ */
+
+ion-tabs {
+  height: 100%;
+  background: var(--color-brand-secondary);
+}
+
+/* ============================================
+   TAB BAR - MOBILE (BOTTOM)
+   ============================================ */
+
+.ds-tab-bar {
+  --background: var(--color-background-neutral-primary);
+  /* No delay when appearing - start immediately */
+  transition: transform 0.20s ease-in-out;
+}
+
+/* Mobile: Fixed position for slide transitions */
+ion-tab-bar[slot="bottom"] {
+  border-top: 1px solid var(--border-color-default);
+  padding-top: 8px;
+  /* iPhone home indicator safe area is 34px total */
+  /* Fallback to 34px for simulator when env variable isn't available */
+  padding-bottom: calc(var(--ion-safe-area-bottom, 34px) - 4px);
+}
+
+@media (max-width: 767px) {
+  ion-tab-bar[slot="bottom"] {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+}
+
+/* Hide tab bar when detail page is active with slide-out animation (Mobile only) */
+@media (max-width: 767px) {
+  ion-tabs:has(ds-mobile-page-details) .ds-tab-bar {
+    transform: translateY(100%);
+    /* Add delay when hiding - wait 650ms so it starts hiding 50ms before page transition ends */
+    transition: transform 0.3s ease;
+  }
+}
+
+/* Mobile: hide logo and avatar, show tab buttons in a row */
+.ds-tab-bar__logo,
+.ds-tab-bar__actions {
+  display: none;
+}
+
+.ds-tab-bar__tabs {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* On larger screens or PWA mode, remove the extra Safari toolbar padding */
+@media (min-width: 769px) {
+  ion-tab-bar[slot="bottom"] {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+@media (display-mode: standalone) {
+  ion-tab-bar[slot="bottom"] {
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+  }
+}
+
+/* ============================================
+   TAB BAR - DESKTOP (TOP)
+   ============================================ */
+
+@media (min-width: 768px) {
+  ion-tab-bar[slot="top"] {
+    --background: var(--color-brand-secondary);
+    position: relative; /* NOT absolute - part of layout flow */
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    height: 64px;
+    max-width: none;
+  }
+  
+  /* Show logo and avatar on desktop */
+  .ds-tab-bar__logo {
+    display: flex;
+    position: absolute;
+    left: 24px;
+    align-items: center;
+  }
+  
+  .ds-tab-bar__actions {
+    display: flex;
+    position: absolute;
+    right: 24px;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .ds-tab-bar__tabs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    max-width: calc(var(--content-max-width-md) + (var(--content-padding-md) * 2));
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    padding-left: var(--content-padding-md);
+    padding-right: var(--content-padding-md);
+  }
+  
+  .logomark {
+    height: 28px;
+    width: auto;
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .ds-tab-bar__tabs {
+    max-width: calc(var(--content-max-width-md) + (var(--content-padding-md) * 2));
+    padding-left: var(--content-padding-lg);
+    padding-right: var(--content-padding-lg);
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 1440px) {
+  .ds-tab-bar__tabs {
+    max-width: calc(var(--content-max-width-lg) + (var(--content-padding-lg) * 2));
+    padding-left: var(--content-padding-xl);
+    padding-right: var(--content-padding-xl);
+  }
+}
+
+@media (min-width: 1768px) {
+  .ds-tab-bar__tabs {
+    /* Keep xl max-width, only increase padding */
+    padding-left: var(--content-padding-2xl);
+    padding-right: var(--content-padding-2xl);
+  }
+}
+
+@media (min-width: 1920px) {
+  .ds-tab-bar__tabs {
+    /* Keep xl max-width, only increase padding */
+    padding-left: var(--content-padding-3xl);
+    padding-right: var(--content-padding-3xl);
+  }
+}
+
+/* ============================================
+   TAB BUTTONS - MOBILE
+   ============================================ */
+
+ion-tab-button {
+  --color: var(--text-color-default-tertiary);
+  --color-selected: var(--color-brand-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+}
+
+/* Custom ripple effect - positioned in center of tab button */
+.tab-icon-ripple {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-brand-base);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.36, 1.2, 0.04, 1.4);
+  z-index: 0;
+}
+
+/* Trigger ripple on tab selection */
+.tab-selected .tab-icon-ripple {
+  transform: translate(-50%, -50%) scale(2);
+  opacity: 0.05;
+  animation: ripple-fade 0.6s cubic-bezier(0.36, 0.5, 0.04, 1.8) forwards;
+}
+
+@keyframes ripple-fade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  30% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+
+/* Allow ripple to expand beyond button */
+ion-tab-button::part(native) {
+  overflow: visible;
+}
+
+ion-tab-button ion-ripple-effect {
+  color: var(--color-brand-base);
+  border-radius: 1000px;
+}
+
+ion-tab-button ion-label {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  margin-top: 0;
+}
+
+
+/* ============================================
+   TAB ICON ANIMATION
+   ============================================ */
+
+/* Icon wrapper - relative positioning context */
+.tab-icon-wrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1; /* Above ripple */
+  margin-bottom: 4px;
+}
+
+/* Both icons positioned absolutely and centered */
+.tab-icon-inactive,
+.tab-icon-active {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.8s cubic-bezier(0.36, 1, 0.04, 1);
+}
+
+/* Start state (inactive tab) */
+.tab-icon-inactive {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.tab-icon-active {
+  opacity: 0;
+  transform: translate(-50%, calc(-50% - 12px)) scale(0.5);
+}
+
+/* End state (active tab) */
+.tab-selected .tab-icon-inactive {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+.tab-selected .tab-icon-active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ============================================
+   TAB BUTTONS - DESKTOP
+   ============================================ */
+
+@media (min-width: 768px) {
+  .ds-tab-button {
+    flex-direction: row;
+    height: 40px;
+    padding: 0px 16px !important;
+    border-radius: 40px;
+    transition: all 0.2s ease;
+    width: fit-content;
+    min-width: auto;
+    flex: 0 0 auto;
+    --color: rgba(255, 255, 255, 0.7);
+    --color-selected: white;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Desktop: smaller icon wrapper */
+  .tab-icon-wrapper {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Desktop: smaller ripple */
+  .tab-icon-ripple {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Ensure native button respects the rounded shape */
+  .ds-tab-button::part(native) {
+    border-radius: 40px;
+  }
+  
+  .ds-tab-button:hover {
+    --color: white;
+    --color-selected: white;
+  }
+  
+  .ds-tab-button.tab-selected {
+    background: var(--color-background-brand);
+    --color-selected: white;
+  }
+  
+  .ds-tab-button .button-native {
+    width: auto;
+    padding: 0;
+  }
+  
+  .ds-tab-button ion-label {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    margin: 0;
+    color: inherit;
+  }
+  
+  .ds-tab-button .tab-icon-wrapper {
+    margin-right: 4px;
+    margin-bottom: 0px;
+  }
+  
+  .ds-tab-button ion-ripple-effect {
+    color: rgba(255, 255, 255, 0.3);
+    border-radius: 1000px;
+    transform: scale(1.5);
+  }
+}
+
+/* ============================================
+   AVATAR STYLING
+   ============================================ */
+
+@media (min-width: 768px) {
+  .ds-tab-bar__actions ds-avatar {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .ds-tab-bar__actions ds-avatar:hover {
+    transform: scale(1.05);
+  }
+}
+

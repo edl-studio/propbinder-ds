@@ -1,0 +1,324 @@
+/* ============================================
+   DS MOBILE PAGE MAIN
+   Reusable mobile page component for main/tab pages
+   ============================================ */
+
+/* ============================================
+   HOST
+   ============================================ */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+/* ============================================
+   ION-HEADER - Fixed Header at Top
+   ============================================ */
+
+ion-header {
+  background: var(--color-brand-secondary);
+  box-shadow: none;
+}
+
+ion-header ion-toolbar {
+  --background: var(--color-brand-secondary);
+  --border-width: 0;
+  --box-shadow: none;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --min-height: 64px;
+  height: 100%;
+  min-height: 64px;
+  padding: 0;
+}
+
+ion-header ion-toolbar::part(native) {
+  height: 100%;
+  min-height: 64px;
+  padding: 0;
+}
+
+/* Hide header on desktop when using ds-mobile-tabs top bar */
+@media (min-width: 768px) {
+  ion-header {
+    display: none;
+    height: auto;
+  }
+}
+
+/* ============================================
+   HEADER HOME - Logo + Title + Avatar
+   ============================================ */
+
+.header-home {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: var(--color-brand-secondary);
+  position: relative;
+  height: 100%;
+}
+
+.header-home__title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: white;
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  margin: 0;
+  padding: 0;
+  --color: white;
+}
+
+/* Show title when scrolled */
+.header-scrolled .header-home__title {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.header-home__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logomark {
+  height: 28px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .header-home {
+    padding: 16px 24px;
+  }
+  
+  .logomark {
+    height: 32px;
+  }
+
+  /* Hide title on desktop - not needed */
+  .header-home__title {
+    display: none;
+  }
+}
+
+/* ============================================
+   ION-CONTENT
+   ============================================ */
+
+ion-content {
+  --background: var(--color-brand-secondary);
+  --padding-top: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-bottom: 0;
+  border-radius: 24px 24px 24px 24px;
+  overflow: hidden;
+}
+
+/* iOS-specific: White background for bottom overshoot */
+.plt-ios ion-content {
+  --background: var(--color-background-neutral-primary);
+}
+
+/* Desktop only: remove bottom radius */
+@media (min-width: 768px) {
+  ion-content {
+    border-radius: 24px 24px 0 0;
+  }
+}
+
+ion-content::part(scroll) {
+  -webkit-overflow-scrolling: touch;
+  /* Note: Do NOT set overscroll-behavior-y here as it prevents ion-refresher from working */
+  /* overscroll-behavior on ion-app is sufficient to block native browser pull-to-refresh */
+}
+
+/* ============================================
+   CONDENSED HEADER
+   ============================================ */
+
+ion-header[collapse="condense"] {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  ion-header[collapse="condense"] {
+    display: none;
+  }
+}
+
+/* ============================================
+   REFRESHER
+   ============================================ */
+
+ion-refresher {
+  z-index: 0;
+}
+
+ion-refresher-content {
+  --color: white;
+}
+
+/* ============================================
+   HEADER EXPANDABLE - Purple Header Section
+   ============================================ */
+
+.header-expandable {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--color-brand-secondary);
+  padding: 32px 20px 24px 20px;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  transition: opacity 0.1s ease-out, transform 0.1s ease-out;
+}
+
+.header-expandable__text {
+  margin-bottom: 0;
+}
+
+.header-expandable__title {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.header-expandable__subtitle {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: white;
+  opacity: 0.85;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .header-expandable {
+    padding: 48px 0;
+    max-width: calc(var(--content-max-width-md) + (var(--content-padding-md) * 2));
+    margin: 0 auto;
+    width: 100%;
+    padding-left: var(--content-padding-md);
+    padding-right: var(--content-padding-md);
+  }
+
+  .header-expandable__title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .header-expandable__subtitle {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (min-width: 992px) {
+  .header-expandable {
+    max-width: calc(var(--content-max-width-md) + (var(--content-padding-md) * 2));
+    padding-left: var(--content-padding-lg);
+    padding-right: var(--content-padding-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .header-expandable {
+    max-width: calc(var(--content-max-width-lg) + (var(--content-padding-lg) * 2));
+    padding-left: var(--content-padding-xl);
+    padding-right: var(--content-padding-xl);
+  }
+}
+
+@media (min-width: 1768px) {
+  .header-expandable {
+    padding-left: var(--content-padding-2xl);
+    padding-right: var(--content-padding-2xl);
+  }
+}
+
+@media (min-width: 1920px) {
+  .header-expandable {
+    padding-left: var(--content-padding-3xl);
+    padding-right: var(--content-padding-3xl);
+  }
+}
+
+/* ============================================
+   CONTENT WRAPPER - White Rounded Content
+   ============================================ */
+
+.content-wrapper {
+  position: relative;
+  z-index: 20;
+  background: var(--color-background-neutral-primary);
+  border-radius: 24px 24px 0 0;
+  padding: 0;
+  min-height: 100vh;
+  transform: translateZ(0);
+  will-change: transform;
+  isolation: isolate;
+  /* Extend white background below for iOS overshoot using box-shadow */
+  box-shadow: 0 100vh 0 0 var(--color-background-neutral-primary);
+}
+
+@media (min-width: 768px) {
+  .content-wrapper {
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+  }
+}
+
+.content-inner {
+  /* Fixed 20px horizontal padding globally */
+  padding: 24px 20px 32px 20px;
+  /* Add bottom padding on mobile to account for fixed tab bar */
+  padding-bottom: calc(var(--mobile-content-spacing) + var(--mobile-tab-bar-height) + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 768px) {
+  .content-inner {
+    padding: 32px var(--content-padding-md) !important; /* Override inline styles on desktop */
+    max-width: calc(var(--content-max-width-md) + (var(--content-padding-md) * 2));
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .content-inner {
+    padding: 32px var(--content-padding-lg) !important;
+    max-width: calc(var(--content-max-width-md) + (var(--content-padding-md) * 2));
+  }
+}
+
+@media (min-width: 1440px) {
+  .content-inner {
+    padding: 32px var(--content-padding-xl) !important;
+    max-width: calc(var(--content-max-width-lg) + (var(--content-padding-lg) * 2));
+  }
+}
+
+@media (min-width: 1768px) {
+  .content-inner {
+    padding: 32px var(--content-padding-2xl) !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  .content-inner {
+    padding: 32px var(--content-padding-3xl) !important;
+  }
+}
+

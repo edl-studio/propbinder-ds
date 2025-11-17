@@ -1,0 +1,334 @@
+/* ============================================
+   HOST & BASE LAYOUT
+   ============================================ */
+
+:host {
+  display: block;
+  height: 100vh; /* Fallback for older browsers */
+  height: 100svh; /* Small viewport height - excludes browser UI */
+}
+
+/* ============================================
+   IONIC OVERRIDES - TABS
+   ============================================ */
+
+ion-tabs {
+  height: 100%;
+  background: var(--color-brand-secondary);
+}
+
+/* ============================================
+   IONIC OVERRIDES - HEADER
+   ============================================ */
+
+ion-header {
+  background: var(--color-brand-secondary);
+  box-shadow: none;
+  position: relative;
+  z-index: 10;
+}
+
+/* Gradient fade effect at bottom of header */
+ion-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-brand-secondary) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+ion-header ion-toolbar {
+  --background: var(--color-brand-secondary);
+  --border-width: 0;
+  --box-shadow: none;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+ion-header.header-translucent ion-toolbar {
+  --backdrop-filter: none;
+}
+
+/* ============================================
+   IONIC OVERRIDES - CONTENT
+   ============================================ */
+
+ion-content {
+  --background: transparent;
+  --padding-top: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-bottom: 0;
+  /* Explicitly avoid creating stacking context */
+  isolation: auto;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+ion-content::part(scroll) {
+  /* Ensure smooth scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Block browser overscroll - ion-refresher provides its own elastic pull animation */
+  overscroll-behavior-y: none;
+}
+
+/* ============================================
+   IONIC OVERRIDES - REFRESHER
+   ============================================ */
+
+/* Ionic Refresher Styling - provides native-feeling elastic pull */
+ion-refresher {
+  z-index: 0; /* Below everything */
+}
+
+ion-refresher-content {
+  --color: white;
+}
+
+/* ============================================
+   TAB BAR
+   ============================================ */
+
+ion-tab-bar {
+  --background: var(--color-background-neutral-primary);
+  padding: 8px 0;
+}
+
+/* Mobile: Bottom tab bar styling */
+ion-tab-bar[slot="bottom"] {
+  border-top: 1px solid var(--border-color-default);
+  /* Safari iOS: Add padding for home indicator (safe-area) + Safari's bottom toolbar */
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+}
+
+/* Desktop: Top tab bar styling - floating overlay */
+ion-tab-bar[slot="top"] {
+  --background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  border-bottom: none;
+  padding: 12px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+/* On larger screens or PWA mode, remove the extra Safari toolbar padding */
+@media (min-width: 769px) {
+  ion-tab-bar {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+@media (display-mode: standalone) {
+  ion-tab-bar {
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+  }
+}
+
+ion-tab-button {
+  --color: var(--text-color-default-tertiary);
+  --color-selected: var(--color-brand-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Desktop: Horizontal pill layout */
+@media (min-width: 768px) {
+  ion-tab-button {
+    flex-direction: row;
+    height: 36px;
+    padding: 0px 12px;
+    border-radius: 40px;
+    transition: background-color 0.2s ease;
+    width: fit-content;
+    min-width: auto;
+    flex: 0 0 auto;
+  }
+  
+  ion-tab-button .button-native {
+    width: auto;
+    padding: 0;
+  }
+  
+  ion-tab-button a,
+  ion-tab-button span {
+    width: auto;
+  }
+  
+  ion-tab-button ds-icon {
+    margin-right: 4px;
+  }
+
+  ion-tab-button.tab-selected {
+    background: var(--color-brand-base);
+  }
+}
+
+ion-tab-button ion-label {
+  font-size: var(--font-size-2xs);
+}
+
+/* Desktop: Larger label, always white */
+@media (min-width: 768px) {
+  ion-tab-button ion-label {
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.64px;
+    color: white;
+  }
+}
+
+ion-tab-button ds-icon {
+  color: var(--text-color-default-tertiary);
+}
+
+ion-tab-button.tab-selected ds-icon {
+  color: var(--color-brand-base);
+}
+
+/* Desktop: Icon sizing and colors */
+@media (min-width: 768px) {
+  ion-tab-button ds-icon {
+    color: white;
+    width: 20px;
+    height: 20px;
+  }
+  
+  ion-tab-button.tab-selected ds-icon {
+    color: white;
+  }
+}
+
+/* ============================================
+   HEADER VARIANT: HOME
+   ============================================ */
+
+.header-home {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--color-brand-secondary);
+  position: relative;
+  z-index: 2;
+}
+
+.logomark {
+  height: 28px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.header-home__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.header-home__actions ds-avatar {
+  cursor: pointer;
+  transition: opacity var(--transition-duration-fast) var(--ease-smooth);
+}
+
+.header-home__actions ds-avatar:hover {
+  opacity: 0.9;
+}
+
+.header-home__actions ds-avatar:active {
+  opacity: 0.8;
+}
+
+/* ============================================
+   HEADER VARIANT: SIMPLE
+   ============================================ */
+
+.header-simple {
+  padding: 12px 16px;
+  background: transparent;
+}
+
+.header-simple .header-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+/* ============================================
+   HEADER VARIANT: BACK
+   ============================================ */
+
+.header-back {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: transparent;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: opacity var(--transition-duration-fast) var(--ease-smooth);
+}
+
+.back-button:hover {
+  opacity: 0.8;
+}
+
+.back-button:active {
+  opacity: 0.6;
+}
+
+.back-button ds-icon {
+  color: white;
+}
+
+.header-back .header-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  flex: 1;
+}
+
+/* ============================================
+   EXPANDABLE HEADER (for home page pattern)
+   ============================================ */
+
+.header-expandable {
+  background: var(--color-brand-secondary);
+  padding: 24px 16px;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+

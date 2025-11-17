@@ -1,0 +1,99 @@
+import {
+  setupFormControl
+} from "./chunk-TTG4L5LE.js";
+import {
+  setupInteractions
+} from "./chunk-A5LILIPV.js";
+import {
+  createState,
+  createStateInjector,
+  createStateProvider,
+  createStateToken
+} from "./chunk-AHNVSUII.js";
+import {
+  uniqueId
+} from "./chunk-VXVCWHF7.js";
+import "./chunk-SQP3BRRN.js";
+import "./chunk-YLELG2JA.js";
+import "./chunk-NMFEGCZ7.js";
+import "./chunk-ALQK544G.js";
+import "./chunk-7OMPJCAI.js";
+import "./chunk-U3ZLLG7Y.js";
+import "./chunk-7YT5CE2Y.js";
+import {
+  Directive,
+  booleanAttribute,
+  input,
+  setClassMetadata,
+  ɵɵProvidersFeature,
+  ɵɵattribute,
+  ɵɵdefineDirective,
+  ɵɵdomProperty
+} from "./chunk-5OFLYFBL.js";
+import "./chunk-UK4S7V5W.js";
+
+// node_modules/ng-primitives/fesm2022/ng-primitives-textarea.mjs
+var NgpTextareaStateToken = createStateToken("Textarea");
+var provideTextareaState = createStateProvider(NgpTextareaStateToken);
+var injectTextareaState = createStateInjector(NgpTextareaStateToken);
+var textareaState = createState(NgpTextareaStateToken);
+var _NgpTextarea = class _NgpTextarea {
+  constructor() {
+    this.id = input(uniqueId("ngp-textarea"));
+    this.disabled = input(false, {
+      transform: booleanAttribute
+    });
+    this.state = textareaState(this);
+    setupInteractions({
+      hover: true,
+      press: true,
+      focus: true,
+      disabled: this.state.disabled
+    });
+    setupFormControl({
+      id: this.state.id,
+      disabled: this.state.disabled
+    });
+  }
+};
+_NgpTextarea.ɵfac = function NgpTextarea_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _NgpTextarea)();
+};
+_NgpTextarea.ɵdir = ɵɵdefineDirective({
+  type: _NgpTextarea,
+  selectors: [["", "ngpTextarea", ""]],
+  hostVars: 2,
+  hostBindings: function NgpTextarea_HostBindings(rf, ctx) {
+    if (rf & 2) {
+      ɵɵdomProperty("id", ctx.id());
+      ɵɵattribute("disabled", ctx.disabled() ? "" : null);
+    }
+  },
+  inputs: {
+    id: [1, "id"],
+    disabled: [1, "disabled"]
+  },
+  exportAs: ["ngpTextarea"],
+  features: [ɵɵProvidersFeature([provideTextareaState()])]
+});
+var NgpTextarea = _NgpTextarea;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NgpTextarea, [{
+    type: Directive,
+    args: [{
+      selector: "[ngpTextarea]",
+      exportAs: "ngpTextarea",
+      providers: [provideTextareaState()],
+      host: {
+        "[id]": "id()",
+        "[attr.disabled]": 'disabled() ? "" : null'
+      }
+    }]
+  }], () => [], null);
+})();
+export {
+  NgpTextarea,
+  injectTextareaState,
+  provideTextareaState
+};
+//# sourceMappingURL=ng-primitives_textarea.js.map

@@ -1,0 +1,535 @@
+/**
+ * Ionic-Specific Styles
+ * 
+ * This file contains all styles that are specific to Ionic Framework and mobile app usage.
+ * These styles are not needed for web-only or design system library builds.
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+
+/* Mobile common styles */
+/* Note: mobile-common.css is included in @propbinder/design-system/styles/globals.css */
+
+/* Ionic-Specific CSS Variables */
+:root {
+  /* Ionic Keyboard Appearance - force light theme */
+  --ion-keyboard-color: #ffffff;
+  --ion-keyboard-background: #ffffff;
+  --ion-keyboard-text-color: #000000;
+  color-scheme: light;
+  
+  /* Layout - Mobile Navigation */
+  --mobile-tab-bar-height: 64px;
+  --mobile-content-spacing: 20px;
+}
+
+/* Global Styles for Mobile App */
+html {
+  /* Safe Area Variables - set here according to Ionic documentation */
+  --ion-safe-area-top: env(safe-area-inset-top);
+  --ion-safe-area-bottom: env(safe-area-inset-bottom);
+  --ion-safe-area-left: env(safe-area-inset-left);
+  --ion-safe-area-right: env(safe-area-inset-right);
+}
+
+html,
+body {
+  /* Background color must match theme-color for iOS PWA status bar */
+  background-color: #221a4c;
+  color: var(--text-color-default-primary);
+  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;
+  
+  /* Ensure full height for iOS PWA */
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  
+  /* Don't add padding to html/body - let Ionic components handle safe areas */
+}
+
+/* iOS-specific: White background for overshoot areas */
+.plt-ios html,
+.plt-ios body {
+  background-color: var(--color-background-neutral-primary, #ffffff);
+}
+
+.plt-ios ion-app {
+  background-color: var(--color-background-neutral-primary, #ffffff);
+}
+
+/* Ionic Component Styles - Map to Design System */
+/* These styles apply Ionic's CSS variables to match our design system */
+
+:root {
+  /* Override Ionic's primary color to use our brand color */
+  --ion-color-primary: var(--color-brand-base);
+  --ion-color-primary-rgb: 107, 95, 245;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: var(--color-brand-base-hover);
+  --ion-color-primary-tint: var(--color-brand-base);
+  
+  /* Ionic component defaults */
+  --ion-background-color: var(--color-background-neutral-primary);
+  --ion-text-color: var(--text-color-default-primary);
+}
+
+ion-header {
+  box-shadow: none;
+}
+
+ion-toolbar {
+  --background: transparent;
+  --border-width: 0;
+}
+
+ion-content {
+  --background: var(--color-background-neutral-primary);
+}
+
+/* Default: Block browser overscroll on all platforms */
+ion-content::part(scroll) {
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ion-page {
+  overscroll-behavior-y: none;
+}
+
+/* iOS-specific: Enable native scroll overshoot/bounce effect */
+.plt-ios ion-content::part(scroll) {
+  overscroll-behavior-y: contain;
+}
+
+.plt-ios .ion-page {
+  overscroll-behavior-y: contain;
+}
+
+ion-footer {
+  box-shadow: none;
+}
+
+ion-router-outlet {
+  --background: var(--color-background-neutral-primary);
+}
+
+ion-refresher {
+  --background: transparent;
+  --color: white;
+}
+
+ion-refresher-content {
+  --color: white;
+}
+
+/* Force spinner color to brand */
+ion-spinner {
+  --color: var(--color-brand-base) !important;
+  color: var(--color-brand-base) !important;
+}
+
+ion-modal {
+  --background: var(--color-background-neutral-primary);
+  --border-radius: 16px;
+  --box-shadow: var(--box-shadow-lg);
+}
+
+/* Prevent modal from resizing when keyboard appears */
+ion-modal {
+  height: 100% !important;
+  max-height: 100vh !important;
+}
+
+ion-modal .modal-wrapper,
+ion-modal::part(content) {
+  position: fixed !important;
+  height: 100% !important;
+  max-height: 100vh !important;
+}
+
+/* Prevent ion-content inside modals from resizing */
+ion-modal ion-content {
+  --keyboard-offset: 0px !important;
+  height: 100% !important;
+}
+
+ion-action-sheet {
+  --background: var(--color-background-neutral-primary);
+  --color: var(--text-color-default-primary);
+  --button-background: var(--color-background-neutral-secondary);
+  --button-background-hover: var(--color-background-neutral-tertiary);
+  --button-background-selected: var(--color-background-brand);
+  --button-color: var(--text-color-default-primary);
+}
+
+ion-toast {
+  --background: var(--color-background-neutral-strong);
+  --color: var(--text-color-default-primary-inverse);
+  --border-radius: 8px;
+  --box-shadow: var(--box-shadow-lg);
+}
+
+/* ============================================
+   BOTTOM SHEET MODAL STYLES
+   Based on Ionic 6 bottom sheet presentation
+   ============================================ */
+
+/* Base bottom sheet styling */
+.ds-bottom-sheet {
+  --border-radius: 16px;
+  --box-shadow: 0px -2px 24px rgba(0, 0, 0, 0.12);
+  /* Position backdrop to start below header */
+  --offset-top: 32px;
+  --backdrop-opacity: 0.4;
+  transition: --backdrop-opacity 0.3s ease;
+  /* Position the modal wrapper to start below header */
+  /* Default: 32px offset to align with header content */
+  top: 32px !important;
+  height: calc(100% - 32px) !important;
+}
+
+/* On iOS devices with safe area, use safe-area-inset-top to avoid status bar overlap */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .ds-bottom-sheet {
+    /* Use safe-area-inset-top if larger than 32px, otherwise use 32px */
+    /* This ensures we're always below the status bar */
+    top: env(safe-area-inset-top, 32px) !important;
+    height: calc(100% - env(safe-area-inset-top, 32px)) !important;
+  }
+}
+
+
+/* Backdrop styling */
+.ds-bottom-sheet::part(backdrop) {
+  background: rgba(0, 0, 0, var(--backdrop-opacity, 0.6));
+}
+
+/* Handle customization */
+.ds-bottom-sheet::part(handle) {
+  background: var(--border-color-default);
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+/* Content area styling - Override Ionic's bottom-based positioning */
+.ds-bottom-sheet::part(content) {
+  border-radius: var(--border-radius);
+  background: var(--color-background-neutral-primary, #ffffff);
+  box-shadow: var(--box-shadow);
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Remove border radius when fully expanded */
+@media (min-height: 768px) {
+  .ds-bottom-sheet.modal-sheet-expanded::part(content) {
+    border-radius: 0;
+  }
+}
+
+
+
+/* Ensure content scrolls properly */
+.ds-bottom-sheet ion-content {
+  --background: transparent;
+}
+
+/* Better mobile experience */
+@media (max-width: 768px) {
+  .ds-bottom-sheet::part(content) {
+    max-width: 100%;
+  }
+}
+
+/* Desktop centering */
+@media (min-width: 769px) {
+  .ds-bottom-sheet::part(content) {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+}
+
+/* ============================================
+   Mobile Modal Styles (Generic Modal Service)
+   ============================================ */
+
+/**
+ * Mobile Modal Styles
+ * 
+ * Global styles for modals opened via DsMobileModalService.
+ * These styles are applied to all modals and handle different presentation styles.
+ */
+
+/* Base modal styles */
+.ds-mobile-modal {
+  --background: var(--color-background-neutral-primary, #ffffff);
+  --border-radius: 16px;
+  --box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Fullscreen presentation */
+.ds-modal-fullscreen {
+  --width: 100%;
+  --height: 100%;
+  --border-radius: 0;
+}
+
+.ds-modal-fullscreen::part(content) {
+  border-radius: 0;
+}
+
+/* Card presentation (default iOS modal style) */
+.ds-modal-card {
+  --width: 100%;
+  --height: auto;
+  --max-height: 90%;
+  --border-radius: 16px 16px 0 0;
+}
+
+.ds-modal-card::part(content) {
+  border-radius: 16px 16px 0 0;
+  box-shadow: var(--box-shadow);
+}
+
+/* Sheet presentation (bottom sheet with breakpoints) */
+.ds-modal-sheet {
+  --width: 100%;
+  --height: auto;
+  --border-radius: 16px 16px 0 0;
+}
+
+.ds-modal-sheet::part(content) {
+  border-radius: 16px 16px 0 0;
+  box-shadow: var(--box-shadow);
+}
+
+.ds-modal-sheet::part(handle) {
+  background: var(--border-color-default);
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  margin: 8px auto 0;
+}
+
+/* Backdrop styles */
+.ds-mobile-modal::part(backdrop) {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+/* Animations */
+.ds-mobile-modal.modal-card-enter-active,
+.ds-mobile-modal.modal-sheet-enter-active {
+  animation: slideUpModal 0.3s ease-out;
+}
+
+.ds-mobile-modal.modal-card-leave-active,
+.ds-mobile-modal.modal-sheet-leave-active {
+  animation: slideDownModal 0.3s ease-in;
+}
+
+.ds-mobile-modal.modal-fullscreen-enter-active {
+  animation: fadeInModal 0.2s ease-out;
+}
+
+.ds-mobile-modal.modal-fullscreen-leave-active {
+  animation: fadeOutModal 0.2s ease-in;
+}
+
+@keyframes slideUpModal {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDownModal {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutModal {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Safe area handling for notched devices */
+@supports (padding: env(safe-area-inset-top)) {
+  .ds-modal-fullscreen::part(content) {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+  .ds-mobile-modal {
+    --background: var(--color-background-neutral-primary-dark, #1a1a1a);
+  }
+  
+  .ds-mobile-modal::part(backdrop) {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ds-mobile-modal.modal-card-enter-active,
+  .ds-mobile-modal.modal-card-leave-active,
+  .ds-mobile-modal.modal-sheet-enter-active,
+  .ds-mobile-modal.modal-sheet-leave-active,
+  .ds-mobile-modal.modal-fullscreen-enter-active,
+  .ds-mobile-modal.modal-fullscreen-leave-active {
+    animation: none;
+  }
+}
+
+/* ============================================
+   ION-TAB-BUTTON CUSTOMIZATION
+   ============================================ */
+
+/* Set gap for button-inner to control spacing between icon and label */
+ion-tab-button::part(native) {
+  gap: 2px;
+}
+
+/* ============================================
+   Post Detail Modal Styles
+   ============================================ */
+
+.ds-post-detail-modal {
+  --background: var(--color-background-neutral-primary, #ffffff);
+  --width: 100%;
+  --height: 100dvh; /* Use dynamic viewport height instead of 100% */
+  --border-radius: 16px 16px 0 0;
+  margin-top: 48px;
+}
+
+.ds-post-detail-modal::part(content) {
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  background: var(--color-background-neutral-primary, #ffffff);
+}
+
+.ds-post-detail-modal::part(backdrop) {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.ds-post-detail-modal ion-content {
+  --background: var(--color-background-neutral-primary, #ffffff);
+}
+
+/* Control the presenting element (page behind) border radius */
+ion-router-outlet.ion-page-hidden,
+.ion-page.ion-page-hidden {
+  border-radius: 16px 16px 0 0 !important;
+  overflow: hidden;
+}
+
+/* Set background to brand secondary */
+ion-router-outlet {
+  background: var(--color-brand-secondary) !important;
+}
+
+/* Override Ionic's default 10px border-radius */
+body.backdrop-no-scroll ion-router-outlet {
+  border-radius: 16px 16px 0 0 !important;
+}
+
+/* Target the router outlet when modal is active */
+ion-router-outlet:not(.ion-page-hidden) {
+  border-radius: 16px 16px 0 0 !important;
+  transition: border-radius 0.3s ease, transform 0.3s ease;
+}
+
+/* Adjust the presenting element animation */
+.modal-card-enter-active ion-router-outlet,
+.modal-card-enter-active .ion-page {
+  border-radius: 16px 16px 0 0 !important;
+}
+
+/* When page is scaled behind modal */
+.ion-page-invisible {
+  border-radius: 16px 16px 0 0 !important;
+}
+
+/* Override Ionic's default presenting page styles */
+.modal-shadow .ion-page {
+  border-radius: 16px 16px 0 0 !important;
+}
+
+ion-modal.show-modal ~ ion-router-outlet,
+ion-modal.show-modal ~ * ion-router-outlet {
+  border-radius: 16px 16px 0 0 !important;
+  transform: scale(0.915) !important;
+}
+
+/* Most important - override any Ionic defaults */
+ion-router-outlet[style*="border-radius"] {
+  border-radius: 16px 16px 0 0 !important;
+}
+
+/* Target app root with modal */
+ion-app.ion-page-hidden ion-router-outlet,
+ion-app ion-router-outlet.ion-page-hidden {
+  border-radius: 16px 16px 0 0 !important;
+}
+
+/* Safe area handling */
+@supports (padding: env(safe-area-inset-top)) {
+  .ds-post-detail-modal .post-modal-header .header-content {
+    padding-top: env(safe-area-inset-top);
+    height: calc(56px + env(safe-area-inset-top));
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .ds-post-detail-modal {
+    --background: var(--color-background-neutral-primary-dark, #1a1a1a);
+  }
+  
+  .ds-post-detail-modal::part(content) {
+    background: var(--color-background-neutral-primary-dark, #1a1a1a);
+  }
+  
+  .ds-post-detail-modal::part(backdrop) {
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  .ds-post-detail-modal ion-content {
+    --background: var(--color-background-neutral-primary-dark, #1a1a1a);
+  }
+}
+

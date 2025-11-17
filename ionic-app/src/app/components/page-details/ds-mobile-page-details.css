@@ -1,0 +1,285 @@
+/* ============================================
+   DS MOBILE PAGE DETAILS
+   Reusable mobile page component for detail/drill-down pages
+   ============================================ */
+
+/* ============================================
+   HOST
+   ============================================ */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ============================================
+   ION-HEADER - Back Button Header (Mobile)
+   ============================================ */
+
+ion-header {
+  background: var(--color-brand-secondary);
+  box-shadow: none;
+  height: 64px;
+}
+
+ion-header ion-toolbar {
+  --background: var(--color-brand-secondary);
+  --border-width: 0;
+  --box-shadow: none;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --min-height: 64px;
+  height: 100%;
+  min-height: 64px;
+  padding: 0;
+}
+
+ion-header ion-toolbar::part(native) {
+  height: 100%;
+  min-height: 64px;
+  padding: 0;
+}
+
+/* Hide mobile header on desktop */
+@media (min-width: 768px) {
+  ion-header {
+    display: none;
+  }
+}
+
+/* ============================================
+   HEADER BACK (Mobile)
+   ============================================ */
+
+.header-back {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--color-brand-secondary);
+  position: relative;
+  height: 100%;
+  min-height: 64px;
+}
+
+.header-back .back-button {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: opacity var(--transition-duration-fast) var(--ease-smooth);
+  z-index: 10;
+}
+
+.header-back .back-button:hover {
+  opacity: 0.8;
+}
+
+.header-back .back-button:active {
+  opacity: 0.6;
+}
+
+.header-back .header-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+/* ============================================
+   DESKTOP HEADER (Above Content)
+   ============================================ */
+
+.desktop-header {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktop-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 32px var(--content-padding-md) 24px var(--content-padding-md);
+    max-width: calc(var(--content-max-width-md) + (var(--content-padding-md) * 2));
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .desktop-header .back-button {
+    background: none;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-color-default-primary);
+    transition: opacity var(--transition-duration-fast) var(--ease-smooth);
+  }
+
+  .desktop-header .back-button:hover {
+    opacity: 0.8;
+  }
+
+  .desktop-header .back-button:active {
+    opacity: 0.6;
+  }
+
+  .desktop-header h1 {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-color-default-primary);
+  }
+}
+
+@media (min-width: 992px) {
+  .desktop-header {
+    max-width: calc(var(--content-max-width-md) + (var(--content-padding-md) * 2));
+    padding-left: var(--content-padding-lg);
+    padding-right: var(--content-padding-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .desktop-header {
+    max-width: calc(var(--content-max-width-lg) + (var(--content-padding-lg) * 2));
+    padding-left: var(--content-padding-xl);
+    padding-right: var(--content-padding-xl);
+  }
+}
+
+@media (min-width: 1768px) {
+  .desktop-header {
+    padding-left: var(--content-padding-2xl);
+    padding-right: var(--content-padding-2xl);
+  }
+}
+
+@media (min-width: 1920px) {
+  .desktop-header {
+    padding-left: var(--content-padding-3xl);
+    padding-right: var(--content-padding-3xl);
+  }
+}
+
+/* ============================================
+   ION-CONTENT
+   ============================================ */
+
+ion-content {
+  --background: var(--color-background-neutral-primary);
+  --padding-top: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-bottom: 0;
+  overflow: hidden;
+}
+
+/* Mobile: Start with full radius, then animate to flat bottom */
+@media (max-width: 767px) {
+  ion-content {
+    /* Start with fully rounded corners - 36px bottom radius for more prominent effect */
+    border-radius: 24px 24px 36px 36px;
+    /* Animate to flat bottom after a delay (matches page transition) */
+    animation: bottomRadiusOut 0.6s ease 0.3s forwards;
+  }
+  
+  /* Reverse animation when navigating back */
+  :host(.navigating-back) ion-content {
+    /* Start from flat bottom (the end state after forward animation) */
+    /* Don't use !important here as it would block the animation from working */
+    border-radius: 24px 24px 0 0;
+    /* Animate back to fully rounded during the page transition */
+    /* Duration and easing match the page transition for smooth visual effect */
+    animation: bottomRadiusIn 0.8s cubic-bezier(0.36, 0.66, 0.04, 1) forwards !important;
+  }
+}
+
+/* Animate bottom corners from rounded to flat (forward) */
+@keyframes bottomRadiusOut {
+  from {
+    border-radius: 24px 24px 36px 36px;
+  }
+  to {
+    border-radius: 24px 24px 0 0;
+  }
+}
+
+/* Animate bottom corners from flat to rounded (reverse) */
+@keyframes bottomRadiusIn {
+  from {
+    border-radius: 24px 24px 0 0;
+  }
+  to {
+    border-radius: 24px 24px 36px 36px;
+  }
+}
+
+/* Desktop: always flat bottom, no animation */
+@media (min-width: 768px) {
+  ion-content {
+    border-radius: 24px 24px 0 0;
+    animation: none;
+  }
+}
+
+ion-content::part(scroll) {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+}
+
+/* ============================================
+   DETAIL CONTENT
+   ============================================ */
+
+.detail-content {
+  /* Fixed 20px horizontal padding globally */
+  padding: 24px 20px 32px 20px;
+}
+
+@media (min-width: 768px) {
+  .detail-content {
+    padding: 32px var(--content-padding-md) !important; /* Override inline styles on desktop */
+    max-width: calc(var(--content-max-width-md) + (var(--content-padding-md) * 2));
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .detail-content {
+    padding: 32px var(--content-padding-lg) !important;
+    max-width: calc(var(--content-max-width-md) + (var(--content-padding-md) * 2));
+  }
+}
+
+@media (min-width: 1440px) {
+  .detail-content {
+    padding: 32px var(--content-padding-xl) !important;
+    max-width: calc(var(--content-max-width-lg) + (var(--content-padding-lg) * 2));
+  }
+}
+
+@media (min-width: 1768px) {
+  .detail-content {
+    padding: 32px var(--content-padding-2xl) !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  .detail-content {
+    padding: 32px var(--content-padding-3xl) !important;
+  }
+}
+

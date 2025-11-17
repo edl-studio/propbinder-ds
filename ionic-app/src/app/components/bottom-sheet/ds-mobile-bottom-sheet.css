@@ -1,0 +1,101 @@
+/**
+ * Bottom Sheet Modal Styles
+ * Based on Ionic 6 bottom sheet presentation
+ */
+
+/* Base bottom sheet styling */
+.ds-bottom-sheet {
+  --border-radius: 16px;
+  --box-shadow: 0px -2px 24px rgba(0, 0, 0, 0.12);
+  /* Position backdrop to start below header */
+  --backdrop-top: 32px;
+  --offset-top: 32px;
+  --backdrop-opacity: 0.4;
+  transition: --backdrop-opacity 0.3s ease;
+  /* Position the modal wrapper to start below header */
+  /* Default: 32px offset to align with header content */
+  top: 32px !important;
+  height: calc(100% - 32px) !important;
+}
+
+/* On iOS devices with safe area, use safe-area-inset-top to avoid status bar overlap */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .ds-bottom-sheet {
+    /* Use safe-area-inset-top if larger than 32px, otherwise use 32px */
+    /* This ensures we're always below the status bar */
+    top: env(safe-area-inset-top, 32px) !important;
+    height: calc(100% - env(safe-area-inset-top, 32px)) !important;
+  }
+}
+
+/* Backdrop blur effect */
+.ds-bottom-sheet--blur {
+  --backdrop-opacity: 0.8;
+}
+
+.ds-bottom-sheet--blur::part(backdrop) {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Custom backdrop styling */
+.ds-bottom-sheet--custom-backdrop::part(backdrop) {
+  background: rgba(0, 0, 0, var(--backdrop-opacity, 0.6));
+}
+
+/* Backdrop styling */
+.ds-bottom-sheet::part(backdrop) {
+  background: rgba(0, 0, 0, var(--backdrop-opacity, 0.6));
+}
+
+/* Handle customization */
+.ds-bottom-sheet::part(handle) {
+  background: var(--border-color-default);
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+/* Content area styling - Override Ionic's bottom-based positioning */
+.ds-bottom-sheet::part(content) {
+  border-radius: var(--border-radius);
+  background: var(--color-background-neutral-primary, #ffffff);
+  box-shadow: var(--box-shadow);
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Remove border radius when fully expanded */
+@media (min-height: 768px) {
+  .ds-bottom-sheet.modal-sheet-expanded::part(content) {
+    border-radius: 0;
+  }
+}
+
+
+
+/* Ensure content scrolls properly */
+.ds-bottom-sheet ion-content {
+  --background: transparent;
+}
+
+/* Better mobile experience */
+@media (max-width: 768px) {
+  .ds-bottom-sheet::part(content) {
+    max-width: 100%;
+  }
+}
+
+/* Desktop centering */
+@media (min-width: 769px) {
+  .ds-bottom-sheet::part(content) {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+}
+

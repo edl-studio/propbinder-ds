@@ -1,0 +1,375 @@
+/**
+ * Mobile Lightbox PDF Viewer Styles
+ * PDF preview and native viewer launcher
+ */
+
+@import '../shared/mobile-common.css';
+
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+/* ============================================
+   CONTENT AREA
+   ============================================ */
+.lightbox-content.pdf-viewer {
+  --background: rgba(0, 0, 0, 1);
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.lightbox-content.pdf-viewer::part(scroll) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.lightbox-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
+   HEADER (SHARED STYLES)
+   ============================================ */
+.lightbox-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 80%, transparent 100%);
+  pointer-events: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.share-button,
+.close-button {
+  pointer-events: auto;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.share-button::ng-deep button,
+.close-button::ng-deep button {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+  border: none;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.share-button::ng-deep button:hover,
+.close-button::ng-deep button:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.share-button::ng-deep button:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+.share-button::ng-deep svg,
+.close-button::ng-deep svg {
+  color: white !important;
+  fill: white !important;
+}
+
+/* Safe area support for notched devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .lightbox-header {
+    padding-top: calc(16px + env(safe-area-inset-top));
+  }
+}
+
+/* ============================================
+   PDF CONTAINER
+   ============================================ */
+.pdf-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px 24px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================
+   PDF CONTENT (Aligned with post-pdf-attachment)
+   ============================================ */
+.pdf-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  gap: 16px;
+}
+
+/* Match the red avatar color from post-pdf-attachment */
+.pdf-content::ng-deep .avatar--icon {
+  background-color: #ff5757 !important;
+}
+
+.pdf-title {
+  font-family: 'Brockmann', sans-serif;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+  color: white;
+  margin: 0;
+  word-break: break-word;
+}
+
+.pdf-meta {
+  font-family: 'Brockmann', sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.26px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.open-pdf-button {
+  margin-top: 16px;
+}
+
+/* Style the open button to match the footer action buttons */
+.open-pdf-button::ng-deep button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 100px !important;
+  color: white !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  padding: 16px 16px !important;
+}
+
+.open-pdf-button::ng-deep button:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.02);
+}
+
+.open-pdf-button::ng-deep button:active {
+  transform: scale(0.98);
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+}
+
+.loading-state ion-spinner {
+  --color: rgba(255, 255, 255, 0.8);
+  width: 48px;
+  height: 48px;
+}
+
+.loading-state p {
+  font-family: 'Brockmann', sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+/* ============================================
+   ERROR STATE
+   ============================================ */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  max-width: 400px;
+}
+
+.error-state svg {
+  color: rgba(255, 100, 100, 0.8);
+  margin-bottom: 24px;
+}
+
+.error-state h3 {
+  font-family: 'Brockmann', sans-serif;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: white;
+  margin: 0 0 12px 0;
+}
+
+.error-state p {
+  font-family: 'Brockmann', sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 24px 0;
+}
+
+.retry-button {
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-family: 'Brockmann', sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.retry-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   AUTHOR INFO
+   ============================================ */
+.pdf-author-info {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 50;
+}
+
+.author-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+/* Author styles inherit from mobile-common.css with lightbox overrides */
+.author-name {
+  color: white;
+}
+
+.author-meta {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.author-meta .separator {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Safe area support */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .pdf-author-info {
+    bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+  
+  .pdf-container {
+    padding-bottom: calc(120px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ============================================
+   DESKTOP STYLES
+   ============================================ */
+@media (min-width: 768px) {
+  .lightbox-header {
+    padding: 24px;
+  }
+
+  .pdf-container {
+    padding: 120px 40px 40px;
+  }
+
+  .pdf-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .pdf-description {
+    font-size: var(--font-size-base);
+  }
+
+  .open-pdf-button {
+    padding: 18px 40px;
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .open-pdf-button,
+  .retry-button {
+    transition: none;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+.open-pdf-button:focus-visible,
+.retry-button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+

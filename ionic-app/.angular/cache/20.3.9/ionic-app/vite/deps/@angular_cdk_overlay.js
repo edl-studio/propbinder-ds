@@ -1,0 +1,98 @@
+import {
+  BlockScrollStrategy,
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  CloseScrollStrategy,
+  ConnectedOverlayPositionChange,
+  ConnectionPositionPair,
+  FlexibleConnectedPositionStrategy,
+  FullscreenOverlayContainer,
+  GlobalPositionStrategy,
+  NoopScrollStrategy,
+  Overlay,
+  OverlayConfig,
+  OverlayContainer,
+  OverlayKeyboardDispatcher,
+  OverlayModule,
+  OverlayOutsideClickDispatcher,
+  OverlayPositionBuilder,
+  OverlayRef,
+  RepositionScrollStrategy,
+  STANDARD_DROPDOWN_ADJACENT_POSITIONS,
+  STANDARD_DROPDOWN_BELOW_POSITIONS,
+  ScrollStrategyOptions,
+  ScrollingVisibility,
+  createBlockScrollStrategy,
+  createCloseScrollStrategy,
+  createFlexibleConnectedPositionStrategy,
+  createGlobalPositionStrategy,
+  createNoopScrollStrategy,
+  createOverlayRef,
+  createRepositionScrollStrategy,
+  validateHorizontalPosition,
+  validateVerticalPosition
+} from "./chunk-MVS67VIT.js";
+import "./chunk-ALQK544G.js";
+import {
+  CdkFixedSizeVirtualScroll,
+  CdkScrollable,
+  CdkScrollableModule,
+  CdkVirtualForOf,
+  CdkVirtualScrollViewport,
+  CdkVirtualScrollableElement,
+  CdkVirtualScrollableWindow,
+  ScrollDispatcher,
+  ViewportRuler
+} from "./chunk-UHXM7YBJ.js";
+import {
+  Dir
+} from "./chunk-HLZNGV7I.js";
+import "./chunk-7OMPJCAI.js";
+import "./chunk-U3ZLLG7Y.js";
+import "./chunk-7YT5CE2Y.js";
+import "./chunk-5OFLYFBL.js";
+import "./chunk-UK4S7V5W.js";
+export {
+  BlockScrollStrategy,
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  CdkScrollable,
+  CloseScrollStrategy,
+  ConnectedOverlayPositionChange,
+  ConnectionPositionPair,
+  FlexibleConnectedPositionStrategy,
+  FullscreenOverlayContainer,
+  GlobalPositionStrategy,
+  NoopScrollStrategy,
+  Overlay,
+  OverlayConfig,
+  OverlayContainer,
+  OverlayKeyboardDispatcher,
+  OverlayModule,
+  OverlayOutsideClickDispatcher,
+  OverlayPositionBuilder,
+  OverlayRef,
+  RepositionScrollStrategy,
+  STANDARD_DROPDOWN_ADJACENT_POSITIONS,
+  STANDARD_DROPDOWN_BELOW_POSITIONS,
+  ScrollDispatcher,
+  ScrollStrategyOptions,
+  ScrollingVisibility,
+  ViewportRuler,
+  createBlockScrollStrategy,
+  createCloseScrollStrategy,
+  createFlexibleConnectedPositionStrategy,
+  createGlobalPositionStrategy,
+  createNoopScrollStrategy,
+  createOverlayRef,
+  createRepositionScrollStrategy,
+  validateHorizontalPosition,
+  validateVerticalPosition,
+  CdkFixedSizeVirtualScroll as ɵɵCdkFixedSizeVirtualScroll,
+  CdkScrollableModule as ɵɵCdkScrollableModule,
+  CdkVirtualForOf as ɵɵCdkVirtualForOf,
+  CdkVirtualScrollViewport as ɵɵCdkVirtualScrollViewport,
+  CdkVirtualScrollableElement as ɵɵCdkVirtualScrollableElement,
+  CdkVirtualScrollableWindow as ɵɵCdkVirtualScrollableWindow,
+  Dir as ɵɵDir
+};

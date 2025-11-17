@@ -1,0 +1,150 @@
+/**
+ * Mobile Modal Styles
+ * 
+ * Global styles for modals opened via DsMobileModalService.
+ * These styles are applied to all modals and handle different presentation styles.
+ */
+
+/* Base modal styles */
+.ds-mobile-modal {
+  --background: var(--color-background-neutral-primary, #ffffff);
+  --border-radius: 16px;
+  --box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Fullscreen presentation */
+.ds-modal-fullscreen {
+  --width: 100%;
+  --height: 100%;
+  --border-radius: 0;
+}
+
+.ds-modal-fullscreen::part(content) {
+  border-radius: 0;
+}
+
+/* Card presentation (default iOS modal style) */
+.ds-modal-card {
+  --width: 100%;
+  --height: auto;
+  --max-height: 90%;
+  --border-radius: 16px 16px 0 0;
+}
+
+.ds-modal-card::part(content) {
+  border-radius: 16px 16px 0 0;
+  box-shadow: var(--box-shadow);
+}
+
+/* Sheet presentation (bottom sheet with breakpoints) */
+.ds-modal-sheet {
+  --width: 100%;
+  --height: auto;
+  --border-radius: 16px 16px 0 0;
+}
+
+.ds-modal-sheet::part(content) {
+  border-radius: 16px 16px 0 0;
+  box-shadow: var(--box-shadow);
+}
+
+.ds-modal-sheet::part(handle) {
+  background: var(--border-color-default);
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  margin: 8px auto 0;
+}
+
+/* Backdrop styles */
+.ds-mobile-modal::part(backdrop) {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+/* Animations */
+.ds-mobile-modal.modal-card-enter-active,
+.ds-mobile-modal.modal-sheet-enter-active {
+  animation: slideUp 0.3s ease-out;
+}
+
+.ds-mobile-modal.modal-card-leave-active,
+.ds-mobile-modal.modal-sheet-leave-active {
+  animation: slideDown 0.3s ease-in;
+}
+
+.ds-mobile-modal.modal-fullscreen-enter-active {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.ds-mobile-modal.modal-fullscreen-leave-active {
+  animation: fadeOut 0.2s ease-in;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Safe area handling for notched devices */
+@supports (padding: env(safe-area-inset-top)) {
+  .ds-modal-fullscreen::part(content) {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+  .ds-mobile-modal {
+    --background: var(--color-background-neutral-primary-dark, #1a1a1a);
+  }
+  
+  .ds-mobile-modal::part(backdrop) {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ds-mobile-modal.modal-card-enter-active,
+  .ds-mobile-modal.modal-card-leave-active,
+  .ds-mobile-modal.modal-sheet-enter-active,
+  .ds-mobile-modal.modal-sheet-leave-active,
+  .ds-mobile-modal.modal-fullscreen-enter-active,
+  .ds-mobile-modal.modal-fullscreen-leave-active {
+    animation: none;
+  }
+}
+
