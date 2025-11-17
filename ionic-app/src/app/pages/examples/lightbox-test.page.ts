@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import {
-  DsMobileLightboxService,
-  LightboxAuthor,
-  DsMobilePageMainComponent,
-  DsMobileContentComponent,
   DsButtonComponent
 } from '@propbinder/design-system';
+import { DsMobileLightboxService, LightboxAuthor } from '../../components/lightbox';
+import { DsMobilePageMainComponent } from '../../components/page-main';
+import { DsMobileContentComponent } from '../../components/content';
 
 @Component({
   selector: 'app-lightbox-test',

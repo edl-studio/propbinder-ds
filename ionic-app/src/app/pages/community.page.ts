@@ -1,9 +1,6 @@
 import { Component, signal, computed } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
-  DsMobilePageMainComponent,
-  DsMobileContentComponent,
-  DsMobilePostCardComponent,
   PostContentComponent,
   PostTextComponent,
   PostMediaComponent,
@@ -12,16 +9,17 @@ import {
   ActionLikeComponent,
   ActionCommentComponent,
   PostPdfAttachmentComponent,
-  DsMobilePostComposerComponent,
-  DsMobileBottomSheetService,
-  DsMobilePostCreateBottomSheetComponent,
-  DsMobilePostActionsBottomSheetComponent,
-  PostActionResult,
-  DsMobileLightboxService,
-  LightboxAuthor,
-  DsMobilePostDetailModalService,
   DsIconComponent
 } from '@propbinder/design-system';
+import { DsMobilePageMainComponent } from '../components/page-main';
+import { DsMobileContentComponent } from '../components/content';
+import { DsMobilePostCardComponent } from '../components/post-card';
+import { DsMobilePostComposerComponent } from '../components/post-composer';
+import { DsMobileBottomSheetService } from '../components/bottom-sheet/ds-mobile-bottom-sheet.service';
+import { DsMobilePostCreateBottomSheetComponent } from '../components/bottom-sheet/ds-mobile-post-create-bottom-sheet';
+import { DsMobilePostActionsBottomSheetComponent, PostActionResult } from '../components/bottom-sheet/ds-mobile-post-actions-bottom-sheet';
+import { DsMobileLightboxService, LightboxAuthor } from '../components/lightbox';
+import { DsMobilePostDetailModalService } from '../components/post-detail-modal';
 import { UserService } from '../services/user.service';
 
 @Component({

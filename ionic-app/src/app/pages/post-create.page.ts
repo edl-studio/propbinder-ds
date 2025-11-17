@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import {
   DsAvatarComponent,
   DsIconComponent,
-  DsButtonComponent,
-  DsMobilePageDetailsComponent
+  DsButtonComponent
 } from '@propbinder/design-system';
+import { DsMobilePageDetailsComponent } from '../components/page-details';
 import { UserService } from '../services/user.service';
 
 /**

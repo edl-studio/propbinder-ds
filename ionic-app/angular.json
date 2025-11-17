@@ -33,8 +33,8 @@
             ],
             "styles": [
               "../design-system/src/app/styles/globals.css",
-              "../design-system/src/app/components/ui/mobile/shared/mobile-common.css",
-              "../design-system/src/app/components/ui/mobile/shared/mobile-page-base.css",
+              "src/app/components/shared/mobile-common.css",
+              "src/app/components/shared/mobile-page-base.css",
               "src/app/styles/ionic.css",
               "src/styles.css"
             ],

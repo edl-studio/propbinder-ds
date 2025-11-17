@@ -1,20 +1,18 @@
 import { Component } from '@angular/core';
-import {
-  DsMobilePageDetailsComponent,
+import { DsMobilePageDetailsComponent } from '../components/page-details';
+import { 
   DsMobilePostCardComponent,
   PostContentComponent,
   PostTextComponent,
   PostMediaComponent,
   PostActionsComponent,
   ActionLikeComponent,
-  ActionCommentComponent,
-  DsMobileCommentComponent,
-  DsMobileLightboxService,
-  LightboxAuthor,
-  DsMobileBottomSheetService,
-  DsMobileCommentActionsBottomSheetComponent,
-  CommentActionResult
-} from '@propbinder/design-system';
+  ActionCommentComponent
+} from '../components/post-card';
+import { DsMobileCommentComponent } from '../components/comment';
+import { DsMobileLightboxService, LightboxAuthor } from '../components/lightbox';
+import { DsMobileBottomSheetService } from '../components/bottom-sheet/ds-mobile-bottom-sheet.service';
+import { DsMobileCommentActionsBottomSheetComponent, CommentActionResult } from '../components/bottom-sheet';
 
 @Component({
   selector: 'app-mobile-post-detail-page',

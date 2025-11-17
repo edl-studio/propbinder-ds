@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  DsMobilePageMainComponent,
-  DsMobileContentComponent,
-  DsMobilePostCardComponent,
   PostContentComponent,
   PostTextComponent,
   PostMediaComponent,
   PostActionsComponent,
   ActionLikeComponent,
   ActionCommentComponent,
-  DsMobilePostComposerComponent,
-  DsMobileBottomSheetService,
-  DsMobilePostCreateBottomSheetComponent,
-  DsMobileLightboxService,
-  LightboxAuthor,
-  DsMobileModalService
 } from '@propbinder/design-system';
+import { DsMobilePageMainComponent } from '../../components/page-main';
+import { DsMobileContentComponent } from '../../components/content';
+import { DsMobilePostCardComponent } from '../../components/post-card';
+import { DsMobilePostComposerComponent } from '../../components/post-composer';
+import { DsMobileBottomSheetService } from '../../components/bottom-sheet/ds-mobile-bottom-sheet.service';
+import { DsMobilePostCreateBottomSheetComponent } from '../../components/bottom-sheet/ds-mobile-post-create-bottom-sheet';
+import { DsMobileLightboxService, LightboxAuthor } from '../../components/lightbox';
+import { DsMobileModalService } from '../../components/modal/ds-mobile-modal.service';
 import { MobilePostDetailPageComponent } from '../post-detail.page';
 import { UserService } from '../../services/user.service';
 
