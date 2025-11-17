@@ -1,19 +1,19 @@
 import { Component, signal, computed } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
+import { DsIconComponent } from '@propbinder/design-system';
+import { DsMobilePageMainComponent } from '../components/page-main';
+import { DsMobileContentComponent } from '../components/content';
+import { 
+  DsMobilePostCardComponent,
   PostContentComponent,
   PostTextComponent,
   PostMediaComponent,
   PostAttachmentsComponent,
   PostActionsComponent,
   ActionLikeComponent,
-  ActionCommentComponent,
-  PostPdfAttachmentComponent,
-  DsIconComponent
-} from '@propbinder/design-system';
-import { DsMobilePageMainComponent } from '../components/page-main';
-import { DsMobileContentComponent } from '../components/content';
-import { DsMobilePostCardComponent } from '../components/post-card';
+  ActionCommentComponent
+} from '../components/post-card';
+import { PostPdfAttachmentComponent } from '../components/post-card/ds-mobile-post-pdf-attachment';
 import { DsMobilePostComposerComponent } from '../components/post-composer';
 import { DsMobileBottomSheetService } from '../components/bottom-sheet/ds-mobile-bottom-sheet.service';
 import { DsMobilePostCreateBottomSheetComponent } from '../components/bottom-sheet/ds-mobile-post-create-bottom-sheet';

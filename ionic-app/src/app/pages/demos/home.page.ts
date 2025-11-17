@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular/standalone';
-import {
-  DsIconComponent,
-  DsMobilePageMainComponent,
+import { DsIconComponent } from '@propbinder/design-system';
+import { DsMobilePageMainComponent } from '../../components/page-main';
+import { 
   DsMobileHeaderContentComponent,
   DsMobileHeaderContentTileComponent,
   TileIconComponent,
   TileContentComponent,
   TileLabelComponent,
-  TileValueComponent,
+  TileValueComponent
+} from '../../components/header-content';
+import { 
   DsMobileContentComponent,
   DsMobileContentSectionComponent,
   SectionHeaderComponent,
   ContentRowComponent
-} from '@propbinder/design-system';
+} from '../../components/content';
 import { UserService } from '../../services/user.service';
 
 @Component({

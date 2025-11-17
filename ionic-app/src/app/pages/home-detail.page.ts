@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular/standalone';
-import {
-  DsMobilePageDetailsComponent,
+import { DsMobilePageDetailsComponent } from '../components/page-details';
+import { 
   DsMobileContentComponent,
   DsMobileContentSectionComponent,
   SectionHeaderComponent,
   ContentRowComponent
-} from '@propbinder/design-system';
+} from '../components/content';
 
 @Component({
   selector: 'app-home-detail-page',

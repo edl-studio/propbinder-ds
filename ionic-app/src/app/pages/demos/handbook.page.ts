@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import {
-  DsMobilePageMainComponent,
+import { DsMobilePageMainComponent } from '../../components/page-main';
+import { 
   DsMobileContentComponent,
   DsMobileContentSectionComponent,
   SectionHeaderComponent,
   ContentRowComponent
-} from '@propbinder/design-system';
+} from '../../components/content';
 import { UserService } from '../../services/user.service';
 
 @Component({

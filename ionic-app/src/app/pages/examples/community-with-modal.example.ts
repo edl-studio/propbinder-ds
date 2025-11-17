@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {
+import { DsMobilePageMainComponent } from '../../components/page-main';
+import { DsMobileContentComponent } from '../../components/content';
+import { 
+  DsMobilePostCardComponent,
   PostContentComponent,
   PostTextComponent,
   PostMediaComponent,
   PostActionsComponent,
   ActionLikeComponent,
-  ActionCommentComponent,
-} from '@propbinder/design-system';
-import { DsMobilePageMainComponent } from '../../components/page-main';
-import { DsMobileContentComponent } from '../../components/content';
-import { DsMobilePostCardComponent } from '../../components/post-card';
+  ActionCommentComponent
+} from '../../components/post-card';
 import { DsMobilePostComposerComponent } from '../../components/post-composer';
 import { DsMobileBottomSheetService } from '../../components/bottom-sheet/ds-mobile-bottom-sheet.service';
 import { DsMobilePostCreateBottomSheetComponent } from '../../components/bottom-sheet/ds-mobile-post-create-bottom-sheet';

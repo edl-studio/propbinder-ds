@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DsMobileModalService } from '@propbinder/design-system';
+import { DsMobileModalService } from '../../components/modal/ds-mobile-modal.service';
 import { MobilePostDetailPageComponent } from '../post-detail.page';
 
 /**
