@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../design-system/src/app/components/ui/sidebar/ds-sidebar-variables.css"],
-  "sourcesContent": [".sidebar {\n  --sidebar-content-primary: var(--text-color-default-primary-inverse);\n  --sidebar-content-secondary: #C6CBFF;\n  --sidebar-content-tertiary: #9AA1FE;\n}"],
-  "mappings": ";AAAA,CAAC;AACC,6BAA2B,IAAI;AAC/B,+BAA6B;AAC7B,8BAA4B;AAC9B;",
-  "names": []
-}

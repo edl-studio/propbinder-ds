@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../design-system/src/app/components/ui/select-date/ds-select-date.css"],
-  "sourcesContent": ["/* Date Select Component\n * A wrapper around ds-datepicker with styled input trigger\n */\n\n:host {\n  display: block;\n  width: 100%;\n  max-width: 480px;\n}\n\n/* Set icon opacity to 0.6 when field is empty (to match placeholder) */\n:host ::ng-deep ds-input.ds-select-date__input--empty .ds-input__icon--leading,\n:host ::ng-deep ds-input.ds-select-date__input--empty .ds-input__icon--trailing {\n  opacity: 0.6;\n}\n\n/* Ensure calendar icon (leading) is always visible, even in ghost mode when empty */\n:host ::ng-deep ds-input.ds-select-date__input--empty.ds-input--ghost .ds-input__icon--leading {\n  opacity: 0.6 !important;\n}\n\n/* Rotate chevron icon when datepicker is open */\n:host ::ng-deep ds-input.ds-select-date__input--open .ds-input__icon--trailing {\n  transform: rotate(180deg);\n}\n\n"],
-  "mappings": ";AAIA;AACE,WAAS;AACT,SAAO;AACP,aAAW;AACb;AAGA,MAAM,UAAU,QAAQ,CAAC,6BAA6B,CAAC;AACvD,MAAM,UAAU,QAAQ,CADC,6BAC6B,CAAC;AACrD,WAAS;AACX;AAGA,MAAM,UAAU,QAAQ,CANC,4BAM4B,CAAC,gBAAgB,CANf;AAOrD,WAAS;AACX;AAGA,MAAM,UAAU,QAAQ,CAAC,4BAA4B,CAVE;AAWrD,aAAW,OAAO;AACpB;",
-  "names": []
-}

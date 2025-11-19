@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;3f00dfe5528e7b0ecc4559ba6c31c9002cd165e4337d7807eb1d0aa038437030;/Users/modestas/Propbinder DS/design-system/src/app/components/ui/accordion/ds-accordion.ts"],
-  "sourcesContent": ["\n    :host {\n      display: block;\n      width: 100%;\n      max-width: 24rem;\n      border-radius: 8px;\n      border: 1px solid var(--border-color-default);\n      background-color: white;\n      box-shadow: 0 1px 0 0 var(--border-color-default);\n      overflow: hidden;\n    }\n  "],
-  "mappings": ";AACI;AACE,WAAS;AACT,SAAO;AACP,aAAW;AACX,iBAAe;AACf,UAAQ,IAAI,MAAM,IAAI;AACtB,oBAAkB;AAClB,cAAY,EAAE,IAAI,EAAE,EAAE,IAAI;AAC1B,YAAU;AACZ;",
-  "names": []
-}

@@ -12,7 +12,7 @@ const sourceDir = path.join(__dirname, '..');
 const deployDir = path.join(sourceDir, 'deploy');
 const distDir = path.join(sourceDir, 'dist', 'design-system', 'browser');
 const storybookDir = path.join(sourceDir, 'storybook-static');
-const ionicAppDir = path.join(sourceDir, '..', 'ionic-app', 'dist', 'ionic-app', 'browser');
+const ionicAppDir = path.join(sourceDir, 'ionic-app', 'dist', 'ionic-app', 'browser');
 
 // Utility functions
 function ensureDir(dir) {

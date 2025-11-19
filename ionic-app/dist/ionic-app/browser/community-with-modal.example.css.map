@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;abff8cc177a1673a4f6f3746c992571116649590147cd3c23d15a6a835a6069b;/Users/modestas/Propbinder DS/ionic-app/src/app/pages/examples/community-with-modal.example.ts"],
-  "sourcesContent": ["\n    .post-feed {\n      display: flex;\n      flex-direction: column;\n      max-width: 640px;\n    }\n    \n    .clickable-image {\n      cursor: pointer;\n      transition: transform 0.2s ease, opacity 0.2s ease;\n      border-radius: 8px;\n      display: block;\n      width: 100%;\n      aspect-ratio: 16/9;\n      object-fit: cover;\n    }\n    \n    .clickable-image:active {\n      transform: scale(0.98);\n      opacity: 0.9;\n    }\n  "],
-  "mappings": ";AACI,CAAC;AACC,WAAS;AACT,kBAAgB;AAChB,aAAW;AACb;AAEA,CAAC;AACC,UAAQ;AACR,cAAY,UAAU,KAAK,IAAI,EAAE,QAAQ,KAAK;AAC9C,iBAAe;AACf,WAAS;AACT,SAAO;AACP,gBAAc,EAAE,CAAC;AACjB,cAAY;AACd;AAEA,CAVC,eAUe;AACd,aAAW,MAAM;AACjB,WAAS;AACX;",
-  "names": []
-}

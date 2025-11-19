@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../design-system/src/app/components/ui/sidebar/ds-sidebar-global-action.css"],
-  "sourcesContent": [".sidebar-global-action {\n  display: flex;\n  width: 100%;\n  margin-top: 4px;\n}\n\n/* Ensure the button takes full width */\n.sidebar-global-action__button {\n  width: 100% !important;\n  display: block !important;\n}\n\n.sidebar-global-action__content {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  color: var(--sidebar-content-primary);\n  font-size: var(--font-size-sm);\n  transition: all var(--transition-duration-normal, .2s) ease;\n  overflow: hidden;\n}\n\n.sidebar-global-action__content--collapsed {\n  opacity: 0;\n  width: 0;\n  gap: 0;\n}\n\n.sidebar-global-action__icon {\n  color: var(--sidebar-content-primary) !important;\n  transition: all var(--transition-duration-normal, .2s) ease;\n}\n\n.sidebar-global-action__label {\n  line-height: 1.25;\n  transition: all var(--transition-duration-normal, .2s) ease;\n  white-space: nowrap;\n}"],
-  "mappings": ";AAAA,CAAC;AACC,WAAS;AACT,SAAO;AACP,cAAY;AACd;AAGA,CAAC;AACC,SAAO;AACP,WAAS;AACX;AAEA,CAAC;AACC,WAAS;AACT,eAAa;AACb,OAAK;AACL,SAAO,IAAI;AACX,aAAW,IAAI;AACf,cAAY,IAAI,IAAI,4BAA4B,EAAE,KAAK;AACvD,YAAU;AACZ;AAEA,CAAC;AACC,WAAS;AACT,SAAO;AACP,OAAK;AACP;AAEA,CAAC;AACC,SAAO,IAAI;AACX,cAAY,IAAI,IAAI,4BAA4B,EAAE,KAAK;AACzD;AAEA,CAAC;AACC,eAAa;AACb,cAAY,IAAI,IAAI,4BAA4B,EAAE,KAAK;AACvD,eAAa;AACf;",
-  "names": []
-}

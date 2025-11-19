@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;78bab48bc8890860e6bbbffaad4eb5c6924e3bc97c03cb04964f2af16d03ac95;/Users/modestas/Propbinder DS/ionic-app/src/app/pages/home-detail.page.ts"],
-  "sourcesContent": ["\n    .grey-box {\n      height: 120px;\n      border-radius: 12px;\n      background: var(--color-background-neutral-tertiary);\n      flex: 1;\n    }\n\n    .grey-box.tall {\n      height: 200px;\n    }\n  "],
-  "mappings": ";AACI,CAAC;AACC,UAAQ;AACR,iBAAe;AACf,cAAY,IAAI;AAChB,QAAM;AACR;AAEA,CAPC,QAOQ,CAAC;AACR,UAAQ;AACV;",
-  "names": []
-}

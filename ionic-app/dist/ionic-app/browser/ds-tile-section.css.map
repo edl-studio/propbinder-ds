@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;1c4e19d9030f810050ea082abdc6984f20002a803a2096047518e8b077c55159;/Users/modestas/Propbinder DS/design-system/src/app/components/ui/tile/ds-tile-section.ts"],
-  "sourcesContent": ["\n    :host {\n      display: block;\n      flex: 1;\n      min-width: 0;\n      padding: 20px 24px;\n    }\n    \n    :host(.no-padding) {\n      padding: 0;\n    }\n    \n    :host-context(.ds-tile--vertical):not(:last-child) {\n      border-bottom: 1px solid var(--border-color-default);\n    }\n    \n    :host-context(.ds-tile--horizontal):not(:last-child) {\n      border-right: 1px solid var(--border-color-default);\n    }\n    \n    @media (max-width: 768px) {\n      :host {\n        padding: 16px 20px;\n      }\n      \n      :host(.no-padding) {\n        padding: 0;\n      }\n      \n      :host-context(.ds-tile--horizontal):not(:last-child) {\n        border-right: none;\n        border-bottom: 1px solid var(--border-color-default);\n      }\n    }\n  "],
-  "mappings": ";AACI;AACE,WAAS;AACT,QAAM;AACN,aAAW;AACX,WAAS,KAAK;AAChB;AAEA,MAAM,CAAC;AACL,WAAS;AACX;AAEA,cAAc,CAAC,kBAAkB,KAAK;AACpC,iBAAe,IAAI,MAAM,IAAI;AAC/B;AAEA,cAAc,CAAC,oBAAoB,KAAK;AACtC,gBAAc,IAAI,MAAM,IAAI;AAC9B;AAEA,OAAO,CAAC,SAAS,EAAE;AACjB;AACE,aAAS,KAAK;AAChB;AAEA,QAAM,CAAC;AACL,aAAS;AACX;AAEA,gBAAc,CAAC,oBAAoB,KAAK;AACtC,kBAAc;AACd,mBAAe,IAAI,MAAM,IAAI;AAC/B;AACF;",
-  "names": []
-}

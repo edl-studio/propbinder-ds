@@ -1,0 +1,115 @@
+/**
+ * Mobile Common Styles
+ * Shared CSS classes used across multiple mobile components
+ * 
+ * IMPORTANT: These are global utility classes that should be available
+ * to all components without view encapsulation scoping.
+ */
+
+/* Force these styles to be global and not tree-shaken */
+:root,
+:host,
+* {
+  /* This selector ensures Angular doesn't scope these classes */
+}
+
+/* Author Details Container */
+:root .author-details,
+.author-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+/* Author Name */
+:root .author-name,
+.author-name {
+  font-family: 'Brockmann', sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.3px;
+  color: var(--color-text-primary, #1a1a1a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Author Meta (role, timestamp, etc.) */
+:root .author-meta,
+.author-meta {
+  font-family: 'Brockmann', sans-serif;
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.26px;
+  color: var(--color-text-tertiary, #737373);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+:root .author-meta .separator,
+.author-meta .separator {
+  color: var(--color-text-tertiary, #a0a0a0);
+}
+
+/* Variants for lightbox/overlay contexts (white text on dark bg) */
+:root .lightbox-context .author-name,
+.lightbox-context .author-name,
+:root .overlay-context .author-name,
+.overlay-context .author-name {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+:root .lightbox-context .author-meta,
+.lightbox-context .author-meta,
+:root .overlay-context .author-meta,
+.overlay-context .author-meta {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:root .lightbox-context .author-meta .separator,
+.lightbox-context .author-meta .separator,
+:root .overlay-context .author-meta .separator,
+.overlay-context .author-meta .separator {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Section Headlines */
+:root .section-headline,
+.section-headline {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-color-default-primary);
+  padding: 16px 0;
+  margin: 0;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Empty State Text */
+:root .empty-state-title,
+.empty-state-title {
+  font-family: 'Brockmann', sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-color-default-primary, #202227);
+  margin: 0 0 8px 0;
+}
+
+:root .empty-state-description,
+.empty-state-description {
+  font-family: 'Brockmann', sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-color-default-secondary, #545B66);
+  margin: 0;
+}
+

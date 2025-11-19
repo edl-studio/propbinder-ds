@@ -80,6 +80,7 @@
   --color-brand-weak-hover: #dfe1f3;
   --color-brand-strong: #202227;
   --color-brand-strong-hover: #121418;
+  --color-brand-secondary: #221A4C; /* Dark purple for headers and sidebar */
 
   /* Outline Colors for focus states */
   --outline-color-default: var(--color-brand-weak);

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;ea6e1075faa6c64744bc31249b8e773d4b21048770fcd8c2a7af8f1994d7a849;/Users/modestas/Propbinder DS/ionic-app/src/app/pages/demos/handbook.page.ts"],
-  "sourcesContent": ["\n    .grey-box {\n      height: 120px;\n      border-radius: 12px;\n      background: var(--color-background-neutral-tertiary);\n      flex: 1;\n    }\n  "],
-  "mappings": ";AACI,CAAC;AACC,UAAQ;AACR,iBAAe;AACf,cAAY,IAAI;AAChB,QAAM;AACR;",
-  "names": []
-}
