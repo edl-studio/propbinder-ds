@@ -16,7 +16,7 @@
     "ios:prod:sync": "npx cap sync ios"
   },
   "dependencies": {
-    "@angular/cdk": "^20.2.9",
+    "@angular/cdk": "^20.2.12",
     "@angular/common": "^20.3.4",
     "@angular/compiler": "^20.3.4",
     "@angular/core": "^20.3.4",
@@ -35,10 +35,9 @@
     "@capacitor/status-bar": "^7.0.3",
     "@floating-ui/core": "^1.7.3",
     "@floating-ui/dom": "^1.7.4",
-    "@ionic/angular": "^8.7.9",
-    "@ng-icons/core": "^32.1.0",
-    "@ng-icons/remixicon": "^32.1.0",
-    "@propbinder/design-system": "file:../design-system/dist/design-system-lib",
+    "@ionic/angular": "^8.7.7",
+    "@ng-icons/core": "^30.0.0",
+    "@ng-icons/remixicon": "^30.0.0",
     "@tanstack/angular-table": "^8.21.3",
     "clsx": "^2.1.1",
     "ng-primitives": "^0.77.1",
@@ -47,11 +46,11 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.3.4",
     "@angular/cli": "^20.3.4",
-    "@angular/compiler-cli": "^20.3.4",
+    "@angular/compiler-cli": "^20.3.11",
     "@capacitor/cli": "^7.4.4",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.1",
-    "typescript": "~5.9.2"
+    "typescript": "~5.8.0"
   }
 }

@@ -1,4 +1,4 @@
-import { Component, input, computed, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DsIconComponent } from '../icon/ds-icon';
 
@@ -11,96 +11,95 @@ export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-avatar.css'],
   template: `
-    <div [class]="avatarClasses()">
+    <div [class]="getAvatarClasses()">
       <!-- Initials Avatar -->
-      @if (type() === 'initials') {
-        <span [class]="initialsClasses()">
-          {{ displayInitials() }}
+      <ng-container *ngIf="type === 'initials'">
+        <span [class]="getInitialsClasses()">
+          {{ getDisplayInitials() }}
         </span>
-      }
+      </ng-container>
       
       <!-- Photo Avatar -->
-      @if (type() === 'photo') {
+      <ng-container *ngIf="type === 'photo'">
         <img 
-          [src]="src()" 
-          [alt]="alt() || 'Avatar'"
-          [class]="imageClasses()"
+          [src]="src" 
+          [alt]="alt || 'Avatar'"
+          [class]="getImageClasses()"
           (error)="onImageError()"
         />
-      }
+      </ng-container>
       
       <!-- Icon Avatar -->
-      @if (type() === 'icon') {
+      <ng-container *ngIf="type === 'icon'">
         <ds-icon 
-          [name]="iconName() || 'remixUser3Fill'"
-          [size]="iconSize()"
+          [name]="iconName || 'remixUser3Fill'"
+          [size]="getIconSize()"
           color="var(--text-color-default-primary-inverse)"
           class="avatar__icon"
         />
-      }
+      </ng-container>
     </div>
   `,
 })
 export class DsAvatarComponent {
-  // Input signals
-  type = input<AvatarType>('initials');
-  size = input<AvatarSize>('md');
+  // Input properties with decorators
+  @Input() type: AvatarType = 'initials';
+  @Input() size: AvatarSize = 'md';
   
   // Initials specific inputs
-  initials = input<string>('');
+  @Input() initials: string = '';
   
   // Photo specific inputs
-  src = input<string>('');
-  alt = input<string>('');
+  @Input() src: string = '';
+  @Input() alt: string = '';
   
   // Icon specific inputs
-  iconName = input<string>('remixUser3Fill');
-  iconColor = input<string>('secondary');
+  @Input() iconName: string = 'remixUser3Fill';
+  @Input() iconColor: string = 'secondary';
   
-  // Computed properties
-  avatarClasses = computed(() => {
+  // Methods instead of computed properties
+  getAvatarClasses(): string {
     const classes = ['avatar'];
     
     // Size classes
-    classes.push(`avatar--${this.size()}`);
+    classes.push(`avatar--${this.size}`);
     
     // Type classes
-    classes.push(`avatar--${this.type()}`);
+    classes.push(`avatar--${this.type}`);
     
     // Add depth classes for icon avatars based on size
-    if (this.type() === 'icon') {
+    if (this.type === 'icon') {
       const depthClass = this.getDepthClass();
       classes.push(depthClass);
     }
     
     // Add color variant for initials avatars
-    if (this.type() === 'initials') {
-      classes.push(`avatar--${this.colorVariant()}`);
+    if (this.type === 'initials') {
+      classes.push(`avatar--${this.getColorVariant()}`);
     }
     
     return classes.join(' ');
-  });
+  }
   
-  initialsClasses = computed(() => {
+  getInitialsClasses(): string {
     const classes = ['avatar__initials'];
-    classes.push(`avatar__initials--${this.size()}`);
+    classes.push(`avatar__initials--${this.size}`);
     return classes.join(' ');
-  });
+  }
   
-  imageClasses = computed(() => {
+  getImageClasses(): string {
     const classes = ['avatar__image'];
     return classes.join(' ');
-  });
+  }
   
-  displayInitials = computed(() => {
-    const initialsValue = this.initials();
-    if (!initialsValue) return '';
+  getDisplayInitials(): string {
+    if (!this.initials) return '';
     
     // Take first 2 characters and uppercase them
-    return initialsValue.substring(0, 2).toUpperCase();
-  });
+    return this.initials.substring(0, 2).toUpperCase();
+  }
   
-  iconSize = computed(() => {
+  getIconSize(): string {
     const sizeMap: Record<AvatarSize, string> = {
       xs: '12px',
       sm: '14px',
@@ -108,13 +107,12 @@ export class DsAvatarComponent {
       lg: '24px',
       xl: '32px'
     };
-    return sizeMap[this.size()];
-  });
+    return sizeMap[this.size];
+  }
   
   // Get color variant based on initials
-  colorVariant = computed(() => {
-    const initialsValue = this.initials();
-    if (!initialsValue) return 'light-brown';
+  getColorVariant(): string {
+    if (!this.initials) return 'light-brown';
     
     // Color variants that match the design system
     const colorVariants = [
@@ -130,18 +128,17 @@ export class DsAvatarComponent {
     
     // Calculate a hash from the initials
     let hash = 0;
-    for (let i = 0; i < initialsValue.length; i++) {
-      hash = initialsValue.charCodeAt(i) + ((hash << 5) - hash);
+    for (let i = 0; i < this.initials.length; i++) {
+      hash = this.initials.charCodeAt(i) + ((hash << 5) - hash);
     }
     
     // Use the hash to select a color variant
     const index = Math.abs(hash) % colorVariants.length;
     return colorVariants[index];
-  });
+  }
   
   // Get depth class based on avatar size for icon avatars
   private getDepthClass(): string {
-    const size = this.size();
     const depthMap: Record<AvatarSize, string> = {
       xs: 'depth-sm',
       sm: 'depth-sm',
@@ -149,7 +146,7 @@ export class DsAvatarComponent {
       lg: 'depth-md',
       xl: 'depth-lg'
     };
-    return depthMap[size];
+    return depthMap[this.size];
   }
   
   // Event handlers
