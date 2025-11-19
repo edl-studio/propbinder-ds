@@ -1,0 +1,38 @@
+{
+  "name": "Propbinder Mobile",
+  "short_name": "Propbinder",
+  "description": "Propbinder Mobile Application",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#221a4c",
+  "background_color": "#221a4c",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/App-Icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/App-Icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/App-Icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/App-Icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
+

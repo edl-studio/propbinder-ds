@@ -109,10 +109,10 @@ import { UserService } from '../../services/user.service';
               <post-text>Look at this beautiful view from my balcony! Morning coffee never tasted this good ☕️</post-text>
               <post-media>
                 <img 
-                  src="Assets/Dummy-photos/balcony-view.jpg" 
+                  src="/Assets/Dummy-photos/balcony-view.jpg" 
                   alt="Balcony view" 
                   class="clickable-image"
-                  (click)="openImageLightbox('Assets/Dummy-photos/balcony-view.jpg', 'Balcony view', 'Morning coffee never tasted this good', $event)"
+                  (click)="openImageLightbox('/Assets/Dummy-photos/balcony-view.jpg', 'Balcony view', 'Morning coffee never tasted this good', $event)"
                 />
               </post-media>
             </post-content>

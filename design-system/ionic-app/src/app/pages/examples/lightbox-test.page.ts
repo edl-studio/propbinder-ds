@@ -41,7 +41,7 @@ import { DsMobileContentComponent } from '../../components/content';
           <h2>Click the image or button to test the lightbox:</h2>
           
           <img 
-            src="Assets/Dummy-photos/balcony-view.jpg" 
+            src="/Assets/Dummy-photos/balcony-view.jpg" 
             alt="Test image"
             class="test-image"
             (click)="openLightbox()">
@@ -75,7 +75,7 @@ export class LightboxTestPage {
       images: [
         {
           type: 'image',
-          src: 'Assets/Dummy-photos/balcony-view.jpg',
+          src: '/Assets/Dummy-photos/balcony-view.jpg',
           alt: 'Test Image',
           title: 'Test Image',
           description: 'This is a test image for the lightbox',

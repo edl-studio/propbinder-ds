@@ -30,6 +30,31 @@ interface Inquiry {
       max-width: 640px;
     }
     
+    .inquiry-list-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .inquiry-list-wrapper ds-mobile-interactive-list-item-inquiry:not(:last-child) {
+      position: relative;
+      margin-bottom: 0;
+      padding-bottom: 8px;
+    }
+    
+    .inquiry-list-wrapper ds-mobile-interactive-list-item-inquiry:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 44px; /* 32px (leading content) + 12px (gap) */
+      right: 0;
+      height: 1px;
+      background: var(--color-border-secondary, #e5e5e5);
+    }
+    
+    .inquiry-list-wrapper ds-mobile-interactive-list-item-inquiry:not(:first-child) {
+      padding-top: 8px;
+    }
+    
     .filter-tabs {
       display: flex;
       gap: 8px;
@@ -114,18 +139,20 @@ interface Inquiry {
                 <h2 class="section-headline">Open</h2>
               }
               
-              @for (inquiry of openInquiries(); track inquiry.id) {
-                <ds-mobile-interactive-list-item-inquiry
-                  [title]="inquiry.title"
-                  [description]="inquiry.description"
-                  [status]="'open'"
-                  [timestamp]="inquiry.timestamp"
-                  [iconName]="getInquiryIcon(inquiry.category)"
-                  [clickable]="true"
-                  (inquiryClick)="openInquiryDetail(inquiry.id)"
-                  (longPress)="showInquiryActions(inquiry.id)">
-                </ds-mobile-interactive-list-item-inquiry>
-              }
+              <div class="inquiry-list-wrapper">
+                @for (inquiry of openInquiries(); track inquiry.id) {
+                  <ds-mobile-interactive-list-item-inquiry
+                    [title]="inquiry.title"
+                    [description]="inquiry.description"
+                    [status]="'open'"
+                    [timestamp]="inquiry.timestamp"
+                    [iconName]="getInquiryIcon(inquiry.category)"
+                    [clickable]="true"
+                    (inquiryClick)="openInquiryDetail(inquiry.id)"
+                    (longPress)="showInquiryActions(inquiry.id)">
+                  </ds-mobile-interactive-list-item-inquiry>
+                }
+              </div>
             }
             
             <!-- Closed inquiries -->
@@ -134,18 +161,20 @@ interface Inquiry {
                 <h2 class="section-headline">Closed</h2>
               }
               
-              @for (inquiry of closedInquiries(); track inquiry.id) {
-                <ds-mobile-interactive-list-item-inquiry
-                  [title]="inquiry.title"
-                  [description]="inquiry.description"
-                  [status]="'closed'"
-                  [timestamp]="inquiry.timestamp"
-                  [iconName]="getInquiryIcon(inquiry.category)"
-                  [clickable]="true"
-                  (inquiryClick)="openInquiryDetail(inquiry.id)"
-                  (longPress)="showInquiryActions(inquiry.id)">
-                </ds-mobile-interactive-list-item-inquiry>
-              }
+              <div class="inquiry-list-wrapper">
+                @for (inquiry of closedInquiries(); track inquiry.id) {
+                  <ds-mobile-interactive-list-item-inquiry
+                    [title]="inquiry.title"
+                    [description]="inquiry.description"
+                    [status]="'closed'"
+                    [timestamp]="inquiry.timestamp"
+                    [iconName]="getInquiryIcon(inquiry.category)"
+                    [clickable]="true"
+                    (inquiryClick)="openInquiryDetail(inquiry.id)"
+                    (longPress)="showInquiryActions(inquiry.id)">
+                  </ds-mobile-interactive-list-item-inquiry>
+                }
+              </div>
             }
           } @else {
             <!-- Empty state -->

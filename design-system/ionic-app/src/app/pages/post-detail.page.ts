@@ -98,10 +98,10 @@ import { DsMobileCommentActionsBottomSheetComponent, CommentActionResult } from 
               <post-text>Look at this beautiful view from my balcony! Morning coffee never tasted this good ☕️</post-text>
               <post-media>
                 <img 
-                  src="Assets/Dummy-photos/balcony-view.jpg" 
+                  src="/Assets/Dummy-photos/balcony-view.jpg" 
                   alt="Balcony view" 
                   class="clickable-image"
-                  (click)="openImageLightbox('Assets/Dummy-photos/balcony-view.jpg', 'Balcony View', 'Morning coffee never tasted this good ☕️')"
+                  (click)="openImageLightbox('/Assets/Dummy-photos/balcony-view.jpg', 'Balcony View', 'Morning coffee never tasted this good ☕️')"
                 />
               </post-media>
             </post-content>

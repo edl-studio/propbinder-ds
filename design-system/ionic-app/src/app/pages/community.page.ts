@@ -47,6 +47,31 @@ import { UserService } from '../services/user.service';
       max-width: 640px;
     }
     
+    .post-list-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .post-list-wrapper ds-mobile-interactive-list-item-post:not(:last-child) {
+      position: relative;
+      margin-bottom: 0;
+      padding-bottom: 8px;
+    }
+    
+    .post-list-wrapper ds-mobile-interactive-list-item-post:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 44px; /* 32px (leading content) + 12px (gap) */
+      right: 0;
+      height: 1px;
+      background: var(--color-border-secondary, #e5e5e5);
+    }
+    
+    .post-list-wrapper ds-mobile-interactive-list-item-post:not(:first-child) {
+      padding-top: 8px;
+    }
+    
     .pinned-posts-section {
       margin: -12px -12px 12px -12px;
       padding: 0 12px 4px 12px;
@@ -146,137 +171,139 @@ import { UserService } from '../services/user.service';
           <h2 class="section-headline">All posts</h2>
           
           @if (hasAnyPosts()) {
-            <!-- User Created Posts -->
-            @for (post of userPosts(); track $index) {
+            <div class="post-list-wrapper">
+              <!-- User Created Posts -->
+              @for (post of userPosts(); track $index) {
+                <ds-mobile-interactive-list-item-post
+                  [authorName]="post.authorName"
+                  [authorRole]="post.authorRole"
+                  [timestamp]="post.timestamp"
+                  [avatarType]="post.avatarType"
+                  [avatarSrc]="post.avatarSrc"
+                  [avatarInitials]="post.avatarInitials"
+                  [clickable]="true"
+                  (postClick)="openUserPost($index)"
+                  (commentClick)="openUserPost($index, true)"
+                  (longPress)="handlePostLongPress($index, post.authorRole === 'You')">
+                  
+                  <post-content>
+                    @if (post.content) {
+                      <post-text>{{ post.content }}</post-text>
+                    }
+                    @if (post.imageSrc) {
+                      <post-media>
+                        <img 
+                          [src]="post.imageSrc" 
+                          [alt]="post.imageAlt || 'Posted image'" 
+                          class="clickable-image"
+                          (click)="openImageLightbox(post.imageSrc, post.imageAlt || 'Posted image', post.content, $event)"
+                        />
+                      </post-media>
+                    }
+                  </post-content>
+                  
+                  <post-actions>
+                    <action-like [count]="post.likeCount" [active]="post.isLiked" />
+                    <action-comment [count]="post.commentCount" (commentClick)="openUserPost($index, true)" />
+                  </post-actions>
+                </ds-mobile-interactive-list-item-post>
+              }
+              
+              <!-- Post 1: Text only -->
               <ds-mobile-interactive-list-item-post
-                [authorName]="post.authorName"
-                [authorRole]="post.authorRole"
-                [timestamp]="post.timestamp"
-                [avatarType]="post.avatarType"
-                [avatarSrc]="post.avatarSrc"
-                [avatarInitials]="post.avatarInitials"
+                [authorName]="'John Doe'"
+                [authorRole]="'Tenant'"
+                [timestamp]="'2h ago'"
+                [avatarType]="'photo'"
+                [avatarSrc]="'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'"
                 [clickable]="true"
-                (postClick)="openUserPost($index)"
-                (commentClick)="openUserPost($index, true)"
-                (longPress)="handlePostLongPress($index, post.authorRole === 'You')">
+                (postClick)="openPost('1')"
+                (commentClick)="openPost('1', true)"
+                (longPress)="handlePostLongPress('1', false)">
                 
                 <post-content>
-                  @if (post.content) {
-                    <post-text>{{ post.content }}</post-text>
-                  }
-                  @if (post.imageSrc) {
-                    <post-media>
-                      <img 
-                        [src]="post.imageSrc" 
-                        [alt]="post.imageAlt || 'Posted image'" 
-                        class="clickable-image"
-                        (click)="openImageLightbox(post.imageSrc, post.imageAlt || 'Posted image', post.content, $event)"
-                      />
-                    </post-media>
-                  }
+                  <post-text>Just moved into my new apartment! The landlord was super helpful during the whole process. Really excited to be part of this community! 🏠</post-text>
                 </post-content>
                 
                 <post-actions>
-                  <action-like [count]="post.likeCount" [active]="post.isLiked" />
-                  <action-comment [count]="post.commentCount" (commentClick)="openUserPost($index, true)" />
+                  <action-like [count]="42" />
+                  <action-comment [count]="12" (commentClick)="openPost('1', true)" />
                 </post-actions>
               </ds-mobile-interactive-list-item-post>
-            }
-            
-            <!-- Post 1: Text only -->
-            <ds-mobile-interactive-list-item-post
-              [authorName]="'John Doe'"
-              [authorRole]="'Tenant'"
-              [timestamp]="'2h ago'"
-              [avatarType]="'photo'"
-              [avatarSrc]="'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'"
-              [clickable]="true"
-              (postClick)="openPost('1')"
-              (commentClick)="openPost('1', true)"
-              (longPress)="handlePostLongPress('1', false)">
-              
-              <post-content>
-                <post-text>Just moved into my new apartment! The landlord was super helpful during the whole process. Really excited to be part of this community! 🏠</post-text>
-              </post-content>
-              
-              <post-actions>
-                <action-like [count]="42" />
-                <action-comment [count]="12" (commentClick)="openPost('1', true)" />
-              </post-actions>
-            </ds-mobile-interactive-list-item-post>
 
-            <!-- Post 2: With image -->
-            <ds-mobile-interactive-list-item-post
-              [authorName]="'Sarah Miller'"
-              [authorRole]="'Tenant'"
-              [timestamp]="'4h ago'"
-              [avatarInitials]="'SM'"
-              [clickable]="true"
-              (postClick)="openPost('2')"
-              (commentClick)="openPost('2', true)"
-              (longPress)="handlePostLongPress('2', false)">
-              
-              <post-content>
-                <post-text>Look at this beautiful view from my balcony! Morning coffee never tasted this good ☕️</post-text>
-                <post-media>
-                  <img 
-                    src="/Assets/Dummy-photos/balcony-view.jpg" 
-                    alt="Balcony view" 
-                    class="clickable-image"
-                    (click)="openImageLightbox('/Assets/Dummy-photos/balcony-view.jpg', 'Balcony view', 'Morning coffee never tasted this good', $event)"
-                  />
-                </post-media>
-              </post-content>
-              
-              <post-actions>
-                <action-like [active]="true" [count]="156" />
-                <action-comment [count]="34" (commentClick)="openPost('2', true)" />
-              </post-actions>
-            </ds-mobile-interactive-list-item-post>
+              <!-- Post 2: With image -->
+              <ds-mobile-interactive-list-item-post
+                [authorName]="'Sarah Miller'"
+                [authorRole]="'Tenant'"
+                [timestamp]="'4h ago'"
+                [avatarInitials]="'SM'"
+                [clickable]="true"
+                (postClick)="openPost('2')"
+                (commentClick)="openPost('2', true)"
+                (longPress)="handlePostLongPress('2', false)">
+                
+                <post-content>
+                  <post-text>Look at this beautiful view from my balcony! Morning coffee never tasted this good ☕️</post-text>
+                  <post-media>
+                    <img 
+                      src="/Assets/Dummy-photos/balcony-view.jpg" 
+                      alt="Balcony view" 
+                      class="clickable-image"
+                      (click)="openImageLightbox('/Assets/Dummy-photos/balcony-view.jpg', 'Balcony view', 'Morning coffee never tasted this good', $event)"
+                    />
+                  </post-media>
+                </post-content>
+                
+                <post-actions>
+                  <action-like [active]="true" [count]="156" />
+                  <action-comment [count]="34" (commentClick)="openPost('2', true)" />
+                </post-actions>
+              </ds-mobile-interactive-list-item-post>
 
-            <!-- Post 3: Question -->
-            <ds-mobile-interactive-list-item-post
-              [authorName]="'Mike Johnson'"
-              [authorRole]="'Tenant'"
-              [timestamp]="'1d ago'"
-              [avatarType]="'photo'"
-              [avatarSrc]="'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face'"
-              [clickable]="true"
-              (postClick)="openPost('3')"
-              (commentClick)="openPost('3', true)"
-              (longPress)="handlePostLongPress('3', false)">
-              
-              <post-content>
-                <post-text>Does anyone know if there's a community gym nearby? Looking for recommendations for good fitness centers in the area. 🏋️</post-text>
-              </post-content>
-              
-              <post-actions>
-                <action-like [count]="23" />
-                <action-comment [count]="45" (commentClick)="openPost('3', true)" />
-              </post-actions>
-            </ds-mobile-interactive-list-item-post>
+              <!-- Post 3: Question -->
+              <ds-mobile-interactive-list-item-post
+                [authorName]="'Mike Johnson'"
+                [authorRole]="'Tenant'"
+                [timestamp]="'1d ago'"
+                [avatarType]="'photo'"
+                [avatarSrc]="'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face'"
+                [clickable]="true"
+                (postClick)="openPost('3')"
+                (commentClick)="openPost('3', true)"
+                (longPress)="handlePostLongPress('3', false)">
+                
+                <post-content>
+                  <post-text>Does anyone know if there's a community gym nearby? Looking for recommendations for good fitness centers in the area. 🏋️</post-text>
+                </post-content>
+                
+                <post-actions>
+                  <action-like [count]="23" />
+                  <action-comment [count]="45" (commentClick)="openPost('3', true)" />
+                </post-actions>
+              </ds-mobile-interactive-list-item-post>
 
-            <!-- Post 5: Event -->
-            <ds-mobile-interactive-list-item-post
-              [authorName]="'Emma Brown'"
-              [authorRole]="'Tenant'"
-              [timestamp]="'3d ago'"
-              [avatarType]="'photo'"
-              [avatarSrc]="'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face'"
-              [clickable]="true"
-              (postClick)="openPost('5')"
-              (commentClick)="openPost('5', true)"
-              (longPress)="handlePostLongPress('5', false)">
-              
-              <post-content>
-                <post-text>Organizing a community BBQ next weekend! Everyone's invited. Bring your favorite dish to share. Let's get to know each other better! 🍔🌭</post-text>
-              </post-content>
-              
-              <post-actions>
-                <action-like [active]="true" [count]="124" />
-                <action-comment [count]="89" (commentClick)="openPost('5', true)" />
-              </post-actions>
-            </ds-mobile-interactive-list-item-post>
+              <!-- Post 5: Event -->
+              <ds-mobile-interactive-list-item-post
+                [authorName]="'Emma Brown'"
+                [authorRole]="'Tenant'"
+                [timestamp]="'3d ago'"
+                [avatarType]="'photo'"
+                [avatarSrc]="'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face'"
+                [clickable]="true"
+                (postClick)="openPost('5')"
+                (commentClick)="openPost('5', true)"
+                (longPress)="handlePostLongPress('5', false)">
+                
+                <post-content>
+                  <post-text>Organizing a community BBQ next weekend! Everyone's invited. Bring your favorite dish to share. Let's get to know each other better! 🍔🌭</post-text>
+                </post-content>
+                
+                <post-actions>
+                  <action-like [active]="true" [count]="124" />
+                  <action-comment [count]="89" (commentClick)="openPost('5', true)" />
+                </post-actions>
+              </ds-mobile-interactive-list-item-post>
+            </div>
           } @else {
             <!-- Empty State -->
             <div class="community-empty-state">

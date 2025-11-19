@@ -58,7 +58,7 @@ async openPostWithImage() {
     timestamp: '4h ago',
     avatarInitials: 'SM',
     content: 'Beautiful view from my balcony!',
-    imageSrc: 'Assets/Dummy-photos/balcony-view.jpg',
+    imageSrc: '/Assets/Dummy-photos/balcony-view.jpg',
     imageAlt: 'Balcony view',
     isLiked: true,
     likeCount: 156,
