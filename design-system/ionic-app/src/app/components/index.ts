@@ -27,3 +27,6 @@ export * from './modal';
 // Mobile Post Detail Modal
 export * from './post-detail-modal';
 
+// Mobile Handbook Components
+export * from './handbook-folder';
+
