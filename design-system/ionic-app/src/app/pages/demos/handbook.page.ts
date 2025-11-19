@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { DsMobilePageMainComponent } from '../../components/page-main';
 import { 
   DsMobileContentComponent,
@@ -14,7 +13,6 @@ import { UserService } from '../../services/user.service';
   selector: 'app-mobile-handbook-page',
   standalone: true,
   imports: [
-    FormsModule,
     DsMobilePageMainComponent,
     DsMobileContentComponent,
     DsMobileContentSectionComponent,
@@ -30,29 +28,6 @@ import { UserService } from '../../services/user.service';
       padding: 0;
       justify-items: center;
     }
-    
-    .search-container {
-      margin-bottom: 24px;
-    }
-    
-    .search-input {
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color-default);
-      background: var(--color-background-primary);
-      font-family: 'Brockmann', sans-serif;
-      font-size: 16px;
-      outline: none;
-    }
-    
-    .search-input::placeholder {
-      color: var(--color-text-tertiary);
-    }
-    
-    .search-input:focus {
-      border-color: var(--color-brand-base);
-    }
   `],
   template: `
     <ds-mobile-page-main
@@ -63,14 +38,6 @@ import { UserService } from '../../services/user.service';
       
       <ds-mobile-content>
         <ds-mobile-content-section>
-          <div class="search-container">
-            <input 
-              type="text" 
-              class="search-input" 
-              placeholder="Search"
-              [(ngModel)]="searchQuery">
-          </div>
-          
           <div class="folders-grid">
             <ds-mobile-handbook-folder
               [colorBase]="'#d244cf'"
@@ -79,7 +46,7 @@ import { UserService } from '../../services/user.service';
               [itemCount]="8"
               [label]="'Utilities'">
             </ds-mobile-handbook-folder>
-            
+
             <ds-mobile-handbook-folder
               [colorBase]="'#158452'"
               [colorWeak]="'#dcfce7'"
@@ -87,7 +54,7 @@ import { UserService } from '../../services/user.service';
               [itemCount]="1"
               [label]="'Sikkerhedsudstyr'">
             </ds-mobile-handbook-folder>
-            
+
             <ds-mobile-handbook-folder
               [colorBase]="'#1e5aff'"
               [colorWeak]="'#e0e9ff'"
@@ -102,8 +69,6 @@ import { UserService } from '../../services/user.service';
   `
 })
 export class MobileHandbookPageComponent {
-  searchQuery: string = '';
-  
   constructor(public userService: UserService) {}
   
   handleRefresh(event: any): void {

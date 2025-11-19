@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DsIconComponent } from '@propbinder/design-system/icon/ds-icon';
 
@@ -44,20 +44,113 @@ import { DsIconComponent } from '@propbinder/design-system/icon/ds-icon';
     .folder-container {
       position: relative;
       width: 160px;
+      display: flex;
+      flex-direction: column;
+      perspective: 600px;
+    }
+    
+    .folder-container.open .page-sheet {
+      transform: translateY(-8px);
+      transition-delay: 0.2s;
+    }
+    
+    .folder-container.open .page-sheet:nth-child(1) {
+      transform: scale(0.90) translateY(-28px) rotateX(0deg) translateZ(0.1px);
+    }
+    
+    .folder-container.open .page-sheet:nth-child(2) {
+      transform: scale(0.92) translateY(-24px) rotateX(-9deg) translateZ(0.1px);
+    }
+    
+    .folder-container.open .page-sheet:nth-child(3) {
+      transform: scale(0.94) translateY(-20px) rotateX(-18deg) translateZ(0.1px);
+    }
+    
+    .folder-container.open .page-sheet:nth-child(4) {
+      transform: scale(0.96) translateY(-16px) rotateX(-27deg) translateZ(0.1px);
+    }
+    
+    .folder-container.open .page-sheet:nth-child(5) {
+      transform: scale(0.98) translateY(-12px) rotateX(-36deg) translateZ(0.1px);
+    }
+    
+    .folder-container.open .page-sheet:nth-child(6) {
+      transform: scale(1) translateY(-8px) rotateX(-45deg) translateZ(0.1px);
+    }
+    
+    .folder-container.open .folder-front {
+      -webkit-transform: rotateX(-30deg) translateZ(0.1px);
+      transform: rotateX(-45deg) translateZ(0.1px);
+    }
+    
+    .folder-tab {
+      width: 50%;
+      height: auto;
+      display: block;
     }
     
     .folder-back {
       height: 72px;
-      border-radius: 12px 12px 12px 0px;
+      border-radius: 0px 12px 12px 12px;
       position: relative;
-      overflow: visible;
+      margin-top: -1px;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
     
-    .folder-notch {
+    .page-sheet {
       position: absolute;
-      top: 0;
-      left: 0;
+      width: 128px;
+      height: 56px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color-default);
+      transition: transform 0.3s ease-out;
+      left: 16px;
+    }
+    
+    .page-sheet:nth-child(1) {
+      bottom: 20px;
       z-index: 1;
+      transform-origin: bottom center;
+      transform: scale(0.90);
+    }
+    
+    .page-sheet:nth-child(2) {
+      bottom: 18px;
+      z-index: 1;
+      transform-origin: bottom center;
+      transform: scale(0.92);
+    }
+    
+    .page-sheet:nth-child(3) {
+      bottom: 16px;
+      z-index: 1;
+      transform-origin: bottom center;
+      transform: scale(0.94);
+    }
+    
+    .page-sheet:nth-child(4) {
+      bottom: 14px;
+      z-index: 1;
+      transform-origin: bottom center;
+      transform: scale(0.96);
+    }
+    
+    .page-sheet:nth-child(5) {
+      bottom: 12px;
+      z-index: 1;
+      transform-origin: bottom center;
+      transform: scale(0.98);
+    }
+    
+    .page-sheet:nth-child(6) {
+      bottom: 10px;
+      z-index: 1;
+      transform-origin: bottom center;
+      transform: scale(1);
     }
     
     .folder-front {
@@ -72,22 +165,39 @@ import { DsIconComponent } from '@propbinder/design-system/icon/ds-icon';
       justify-content: space-between;
       padding: 8px;
       z-index: 2;
+      transform-origin: bottom center;
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease-in-out;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      -webkit-font-smoothing: antialiased;
+      -webkit-transform: rotateX(0deg) translateZ(0.1px);
+      transform: rotateX(0deg) translateZ(0.1px);
+      border-left: 1px solid var(--border-color, transparent);
+      border-right: 1px solid var(--border-color, transparent);
+      border-bottom: 1px solid var(--border-color, transparent);
+      box-shadow: inset 0 10px 10px rgba(255, 255, 255, 0.2), 
+                  inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     
     .item-count {
       font-family: 'Brockmann', sans-serif;
-      font-size: 20px;
-      font-weight: 600;
-      line-height: 24px;
-      letter-spacing: -0.5px;
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      line-height: 1.2;
       display: flex;
       align-items: center;
       gap: 4px;
     }
     
     .item-count-label {
-      font-size: 14px;
+      font-size: var(--font-size-sm);
       font-weight: 500;
+      line-height: 1.2;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -109,37 +219,44 @@ import { DsIconComponent } from '@propbinder/design-system/icon/ds-icon';
     }
   `],
   template: `
-    <div class="folder-container">
+    <div class="folder-container" [class.open]="isOpen()" (click)="toggleOpen()">
+      <!-- Folder Tab SVG -->
+      <svg 
+        class="folder-tab" 
+        width="101" 
+        height="24" 
+        viewBox="0 0 101 24" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg">
+        <path 
+          d="M100.037 23.9999L100.5 24L0 24.0001V10.7646C0 4.80853 4.91797 -0.0234985 11 -0.0196688L66.4213 -0.0322266C69.3519 -0.0115886 72.197 1.20548 74.2473 3.29947L90.6765 20.0951C93.1218 22.5925 96.5417 23.9999 100.037 23.9999Z" 
+          [attr.fill]="colorBase"/>
+      </svg>
+      
       <!-- Folder Back -->
       <div class="folder-back" [style.background-color]="colorBase">
-        <!-- SVG Notch Overlay -->
-        <svg 
-          class="folder-notch" 
-          width="102" 
-          height="24" 
-          viewBox="0 0 102 24" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg">
-          <path 
-            d="M100.037 23.9999L100.5 24L0 24.0001V10.7646C0 4.80853 4.91797 -0.0234985 11 -0.0196688L66.4213 -0.0322266C69.3519 -0.0115886 72.197 1.20548 74.2473 3.29947L90.6765 20.0951C93.1218 22.5925 96.5417 23.9999 100.037 23.9999Z" 
-            [attr.fill]="colorBase"/>
-        </svg>
-      </div>
-      
-      <!-- Folder Front -->
-      <div class="folder-front" [style.background-color]="colorWeak">
-        <!-- Item Count (Bottom Left) -->
-        <div class="item-count" [style.color]="colorBase">
-          <span>{{ itemCount }}</span>
-          <span class="item-count-label">ITEMS</span>
-        </div>
+        <!-- Page Sheets -->
+        @for (sheet of getPageSheets(); track $index) {
+          <div class="page-sheet"></div>
+        }
         
-        <!-- Icon (Bottom Right) -->
-        <div class="folder-icon">
-          <ds-icon 
-            [name]="iconName" 
-            [size]="'32px'"
-            [style.color]="colorBase" />
+        <!-- Folder Front -->
+        <div 
+          class="folder-front" 
+          [style.--border-color]="colorBase">
+          <!-- Item Count (Bottom Left) -->
+          <div class="item-count" [style.color]="colorBase">
+            <span>{{ itemCount }}</span>
+            <span class="item-count-label">ITEMS</span>
+          </div>
+          
+          <!-- Icon (Bottom Right) -->
+          <div class="folder-icon">
+            <ds-icon 
+              [name]="iconName" 
+              [size]="'20px'"
+              [style.color]="colorBase" />
+          </div>
         </div>
       </div>
     </div>
@@ -176,5 +293,26 @@ export class DsMobileHandbookFolderComponent {
    * Label text displayed below the folder
    */
   @Input() label: string = 'Folder';
+  
+  /**
+   * Track open/closed state for animation
+   */
+  isOpen = signal(false);
+  
+  /**
+   * Toggle folder open/closed animation
+   */
+  toggleOpen(): void {
+    this.isOpen.set(!this.isOpen());
+  }
+  
+  /**
+   * Calculate the number of page sheets to display
+   * Max 6 sheets regardless of item count
+   */
+  getPageSheets(): number[] {
+    const count = Math.min(this.itemCount, 6);
+    return Array(count).fill(0);
+  }
 }
 
