@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;6dc48f4c7a0302655725628fc521f91502f34084c8a339c31db4519bb30af555;/Users/modestas/Propbinder DS/ionic-app/src/app/components/post-card/ds-mobile-post-card.ts"],
+  "sourcesContent": ["\n    :host {\n      display: block;\n      border-radius: 8px;\n      overflow: hidden;\n    }\n    \n    ::ng-deep img {\n      width: 100%;\n      height: auto;\n      display: block;\n    }\n    \n    ::ng-deep video {\n      width: 100%;\n      height: auto;\n      display: block;\n    }\n  "],
+  "mappings": ";AACI;AACE,WAAS;AACT,iBAAe;AACf,YAAU;AACZ;AAEA,UAAU;AACR,SAAO;AACP,UAAQ;AACR,WAAS;AACX;AAEA,UAAU;AACR,SAAO;AACP,UAAQ;AACR,WAAS;AACX;",
+  "names": []
+}

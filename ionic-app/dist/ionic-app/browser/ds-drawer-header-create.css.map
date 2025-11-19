@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../design-system/src/app/components/ui/drawer/ds-drawer-header-create.css"],
+  "sourcesContent": [".ds-drawer-header-create {\n  @apply tw-flex tw-justify-between tw-items-center tw-w-full tw-gap-4;\n}\n\n.ds-drawer-header-create__title {\n  @apply tw-text-default-primary tw-flex-shrink-0;\n}\n\n.ds-drawer-header-create__actions {\n  @apply tw-flex tw-gap-2 tw-items-center tw-flex-shrink-0;\n}\n\n"],
+  "mappings": ";AACE,CAAA;AAAA,WAAA;AAAA,SAAA;AAAA,eAAA;AAAA,mBAAA;AAAA,OAAA;AAAoE;AAIpE,CAAA;AAAA,eAAA;AAAA,SAAA,IAAA;AAA+C;AAI/C,CAAA;AAAA,WAAA;AAAA,eAAA;AAAA,eAAA;AAAA,OAAA;AAAwD;",
+  "names": []
+}

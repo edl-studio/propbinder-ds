@@ -7,22 +7,20 @@ import {
   CdkScrollableModule,
   ScrollDispatcher,
   ViewportRuler
-} from "./chunk-UHXM7YBJ.js";
+} from "./chunk-3WNF3QYK.js";
 import {
   Directionality
-} from "./chunk-HLZNGV7I.js";
+} from "./chunk-Q4CR4ILL.js";
 import {
   _CdkPrivateStyleLoader,
   _IdGenerator,
   _getEventTarget,
   _getShadowRoot,
+  coerceArray,
   coerceElement,
   coerceNumberProperty
-} from "./chunk-7OMPJCAI.js";
-import {
-  coerceArray
-} from "./chunk-U3ZLLG7Y.js";
-import "./chunk-7YT5CE2Y.js";
+} from "./chunk-BADZCE2L.js";
+import "./chunk-7P4ZKDVH.js";
 import {
   BehaviorSubject,
   ChangeDetectionStrategy,
@@ -70,7 +68,7 @@ import {
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule
-} from "./chunk-5OFLYFBL.js";
+} from "./chunk-V52YD5AQ.js";
 import "./chunk-UK4S7V5W.js";
 
 // node_modules/@angular/cdk/fesm2022/drag-drop.mjs

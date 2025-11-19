@@ -1,0 +1,8 @@
+node_modules
+.angular
+ios
+android
+*.log
+.DS_Store
+capacitor.config.ts
+

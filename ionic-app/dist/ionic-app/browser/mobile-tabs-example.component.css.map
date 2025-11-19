@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;61aac6892856f760319f86d3777189c395ac81799851d2e5599a5537da51c70e;/Users/modestas/Propbinder DS/ionic-app/src/app/pages/mobile-tabs-example.component.ts"],
+  "sourcesContent": ["\n    :host {\n      display: block;\n      height: 100vh;\n      width: 100vw;\n      position: relative;\n    }\n  "],
+  "mappings": ";AACI;AACE,WAAS;AACT,UAAQ;AACR,SAAO;AACP,YAAU;AACZ;",
+  "names": []
+}

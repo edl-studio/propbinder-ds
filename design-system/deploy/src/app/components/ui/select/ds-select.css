@@ -11,7 +11,7 @@
 .ds-select__trigger {
   @apply tw-relative tw-inline-flex tw-items-center tw-justify-between tw-w-full;
   @apply tw-h-8 tw-px-2;
-  @apply tw-rounded-md tw-border tw-transition-all tw-duration-200 tw-ease-in-out;
+  @apply tw-rounded-md tw-border;
   @apply tw-outline-none;
   
   /* Ensure border is rendered inside Shadow DOM */
@@ -280,9 +280,10 @@
 
 /* Dropdown */
 .ds-select__dropdown {
-  @apply tw-absolute tw-z-50 tw-mt-1;
+  @apply tw-absolute tw-mt-1;
   @apply tw-bg-white tw-rounded-md tw-border tw-border-solid;
   
+  z-index: 9999; /* Higher than dialog overlay (z-50) to appear on top */
   border-color: var(--border-color-default);
   background-color: var(--color-background-neutral-primary);
   width: var(--ngp-select-width);
@@ -309,7 +310,6 @@
   @apply tw-relative tw-inline-flex tw-items-center tw-justify-between tw-w-full;
   @apply tw-h-8 tw-px-2;
   @apply tw-cursor-pointer tw-select-none;
-  @apply tw-transition-colors tw-duration-200 tw-ease-in-out;
   
   color: var(--text-color-default-primary);
   border-radius: 6px;
@@ -365,10 +365,22 @@
 .ds-select__icon {
   @apply tw-pointer-events-none;
   color: var(--text-color-default-tertiary);
+  /* No transition for instant appearance on hover */
 }
 
 .ds-select__icon--trailing {
   @apply tw-ml-2;
+}
+
+/* Ghost variant - hide icon by default, show on hover */
+.ds-select--ghost .ds-select__icon {
+  opacity: 0;
+}
+
+.ds-select--ghost .ds-select__trigger:hover:not(:disabled) .ds-select__icon,
+.ds-select--ghost:focus-within .ds-select__icon,
+.ds-select--ghost .ds-select__trigger[data-expanded]:not(:disabled) .ds-select__icon {
+  opacity: 1;
 }
 
 /* Animation classes */

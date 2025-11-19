@@ -31,7 +31,7 @@ import {
   createRepositionScrollStrategy,
   validateHorizontalPosition,
   validateVerticalPosition
-} from "./chunk-MVS67VIT.js";
+} from "./chunk-JQYZCTGU.js";
 import "./chunk-ALQK544G.js";
 import {
   CdkFixedSizeVirtualScroll,
@@ -43,14 +43,13 @@ import {
   CdkVirtualScrollableWindow,
   ScrollDispatcher,
   ViewportRuler
-} from "./chunk-UHXM7YBJ.js";
+} from "./chunk-3WNF3QYK.js";
 import {
   Dir
-} from "./chunk-HLZNGV7I.js";
-import "./chunk-7OMPJCAI.js";
-import "./chunk-U3ZLLG7Y.js";
-import "./chunk-7YT5CE2Y.js";
-import "./chunk-5OFLYFBL.js";
+} from "./chunk-Q4CR4ILL.js";
+import "./chunk-BADZCE2L.js";
+import "./chunk-7P4ZKDVH.js";
+import "./chunk-V52YD5AQ.js";
 import "./chunk-UK4S7V5W.js";
 export {
   BlockScrollStrategy,

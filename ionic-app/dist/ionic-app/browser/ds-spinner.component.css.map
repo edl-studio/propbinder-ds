@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;1aa9816fd7d36fed5879a2ddb2174bcab5ca3d43385aadc11ab5d24642cc6c71;/Users/modestas/Propbinder DS/design-system/src/app/components/ui/spinner/ds-spinner.component.ts"],
+  "sourcesContent": ["\n    .spinner {\n      transform-origin: center;\n        animation: ds-spinner-spin 1s cubic-bezier(0.4, 0.8, 0.8, 0.7) infinite;\n    }\n    @keyframes ds-spinner-spin {\n      from { transform: rotate(0deg); }\n      to { transform: rotate(360deg); }\n    }\n  "],
+  "mappings": ";AACI,CAAC;AACC,oBAAkB;AAChB,aAAW,gBAAgB,GAAG,aAAa,GAAG,EAAE,GAAG,EAAE,GAAG,EAAE,KAAK;AACnE;AACA,WAFe;AAGb;AAAO,eAAW,OAAO;AAAO;AAChC;AAAK,eAAW,OAAO;AAAS;AAClC;",
+  "names": []
+}

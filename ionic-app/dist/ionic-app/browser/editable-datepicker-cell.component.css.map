@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;4a1ef82a5ce62e1d8286e338270206c7abb7e23ce3fad81d52c7f78892c1085a;/Users/modestas/Propbinder DS/design-system/src/app/components/ui/editable-table/cells/editable-datepicker-cell.component.ts"],
+  "sourcesContent": ["\n    :host {\n      display: block;\n      width: 100%;\n      position: relative;\n    }\n    \n    :host ::ng-deep .ds-datepicker {\n      display: block;\n      width: 100%;\n    }\n    \n    :host ::ng-deep .ds-datepicker__trigger-wrapper {\n      display: block;\n      width: 100%;\n    }\n  "],
+  "mappings": ";AACI;AACE,WAAS;AACT,SAAO;AACP,YAAU;AACZ;AAEA,MAAM,UAAU,CAAC;AACf,WAAS;AACT,SAAO;AACT;AAEA,MAAM,UAAU,CAAC;AACf,WAAS;AACT,SAAO;AACT;",
+  "names": []
+}

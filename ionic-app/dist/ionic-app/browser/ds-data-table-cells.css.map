@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;67f3a17b7e3edd60afe7a15d540917a3d8c61bca57749a3e46045e0b1d9c36cb;/Users/modestas/Propbinder DS/design-system/src/app/components/ui/data-table/ds-data-table-cells.ts"],
+  "sourcesContent": ["\n    .ds-actions-cell {\n      display: flex;\n      gap: 4px;\n      align-items: center;\n    }\n  "],
+  "mappings": ";AACI,CAAC;AACC,WAAS;AACT,OAAK;AACL,eAAa;AACf;",
+  "names": []
+}

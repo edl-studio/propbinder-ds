@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;328c4c619020ad251fc14a27ded880c93bc1ecae5bd15dda8d8103256216cd3d;/Users/modestas/Propbinder DS/ionic-app/src/app/components/header-content/ds-mobile-header-content.ts"],
+  "sourcesContent": ["\n    :host {\n      background: #221a4c;\n      border-radius: 8px;\n      width: 32px;\n      height: 32px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      flex-shrink: 0;\n    }\n  "],
+  "mappings": ";AACI;AACE,cAAY;AACZ,iBAAe;AACf,SAAO;AACP,UAAQ;AACR,WAAS;AACT,eAAa;AACb,mBAAiB;AACjB,eAAa;AACf;",
+  "names": []
+}

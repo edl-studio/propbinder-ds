@@ -1,8 +1,9 @@
 {
-  "buildTime": "2025-10-10T14:50:02.977Z",
+  "buildTime": "2025-11-19T06:46:26.054Z",
   "version": "0.0.0",
-  "landingPage": "Angular App (SPA)",
+  "landingPage": "Ionic App (Mobile SPA)",
   "components": {
+    "ionicApp": true,
     "angular": true,
     "storybook": true,
     "appShellPreview": true

@@ -1,4 +1,4 @@
-import { Component, input, computed, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DsIconComponent } from '../icon/ds-icon';
 
@@ -7,95 +7,108 @@ export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 @Component({
   selector: 'ds-avatar',
+  standalone: true,
   imports: [CommonModule, DsIconComponent],
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./ds-avatar.css'],
   template: `
-    <div [class]="avatarClasses()">
-      <!-- Initials Avatar -->
-      @if (type() === 'initials') {
-        <span [class]="initialsClasses()">
-          {{ displayInitials() }}
+    @if (initialized) {
+      <div [class]="getAvatarClasses()">
+        <!-- Initials Avatar -->
+        <span *ngIf="type === 'initials'" [class]="getInitialsClasses()">
+          {{ getDisplayInitials() }}
         </span>
-      }
-      
-      <!-- Photo Avatar -->
-      @if (type() === 'photo') {
+        
+        <!-- Photo Avatar -->
         <img 
-          [src]="src()" 
-          [alt]="alt() || 'Avatar'"
-          [class]="imageClasses()"
+          *ngIf="type === 'photo'"
+          [src]="src" 
+          [alt]="alt || 'Avatar'"
+          [class]="getImageClasses()"
           (error)="onImageError()"
         />
-      }
-      
-      <!-- Icon Avatar -->
-      @if (type() === 'icon') {
+        
+        <!-- Icon Avatar -->
         <ds-icon 
-          [name]="iconName() || 'remixUser3Fill'"
-          [size]="iconSize()"
+          *ngIf="type === 'icon'"
+          [name]="iconName || 'remixUser3Fill'"
+          [size]="getIconSize()"
           color="var(--text-color-default-primary-inverse)"
           class="avatar__icon"
         />
-      }
-    </div>
+      </div>
+    }
   `,
 })
 export class DsAvatarComponent {
-  // Input signals
-  type = input<AvatarType>('initials');
-  size = input<AvatarSize>('md');
+  // Track initialization to prevent premature rendering
+  initialized = true;
+  
+  // Regular inputs instead of signal inputs
+  @Input() type: AvatarType = 'initials';
+  @Input() size: AvatarSize = 'md';
   
   // Initials specific inputs
-  initials = input<string>('');
+  @Input() initials: string = '';
   
   // Photo specific inputs
-  src = input<string>('');
-  alt = input<string>('');
+  @Input() src: string = '';
+  @Input() alt: string = '';
   
   // Icon specific inputs
-  iconName = input<string>('remixUser3Fill');
-  iconColor = input<string>('secondary');
+  @Input() iconName: string = 'remixUser3Fill';
+  @Input() iconColor: string = 'secondary';
   
-  // Computed properties
-  avatarClasses = computed(() => {
-    const classes = ['avatar'];
+  // Computed properties as methods instead of getters
+  getAvatarClasses(): string {
+    const classes: string[] = ['avatar'];
     
     // Size classes
-    classes.push(`avatar--${this.size()}`);
+    if (this.size) {
+      classes.push(`avatar--${this.size}`);
+    }
     
     // Type classes
-    classes.push(`avatar--${this.type()}`);
+    if (this.type) {
+      classes.push(`avatar--${this.type}`);
+    }
     
     // Add depth classes for icon avatars based on size
-    if (this.type() === 'icon') {
+    if (this.type === 'icon') {
       const depthClass = this.getDepthClass();
-      classes.push(depthClass);
+      if (depthClass) {
+        classes.push(depthClass);
+      }
+    }
+    
+    // Add color variant for initials avatars
+    if (this.type === 'initials') {
+      classes.push(`avatar--${this.getColorVariant()}`);
     }
     
     return classes.join(' ');
-  });
+  }
   
-  initialsClasses = computed(() => {
-    const classes = ['avatar__initials'];
-    classes.push(`avatar__initials--${this.size()}`);
+  getInitialsClasses(): string {
+    const classes: string[] = ['avatar__initials'];
+    if (this.size) {
+      classes.push(`avatar__initials--${this.size}`);
+    }
     return classes.join(' ');
-  });
+  }
   
-  imageClasses = computed(() => {
-    const classes = ['avatar__image'];
-    return classes.join(' ');
-  });
+  getImageClasses(): string {
+    return 'avatar__image';
+  }
   
-  displayInitials = computed(() => {
-    const initialsValue = this.initials();
-    if (!initialsValue) return '';
+  getDisplayInitials(): string {
+    if (!this.initials) return '';
     
     // Take first 2 characters and uppercase them
-    return initialsValue.substring(0, 2).toUpperCase();
-  });
+    return this.initials.substring(0, 2).toUpperCase();
+  }
   
-  iconSize = computed(() => {
+  getIconSize(): string {
     const sizeMap: Record<AvatarSize, string> = {
       xs: '12px',
       sm: '14px',
@@ -103,12 +116,40 @@ export class DsAvatarComponent {
       lg: '24px',
       xl: '32px'
     };
-    return sizeMap[this.size()];
-  });
+    return this.size ? sizeMap[this.size] : '18px';
+  }
+  
+  // Get color variant based on initials
+  private getColorVariant(): string {
+    if (!this.initials) return 'light-brown';
+    
+    // Color variants that match the design system
+    const colorVariants = [
+      'light-brown',
+      'rose',
+      'pink',
+      'purple',
+      'blue',
+      'light-blue',
+      'turquoise',
+      'light-green'
+    ];
+    
+    // Calculate a hash from the initials
+    let hash = 0;
+    for (let i = 0; i < this.initials.length; i++) {
+      hash = this.initials.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    
+    // Use the hash to select a color variant
+    const index = Math.abs(hash) % colorVariants.length;
+    return colorVariants[index];
+  }
   
   // Get depth class based on avatar size for icon avatars
   private getDepthClass(): string {
-    const size = this.size();
+    if (!this.size) return 'depth-sm';
+    
     const depthMap: Record<AvatarSize, string> = {
       xs: 'depth-sm',
       sm: 'depth-sm',
@@ -116,7 +157,7 @@ export class DsAvatarComponent {
       lg: 'depth-md',
       xl: 'depth-lg'
     };
-    return depthMap[size];
+    return depthMap[this.size];
   }
   
   // Event handlers

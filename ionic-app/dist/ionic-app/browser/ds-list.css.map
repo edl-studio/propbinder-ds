@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;cdeba3b8df0ef716bccf80a61ba8e8bbd565aa69f529d8e6cc44f6b9231761de;/Users/modestas/Propbinder DS/design-system/src/app/components/ui/list/ds-list.ts"],
+  "sourcesContent": ["\n    .ds-list {\n      display: flex;\n      flex-direction: column;\n      overflow: hidden;\n    }\n\n    /* List item base styles */\n    ds-list-item {\n      display: block;\n      position: relative;\n    }\n\n    /* Hover state border radius */\n    ds-list-item:first-child .list-item:hover {\n      border-top-left-radius: 8px;\n      border-top-right-radius: 8px;\n    }\n\n    ds-list-item:last-child .list-item:hover {\n      border-bottom-left-radius: 8px;\n      border-bottom-right-radius: 8px;\n    }\n  "],
+  "mappings": ";AACI,CAAC;AACC,WAAS;AACT,kBAAgB;AAChB,YAAU;AACZ;AAGA;AACE,WAAS;AACT,YAAU;AACZ;AAGA,YAAY,aAAa,CAAC,SAAS;AACjC,0BAAwB;AACxB,2BAAyB;AAC3B;AAEA,YAAY,YAAY,CALE,SAKQ;AAChC,6BAA2B;AAC3B,8BAA4B;AAC9B;",
+  "names": []
+}

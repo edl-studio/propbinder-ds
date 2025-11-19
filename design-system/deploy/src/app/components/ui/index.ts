@@ -6,10 +6,12 @@
 
 // Component exports
 export { DsButtonComponent } from './button/ds-button';
+export { DsIconButtonComponent } from './button/ds-icon-button';
 export { DsIconComponent } from './icon/ds-icon';
 export { DsInputComponent } from './input/ds-input';
 export { DsTextareaComponent } from './textarea/ds-textarea';
 export { DsCheckboxComponent } from './checkbox/ds-checkbox';
+export { DsSwitchComponent } from './switch/ds-switch';
 export { DsFormFieldComponent } from './form-field/ds-form-field';
 export { DsLabelComponent } from './label/ds-label';
 export { DsTooltipComponent } from './tooltip/ds-tooltip';
@@ -26,11 +28,27 @@ export { DsMetadataItemComponent } from './metadata-item/ds-metadata-item';
 export { DsListItemComponent } from './list-item/ds-list-item';
 export { DsListComponent } from './list/ds-list';
 export { type TopbarBreadcrumbItem } from './topbar/ds-topbar-breadcrumb';
-
+export { DsAccordion } from './accordion/ds-accordion';
+export { DsAccordionItem } from './accordion/ds-accordion-item';
+export { DsComboboxComponent } from './combobox/ds-combobox';
+export { DsListboxComponent } from './listbox/ds-listbox';
+export { DsMenuComponent } from './menu/ds-menu';
+export { DsTaskLocationSelectComponent } from './task-location-select/ds-task-location-select';
+export { DsPropertySuggestionsComponent } from './property-suggestions/ds-property-suggestions.component';
+export { DsRecurrenceInputComponent } from './recurrence-input/ds-recurrence-input';
+export { DsInputTimeComponent } from './input-time/ds-input-time';
+export { DsSelectBadgeComponent } from './select-badge/ds-select-badge';
+export { DsSelectDateComponent } from './select-date/ds-select-date';
+export { DsSelectUserComponent } from './select-user/ds-select-user';
 export { DsSelectComponent } from './select/ds-select';
 export { DsDatepickerComponent } from './datepicker/ds-datepicker';
 export { DsAppLayoutComponent } from './app-layout/ds-app-layout';
 export { DsDrawerComponent } from './drawer/ds-drawer';
+export { DsDrawerHeaderCreateComponent } from './drawer/ds-drawer-header-create';
+export { DsDrawerHeaderCreatedComponent } from './drawer/ds-drawer-header-created';
+export { DsDrawerHeaderDefaultComponent } from './drawer/ds-drawer-header-default';
+export { DsDialogComponent } from './dialog/ds-dialog';
+export { DsConfirmationDialogComponent } from './dialog/ds-confirmation-dialog';
 export { DsDataTableComponent } from './data-table/ds-data-table';
 export { 
   DsDataTableEditableCell,
@@ -65,25 +83,31 @@ export {
   EditableTextCellComponent,
   EditableNumberCellComponent,
   EditableSelectCellComponent,
+  EditableDatepickerCellComponent,
   type EditableTextCellData,
   type EditableNumberCellData,
+  type EditableDatepickerCellData,
   type EditableSelectCellData
 } from './editable-table/cells';
 export {
   editableTextCell,
   editableNumberCell,
+  editableDatepickerCell,
   editableSelectCell,
   type EditableComponentCell
 } from './editable-table/editable-cell-helpers';
 export { DsTileComponent } from './tile/ds-tile';
 export { DsTileSectionComponent } from './tile/ds-tile-section';
 export { TileHeaderComponent } from './tile/tile-header';
+export { DsTabs } from './tabs/ds-tabs';
+export { DsTab } from './tabs/ds-tab';
 
 // Type exports
 export type { ButtonVariant, ButtonSize } from './button/ds-button';
 export type { InputVariant, InputType } from './input/ds-input';
-export type { TextareaVariant, TextareaSize } from './textarea/ds-textarea';
+export type { TextareaVariant } from './textarea/ds-textarea';
 export type { CheckboxVariant, CheckboxSize } from './checkbox/ds-checkbox';
+export type { ComboboxVariant } from './combobox/ds-combobox';
 export type { AvatarType, AvatarSize } from './avatar/ds-avatar';
 export type { BadgeVariant, BadgeContentType } from './badge/ds-badge';
 export type { ShapeVariant, ShapeColorVariant } from './shape-indicator/ds-shape-indicator';
@@ -97,3 +121,4 @@ export type {
   DsDataTableColumnMeta 
 } from './data-table/ds-data-table';
 export type { TileOrientation } from './tile/ds-tile';
+export type { DsFormFieldLayout } from './form-field/ds-form-field';

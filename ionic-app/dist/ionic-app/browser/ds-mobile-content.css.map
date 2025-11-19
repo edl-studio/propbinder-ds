@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;3857ed5fa1e738b9507c901f03b4be419b7216e9547fe0cf30c28db30c32b281;/Users/modestas/Propbinder DS/ionic-app/src/app/components/content/ds-mobile-content.ts"],
+  "sourcesContent": ["\n    :host {\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n    }\n  "],
+  "mappings": ";AACI;AACE,WAAS;AACT,kBAAgB;AAChB,OAAK;AACP;",
+  "names": []
+}

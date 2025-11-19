@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../design-system/src/app/components/ui/metadata-item/ds-metadata-item.css"],
+  "sourcesContent": [".metadata-item {\n  display: flex;\n  align-items: center;\n  gap: 4px;\n  min-height: 20px;\n  height: 20px;\n}\n\n.metadata-item__icon {\n  flex-shrink: 0;\n  color: var(--text-color-default-tertiary);\n  transform: translateY(-0.5px);\n}\n\n.metadata-item__text {\n  color: var(--text-color-default-tertiary);\n  display: flex;\n  align-items: center;\n  min-height: 20px;\n  height: 20px;\n  line-height: 20px;\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,WAAS;AACT,eAAa;AACb,OAAK;AACL,cAAY;AACZ,UAAQ;AACV;AAEA,CAAC;AACC,eAAa;AACb,SAAO,IAAI;AACX,aAAW,WAAW;AACxB;AAEA,CAAC;AACC,SAAO,IAAI;AACX,WAAS;AACT,eAAa;AACb,cAAY;AACZ,UAAQ;AACR,eAAa;AACf;",
+  "names": []
+}

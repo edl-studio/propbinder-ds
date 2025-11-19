@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;edf8ecf5bed29cdcbab6b9c6a8340ae932c3d54a30fb1442f161d52744b9a541;/Users/modestas/Propbinder DS/ionic-app/src/app/pages/examples/lightbox-test.page.ts"],
+  "sourcesContent": ["\n    .test-container {\n      padding: 20px;\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n    }\n    \n    .test-image {\n      width: 100%;\n      max-width: 400px;\n      border-radius: 8px;\n      cursor: pointer;\n      transition: transform 0.2s;\n    }\n    \n    .test-image:active {\n      transform: scale(0.98);\n    }\n  "],
+  "mappings": ";AACI,CAAC;AACC,WAAS;AACT,WAAS;AACT,kBAAgB;AAChB,OAAK;AACP;AAEA,CAAC;AACC,SAAO;AACP,aAAW;AACX,iBAAe;AACf,UAAQ;AACR,cAAY,UAAU;AACxB;AAEA,CARC,UAQU;AACT,aAAW,MAAM;AACnB;",
+  "names": []
+}

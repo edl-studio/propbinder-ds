@@ -1,13 +1,59 @@
+/* Base layout */
 .ds-form-field {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex !important;
+  width: 100%;
+}
+
+.ds-form-field--vertical {
+  flex-direction: column !important;
   gap: 4px;
 }
 
+.ds-form-field--horizontal {
+  flex-direction: row !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+/* Label container */
+.ds-form-field__label {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.ds-form-field__label--vertical {
+  width: auto;
+  min-height: auto;
+}
+
+.ds-form-field__label--horizontal {
+  width: 128px !important;
+  min-width: 128px !important;
+}
+
+/* Control container */
+.ds-form-field__control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ds-form-field__control--vertical {
+  width: 100%;
+  flex: 1;
+}
+
+.ds-form-field__control--horizontal {
+  flex: 1 !important;
+}
+
+/* Description */
 .ds-form-field__description {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--ds-color-muted, #6b7280);
+  margin-top: 0;
 }
 
 /* NgpError will project from content; you can style via data attributes */
@@ -16,4 +62,28 @@
   font-size: 0.75rem;
 }
 
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .ds-form-field--horizontal {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .ds-form-field__label--horizontal {
+    width: auto;
+    min-width: auto;
+    min-height: auto;
+  }
+  
+  .ds-form-field__control--horizontal {
+    width: 100%;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .ds-form-field {
+    transition: none;
+  }
+}
 

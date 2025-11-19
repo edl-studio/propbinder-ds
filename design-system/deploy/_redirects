@@ -2,9 +2,13 @@
 /storybook /storybook/index.html 200
 /storybook/* /storybook/:splat 200
 
+# Design System app routes
+/app /app/index.html 200
+/app/* /app/:splat 200
+
 # App shell routes
 /app-shell-preview /app-shell-preview.html 200
 
-# Angular app routes (fallback to index.html for SPA routing)
+# Ionic App routes (fallback to index.html for SPA routing)
 # This catch-all must be last
 /* /index.html 200

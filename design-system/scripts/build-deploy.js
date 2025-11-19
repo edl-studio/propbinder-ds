@@ -5,13 +5,14 @@ const path = require('path');
 
 /**
  * Build deployment script for Propbinder Design System
- * Combines Angular app build and Storybook static build into a single deployment folder
+ * Combines Ionic App, Angular app, and Storybook static build into a single deployment folder
  */
 
 const sourceDir = path.join(__dirname, '..');
 const deployDir = path.join(sourceDir, 'deploy');
 const distDir = path.join(sourceDir, 'dist', 'design-system', 'browser');
 const storybookDir = path.join(sourceDir, 'storybook-static');
+const ionicAppDir = path.join(sourceDir, '..', 'ionic-app', 'dist', 'ionic-app', 'browser');
 
 // Utility functions
 function ensureDir(dir) {
@@ -58,14 +59,60 @@ function updateHtmlPaths(filePath, basePath = '') {
 async function main() {
   console.log('🚀 Building deployment package...');
 
+  // Backup Vercel config files before cleaning
+  const vercelBackup = path.join(deployDir, '.vercel');
+  const vercelJsonPath = path.join(deployDir, 'vercel.json');
+  const packageJsonPath = path.join(deployDir, 'package.json');
+  
+  let vercelConfig = null;
+  let vercelJson = null;
+  let packageJson = null;
+  
+  if (fs.existsSync(vercelBackup)) {
+    vercelConfig = fs.readFileSync(path.join(vercelBackup, 'project.json'), 'utf8');
+  }
+  if (fs.existsSync(vercelJsonPath)) {
+    vercelJson = fs.readFileSync(vercelJsonPath, 'utf8');
+  }
+  if (fs.existsSync(packageJsonPath)) {
+    packageJson = fs.readFileSync(packageJsonPath, 'utf8');
+  }
+
   // Ensure deploy directory exists and is clean
   if (fs.existsSync(deployDir)) {
     fs.rmSync(deployDir, { recursive: true, force: true });
   }
   ensureDir(deployDir);
+  
+  // Restore Vercel config files
+  if (vercelConfig) {
+    ensureDir(vercelBackup);
+    fs.writeFileSync(path.join(vercelBackup, 'project.json'), vercelConfig);
+    fs.writeFileSync(path.join(vercelBackup, '.gitignore'), '*\n');
+    console.log('✅ Restored Vercel project config');
+  }
+  if (vercelJson) {
+    fs.writeFileSync(vercelJsonPath, vercelJson);
+    console.log('✅ Restored vercel.json');
+  }
+  if (packageJson) {
+    fs.writeFileSync(packageJsonPath, packageJson);
+    console.log('✅ Restored package.json');
+  }
+
+  // Copy Ionic App build to root directory (main landing page)
+  console.log('📱 Copying Ionic App build...');
+  if (fs.existsSync(ionicAppDir)) {
+    copyRecursive(ionicAppDir, deployDir);
+    console.log('✅ Ionic App copied to root directory');
+  } else {
+    console.error('❌ Ionic App build not found. Run "cd ../ionic-app && npm run build" first.');
+    console.error('   Expected path:', ionicAppDir);
+    process.exit(1);
+  }
 
   // Copy Angular app build to /app directory
-  console.log('📦 Copying Angular app build...');
+  console.log('📦 Copying Angular app build to /app...');
   if (fs.existsSync(distDir)) {
     const appDir = path.join(deployDir, 'app');
     copyRecursive(distDir, appDir);
@@ -103,7 +150,7 @@ async function main() {
     'app-shell-standalone.html'
   ];
 
-  // Find the actual bundle file names in the app directory
+  // Find the actual bundle file names in the /app directory
   const appDir = path.join(deployDir, 'app');
   const mainJsFile = fs.readdirSync(appDir).find(file => file.startsWith('main-') && file.endsWith('.js'));
   const polyfillsJsFile = fs.readdirSync(appDir).find(file => file.startsWith('polyfills-') && file.endsWith('.js'));
@@ -168,31 +215,8 @@ async function main() {
     console.log('✅ Source files copied successfully');
   }
 
-  // Use Angular app as the main landing page
-  console.log('🏠 Using Angular app as main index.html...');
-  
-  // Copy Angular app files to root level
-  const angularIndexPath = path.join(deployDir, 'app', 'index.html');
-  if (fs.existsSync(angularIndexPath)) {
-    const angularIndexContent = fs.readFileSync(angularIndexPath, 'utf8');
-    fs.writeFileSync(path.join(deployDir, 'index.html'), angularIndexContent);
-    console.log('✅ Angular app index.html copied as main index.html');
-    
-    // Copy Angular app JS and CSS files to root level for proper loading
-    const appDir = path.join(deployDir, 'app');
-    const files = fs.readdirSync(appDir);
-    
-    files.forEach(file => {
-      if (file.endsWith('.js') || file.endsWith('.css')) {
-        const srcFile = path.join(appDir, file);
-        const destFile = path.join(deployDir, file);
-        fs.copyFileSync(srcFile, destFile);
-        console.log(`✅ Copied ${file} to root`);
-      }
-    });
-  } else {
-    console.error('❌ Angular app index.html not found at:', angularIndexPath);
-  }
+  // Ionic App is the main landing page
+  console.log('✅ Ionic App is the main landing page at /');
 
   // Create _redirects file for better SPA routing
   console.log('🔄 Creating redirects configuration...');
@@ -200,10 +224,14 @@ async function main() {
 /storybook /storybook/index.html 200
 /storybook/* /storybook/:splat 200
 
+# Design System app routes
+/app /app/index.html 200
+/app/* /app/:splat 200
+
 # App shell routes
 /app-shell-preview /app-shell-preview.html 200
 
-# Angular app routes (fallback to index.html for SPA routing)
+# Ionic App routes (fallback to index.html for SPA routing)
 # This catch-all must be last
 /* /index.html 200`;
 
@@ -214,8 +242,9 @@ async function main() {
   const deployInfo = {
     buildTime: new Date().toISOString(),
     version: require('../package.json').version,
-    landingPage: 'Angular App (SPA)',
+    landingPage: 'Ionic App (Mobile SPA)',
     components: {
+      ionicApp: fs.existsSync(ionicAppDir),
       angular: fs.existsSync(distDir),
       storybook: fs.existsSync(storybookDir),
       appShellPreview: fs.existsSync(path.join(deployDir, 'app-shell-preview.html'))
@@ -228,8 +257,9 @@ async function main() {
   console.log('\n🎉 Deployment package created successfully!');
   console.log(`📁 Output directory: ${deployDir}`);
   console.log('\n📋 Deployment contents:');
-  console.log('  • Angular app as main landing page (/)');
+  console.log('  • Ionic App as main landing page (/)');
   console.log('  • Storybook documentation (/storybook/)');
+  console.log('  • Design System app (/app/)');
   console.log('  • App Shell Preview (/app-shell-preview)');
   console.log('  • Public assets (/public/)');
   console.log('\n🚀 Ready for deployment to Vercel!');

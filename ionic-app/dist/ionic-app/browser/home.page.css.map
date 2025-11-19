@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;071be0b0eeccbe33be0ecf652d6c920882999bef64fe01bc18163049cdbdd664;/Users/modestas/Propbinder DS/ionic-app/src/app/pages/demos/home.page.ts"],
+  "sourcesContent": ["\n    /* Placeholder grey boxes for content */\n    .grey-box {\n      height: 120px;\n      border-radius: 12px;\n      background: var(--color-background-neutral-tertiary);\n      flex: 1;\n    }\n\n    .grey-box.clickable {\n      background: var(--color-background-brand);\n      cursor: pointer;\n      transition: transform var(--transition-duration-fast) var(--ease-smooth);\n    }\n\n    .grey-box.clickable:active {\n      transform: scale(0.98);\n    }\n  "],
+  "mappings": ";AAEI,CAAC;AACC,UAAQ;AACR,iBAAe;AACf,cAAY,IAAI;AAChB,QAAM;AACR;AAEA,CAPC,QAOQ,CAAC;AACR,cAAY,IAAI;AAChB,UAAQ;AACR,cAAY,UAAU,IAAI,4BAA4B,IAAI;AAC5D;AAEA,CAbC,QAaQ,CANC,SAMS;AACjB,aAAW,MAAM;AACnB;",
+  "names": []
+}

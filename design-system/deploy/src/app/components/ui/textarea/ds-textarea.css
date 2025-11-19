@@ -20,6 +20,7 @@
   /* Layout */
   @apply tw-relative tw-inline-flex tw-w-full;
   @apply tw-rounded-md tw-border tw-transition-all tw-duration-200 tw-ease-in-out;
+  @apply tw-px-2 tw-py-2;
   
   /* Ensure border is rendered inside Shadow DOM */
   border-style: solid;
@@ -54,10 +55,91 @@
     border-color: var(--border-color-default);
     cursor: default;
   }
+  
+  /* Ghost variant */
+  &.textarea-container--ghost {
+    border-color: transparent;
+    max-width: none; /* Allow ghost textareas to fill container without constraint */
+  }
+  
+  &.textarea-container--ghost:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--border-color-default);
+  }
+  
+  &.textarea-container--ghost:focus-within {
+    outline: none;
+    box-shadow: none;
+    border-color: var(--color-brand-base);
+    transition: border-color 200ms ease-in-out;
+  }
+  
+  &.textarea-container--ghost:focus-within:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--color-brand-base);
+  }
+  
+  /* Ghost variant with error */
+  &.textarea-container--ghost.textarea-container--error {
+    border-color: transparent;
+  }
+  
+  &.textarea-container--ghost.textarea-container--error:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--color-destructive-base);
+  }
+  
+  &.textarea-container--ghost.textarea-container--error:focus-within {
+    outline: none;
+    box-shadow: none;
+    border-color: var(--color-destructive-base);
+    transition: border-color 200ms ease-in-out;
+  }
+  
+  &.textarea-container--ghost.textarea-container--error:focus-within:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--color-destructive-base);
+  }
+  
+  /* Ghost variant with warning */
+  &.textarea-container--ghost.textarea-container--warning {
+    border-color: transparent;
+  }
+  
+  &.textarea-container--ghost.textarea-container--warning:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--color-warning-base);
+  }
+  
+  &.textarea-container--ghost.textarea-container--warning:focus-within {
+    outline: none;
+    box-shadow: none;
+    border-color: var(--color-warning-base);
+    transition: border-color 200ms ease-in-out;
+  }
+  
+  &.textarea-container--ghost.textarea-container--warning:focus-within:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--color-warning-base);
+  }
+  
+  /* Ghost variant with success */
+  &.textarea-container--ghost.textarea-container--success {
+    border-color: transparent;
+  }
+  
+  &.textarea-container--ghost.textarea-container--success:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--color-success-base);
+  }
+  
+  &.textarea-container--ghost.textarea-container--success:focus-within {
+    outline: none;
+    box-shadow: none;
+    border-color: var(--color-success-base);
+    transition: border-color 200ms ease-in-out;
+  }
+  
+  &.textarea-container--ghost.textarea-container--success:focus-within:hover:not(.textarea-container--disabled):not(.textarea-container--readonly) {
+    border-color: var(--color-success-base);
+  }
 }
 
 /* Keyboard/mouse focus ring using :focus-within (works in Shadow DOM) */
-.textarea-container:focus-within {
+.textarea-container:focus-within:not(.textarea-container--ghost) {
   box-shadow: 0 0 0 3px var(--outline-color-default);
   outline: none;
   border-color: var(--color-brand-base);
@@ -66,22 +148,6 @@
 /* Preserve class-based focus hook but without visual changes (state only) */
 .textarea-container--focused {
   /* no visual changes; ring handled by :focus-within */
-}
-
-/* Size variants */
-.textarea-container--sm {
-  @apply tw-p-2 tw-text-sm;
-  min-height: 5rem; /* ~80px */
-}
-
-.textarea-container--md {
-  @apply tw-p-3 tw-text-base;
-  min-height: 6rem; /* ~96px */
-}
-
-.textarea-container--lg {
-  @apply tw-p-4 tw-text-lg;
-  min-height: 7rem; /* ~112px */
 }
 
 /* Variant styles */
@@ -132,7 +198,7 @@
 .textarea {
   /* Layout */
   @apply tw-flex-1 tw-bg-transparent tw-border-0 tw-outline-none tw-resize-y;
-  @apply tw-text-base tw-leading-relaxed tw-placeholder-opacity-60;
+  @apply tw-placeholder-opacity-60;
   
   /* Typography */
   font-family: inherit;
@@ -169,21 +235,6 @@
   }
 }
 
-/* Size-specific textarea styles */
-.textarea--sm {
-  @apply tw-text-sm;
-  line-height: 1.4;
-}
-
-.textarea--md {
-  @apply tw-text-base;
-  line-height: 1.5;
-}
-
-.textarea--lg {
-  @apply tw-text-lg;
-  line-height: 1.6;
-}
 
 /* Variant-specific textarea styles */
 .textarea--error {

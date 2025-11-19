@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../design-system/src/app/components/ui/label/ds-label.css"],
+  "sourcesContent": ["/* Label Base */\n.ds-label {\n  display: flex;\n  align-items: center;\n  height: 20px;\n  color: var(--text-color-default-secondary);\n}\n\n/* Size Variants */\n.ds-label--sm {\n  font-size: 12px;\n  line-height: 1.4;\n  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;\n}\n\n.ds-label--md {\n  font-size: 14px;\n  line-height: 1.4;\n  font-family: 'Brockmann', system-ui, -apple-system, sans-serif;\n}\n"],
+  "mappings": ";AACA,CAAC;AACC,WAAS;AACT,eAAa;AACb,UAAQ;AACR,SAAO,IAAI;AACb;AAGA,CAAC;AACC,aAAW;AACX,eAAa;AACb;AAAA,IAAa,WAAW;AAAA,IAAE,SAAS;AAAA,IAAE,aAAa;AAAA,IAAE;AACtD;AAEA,CAAC;AACC,aAAW;AACX,eAAa;AACb;AAAA,IAAa,WAAW;AAAA,IAAE,SAAS;AAAA,IAAE,aAAa;AAAA,IAAE;AACtD;",
+  "names": []
+}
